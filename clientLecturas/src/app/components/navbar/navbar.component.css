@@ -1,0 +1,9 @@
+.navbar-container{
+    background-color: aquamarine;
+}
+
+.navbar {
+    background-color: aquamarine!important;
+    margin-left:20%; 
+    margin-right: 20%;
+}

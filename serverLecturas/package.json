@@ -1,0 +1,19 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "LecturasAppServer",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon ."
+  },
+  "type": "module",
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  },
+  "dependencies": {
+    "mongodb": "^6.9.0",
+    "mongoose": "^8.7.0"
+  }
+}
