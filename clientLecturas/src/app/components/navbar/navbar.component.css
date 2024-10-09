@@ -7,3 +7,8 @@
     margin-left:20%; 
     margin-right: 20%;
 }
+
+
+.router-link-active {
+    font-weight: 600;
+}
