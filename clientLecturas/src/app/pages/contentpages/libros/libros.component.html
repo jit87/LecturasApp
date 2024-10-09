@@ -1,1 +1,33 @@
-<p>libros works!</p>
+<section class="animate__animated animate__fadeIn" >
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Mis Libros</h1>
+    
+        <div class="mb-4">
+            <input type="text" id="searchInput" class="form-control" placeholder="Buscar libros...">
+        </div>
+    
+        <div class="mb-4">
+            <button id="btnAgregarLibro" class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarLibro">Añadir
+                Libro</button>
+            <button id="btnAgregarColeccion" class="btn btn-secondary" data-toggle="modal"
+                data-target="#modalAgregarColeccion" style="margin-left: 5px;">Añadir Colección</button>
+        </div>
+    
+        <div class="mb-4">
+            <h2>Colecciones</h2>
+            <div id="colecciones" class="mb-3">
+            </div>
+        </div>
+    
+        <div id="misLibros">
+            <h2 class="category-title">Leídos</h2>
+            <div id="leidos" class="row"></div>
+    
+            <h2 class="category-title">Por Leer</h2>
+            <div id="porLeer" class="row"></div>
+    
+            <h2 class="category-title">En Progreso</h2>
+            <div id="enProgreso" class="row"></div>
+        </div>
+    </div>
+</section>
