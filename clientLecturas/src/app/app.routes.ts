@@ -14,7 +14,7 @@ export const APP_ROUTES: Routes = [
     { path: 'home', component: HomeComponent },
     { path: 'perfil', component: PerfilComponent },
     { path: 'libros', component: LibrosComponent },
-    { path: 'buscador/:nombre', component: BuscadorComponent },
+    { path: 'buscador/:termino', component: BuscadorComponent },
     { path: '**', pathMatch:'full', redirectTo:'home'}
 ];
 

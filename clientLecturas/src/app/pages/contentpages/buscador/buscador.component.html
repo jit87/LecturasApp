@@ -1,1 +1,15 @@
-<p>buscador works!</p>
+<p *ngIf="libros.length == 0" class="error">No hay libros disponibles</p>
+<div   class="row row-cols-1 row-cols-md-2 g-4 mt-3 mb-5" *ngIf="libros.length > 0">
+    <div class="col" *ngFor="let libro of libros">
+        <div class="card">
+            <img src="{{libro.imageLinks.smallThumbnail}}" *ngIf="libro.imageLinks.smallThumbnail" class="card-img-top img-fluid"  alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{ libro.title }}</h5>
+                <p class="card-text">{{ libro.description }}</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>

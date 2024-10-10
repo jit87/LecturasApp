@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router, RouterModule } from '@angular/router';
+import { LibrosService } from '../../services/libros.service';
 
 @Component({
   selector: 'app-navbar',
@@ -6,5 +8,13 @@ import { Component } from '@angular/core';
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
+
+  constructor(private router: Router) { }
+  
+
+  getInfoLibro(termino: string) {
+    this.router.navigate(['/buscador', termino]);
+  }
+
 
 }

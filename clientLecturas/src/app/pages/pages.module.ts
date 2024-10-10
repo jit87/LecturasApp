@@ -5,6 +5,7 @@ import { RegistroComponent } from './authpages/registro/registro.component';
 import { HomeComponent } from './contentpages/home/home.component';
 import { PerfilComponent } from './contentpages/perfil/perfil.component';
 import { LibrosComponent } from './contentpages/libros/libros.component';
+import { BuscadorComponent } from './contentpages/buscador/buscador.component';
 
 
 
@@ -14,7 +15,8 @@ import { LibrosComponent } from './contentpages/libros/libros.component';
     RegistroComponent,
     HomeComponent,
     PerfilComponent,
-    LibrosComponent
+    LibrosComponent,
+    BuscadorComponent
   ],
   imports: [
     CommonModule
@@ -24,7 +26,8 @@ import { LibrosComponent } from './contentpages/libros/libros.component';
     RegistroComponent,
     HomeComponent,
     PerfilComponent,
-    LibrosComponent
+    LibrosComponent,
+    BuscadorComponent
   ]
 })
 export class PagesModule { }
