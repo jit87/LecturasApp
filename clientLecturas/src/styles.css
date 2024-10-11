@@ -2,6 +2,17 @@
 body {
     position: relative;
     min-height: 100vh;
+    background-color:rgb(236, 238, 239);
+}
+
+.navbar-container {
+    background-color: rgb(175, 230, 248);
+}
+
+.navbar {
+    background-color: rgb(175, 230, 248) !important;
+    margin-left: 16%;
+    margin-right: 16%;
 }
 
 .footer {
@@ -10,3 +21,4 @@ body {
     width: 100%;
     height: 2.5rem;
 }
+

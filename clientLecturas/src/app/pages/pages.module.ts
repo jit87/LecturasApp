@@ -6,6 +6,8 @@ import { HomeComponent } from './contentpages/home/home.component';
 import { PerfilComponent } from './contentpages/perfil/perfil.component';
 import { LibrosComponent } from './contentpages/libros/libros.component';
 import { BuscadorComponent } from './contentpages/buscador/buscador.component';
+import { RouterModule } from '@angular/router';
+import { InfoComponent } from './contentpages/info/info.component';
 
 
 
@@ -16,10 +18,12 @@ import { BuscadorComponent } from './contentpages/buscador/buscador.component';
     HomeComponent,
     PerfilComponent,
     LibrosComponent,
-    BuscadorComponent
+    BuscadorComponent,
+    InfoComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
   ],
   exports: [
     LoginComponent,
@@ -27,7 +31,8 @@ import { BuscadorComponent } from './contentpages/buscador/buscador.component';
     HomeComponent,
     PerfilComponent,
     LibrosComponent,
-    BuscadorComponent
+    BuscadorComponent,
+    InfoComponent
   ]
 })
 export class PagesModule { }

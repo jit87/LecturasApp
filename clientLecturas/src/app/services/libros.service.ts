@@ -19,6 +19,17 @@ export class LibrosService {
     return this.http.get(`${this.url}${term}&key=${this.Google_API_KEY}&maxResults=${this.max}`); 
   }
 
+  //Devuelve novedades de libros de ficción
+  getLibrosNuevos(): Observable<any> {
+    return this.http.get(`${this.url}subject:fiction&key=${this.Google_API_KEY}&maxResults=${this.max}&orderBy=newest`); 
+  }
+
+  getInfoLibroById(id: string): Observable<any>{
+    console.log(`${this.url}&${id}&key=${this.Google_API_KEY}`); 
+    return this.http.get(`${this.url}&${id}&key=${this.Google_API_KEY}`);
+  }
+
+
 
 
 

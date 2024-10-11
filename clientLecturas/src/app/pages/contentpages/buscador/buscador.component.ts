@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { LibrosService } from '../../../services/libros.service';
-import { Location } from '@angular/common'
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-buscador',
@@ -11,7 +11,9 @@ import { Location } from '@angular/common'
 export class BuscadorComponent {
 
 
-  libros: any[] = []; 
+  libros: { id: any; info: any; }[] = []; 
+  cargados: boolean = false; 
+  disponibles: boolean = true; 
   // titulo: string;
   // autores: string[];
   // publisher: string;
@@ -46,14 +48,23 @@ export class BuscadorComponent {
 
   
   getLibros(termino: string) {
+    //Limpiamos la búsqueda anterior antes de realizar nueva búsqueda
+    this.libros = []; 
     this._librosService.getLibros(termino).subscribe(
       (resp: any) => {
         for (let i = 0; i < resp.items.length; i++) {
-          this.libros.push(resp.items[i].volumeInfo)
+           const libroInfo = {
+                id: resp.items[i].id,
+                info: resp.items[i].volumeInfo
+              };
+            this.libros.push(libroInfo);
         }
+         this.cargados = true; 
       },
       (error) => {
         console.log("Ha fallado", error); 
+        this.disponibles = false;
+        this.cargados = true;
       }
     );
     console.log(this.libros); 

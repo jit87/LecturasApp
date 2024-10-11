@@ -1,7 +1,3 @@
-
-
-.card-img-top {
-    height: auto;
-    max-height: 150px;
-    object-fit: cover;
+a:hover {
+    text-decoration: underline !important;
 }
