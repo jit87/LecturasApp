@@ -25,7 +25,7 @@ export class HomeComponent {
                 id: resp.items[i].id,
                 info: resp.items[i].volumeInfo
               };
-            this.librosNuevos.push(libroInfo);
+          this.librosNuevos.push(libroInfo);
         }
         this.cargados = true;
       },

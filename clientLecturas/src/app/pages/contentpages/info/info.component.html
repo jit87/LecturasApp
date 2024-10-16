@@ -1,23 +1,26 @@
-<button class="btn btn-outline-secondary mt-3" (click)="regresar()">Volver</button>
-<p>info works!</p>
 <div class="container">
-    <img src=""
-        alt="Portada del libro" class="image">
-
-    <div class="title">The Google Story (2018 Updated Edition)</div>
-    <div class="subtitle">Inside the Hottest Business, Media, and Technology Success of Our Time</div>
-
-    <div class="authors"><strong>Autores:</strong> David A. Vise, Mark Malseed</div>
-    <div class="publisher"><strong>Editorial:</strong> Random House Publishing Group</div>
+    <button class="btn btn-outline-secondary mt-3" (click)="regresar()">Volver</button>
+    <br>
+    <br>
+    <div>
+    <div class="title"><h5>{{ titulo }}</h5>
+    <small> {{ autores }}</small>
+    </div>
+    <br>
+    <img src="{{portada}}" alt="Portada del libro" class="image">
+    <br>
+    <br>
+    <div class="publisher"><strong>Editorial:</strong> {{ editor }}</div>
     <div class="date"><strong>Fecha de publicación:</strong> 2005-11-15</div>
-    <div class="categories"><strong>Categorías:</strong> Business & Economics / Entrepreneurship, Computers /
-        Information Technology, History / Modern / 20th Century / General</div>
+    <div class="categories"><strong>Categorías:</strong> {{ categorias }}</div>
 
     <div class="description">
         <strong>Descripción:</strong>
-        <span>
-            <b>The definitive, bestselling account of the company that changed the way we work and live...</b>
-        </span>
+            {{ descripcion }}
+    </div>
+    <div class="pages">
+        <strong>Número de páginas:</strong>
+        {{ paginas }}
     </div>
 
     <div class="rating">
@@ -28,6 +31,8 @@
         <strong>Precio:</strong> €12.51
     </div>
 
-    <a href="https://play.google.com/store/libros/details?id=zyTCAlFPjgYC&rdid=zyTCAlFPjgYC&rdot=1&source=gbs_api"
-        class="buy-button">Comprar Libro</a>
+    <br>
+    <button class="btn btn-success btn-sm" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">Guadar libro</button>
+    </div>
+
 </div>

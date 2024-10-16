@@ -25,8 +25,7 @@ export class LibrosService {
   }
 
   getInfoLibroById(id: string): Observable<any>{
-    console.log(`${this.url}&${id}&key=${this.Google_API_KEY}`); 
-    return this.http.get(`${this.url}&${id}&key=${this.Google_API_KEY}`);
+    return this.http.get(`${this.url.slice(0,this.url.length-3)}/${id}?&key=${this.Google_API_KEY}`);
   }
 
 
