@@ -57,6 +57,7 @@ constructor(
         (error) => {
           console.log("Error", error); 
           this.disponibles = false;
+          this.cargando = false;
         }
       )
   }
