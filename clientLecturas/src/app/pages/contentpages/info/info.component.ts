@@ -19,6 +19,10 @@ autores: string = "";
 editor: string = ""; 
 categorias: string = ""; 
 paginas: string = ""; 
+fecha: string = ""; 
+  
+cargando: boolean = false; 
+disponibles: boolean = true; 
 
 constructor(
     private _librosService: LibrosService,
@@ -36,6 +40,7 @@ constructor(
 
 
   getInfoLibro(id: string) {
+    this.cargando = true; 
     this._librosService.getInfoLibroById(id).subscribe(
       (resp) => {
           console.log(resp); 
@@ -46,9 +51,12 @@ constructor(
           this.editor = resp.volumeInfo.publisher; 
           this.categorias = resp.volumeInfo.categories; 
           this.paginas = resp.volumeInfo.pageCount.toString(); 
+          this.fecha = resp.volumeInfo.publishedDate; 
+          this.cargando = false;
         },
         (error) => {
           console.log("Error", error); 
+          this.disponibles = false;
         }
       )
   }

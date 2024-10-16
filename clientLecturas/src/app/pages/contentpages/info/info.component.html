@@ -1,5 +1,11 @@
 <div class="container">
     <button class="btn btn-outline-secondary mt-3" (click)="regresar()">Volver</button>
+    <p *ngIf="disponibles == false" class="error">No hay información disponible</p>
+    <div class="mt-4" *ngIf="cargando==true" style="text-align: center;">
+        <div class="spinner-border m-5" role="status">
+            <span class="visually-hidden">Cargando...</span>
+        </div>
+    </div>
     <br>
     <br>
     <div>
@@ -11,7 +17,7 @@
     <br>
     <br>
     <div class="publisher"><strong>Editorial:</strong> {{ editor }}</div>
-    <div class="date"><strong>Fecha de publicación:</strong> 2005-11-15</div>
+    <div class="date"><strong>Fecha de publicación:</strong> {{ fecha }}</div>
     <div class="categories"><strong>Categorías:</strong> {{ categorias }}</div>
 
     <div class="description">
@@ -22,17 +28,10 @@
         <strong>Número de páginas:</strong>
         {{ paginas }}
     </div>
-
-    <div class="rating">
-        <strong>Calificación:</strong> ⭐ 4 (4 ratings)
-    </div>
-
-    <div class="price">
-        <strong>Precio:</strong> €12.51
-    </div>
-
     <br>
-    <button class="btn btn-success btn-sm" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">Guadar libro</button>
+    <button class="btn btn-success btn-sm mb-3" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">Guadar libro</button>
     </div>
+    <br>
+    <br>
 
 </div>
