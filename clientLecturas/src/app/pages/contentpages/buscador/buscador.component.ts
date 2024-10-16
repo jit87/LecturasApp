@@ -12,7 +12,7 @@ export class BuscadorComponent {
 
 
   libros: { id: any; info: any; }[] = []; 
-  cargados: boolean = false; 
+  cargando: boolean = false; 
   disponibles: boolean = true; 
   // titulo: string;
   // autores: string[];
@@ -48,6 +48,7 @@ export class BuscadorComponent {
 
   
   getLibros(termino: string) {
+    this.cargando = true; 
     //Limpiamos la búsqueda anterior antes de realizar nueva búsqueda
     this.libros = []; 
     this._librosService.getLibros(termino).subscribe(
@@ -58,13 +59,12 @@ export class BuscadorComponent {
                 info: resp.items[i].volumeInfo
               };
             this.libros.push(libroInfo);
+            this.cargando = false;
         }
-         this.cargados = true; 
       },
       (error) => {
         console.log("Ha fallado", error); 
         this.disponibles = false;
-        this.cargados = true;
       }
     );
     console.log(this.libros); 

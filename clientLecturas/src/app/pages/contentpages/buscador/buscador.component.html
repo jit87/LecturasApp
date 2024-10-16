@@ -2,7 +2,7 @@
     <div class="container">
         <button class="btn btn-outline-secondary mb-3" (click)="regresar()">Volver</button>
         <p *ngIf="disponibles == false" class="error">No hay libros disponibles</p> 
-        <div class="mt-4" *ngIf="cargados==false" style="text-align: center;">
+        <div class="mt-4" *ngIf="cargando==true" style="text-align: center;">
             <div class="spinner-border m-5" role="status">
                 <span class="visually-hidden">Cargando...</span>
             </div>
