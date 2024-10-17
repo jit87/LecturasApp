@@ -1,21 +1,27 @@
-export class LibroModel {
 
-  _id:                 string; 
-  _idUsuario:          string; 
-  titulo:              string;
-  autores:             string[];
-  editor:              string;
-  fechaPublicacion:    string;
-  descripcion:         string;
-  pageCount:           number;
-  averageRating:       number;
-  ratingsCount:        number;
-  contentVersion:      string;
-  imagen:              string;
-  lengua:              string;
-  previewLink:         string;
-  
- constructor() {
+export enum EstadoLibro {
+  Leido = "leido",
+  Pendiente = "pendiente"
+}
+
+export class LibroModel {
+  _id?:                 string; 
+  _idUsuario?:          string; 
+  titulo:               string;
+  autores:              string[];
+  editor?:              string;
+  fechaPublicacion?:    string;
+  descripcion?:         string;
+  pageCount?:           number;
+  averageRating?:       number;
+  ratingsCount?:        number;
+  contentVersion?:      string;
+  imagen?:              string;
+  lengua?:              string;
+  previewLink?:         string;
+  estado?:              EstadoLibro; 
+
+  constructor() {
     this._id = "";
     this._idUsuario = ""; 
     this.titulo = ""; 
@@ -27,12 +33,9 @@ export class LibroModel {
     this.averageRating = 0;
     this.ratingsCount = 0;
     this.contentVersion = "";
-    this.imagen = "" 
+    this.imagen = ""; 
     this.lengua = "";
     this.previewLink = "";
+    this.estado = EstadoLibro.Pendiente; 
    }
-    
-
-    
 }
-
