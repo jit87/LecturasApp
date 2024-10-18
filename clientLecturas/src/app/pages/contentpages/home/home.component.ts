@@ -13,6 +13,7 @@ export class HomeComponent {
   cargados: boolean = false; 
   disponibles: boolean = true; 
   libro: LibroModel = new LibroModel(); 
+  librosGuardados: any[] = [];
 
   constructor(private _librosService: LibrosService) {
     this.getLibrosNuevos(); 
@@ -41,27 +42,36 @@ export class HomeComponent {
 
   //Primero se guardan en el LocalStorage para probar y una vez terminado el Front se añadirá al backend
   guardarEstadoLibro(estado: string, libro: any) { 
-   if (estado == 'leido') {
-        this.libro._id = "";
-        this.libro._idUsuario = ""; 
-        this.libro.titulo = libro.info.title; 
-        this.libro.autores = libro.info.authors[0]; 
-        this.libro.editor = libro.info.publisher;
-        this.libro.fechaPublicacion = libro.info.publishedDate;
-        this.libro.descripcion = libro.info.description;
-        this.libro.pageCount = libro.info.pageCount.toString(); 
-        this.libro.averageRating = 0;
-        this.libro.ratingsCount = 0;
-        this.libro.contentVersion = "";
-        this.libro.imagen = libro.info.imageLinks.thumbnail; ; 
-        this.libro.lengua = "";
-        this.libro.previewLink = "";
-        this.libro.estado = EstadoLibro.Leido; 
-        localStorage.setItem("estado", JSON.stringify(this.libro));
-    } else if (estado == 'pendiente') {
-        this.libro.estado = EstadoLibro.Pendiente;
-        localStorage.setItem('estado', JSON.stringify(this.libro));  
-    }
+    
+    //Recuperamos lo que haya en el localStorage
+    const librosPrevios = JSON.parse(localStorage.getItem("librosGuardados") || '[]');
+
+    //Hay que crear una instancia para cada libro, si no se añade el mismo varias veces
+    const nuevoLibro = {
+      _id: "",
+      _idUsuario: "",
+      titulo: libro.info.title,
+      autores: libro.info.authors[0],
+      editor: libro.info.publisher,
+      fechaPublicacion: libro.info.publishedDate,
+      descripcion: libro.info.description,
+      pageCount: libro.info.pageCount.toString(),
+      averageRating: 0,
+      ratingsCount: 0,
+      contentVersion: "",
+      imagen: libro.info.imageLinks.thumbnail,
+      lengua: "",
+      previewLink: "",
+      estado: estado === 'leido' ? EstadoLibro.Leido : EstadoLibro.Pendiente
+    };
+
+    if (nuevoLibro) {
+        this.librosGuardados = librosPrevios; 
+        this.librosGuardados.push(nuevoLibro);
+        console.log(this.librosGuardados);
+        localStorage.setItem("librosGuardados", JSON.stringify(this.librosGuardados));
+      } 
+
   }
 
 

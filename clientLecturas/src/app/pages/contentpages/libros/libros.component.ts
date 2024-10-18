@@ -7,4 +7,22 @@ import { Component } from '@angular/core';
 })
 export class LibrosComponent {
 
+  librosGuardados: any[] = [];
+
+  constructor() {
+    this.mostrarLibros(); 
+  }
+
+
+  mostrarLibros() {
+    var guardados = localStorage.getItem('librosGuardados');
+
+    if (guardados) {
+      this.librosGuardados.push(JSON.parse(guardados));
+    }
+    console.log(this.librosGuardados); 
+  }
+  
+
+
 }
