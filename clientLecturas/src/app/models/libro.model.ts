@@ -19,7 +19,8 @@ export class LibroModel {
   imagen?:              string;
   lengua?:              string;
   previewLink?:         string;
-  estado?:              EstadoLibro; 
+  estado?:              EstadoLibro;
+  coleccion?:           string; 
 
   constructor() {
     this._id = "";
@@ -36,6 +37,7 @@ export class LibroModel {
     this.imagen = ""; 
     this.lengua = "";
     this.previewLink = "";
-    this.estado = EstadoLibro.Pendiente; 
+    this.estado = EstadoLibro.Pendiente;
+    this.coleccion = "No clasificado"
    }
 }

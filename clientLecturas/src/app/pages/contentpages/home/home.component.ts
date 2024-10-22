@@ -48,7 +48,7 @@ export class HomeComponent {
 
     //Hay que crear una instancia para cada libro, si no se añade el mismo varias veces
     const nuevoLibro = {
-      _id: "",
+      _id: libro.id,
       _idUsuario: "",
       titulo: libro.info.title,
       autores: libro.info.authors[0],

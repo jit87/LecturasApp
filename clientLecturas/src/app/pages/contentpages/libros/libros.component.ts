@@ -8,12 +8,14 @@ import { Component } from '@angular/core';
 export class LibrosComponent {
 
   librosGuardados: any[] = [];
+  mostrarForm: boolean = false; 
 
   constructor() {
     this.mostrarLibros(); 
   }
 
 
+  //ACCIONES
   mostrarLibros() {
     var guardados = localStorage.getItem('librosGuardados');
 
@@ -21,6 +23,16 @@ export class LibrosComponent {
       this.librosGuardados.push(JSON.parse(guardados));
     }
     console.log(this.librosGuardados); 
+  }
+
+
+  //FORMULARIO
+  mostrarFormulario(id:string) {
+    this.mostrarForm = true; 
+  }
+
+  cerrarFormulario() {
+    this.mostrarForm = false; 
   }
   
 

@@ -1,8 +1,8 @@
 export class ColeccionModel {
 
-_id:                 string; 
+_id:        string; 
 _idUsuario: string; 
-libros: string[]; 
+libros:     string[]; 
     
 
 constructor() {

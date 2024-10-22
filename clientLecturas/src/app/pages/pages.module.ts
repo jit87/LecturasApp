@@ -8,6 +8,7 @@ import { LibrosComponent } from './contentpages/libros/libros.component';
 import { BuscadorComponent } from './contentpages/buscador/buscador.component';
 import { RouterModule } from '@angular/router';
 import { InfoComponent } from './contentpages/info/info.component';
+import { EditarLibroComponent } from './contentpages/editar-libro/editar-libro.component';
 
 
 
@@ -19,7 +20,8 @@ import { InfoComponent } from './contentpages/info/info.component';
     PerfilComponent,
     LibrosComponent,
     BuscadorComponent,
-    InfoComponent
+    InfoComponent,
+    EditarLibroComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +34,8 @@ import { InfoComponent } from './contentpages/info/info.component';
     PerfilComponent,
     LibrosComponent,
     BuscadorComponent,
-    InfoComponent
+    InfoComponent,
+    EditarLibroComponent
   ]
 })
 export class PagesModule { }

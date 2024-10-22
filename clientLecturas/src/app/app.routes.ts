@@ -7,6 +7,7 @@ import { LoginComponent } from './pages/authpages/login/login.component';
 import { RegistroComponent } from './pages/authpages/registro/registro.component';
 import { BuscadorComponent } from './pages/contentpages/buscador/buscador.component';
 import { InfoComponent } from './pages/contentpages/info/info.component';
+import { EditarLibroComponent } from './pages/contentpages/editar-libro/editar-libro.component';
 
 
 export const APP_ROUTES: Routes = [
@@ -16,7 +17,7 @@ export const APP_ROUTES: Routes = [
     { path: 'perfil', component: PerfilComponent },
     { path: 'libros', component: LibrosComponent },
     { path: 'buscador/:termino', component: BuscadorComponent },
-    { path: 'info/:id', component:InfoComponent }, 
+    { path: 'info/:id', component: InfoComponent }, 
     { path: '**', pathMatch:'full', redirectTo:'home'}
 ];
 
