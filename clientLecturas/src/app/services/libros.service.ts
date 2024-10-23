@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../environments/environment'
+import { EstadoLibro } from '../models/libro.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,10 @@ export class LibrosService {
   url: string = "https://www.googleapis.com/books/v1/volumes?q="
   Google_API_KEY: string = environment.Google_API_KEY;  
   max: number = 10; 
+
+  id: string = ""; 
+  titulo: string = "";
+  estado: string = ""; 
 
   constructor(private http: HttpClient) { }
 
@@ -29,10 +34,34 @@ export class LibrosService {
   }
 
 
+  
+  ///////////////////////
 
+  getIdLibro() {
+    return this.id; 
+  }
 
+  getTituloLibro() {
+    return this.titulo; 
+  }
 
+  getEstadoLibro() {
+    return this.estado; 
+  }
 
+  setIdLibro(id:string) {
+    this.id = id; 
+  }
+
+  setTituloLibro(titulo: string) {
+    this.titulo = titulo; 
+  }
+
+  setEstadoLibro(estado: EstadoLibro) {
+    this.estado = estado; 
+  }
+
+  
 
 
 

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PagesModule } from './pages/pages.module';
+import { FormsModule } from '@angular/forms';
 
 //Rutas
 import { APP_ROUTING } from './app.routes';
@@ -25,7 +26,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     ComponentsModule,
     PagesModule,
     CommonModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -9,6 +9,7 @@ import { BuscadorComponent } from './contentpages/buscador/buscador.component';
 import { RouterModule } from '@angular/router';
 import { InfoComponent } from './contentpages/info/info.component';
 import { EditarLibroComponent } from './contentpages/editar-libro/editar-libro.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -25,7 +26,8 @@ import { EditarLibroComponent } from './contentpages/editar-libro/editar-libro.c
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    FormsModule
   ],
   exports: [
     LoginComponent,

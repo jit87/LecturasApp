@@ -2,16 +2,16 @@
     <div class="container mt-5">
         <div class="card shadow-lg">
             <div class="card-header text-center">
-                <h2 class="mb-0">Editar Libro</h2>
+                <h4 class="mb-0">Editar Libro: {{ titulo }}</h4>
                 <button class="btn btn-close" style="margin-left: 92.5%; cursor: pointer;" (click)="cerrar()"></button>
             </div>
             <div class="card-body">
-                <form (ngSubmit)="guardarCambios()">
+                <form (ngSubmit)="guardarCambios(f)" #f="ngForm">
                     <div class="mb-3">
                         <label for="estado" class="form-label">Estado</label>
-                        <select id="estado" class="form-select" name="estado">
-                            <option value="Pendiente">Pendiente</option>
-                            <option value="Terminado">Terminado</option>
+                        <select id="estado" class="form-select" name="estado"  [(ngModel)]="libro.estado">
+                            <option value="pendiente">Pendiente</option>
+                            <option value="leido">Leído</option>
                         </select>
                     </div>
 
