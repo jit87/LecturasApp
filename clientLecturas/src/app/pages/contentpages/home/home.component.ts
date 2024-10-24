@@ -62,7 +62,7 @@ export class HomeComponent {
       imagen: libro.info.imageLinks.thumbnail,
       lengua: "",
       previewLink: "",
-      estado: estado === 'leido' ? 'Leido' : 'Pendiente'
+      estado: estado === 'Leído' ? 'Leído' : 'Pendiente'
     };
 
     if (nuevoLibro) {

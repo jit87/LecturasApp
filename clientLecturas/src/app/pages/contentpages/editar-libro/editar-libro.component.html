@@ -15,12 +15,13 @@
                                 [(ngModel)]="libro.estado">
                             <option value="" disabled selected>Selecciona un estado</option>
                             <option value="Pendiente">Pendiente</option>
-                            <option value="Leido">Leído</option>
+                            <option value="Leído">Leído</option>
                         </select>
                     </div>
 
                     <div class="mb-3">
                         <label for="coleccion" class="form-label">Colección</label>
+                        <small class="fst-italic" *ngIf="colecciones.length==0" style="font-size: x-small;"> (No hay colecciones creadas)</small>
                         <select id="coleccion" 
                                 class="form-select" 
                                 name="coleccion" 

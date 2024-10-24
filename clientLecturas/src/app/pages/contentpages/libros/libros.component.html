@@ -8,10 +8,12 @@
 
         <div class="mb-4">
             <h2>Colecciones</h2>
-            <div id="colecciones" class="mb-3">
-                <button id="btnAgregarColeccion" class="btn btn-secondary btn-sm" data-toggle="modal"
-                    data-target="#modalAgregarColeccion" style="margin-left: 5px;">Añadir Colección</button>
+            <div id="colecciones" class="col-md-4">
+                 <input type="text" id="coleccionInput" class="form-control" placeholder="Añadir colección..." #coleccion>
+                 <span><button id="btnAgregarColeccion" class="btn btn-secondary btn-sm" data-toggle="modal"
+                    data-target="#modalAgregarColeccion" style="margin-left: 5px;" (click)="crearColeccion(coleccion)">Añadir Colección</button></span>
             </div>
+            <span class="badge text-bg-primary" style="margin-left: 3px;" *ngFor="let coleccion of colecciones">{{ coleccion.nombre }}</span>
         </div>
 
         <div id="misLibros">
@@ -53,7 +55,7 @@
             </table>
             <div *ngIf="mostrarForm"
                 style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.7); z-index: 10; display: flex; justify-content: center; align-items: center;">
-                <app-editar-libro *ngIf="mostrarForm==true" (cerrarFormulario)="cerrarFormulario()"></app-editar-libro>
+                <app-editar-libro *ngIf="mostrarForm==true" (cerrarFormulario)="cerrarFormulario()" (libroEditado)="recibirConfEditado($event)"></app-editar-libro>
             </div>
         </div>
     </div>
