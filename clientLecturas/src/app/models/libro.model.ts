@@ -1,8 +1,5 @@
 
-export enum EstadoLibro {
-  Leido = "leido",
-  Pendiente = "pendiente"
-}
+
 
 export class LibroModel {
   _id?:                 string; 
@@ -19,7 +16,7 @@ export class LibroModel {
   imagen?:              string;
   lengua?:              string;
   previewLink?:         string;
-  estado?:              EstadoLibro;
+  estado?:              string;
   coleccion?:           string; 
 
   constructor() {
@@ -37,7 +34,7 @@ export class LibroModel {
     this.imagen = ""; 
     this.lengua = "";
     this.previewLink = "";
-    this.estado = EstadoLibro.Pendiente;
+    this.estado = "Pendiente";
     this.coleccion = "No clasificado"
    }
 }

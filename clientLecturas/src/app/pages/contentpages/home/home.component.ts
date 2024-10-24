@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { LibrosService } from '../../../services/libros.service';
-import { LibroModel, EstadoLibro } from '../../../models/libro.model';
+import { LibroModel } from '../../../models/libro.model';
 
 @Component({
   selector: 'app-home',
@@ -62,7 +62,7 @@ export class HomeComponent {
       imagen: libro.info.imageLinks.thumbnail,
       lengua: "",
       previewLink: "",
-      estado: estado === 'leido' ? EstadoLibro.Leido : EstadoLibro.Pendiente
+      estado: estado === 'leido' ? 'Leido' : 'Pendiente'
     };
 
     if (nuevoLibro) {

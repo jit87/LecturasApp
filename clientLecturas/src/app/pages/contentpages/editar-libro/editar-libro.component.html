@@ -2,29 +2,42 @@
     <div class="container mt-5">
         <div class="card shadow-lg">
             <div class="card-header text-center">
-                <h4 class="mb-0">Editar Libro: {{ titulo }}</h4>
+                <h4 class="mb-0">Editar Libro: {{ libro.titulo }}</h4>
                 <button class="btn btn-close" style="margin-left: 92.5%; cursor: pointer;" (click)="cerrar()"></button>
             </div>
             <div class="card-body">
-                <form (ngSubmit)="guardarCambios(f)" #f="ngForm">
+                <form (ngSubmit)="guardarCambios(f)" #f="ngForm"  novalidate>
                     <div class="mb-3">
                         <label for="estado" class="form-label">Estado</label>
-                        <select id="estado" class="form-select" name="estado"  [(ngModel)]="libro.estado">
-                            <option value="pendiente">Pendiente</option>
-                            <option value="leido">Leído</option>
+                        <select id="estado" 
+                                class="form-select" 
+                                name="estado" 
+                                [(ngModel)]="libro.estado">
+                            <option value="" disabled selected>Selecciona un estado</option>
+                            <option value="Pendiente">Pendiente</option>
+                            <option value="Leido">Leído</option>
                         </select>
                     </div>
 
                     <div class="mb-3">
                         <label for="coleccion" class="form-label">Colección</label>
-                        <select id="coleccion" class="form-select" name="coleccion">
-                            <!-- <option *ngFor="let coleccion of colecciones" [value]="coleccion">{{ coleccion }}</option> -->
+                        <select id="coleccion" 
+                                class="form-select" 
+                                name="coleccion" 
+                                [(ngModel)]="libro.coleccion">
+                            <option value="" disabled selected *ngIf="colecciones.length==0">No hay colecciones creadas</option>
+                            <option *ngFor="let coleccion of colecciones" 
+                                    [value]="coleccion">{{ coleccion }}</option>
                         </select>
                     </div>
 
                     <div class="mb-3">
                         <label for="reseña" class="form-label">Añadir Reseña</label>
-                        <textarea id="reseña" class="form-control" name="reseña" rows="4"></textarea>
+                        <textarea   id="reseña" 
+                                    class="form-control" 
+                                    name="reseña" 
+                                    rows="4" 
+                                    [(ngModel)]="libro.descripcion"></textarea>
                     </div>
 
                     <div class="text-center">

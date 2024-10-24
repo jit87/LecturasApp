@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../environments/environment'
-import { EstadoLibro } from '../models/libro.model';
+
 
 @Injectable({
   providedIn: 'root'
@@ -57,7 +57,7 @@ export class LibrosService {
     this.titulo = titulo; 
   }
 
-  setEstadoLibro(estado: EstadoLibro) {
+  setEstadoLibro(estado: string) {
     this.estado = estado; 
   }
 

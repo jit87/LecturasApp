@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { LibrosService } from '../../../services/libros.service';
-import { EstadoLibro } from '../../../models/libro.model';
 
 @Component({
   selector: 'app-libros',
@@ -29,7 +28,7 @@ export class LibrosComponent {
 
 
   //FORMULARIO
-  mostrarFormulario(id:string, titulo: string, estado: EstadoLibro) {
+  mostrarFormulario(id:string, titulo: string, estado:string) {
     this.mostrarForm = true; 
     this._librosService.setIdLibro(id); 
     this._librosService.setTituloLibro(titulo); 
