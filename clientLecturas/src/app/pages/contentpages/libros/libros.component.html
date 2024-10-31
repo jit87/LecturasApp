@@ -3,7 +3,7 @@
         <h2 class="text-center mb-4">Mis Libros Guardados</h2>
 
         <div class="mb-4">
-            <input type="text" id="searchInput" class="form-control" placeholder="Buscar libros...">
+            <input type="text" id="searchInput" class="form-control" placeholder="Buscar libros..." #termino (keyup)="buscarLibrosGuardados(termino.value)">
         </div>
 
         <div class="mb-4" style="width: 100%;">
@@ -43,7 +43,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let libro of librosGuardados[0]; let i = index">
+                    <tr *ngFor="let libro of librosAMostrar[0]; let i = index">
                         <td>{{ i + 1 }}</td>
                         <td><img src="{{libro.imagen}}" style="width: 50px;height: 70px;"></td>
                         <td>{{ libro.titulo }}</td>
