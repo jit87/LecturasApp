@@ -49,6 +49,14 @@ export class LibrosComponent {
   }
 
 
+  eliminarColeccion(index: number) {
+    //Filtramos la coleccion que pasamos como parámetro
+    var coleccionesModificadas = this.colecciones.filter((elem) => elem.nombre !== this.colecciones.at(index)?.nombre);
+    localStorage.setItem("coleccionesGuardadas", JSON.stringify(coleccionesModificadas)); 
+    this.mostrarColecciones();
+  }
+
+
   //FORMULARIO
   mostrarFormulario(id:string, titulo: string, estado:string) {
     this.mostrarForm = true; 
