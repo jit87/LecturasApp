@@ -61,6 +61,9 @@ export class LibrosComponent {
 
 
   crearColeccion(coleccion: any) {
+    if (coleccion.value=="") {
+      return; 
+    }
     this.coleccion = {
       _id: "default", 
       _idUsuario: "default",
