@@ -19,6 +19,7 @@ export class LibrosService {
 
   constructor(private http: HttpClient) { }
 
+  //Datos de la API
   //Devuelve libros que coincidan con el titulo indicado
   getLibros(term: string): Observable<any> {
     return this.http.get(`${this.url}${term}&key=${this.Google_API_KEY}&maxResults=${this.max}`); 
@@ -34,34 +35,6 @@ export class LibrosService {
   }
 
 
-  
-  ///////////////////////
-
-  getIdLibro() {
-    return this.id; 
-  }
-
-  getTituloLibro() {
-    return this.titulo; 
-  }
-
-  getEstadoLibro() {
-    return this.estado; 
-  }
-
-  setIdLibro(id:string) {
-    this.id = id; 
-  }
-
-  setTituloLibro(titulo: string) {
-    this.titulo = titulo; 
-  }
-
-  setEstadoLibro(estado: string) {
-    this.estado = estado; 
-  }
-
-  
 
 
 

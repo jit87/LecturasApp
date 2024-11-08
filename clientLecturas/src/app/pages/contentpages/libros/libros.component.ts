@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { LibrosService } from '../../../services/libros.service';
 import { ColeccionModel } from '../../../models/coleccion.model';
+import { EstadoLibroService } from '../../../services/estado-libro.service';
 
 @Component({
   selector: 'app-libros',
@@ -16,7 +17,7 @@ export class LibrosComponent {
   colecciones: ColeccionModel[] = []; 
   coleccion: ColeccionModel = new ColeccionModel(); 
 
-  constructor(private _librosService: LibrosService) {
+  constructor(private _estadoLibroService: EstadoLibroService) {
     this.mostrarLibros(); 
     this.mostrarColecciones(); 
   }
@@ -86,9 +87,9 @@ export class LibrosComponent {
   //FORMULARIO
   mostrarFormulario(id:string, titulo: string, estado:string) {
     this.mostrarForm = true; 
-    this._librosService.setIdLibro(id); 
-    this._librosService.setTituloLibro(titulo); 
-    this._librosService.setEstadoLibro(estado); 
+    this._estadoLibroService.setIdLibro(id); 
+    this._estadoLibroService.setTituloLibro(titulo); 
+    this._estadoLibroService.setEstadoLibro(estado); 
   }
 
   cerrarFormulario() {
