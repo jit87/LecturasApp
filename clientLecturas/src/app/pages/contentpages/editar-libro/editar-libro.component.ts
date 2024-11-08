@@ -28,6 +28,7 @@ constructor(private _estadoLibroService: EstadoLibroService) {
   this.libro._id = this._estadoLibroService.getIdLibro(); 
   this.libro.titulo = this._estadoLibroService.getTituloLibro();
   this.libro.estado = this._estadoLibroService.getEstadoLibro(); 
+  //this.libro.coleccion = this._estadoLibroService.
   var datos = this._estadoLibroService.getColecciones(); 
   if (datos) {
     //this.colecciones = [datos]; 
