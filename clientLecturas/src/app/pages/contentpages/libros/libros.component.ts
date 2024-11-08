@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { LibrosService } from '../../../services/libros.service';
 import { ColeccionModel } from '../../../models/coleccion.model';
 import { EstadoLibroService } from '../../../services/estado-libro.service';
+import { EditarLibroComponent } from '../editar-libro/editar-libro.component';
 
 @Component({
   selector: 'app-libros',
@@ -80,16 +81,30 @@ export class LibrosComponent {
     //Filtramos la coleccion que pasamos como parámetro
     var coleccionesModificadas = this.colecciones.filter((elem) => elem.nombre !== this.colecciones.at(index)?.nombre);
     localStorage.setItem("coleccionesGuardadas", JSON.stringify(coleccionesModificadas)); 
+    //Eliminamos la coleccion de los libros a los que está asignada
+    this.eliminarAsignacionColeccion(index);
     this.mostrarColecciones();
   }
 
 
+  eliminarAsignacionColeccion(index: number) {
+    var nombreColeccion = this.colecciones.at(index)?.nombre; 
+     this.librosGuardados.forEach((elem: any) => {
+      if (elem.coleccion == nombreColeccion) {
+        console.log(elem.coleccion); 
+      }
+    })
+   // localStorage.setItem("librosGuardados", JSON.stringify(this.librosGuardados)); 
+  }
+
+
   //FORMULARIO
-  mostrarFormulario(id:string, titulo: string, estado:string) {
+  mostrarFormulario(id:string, titulo: string, estado:string, coleccion: string) {
     this.mostrarForm = true; 
     this._estadoLibroService.setIdLibro(id); 
     this._estadoLibroService.setTituloLibro(titulo); 
     this._estadoLibroService.setEstadoLibro(estado); 
+    this._estadoLibroService.setColeccionLibro(coleccion);
   }
 
   cerrarFormulario() {

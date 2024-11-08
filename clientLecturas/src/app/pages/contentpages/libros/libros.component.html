@@ -40,6 +40,7 @@
                         <th>Estado</th> 
                         <th>Colección</th>
                         <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -51,11 +52,12 @@
                         <td>{{ libro.editor }}</td>
                         <td>{{ libro.fechaPublicacion }}</td>
                         <td>{{ libro.estado }}</td> 
+                        <td>{{ libro.coleccion }}</td>
                         <td></td>
                         <td>
                             <button class="btn btn-secondary btn-sm" 
                                     style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                                    (click)="mostrarFormulario(libro._id,libro.titulo,libro.estado)">
+                                    (click)="mostrarFormulario(libro._id,libro.titulo,libro.estado, libro.coleccion)">
                                     Editar
                             </button>
                         </td>

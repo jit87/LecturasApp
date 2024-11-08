@@ -8,6 +8,7 @@ export class EstadoLibroService {
   private id: string = "";
   private titulo: string = "";
   private estado: string = "";
+  private coleccion: string = ""; 
 
   constructor() { }
 
@@ -24,6 +25,10 @@ export class EstadoLibroService {
     return this.estado;
   }
 
+  getColeccionLibro() {
+    return this.coleccion; 
+  }
+
   setIdLibro(id: string): void {
     this.id = id;
   }
@@ -36,11 +41,18 @@ export class EstadoLibroService {
     this.estado = estado;
   }
 
+  setColeccionLibro(coleccion: string) {
+    this.coleccion = coleccion;
+  }
+
+  
+
   
   //Colecciones
   getColecciones() {
       return JSON.parse(localStorage.getItem("coleccionesGuardadas")  || '[]');
   }
+
 
 
 
