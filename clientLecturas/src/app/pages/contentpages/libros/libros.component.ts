@@ -3,6 +3,7 @@ import { LibrosService } from '../../../services/libros.service';
 import { ColeccionModel } from '../../../models/coleccion.model';
 import { EstadoLibroService } from '../../../services/estado-libro.service';
 import { EditarLibroComponent } from '../editar-libro/editar-libro.component';
+import { LibroModel } from '../../../models/libro.model';
 
 @Component({
   selector: 'app-libros',
@@ -14,6 +15,7 @@ export class LibrosComponent {
   librosGuardados: any[] = [];
   librosSeleccionados: any[] = []; 
   librosAMostrar: any[] = []; 
+  libroEncontrado: boolean = false; 
   mostrarForm: boolean = false; 
   colecciones: ColeccionModel[] = []; 
   coleccion: ColeccionModel = new ColeccionModel(); 
@@ -36,21 +38,41 @@ export class LibrosComponent {
 
 
   /*Buscador*/
-  //Busva libros dentro de los que hay guardados
+  //Busca libros dentro de los que hay guardados
   buscarLibrosGuardados(termino: string) {
-    for (var i = 0; i < this.librosGuardados[0].length; i++){
-      if (this.librosGuardados[0][i].titulo===termino || this.librosGuardados[0][i].autores===termino) {
-        console.log("encontrado"); 
-        var libroSeleccionado = this.librosGuardados[0][i];
-        this.librosSeleccionados.push(libroSeleccionado); 
-      } 
-      else {
-         this.mostrarLibros();
+    if(this.libroEncontrado==false)
+      for (var i = 0; i < this.librosGuardados[0].length; i++){
+        if (this.librosGuardados[0][i].titulo===termino || this.librosGuardados[0][i].autores===termino) {
+          console.log("encontrado"); 
+          var libroSeleccionado = this.librosGuardados[0][i];
+          this.librosSeleccionados.push(libroSeleccionado); 
+          this.libroEncontrado = true; 
+          break; 
+        } 
+        else if (this.librosGuardados[0][i].coleccion == termino) {
+          console.log("encontrado"); 
+          var libroSeleccionado = this.librosGuardados[0][i];
+          this.librosSeleccionados.push(libroSeleccionado); 
+          this.libroEncontrado = true; 
+        }
+        else {
+          this.mostrarLibros();
+        }
       }
-    }
     this.librosAMostrar = [];
     this.librosAMostrar.push(this.librosSeleccionados); 
     console.log(this.librosSeleccionados); 
+  }
+
+
+  eliminarLibro(index: number) {
+    for (var i = 0; i < this.librosGuardados[0].length; i++){
+      console.log(this.librosGuardados[0][i]); 
+      this.librosGuardados[0].splice(index, 1);
+      break; 
+    }
+    localStorage.setItem("librosGuardados", JSON.stringify(this.librosGuardados[0]));
+    this.mostrarLibros();
   }
 
 
@@ -89,13 +111,14 @@ export class LibrosComponent {
 
   eliminarAsignacionColeccion(index: number) {
     var nombreColeccion = this.colecciones.at(index)?.nombre; 
-     this.librosGuardados.forEach((elem: any) => {
-      if (elem.coleccion == nombreColeccion) {
-        console.log(elem.coleccion); 
+    for (var i = 0; i < this.librosGuardados[0].length; i++) {
+      if (this.librosGuardados[0][i].coleccion== nombreColeccion) {
+        this.librosGuardados[0][i].coleccion = "";
       }
-    })
-   // localStorage.setItem("librosGuardados", JSON.stringify(this.librosGuardados)); 
+    }
+   localStorage.setItem("librosGuardados", JSON.stringify(this.librosGuardados[0])); 
   }
+
 
 
   //FORMULARIO

@@ -29,7 +29,21 @@
         {{ paginas }}
     </div>
     <br>
-    <button class="btn btn-success btn-sm mb-3" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">Guadar libro</button>
+        <div>
+            <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-success dropdown-toggle btn-sm" data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                        Guardar
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" (click)="guardarEstadoLibro('Pendiente',libroId)">Para leer</a></li>
+                        <li><a class="dropdown-item" (click)="guardarEstadoLibro('Leído',libroId)">Leído</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
     <br>
     <br>

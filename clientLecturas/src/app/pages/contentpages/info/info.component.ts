@@ -23,6 +23,7 @@ fecha: string = "";
   
 cargando: boolean = false; 
 disponibles: boolean = true; 
+librosGuardados: any[] = [];
 
 constructor(
     private _librosService: LibrosService,
@@ -63,13 +64,45 @@ constructor(
   }
 
 
- 
-
-
-
    regresar() {
     this.location.back(); 
   }
+
+
+  //Primero se guardan en el LocalStorage para probar y una vez terminado el Front se añadirá al backend
+  guardarEstadoLibro(estado: string, libro: any) { 
+    
+    //Recuperamos lo que haya en el localStorage
+    const librosPrevios = JSON.parse(localStorage.getItem("librosGuardados") || '[]');
+
+    //Hay que crear una instancia para cada libro, si no se añade el mismo varias veces
+    const nuevoLibro = {
+      _id: libro.id,
+      _idUsuario: "",
+      titulo: libro.info.title,
+      autores: libro.info.authors[0],
+      editor: libro.info.publisher,
+      fechaPublicacion: libro.info.publishedDate,
+      descripcion: libro.info.description,
+      pageCount: libro.info.pageCount.toString(),
+      averageRating: 0,
+      ratingsCount: 0,
+      contentVersion: "",
+      imagen: libro.info.imageLinks.thumbnail,
+      lengua: "",
+      previewLink: "",
+      estado: estado === 'Leído' ? 'Leído' : 'Pendiente'
+    };
+
+    if (nuevoLibro) {
+        this.librosGuardados = librosPrevios; 
+        this.librosGuardados.push(nuevoLibro);
+        console.log(this.librosGuardados);
+        localStorage.setItem("librosGuardados", JSON.stringify(this.librosGuardados));
+      } 
+
+  }
+
 
 
 }

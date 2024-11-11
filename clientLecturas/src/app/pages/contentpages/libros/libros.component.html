@@ -17,7 +17,7 @@
                         data-toggle="modal"
                         data-target="#modalAgregarColeccion" 
                         style="margin-left: 5px;padding: 7px;" 
-                        (click)="crearColeccion(coleccion)">Añadir Colección</button>
+                        (click)="crearColeccion(coleccion)">Añadir colección</button>
             </div>
             <br>
             <br>
@@ -28,7 +28,8 @@
 
         <div id="misLibros">
             <!-- Tabla para los libros guardados -->
-            <table class="table table-striped">
+            <p class="error" *ngIf="!librosAMostrar[0]">No hay libros guardados</p>
+            <table class="table table-striped" *ngIf="librosAMostrar[0]">
                 <thead>
                     <tr>
                         <th>#</th>
@@ -41,13 +42,14 @@
                         <th>Colección</th>
                         <th></th>
                         <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let libro of librosAMostrar[0]; let i = index">
                         <td>{{ i + 1 }}</td>
                         <td><img src="{{libro.imagen}}" style="width: 50px;height: 70px;"></td>
-                        <td>{{ libro.titulo }}</td>
+                        <td  [routerLink]="['/info', libro.id]">{{ libro.titulo }}</td>
                         <td>{{ libro.autores }}</td>
                         <td>{{ libro.editor }}</td>
                         <td>{{ libro.fechaPublicacion }}</td>
@@ -55,11 +57,13 @@
                         <td>{{ libro.coleccion }}</td>
                         <td></td>
                         <td>
-                            <button class="btn btn-secondary btn-sm" 
-                                    style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                                    (click)="mostrarFormulario(libro._id,libro.titulo,libro.estado, libro.coleccion)">
-                                    Editar
-                            </button>
+                            <i class="fa-regular fa-pen-to-square"  
+                               style="cursor: pointer;"
+                               (click)="mostrarFormulario(libro._id,libro.titulo,libro.estado, libro.coleccion)"></i> 
+                        </td>
+                        <td>
+                            <i class="fa-solid fa-trash"
+                               style="cursor: pointer;" (click)="eliminarLibro(i)"></i>
                         </td>
                         <!-- <i class="fa-solid fa-plus"></i> -->
                     </tr>
