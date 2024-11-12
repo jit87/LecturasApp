@@ -28,6 +28,7 @@ export class LibrosComponent {
 
  
   //LIBROS
+  //Cambiar el acceso del lS a la BBDD cuando se cree el backend
   mostrarLibros() {
     var guardados = localStorage.getItem('librosGuardados');
     if (guardados) {
@@ -61,10 +62,12 @@ export class LibrosComponent {
       }
     this.librosAMostrar = [];
     this.librosAMostrar.push(this.librosSeleccionados); 
-    console.log(this.librosSeleccionados); 
+     if(termino == "" || termino== null) {
+      this.mostrarLibros(); 
+    }
   }
 
-
+  //Cambiar el acceso del lS a la BBDD cuando se cree el backend
   eliminarLibro(index: number) {
     for (var i = 0; i < this.librosGuardados[0].length; i++){
       console.log(this.librosGuardados[0][i]); 
@@ -77,6 +80,7 @@ export class LibrosComponent {
 
 
   //COLECCIONES
+  //Cambiar el acceso del lS a la BBDD cuando se cree el backend
   mostrarColecciones() {
     var coleccionGuardada = localStorage.getItem("coleccionesGuardadas");
     if(coleccionGuardada)
@@ -122,12 +126,14 @@ export class LibrosComponent {
 
 
   //FORMULARIO
+  //Comunicamos los datos del libro de la tabla al componente del formulario
   mostrarFormulario(id:string, titulo: string, estado:string, coleccion: string) {
     this.mostrarForm = true; 
     this._estadoLibroService.setIdLibro(id); 
     this._estadoLibroService.setTituloLibro(titulo); 
     this._estadoLibroService.setEstadoLibro(estado); 
     this._estadoLibroService.setColeccionLibro(coleccion);
+    this.mostrarLibros(); 
   }
 
   cerrarFormulario() {

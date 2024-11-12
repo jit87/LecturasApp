@@ -28,18 +28,22 @@ constructor(private _estadoLibroService: EstadoLibroService) {
   this.libro._id = this._estadoLibroService.getIdLibro(); 
   this.libro.titulo = this._estadoLibroService.getTituloLibro();
   this.libro.estado = this._estadoLibroService.getEstadoLibro(); 
-  //this.libro.coleccion = this._estadoLibroService.
   var datos = this._estadoLibroService.getColecciones(); 
   if (datos) {
-    //this.colecciones = [datos]; 
     datos.forEach((element:any) => {
       this.colecciones.push(element.nombre); 
     });
-    this.colecciones.push("No asignar"); 
+    this.colecciones.push("No asignado"); 
+  }
+  var datos2 = this._estadoLibroService.getColeccionByName(this.libro.titulo);
+  if (datos2) {
+    this.libro.coleccion = datos2;  
+  } else {
+    this.libro.coleccion = 'No asignado'; 
   }
 }
 
-
+//Cambiar el acceso del lS a la BBDD cuando se cree el backend
 guardarCambios(form: NgForm) {  
   if (form.invalid) {
     console.log("Formulario no valido");

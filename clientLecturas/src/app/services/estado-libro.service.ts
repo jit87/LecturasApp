@@ -29,6 +29,18 @@ export class EstadoLibroService {
     return this.coleccion; 
   }
 
+  //Cambiar por Id cuando conectemos con el backend
+  getColeccionByName(nombre: string) {
+    var coleccion = "";
+    var libros = JSON.parse(localStorage.getItem("librosGuardados") || '[]');
+    libros.forEach((elem:any) => {
+      if (elem.titulo == nombre) {
+        coleccion = elem.coleccion; 
+      }
+    });
+    return coleccion; 
+  }
+
   setIdLibro(id: string): void {
     this.id = id;
   }
