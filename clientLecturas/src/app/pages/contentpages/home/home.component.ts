@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { LibrosService } from '../../../services/libros.service';
 import { LibroModel } from '../../../models/libro.model';
+import { EstadoLibroService } from '../../../services/estado-libro.service';
 
 
 @Component({
@@ -14,9 +15,10 @@ export class HomeComponent {
   cargados: boolean = false; 
   disponibles: boolean = true; 
   libro: LibroModel = new LibroModel(); 
-  librosGuardados: any[] = [];
+  librosGuardados: any[] = []; 
 
-  constructor(private _librosService: LibrosService) {
+
+  constructor(private _librosService: LibrosService, private _estadoLibroService: EstadoLibroService) {
     this.getLibrosNuevos(); 
   }
 
@@ -28,7 +30,7 @@ export class HomeComponent {
            const libroInfo = {
                 id: resp.items[i].id,
                 info: resp.items[i].volumeInfo
-              };
+          };
           this.librosNuevos.push(libroInfo);
         }
         this.cargados = true;
@@ -43,10 +45,8 @@ export class HomeComponent {
 
   //Primero se guardan en el LocalStorage para probar y una vez terminado el Front se añadirá al backend
   guardarEstadoLibro(estado: string, libro: any) { 
-    
     //Recuperamos lo que haya en el localStorage
     const librosPrevios = JSON.parse(localStorage.getItem("librosGuardados") || '[]');
-
     //Hay que crear una instancia para cada libro, si no se añade el mismo varias veces
     const nuevoLibro = {
       _id: libro.id,
@@ -65,15 +65,28 @@ export class HomeComponent {
       previewLink: "",
       estado: estado === 'Leído' ? 'Leído' : 'Pendiente'
     };
-
     if (nuevoLibro) {
         this.librosGuardados = librosPrevios; 
         this.librosGuardados.push(nuevoLibro);
         console.log(this.librosGuardados);
         localStorage.setItem("librosGuardados", JSON.stringify(this.librosGuardados));
       } 
-
   }
+
+
+getEstadoLibro(id: string) {
+  var result = 0;   
+  var librosGuardados = this._estadoLibroService.getLibros();
+  for (const element of librosGuardados) {
+    if (element._id === id) {
+      result = 1; 
+      break; 
+    } 
+  }
+  return result; 
+}
+
+
 
 
 }

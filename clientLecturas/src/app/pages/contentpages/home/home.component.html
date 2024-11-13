@@ -39,7 +39,7 @@
                                         style="max-height: 2.9em; overflow: hidden; text-overflow: ellipsis;font-size: small;">
                                         {{ libro.info.description }}...
                                     </p>
-                                    <div>
+                                    <div *ngIf="getEstadoLibro(libro.id)==0">
                                             <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
                                                 <div class="btn-group" role="group">
                                                     <button type="button" class="btn btn-success dropdown-toggle btn-sm" data-bs-toggle="dropdown" aria-expanded="false"  style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
@@ -52,6 +52,7 @@
                                                 </div>
                                             </div>
                                     </div>
+                                    <p *ngIf="getEstadoLibro(libro.id)==1" style="font-size: small;color: lightseagreen;font-weight: 600;">Guardado</p>
                                 </div>
                             </div>
                         </div>

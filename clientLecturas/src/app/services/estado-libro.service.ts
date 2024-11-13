@@ -12,6 +12,7 @@ export class EstadoLibroService {
 
   constructor() { }
 
+  //GETTERS
   //Libro
   getIdLibro(): string {
     return this.id;
@@ -25,6 +26,12 @@ export class EstadoLibroService {
     return this.estado;
   }
 
+  getLibros() {
+     return JSON.parse(localStorage.getItem("librosGuardados")  || '[]');
+  }
+
+
+  //Colecciones
   getColeccionLibro() {
     return this.coleccion; 
   }
@@ -41,6 +48,13 @@ export class EstadoLibroService {
     return coleccion; 
   }
 
+  getColecciones() {
+      return JSON.parse(localStorage.getItem("coleccionesGuardadas")  || '[]');
+  }
+
+
+  //SETTERS
+  //Libro
   setIdLibro(id: string): void {
     this.id = id;
   }
@@ -59,11 +73,7 @@ export class EstadoLibroService {
 
   
 
-  
-  //Colecciones
-  getColecciones() {
-      return JSON.parse(localStorage.getItem("coleccionesGuardadas")  || '[]');
-  }
+
 
 
 
