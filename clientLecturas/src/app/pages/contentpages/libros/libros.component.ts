@@ -134,6 +134,11 @@ export class LibrosComponent {
     }
    localStorage.setItem("librosGuardados", JSON.stringify(this.librosGuardados[0])); 
   }
+  
+
+  filtrarPorColeccion(coleccion: ColeccionModel) {
+    this.buscarLibrosGuardados(coleccion.nombre); 
+  }
 
 
 

@@ -21,7 +21,7 @@
             </div>
             <br>
             <br>
-            <span class="badge text-bg-primary" style="margin-left: 3px;" *ngFor="let coleccion of colecciones;let i=index">{{ coleccion.nombre }} 
+            <span class="badge text-bg-primary" style="margin-left: 3px;cursor: pointer;" *ngFor="let coleccion of colecciones;let i=index" (click)="filtrarPorColeccion(coleccion)">{{ coleccion.nombre }} 
                 <i class="fa-solid fa-xmark"  style="cursor: pointer;" (click)="eliminarColeccion(i)"></i>
             </span>
         </div>
