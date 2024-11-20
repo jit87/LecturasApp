@@ -11,20 +11,23 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
+                    <li class="nav-item" *ngIf="autenticado">
                         <a class="nav-link" [routerLink]="['/home']"  routerLinkActive="router-link-active">Home</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" *ngIf="autenticado">
                         <a class="nav-link" [routerLink]="['/libros']" routerLinkActive="router-link-active">Mis libros</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" *ngIf="autenticado">
                         <a class="nav-link" [routerLink]="['/perfil']" routerLinkActive="router-link-active">Perfil</a>
                     </li>
                 </ul>
-                <form class="d-flex" role="search">
+                <form class="d-flex" role="search" *ngIf="autenticado">
                     <input #termino class="form-control me-2" type="search" placeholder="Search" aria-label="Buscar">
                     <button class="btn btn-outline-primary" type="button" (click)="getInfoLibro(termino.value)">Buscar</button>
                 </form>
+                <br>
+                    <i class="fa-solid fa-power-off" style="margin-left: 2%; color: blue;cursor: pointer;" [routerLink]="['/login']" *ngIf="autenticado"></i>
+                <br>
             </div>
         </div>
     </nav>

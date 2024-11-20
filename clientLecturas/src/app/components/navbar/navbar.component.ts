@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { LibrosService } from '../../services/libros.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,12 +10,50 @@ import { LibrosService } from '../../services/libros.service';
 })
 export class NavbarComponent {
 
-  constructor(private router: Router) { }
-  
+  autenticado: boolean | any = false;
+  isAuthenticated: boolean = false;
 
+  constructor(private router: Router,
+              private _authService: AuthService
+
+  ) {
+     if(this._authService.isAuthenticated()) {
+      this.autenticado = true;
+    }
+     this.checkAuthentication();
+   }
+
+
+  
+  //Buscador de libros
   getInfoLibro(termino: string) {
     this.router.navigate(['/buscador', termino]);
   }
+
+  ngOnInit(){}
+
+
+  ngDoCheck(): void {
+    this.checkAuthentication();
+  }
+
+  checkAuthentication() {
+    const token = localStorage.getItem('auth-token');
+    this.isAuthenticated = !!token; 
+    if (this.isAuthenticated) {
+      this.autenticado = true; 
+    }
+  }
+
+  
+  logout() {
+    this._authService.logout(); 
+    this.autenticado = false; 
+    //Eliminamos los datos guardados en el navegador
+    localStorage.clear();
+  }
+  
+
 
 
 }
