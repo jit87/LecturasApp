@@ -32,9 +32,9 @@ async function main() {
         console.log("Conectado a MongoDB correctamente");
 
         // Ruta principal
-        app.get('/', (req, res) => {
+        /*app.get('/', (req, res) => {
             res.send('Hola mundo');
-        });
+        });*/
 
         //Permite usar objetos js
         app.use(express.json()); 

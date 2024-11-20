@@ -84,7 +84,7 @@ router.get('/usuario/:email', async (req, res) => {
 });
 
 //Ruta para modificar contraseña
-router.put('/modificar-pass', async (req, res) => {
+/*router.put('/modificar-pass', async (req, res) => {
 
     try {
         const { email, actualPassword, nuevaPassword } = req.body;
@@ -160,6 +160,6 @@ router.put('/modificar-email', async (req, res) => {
         res.status(500).send(err);
     }
 });
-
+*/
 
 export default router;

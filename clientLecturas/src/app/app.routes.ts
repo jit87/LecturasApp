@@ -8,16 +8,17 @@ import { RegistroComponent } from './pages/authpages/registro/registro.component
 import { BuscadorComponent } from './pages/contentpages/buscador/buscador.component';
 import { InfoComponent } from './pages/contentpages/info/info.component';
 import { EditarLibroComponent } from './pages/contentpages/editar-libro/editar-libro.component';
+import { AuthGuard } from './guards/auth.guard';
 
 
 export const APP_ROUTES: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'registro', component: RegistroComponent }, 
-    { path: 'home', component: HomeComponent },
-    { path: 'perfil', component: PerfilComponent },
-    { path: 'libros', component: LibrosComponent },
-    { path: 'buscador/:termino', component: BuscadorComponent },
-    { path: 'info/:id', component: InfoComponent }, 
+    { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+    { path: 'perfil', component: PerfilComponent, canActivate: [AuthGuard] },
+    { path: 'libros', component: LibrosComponent, canActivate: [AuthGuard] },
+    { path: 'buscador/:termino', component: BuscadorComponent, canActivate: [AuthGuard] },
+    { path: 'info/:id', component: InfoComponent, canActivate: [AuthGuard] }, 
     { path: '**', pathMatch:'full', redirectTo:'home'}
 ];
 
