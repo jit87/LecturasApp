@@ -9,7 +9,7 @@ import { catchError, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
-  public authUrl = 'http://localhost:4200'; 
+  public authUrl = 'http://localhost:4000'; //Esta URL tiene que coincidir con la que tenemos configurada en el backend en index.js: en la función app.listen(4000, () => {})
   private tokenKey = 'auth-token';
   
   private userSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
