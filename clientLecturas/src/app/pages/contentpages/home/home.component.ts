@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { LibrosService } from '../../../services/libros.service';
 import { LibroModel } from '../../../models/libro.model';
 import { EstadoLibroService } from '../../../services/estado-libro.service';
+import { LecturasBBDDService } from '../../../services/lecturas-bbdd.service';
 
 
 @Component({
@@ -18,7 +19,9 @@ export class HomeComponent {
   librosGuardados: any[] = []; 
 
 
-  constructor(private _librosService: LibrosService, private _estadoLibroService: EstadoLibroService) {
+  constructor(private _librosService: LibrosService,
+              private _estadoLibroService: EstadoLibroService,
+              private _lecturasBBDDService: LecturasBBDDService) {
     this.getLibrosNuevos(); 
   }
 
@@ -70,6 +73,8 @@ export class HomeComponent {
         this.librosGuardados.push(nuevoLibro);
         console.log(this.librosGuardados);
         localStorage.setItem("librosGuardados", JSON.stringify(this.librosGuardados));
+        this._lecturasBBDDService.addlibro(nuevoLibro); 
+      
       } 
   }
 
