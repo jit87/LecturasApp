@@ -137,9 +137,14 @@ export class LibrosComponent {
   
 
   filtrarPorColeccion(coleccion: ColeccionModel) {
-    this.buscarLibrosGuardados(coleccion.nombre); 
+    this.buscarLibrosGuardados(coleccion.nombre);  
   }
 
+
+  mostrarTodasColecciones() {
+    this.mostrarColecciones();
+    this.mostrarLibros(); 
+  }
 
 
   //FORMULARIO
