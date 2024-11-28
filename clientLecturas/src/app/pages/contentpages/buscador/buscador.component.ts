@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { LibrosService } from '../../../services/libros.service';
 import { Location } from '@angular/common';
 

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 import { LibrosService } from '../../services/libros.service';
 import { AuthService } from '../../services/auth.service';
 
@@ -51,6 +51,8 @@ export class NavbarComponent {
     this.autenticado = false; 
     //Eliminamos los datos guardados en el navegador
     localStorage.clear();
+    //localStorage.removeItem("email");
+    //localStorage.removeItem("auth-token");
   }
   
 

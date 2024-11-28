@@ -26,7 +26,7 @@
                     <button class="btn btn-outline-primary" type="button" (click)="getInfoLibro(termino.value)">Buscar</button>
                 </form>
                 <br>
-                    <i class="fa-solid fa-power-off" style="margin-left: 2%; color: blue;cursor: pointer;" [routerLink]="['/login']" *ngIf="autenticado"></i>
+                    <i class="fa-solid fa-power-off" style="margin-left: 2%; color: blue;cursor: pointer;" [routerLink]="['/login']" *ngIf="autenticado" (click)="logout()"></i>
                 <br>
             </div>
         </div>
