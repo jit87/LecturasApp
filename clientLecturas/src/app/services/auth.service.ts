@@ -18,6 +18,8 @@ export class AuthService {
 
   private authStatus = new BehaviorSubject<boolean>(this.isLoggedIn());
 
+  usuarioID: string = ""; 
+
   constructor(private http: HttpClient, private router: Router) { }
 
 
@@ -95,7 +97,12 @@ registro(nombre: string, email: string, password: string): Observable<any> {
   getUserByEmail(email: string | null):Observable<any> {
     return this.http.get<any>(`${this.authUrl}/usuario/${email}`);
   }
+  
 
+
+  getIdByEmail(email: string | null) {
+    return this.http.get<any>(`${this.authUrl}/usuarioId/${email}`);
+  }
 
 
   isLoggedIn(): boolean {

@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { EstadoLibroService } from '../../../services/estado-libro.service';
 import { LecturasBBDDService } from '../../../services/lecturas-bbdd.service';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-info',
@@ -26,20 +27,39 @@ fecha: string = "";
 cargando: boolean = false; 
 disponibles: boolean = true; 
 librosGuardados: any[] = [];
+usuarioID: String = ""
 
 constructor(
     private _librosService: LibrosService,
     private activatedRoute: ActivatedRoute,
     private location: Location,
     private _estadoLibroService: EstadoLibroService,
-    private _lecturasBBDDService: LecturasBBDDService) {
+    private _lecturasBBDDService: LecturasBBDDService,
+    private _authService: AuthService) {
    this.activatedRoute.params.subscribe(
      (params:any) => {
         this.libroId = params.id;
         this.getInfoLibro(this.libroId); 
       }
     )
-  
+  }
+
+//Usamos promesa porque la obtención del ID es asíncrona y si la queremos recuperar en guardarEstadoLibros dará undefined si no usamos promesas
+ async getUsuarioID() {
+  const email = localStorage.getItem("email"); 
+   return new Promise((resolve, reject) => {
+     this._authService.getIdByEmail(email).subscribe(
+       (resp: any) => {
+         this.usuarioID = resp;
+         console.log('Usuario ID obtenido:', this.usuarioID);
+         resolve(this.usuarioID);
+       },
+       (err) => {
+         console.error('Error al obtener el usuarioID:', err);
+         reject(err);
+       }
+     );
+   });
   }
 
 
@@ -74,13 +94,15 @@ constructor(
 
 
   //Primero se guardan en el LocalStorage para probar y una vez terminado el Front se añadirá al backend
-  guardarEstadoLibro(estado: string, libro: any) { 
+  async guardarEstadoLibro(estado: string) { 
+    //Await espera a que se ejecute la promesa anterior
+    const usuarioID = await this.getUsuarioID();
     //Recuperamos lo que haya en el localStorage
     const librosPrevios = JSON.parse(localStorage.getItem("librosGuardados") || '[]');
     //Hay que crear una instancia para cada libro, si no se añade el mismo varias veces
     const nuevoLibro = {
       _id: this.libroId,
-      _idUsuario: "",
+      _idUsuario: usuarioID,
       titulo: this.titulo,
       autores: this.autores,
       editor: this.editor,

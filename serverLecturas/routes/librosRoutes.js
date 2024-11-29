@@ -10,9 +10,9 @@ const router = Router();
 //Ruta para añadir una acción
 router.post('/', agregarLibro); 
 
-/*
 //Ruta para obtener todas las Libros
-router.get('/todos/:id', obtenerLibros); 
+/*router.get('/todos/:id', obtenerLibros); 
+
 
 //Ruta para actualizar una acción
 router.put('/:id', actualizarLibro);

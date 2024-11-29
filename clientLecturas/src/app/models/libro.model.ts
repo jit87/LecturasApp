@@ -3,7 +3,7 @@
 
 export class LibroModel {
   _id?:                 string; 
-  _idUsuario?:          string; 
+  _idUsuario?:          string | any; 
   titulo:               string;
   autores:              string[];
   editor?:              string;

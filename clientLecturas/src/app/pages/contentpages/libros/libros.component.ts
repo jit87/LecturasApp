@@ -4,6 +4,8 @@ import { ColeccionModel } from '../../../models/coleccion.model';
 import { EstadoLibroService } from '../../../services/estado-libro.service';
 import { EditarLibroComponent } from '../editar-libro/editar-libro.component';
 import { LibroModel } from '../../../models/libro.model';
+import { AuthService } from '../../../services/auth.service';
+import { LecturasBBDDService } from '../../../services/lecturas-bbdd.service';
 
 @Component({
   selector: 'app-libros',
@@ -19,18 +21,37 @@ export class LibrosComponent {
   mostrarForm: boolean = false; 
   colecciones: ColeccionModel[] = []; 
   coleccion: ColeccionModel = new ColeccionModel(); 
+  usuarioID: string = ""; 
 
-  constructor(private _estadoLibroService: EstadoLibroService) {
-    this.mostrarLibros(); 
+  constructor(private _estadoLibroService: EstadoLibroService,
+    private _authService: AuthService,
+    private _lecturasBBDDService: LecturasBBDDService) {
     this.mostrarColecciones(); 
+    this.getUsuarioID(); 
   }
 
 
- 
+  //Obtenemos ID de usuario necesario para mostrar los libros guardados
+  getUsuarioID() {
+    const email = localStorage.getItem("email"); 
+    this._authService.getUserByEmail(email).subscribe(
+      (resp: any) => {
+        this.usuarioID = resp._id; 
+        this.mostrarLibros();
+      }
+    ); 
+  }
+
+
   //LIBROS
   //Cambiar el acceso del lS a la BBDD cuando se cree el backend
   mostrarLibros() {
     var guardados = localStorage.getItem('librosGuardados');
+    this._lecturasBBDDService.getListLibros(this.usuarioID).subscribe(
+      (resp: any) => {
+        console.log(resp); 
+      }
+    )
     if (guardados) {
       this.librosGuardados.push(JSON.parse(guardados));
       this.librosAMostrar = this.librosGuardados;

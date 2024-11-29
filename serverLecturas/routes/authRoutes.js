@@ -83,6 +83,25 @@ router.get('/usuario/:email', async (req, res) => {
     
 });
 
+
+//Ruta para obtener el ID en función del email
+router.get('/usuarioId/:email', async (req, res) => {
+
+     try {
+        const email = req.params.email;
+        const user = await Usuario.findOne({ email: email }).exec();
+
+        if (!user) {
+        return res.status(404).json({ message: 'Usuario no encontrado' });
+        }
+
+        res.json(user._id);
+    } catch (error) {
+        res.status(500).json({ message: 'Error en el servidor', error });
+    }
+    
+});
+
 //Ruta para modificar contraseña
 /*router.put('/modificar-pass', async (req, res) => {
 

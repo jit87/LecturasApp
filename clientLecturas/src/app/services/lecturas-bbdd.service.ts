@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { LibroModel } from '../models/libro.model';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +13,7 @@ export class LecturasBBDDService {
   listLibros: LibroModel[] = []; 
   
 
-  constructor(private http: HttpClient) {
-
+  constructor(private http: HttpClient, private _authService: AuthService) {
   }
 
 

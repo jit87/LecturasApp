@@ -38,7 +38,7 @@ export async function agregarLibro(req, res) {
 export async function obtenerLibros(req, res) {
 
     try {
-        const Libros = await Libro.find({ _id: req.usuarioId }); 
+        const Libros = await Libro.find({ _id: req.usuarioID }); 
         res.json(Libros); 
     } catch (error) {
         console.error(error);
