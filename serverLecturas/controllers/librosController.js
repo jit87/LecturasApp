@@ -33,12 +33,12 @@ export async function agregarLibro(req, res) {
 }
 
 
-/*
+
 
 export async function obtenerLibros(req, res) {
 
     try {
-        const Libros = await Libro.find({ usuarioId: req.usuarioId }); 
+        const Libros = await Libro.find({ _id: req.usuarioId }); 
         res.json(Libros); 
     } catch (error) {
         console.error(error);
@@ -47,6 +47,7 @@ export async function obtenerLibros(req, res) {
   
 }
 
+/*
 
 
 

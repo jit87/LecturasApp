@@ -1,1 +1,44 @@
-<p>perfil works!</p>
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil de Usuario</title>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <!-- Tarjeta del perfil de usuario -->
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white text-center">
+                <h3>Perfil de Usuario</h3>
+            </div>
+            <div class="card-body" *ngFor="let elem of DatosPerfil">
+                <div class="row mb-3">
+                    <div class="col-4 text-end fw-bold">Nombre:</div>
+                    <div class="col-8">{{ elem.nombre }}</div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-4 text-end fw-bold">Email:</div>
+                    <div class="col-8">{{ elem.email }}</div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-4 text-end fw-bold">ID de Usuario:</div>
+                    <div class="col-8">{{ elem._id }}</div>
+                </div>
+                <!-- Sección opcional: Información adicional -->
+                <div class="row mt-4">
+                    <div class="col-12 text-center">
+                        <button class="btn btn-warning btn-sm">Editar perfil</button>
+                        <button class="btn btn-danger btn-sm">Eliminar cuenta</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  
+</body>
+
+</html>
