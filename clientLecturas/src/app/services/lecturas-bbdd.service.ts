@@ -17,7 +17,7 @@ export class LecturasBBDDService {
   }
 
 
-   //Obtenemos las libros guardades en mongoDB
+  //Obtenemos las libros guardades en mongoDB
   getListLibros(usuarioId: string): Observable<any> {
     return this.http.get(this.url + "/todos/" + usuarioId);
   }
@@ -26,7 +26,7 @@ export class LecturasBBDDService {
   //Añadimos la libro al vector de libros y luego a la BBDD de mongoDB. 
   addlibro(libro: LibroModel): Observable<any> {
      this.listLibros.push(libro);
-     return this.http.post(this.url, libro); 
+     return this.http.post(this.url + '/libros', libro); 
   }
 
 

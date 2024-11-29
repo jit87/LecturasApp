@@ -17,6 +17,7 @@ export class HomeComponent {
   disponibles: boolean = true; 
   libro: LibroModel = new LibroModel(); 
   librosGuardados: any[] = []; 
+  idUsuario: String = ""; 
 
 
   constructor(private _librosService: LibrosService,
@@ -73,7 +74,9 @@ export class HomeComponent {
         this.librosGuardados.push(nuevoLibro);
         console.log(this.librosGuardados);
         localStorage.setItem("librosGuardados", JSON.stringify(this.librosGuardados));
-        this._lecturasBBDDService.addlibro(nuevoLibro); 
+        this._lecturasBBDDService.addlibro(nuevoLibro).subscribe((resp: any) => {
+          console.log(resp);
+        })
       
       } 
   }

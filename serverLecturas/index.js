@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import authRoutes from './routes/authRoutes.js'; 
+import librosRoutes from './routes/librosRoutes.js'; 
 
 
 // Crear servidor
@@ -40,8 +41,13 @@ async function main() {
         app.use(express.json()); 
 
         
-        // Registrar el enrutador para la ruta 
+        //Registra el enrutador para la ruta de autenticación 
         app.use('/', authRoutes);
+
+
+        //Registra la ruta de gestión de libros
+        app.use('/libros', librosRoutes);
+
 
         // Iniciar servidor en el puerto 4000
         app.listen(4000, () => {
