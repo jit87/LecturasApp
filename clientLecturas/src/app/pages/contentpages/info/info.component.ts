@@ -3,6 +3,7 @@ import { LibrosService } from '../../../services/libros.service';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { EstadoLibroService } from '../../../services/estado-libro.service';
+import { LecturasBBDDService } from '../../../services/lecturas-bbdd.service';
 
 @Component({
   selector: 'app-info',
@@ -16,10 +17,10 @@ libroInfo: any[] = [];
 titulo: string = "";
 portada: string = "";
 descripcion: string = ""; 
-autores: string = "";
+autores: string[] = [];
 editor: string = ""; 
 categorias: string = ""; 
-paginas: string = ""; 
+paginas: any = ""; 
 fecha: string = ""; 
   
 cargando: boolean = false; 
@@ -30,7 +31,8 @@ constructor(
     private _librosService: LibrosService,
     private activatedRoute: ActivatedRoute,
     private location: Location,
-    private _estadoLibroService: EstadoLibroService) {
+    private _estadoLibroService: EstadoLibroService,
+    private _lecturasBBDDService: LecturasBBDDService) {
    this.activatedRoute.params.subscribe(
      (params:any) => {
         this.libroId = params.id;
@@ -98,6 +100,10 @@ constructor(
         this.librosGuardados.push(nuevoLibro);
         console.log(this.librosGuardados);
         localStorage.setItem("librosGuardados", JSON.stringify(this.librosGuardados));
+       
+        this._lecturasBBDDService.addlibro(nuevoLibro).subscribe((resp: any) => {
+          console.log(resp);
+        })
       } 
   }
 

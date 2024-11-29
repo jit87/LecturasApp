@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { LibrosService } from '../../../services/libros.service';
 import { Location } from '@angular/common';
+import { LecturasBBDDService } from '../../../services/lecturas-bbdd.service';
 
 @Component({
   selector: 'app-buscador',
@@ -32,9 +33,9 @@ export class BuscadorComponent {
   constructor(
     private _librosService: LibrosService,
     private activatedRoute: ActivatedRoute,
-    private location: Location) {
+    private location: Location,
+    private _lecturasBBDDService: LecturasBBDDService) {
     
-
   }
 
 
@@ -106,6 +107,10 @@ export class BuscadorComponent {
         this.librosGuardados.push(nuevoLibro);
         console.log(this.librosGuardados);
         localStorage.setItem("librosGuardados", JSON.stringify(this.librosGuardados));
+      
+       this._lecturasBBDDService.addlibro(nuevoLibro).subscribe((resp: any) => {
+          console.log(resp);
+        })
       } 
 
   }

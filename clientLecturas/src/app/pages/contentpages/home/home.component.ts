@@ -74,6 +74,7 @@ export class HomeComponent {
         this.librosGuardados.push(nuevoLibro);
         console.log(this.librosGuardados);
         localStorage.setItem("librosGuardados", JSON.stringify(this.librosGuardados));
+      
         this._lecturasBBDDService.addlibro(nuevoLibro).subscribe((resp: any) => {
           console.log(resp);
         })
