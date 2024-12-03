@@ -38,7 +38,7 @@ export async function agregarLibro(req, res) {
 export async function obtenerLibros(req, res) {
 
     try {
-        const Libros = await Libro.find({ _id: req.usuarioID }); 
+        const Libros = await Libro.find({ _idUsuario: req.params.id }); 
         res.json(Libros); 
     } catch (error) {
         console.error(error);
@@ -86,18 +86,18 @@ export async function actualizarLibro(req, res) {
   
 }
 
-
+*/
 
 
 export async function eliminarLibro(req, res) {
 
-   try {
-        const Libro = await Libro.findById(req.params.id);
+  try {
+    const libro = await Libro.findById(req.params.id);
         
-        if (!Libro) return res.status(404).json({ message: 'Libro no encontrada' });
+        if (!libro) return res.status(404).json({ message: 'Libro no encontrado' });
 
-        if (Libro.usuarioId.toString() !== req.usuarioId) {
-            return res.status(403).json({ message: 'No tienes permiso para eliminar esta Libro' });
+        if (Libro._idUsuario !== req.usuarioId) {
+            return res.status(403).json({ message: 'No tienes permiso para eliminar este Libro' });
         }
         
         await Libro.deleteOne({ _id: req.params.id });
@@ -109,7 +109,7 @@ export async function eliminarLibro(req, res) {
 }
 
 
-
+/*
 export async function obtenerLibro(req, res) {
 
     try {

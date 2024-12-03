@@ -19,7 +19,7 @@ export class LecturasBBDDService {
 
   //Obtenemos las libros guardades en mongoDB
   getListLibros(usuarioId: string): Observable<any> {
-    return this.http.get(this.url + "/todos/" + usuarioId);
+    return this.http.get(this.url + "/libros/todos/" + usuarioId);
   }
 
 
@@ -31,8 +31,8 @@ export class LecturasBBDDService {
 
 
   //Quitamos la libro del vector de libros 
-  deletelibro(libroId: LibroModel): Observable<any> {
-    return this.http.delete(this.url + "/" +  libroId); 
+  deletelibro(libroId: string): Observable<any> {
+    return this.http.delete(this.url + "/libros/" +  libroId); 
   }
 
 

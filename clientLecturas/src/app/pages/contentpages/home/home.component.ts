@@ -4,6 +4,7 @@ import { LibroModel } from '../../../models/libro.model';
 import { EstadoLibroService } from '../../../services/estado-libro.service';
 import { LecturasBBDDService } from '../../../services/lecturas-bbdd.service';
 import { AuthService } from '../../../services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -24,7 +25,8 @@ export class HomeComponent {
   constructor(private _librosService: LibrosService,
               private _estadoLibroService: EstadoLibroService,
               private _lecturasBBDDService: LecturasBBDDService,
-              private _authService: AuthService) {
+              private _authService: AuthService,
+              private toastr: ToastrService) {
     this.getLibrosNuevos(); 
   }
 
@@ -73,7 +75,7 @@ export class HomeComponent {
     //Await espera a que se ejecute la promesa anterior
     const usuarioID = await this.getUsuarioID();
     //Recuperamos lo que haya en el localStorage
-    const librosPrevios = JSON.parse(localStorage.getItem("librosGuardados") || '[]');
+    //const librosPrevios = JSON.parse(localStorage.getItem("librosGuardados") || '[]');
     //Hay que crear una instancia para cada libro, si no se añade el mismo varias veces
     const nuevoLibro = {
       _id: libro.id,
@@ -93,19 +95,19 @@ export class HomeComponent {
       estado: estado === 'Leído' ? 'Leído' : 'Pendiente'
     };
     if (nuevoLibro) {
-        this.librosGuardados = librosPrevios; 
+        //this.librosGuardados = librosPrevios; 
         this.librosGuardados.push(nuevoLibro);
-        console.log(this.librosGuardados);
-        localStorage.setItem("librosGuardados", JSON.stringify(this.librosGuardados));
-      
         this._lecturasBBDDService.addlibro(nuevoLibro).subscribe((resp: any) => {
           console.log(resp);
-        })
-      
+           this.toastr.success('Ha sido añadido!', 'Añadido!');
+        },(error) => {
+          console.log(error); 
+          }
+        )
       } 
   }
 
-
+//Adaptarlo a BBDD
 getEstadoLibro(id: string) {
   var result = 0;   
   var librosGuardados = this._estadoLibroService.getLibros();
