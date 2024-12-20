@@ -92,7 +92,8 @@ export class HomeComponent {
       imagen: libro.info.imageLinks.thumbnail,
       lengua: "",
       previewLink: "",
-      estado: estado === 'Leído' ? 'Leído' : 'Pendiente'
+      estado: estado === 'Leído' ? 'Leído' : 'Pendiente',
+      categorias: libro.info.categories.join(', ')
     };
     if (nuevoLibro) {
         //this.librosGuardados = librosPrevios; 

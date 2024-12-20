@@ -61,6 +61,10 @@ const libroSchema = new Schema({
     type: String,
     default: "No clasificado",
   },
+  categorias: {
+    type: String,
+    required: false,
+  }
 }, {
   timestamps: true, 
 });

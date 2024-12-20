@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { agregarLibro, obtenerLibros, eliminarLibro } from '../controllers/librosController.js';
+import { agregarLibro, obtenerLibros, eliminarLibro, obtenerLibro } from '../controllers/librosController.js';
 //import authenticate  from '../middlewares/authenticate.js'; 
 
 const router = Router();
@@ -14,15 +14,15 @@ router.post('/', agregarLibro);
 router.get('/todos/:id', obtenerLibros); 
 
 /*
-//Ruta para actualizar una acción
+//Ruta para actualizar un libro
 router.put('/:id', actualizarLibro);
 */
-//Ruta para eliminar una acción
+//Ruta para eliminar un libro
 router.delete('/:id', eliminarLibro); 
 
-/*
+
 //Ruta para obtener una Libro por su id
-router.get('/:id', obtenerLibro); */
+router.get('/:id', obtenerLibro); 
 
 
 export default router;

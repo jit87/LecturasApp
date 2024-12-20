@@ -25,9 +25,10 @@ paginas: any = "";
 fecha: string = ""; 
   
 cargando: boolean = false; 
-disponibles: boolean = true; 
+disponibles1: boolean = true; 
+disponibles2: boolean = true; 
 librosGuardados: any[] = [];
-usuarioID: String = ""
+usuarioID: string = ""
 
 constructor(
     private _librosService: LibrosService,
@@ -53,6 +54,7 @@ constructor(
          this.usuarioID = resp;
          console.log('Usuario ID obtenido:', this.usuarioID);
          resolve(this.usuarioID);
+         return this.usuarioID;
        },
        (err) => {
          console.error('Error al obtener el usuarioID:', err);
@@ -66,6 +68,25 @@ constructor(
 
   getInfoLibro(id: string) {
     this.cargando = true; 
+    this._lecturasBBDDService.getlibroById(this.libroId).subscribe(
+        (resp: any) => {
+        console.log(resp); 
+         this.titulo = resp.titulo; 
+         this.portada = resp.imagen; 
+         this.descripcion = resp.descripcion.replace(/(<([^>]+)>)/ig,""); 
+         this.autores = resp.autores[0]; 
+         this.editor = resp.editor; 
+         this.categorias = resp.categorias || resp.coleccion; 
+         this.paginas = resp.pageCount; 
+         this.fecha = resp.fechaPublicacion; 
+         this.cargando = false; 
+      },
+      (error) => {
+        console.log(error); 
+        this.disponibles1 = false;
+        this.cargando = false;
+      }
+    )
     this._librosService.getInfoLibroById(id).subscribe(
       (resp) => {
           console.log(resp); 
@@ -79,12 +100,12 @@ constructor(
           this.fecha = resp.volumeInfo.publishedDate; 
           this.cargando = false;
         },
-        (error) => {
+      (error) => {
           console.log("Error", error); 
-          this.disponibles = false;
+          this.disponibles2 = false;
           this.cargando = false;
-        }
-      )
+         }
+     )
   }
 
 
@@ -115,7 +136,8 @@ constructor(
       imagen: this.portada,
       lengua: "",
       previewLink: "",
-      estado: estado === 'Leído' ? 'Leído' : 'Pendiente'
+      estado: estado === 'Leído' ? 'Leído' : 'Pendiente',
+      categorias: this.categorias
     };
     if (nuevoLibro) {
         this.librosGuardados = librosPrevios; 

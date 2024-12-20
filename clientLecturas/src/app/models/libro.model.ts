@@ -18,6 +18,7 @@ export class LibroModel {
   previewLink?:         string;
   estado?:              string;
   coleccion?:           string; 
+  categorias?:          string;
 
   constructor() {
     this._id = "";
@@ -35,6 +36,7 @@ export class LibroModel {
     this.lengua = "";
     this.previewLink = "";
     this.estado = "Pendiente";
-    this.coleccion = "No clasificado"
+    this.coleccion = "No clasificado";
+    this.categorias = "Sin categoría"; 
    }
 }

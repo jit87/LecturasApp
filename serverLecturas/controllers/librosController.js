@@ -4,7 +4,7 @@ import Libro from "../models/Libro.js";
 
 export async function agregarLibro(req, res) {
 
-  const { _idUsuario,titulo,autores,editor,fechaPublicacion,descripcion,pageCount,averageRating,ratingsCount,contentVersion,imagen,lengua,previewLink,estado,coleccion } = req.body;
+  const { _idUsuario,titulo,autores,editor,fechaPublicacion,descripcion,pageCount,averageRating,ratingsCount,contentVersion,imagen,lengua,previewLink,estado,coleccion,categorias } = req.body;
 
   const nuevoLibro = new Libro({
         _idUsuario,
@@ -22,6 +22,7 @@ export async function agregarLibro(req, res) {
         previewLink,
         estado,
         coleccion,
+        categorias
   });
   
   try {
@@ -38,8 +39,8 @@ export async function agregarLibro(req, res) {
 export async function obtenerLibros(req, res) {
 
     try {
-        const Libros = await Libro.find({ _idUsuario: req.params.id }); 
-        res.json(Libros); 
+        const libros = await Libro.find({ _idUsuario: req.params.id }); 
+        res.json(libros); 
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: error.message });
@@ -109,22 +110,22 @@ export async function eliminarLibro(req, res) {
 }
 
 
-/*
+
 export async function obtenerLibro(req, res) {
 
     try {
-        const Libro = await Libro.findById(req.params.id);
+        const libro = await Libro.findById(req.params.id);
 
-        if (!Libro) return res.status(404).json({ message: 'Libro no encontrada' });
+        if (!libro) return res.status(404).json({ message: 'Libro no encontrado' });
 
-        if (Libro.usuarioId.toString() !== req.usuarioId) {
-          return res.status(403).json({ message: 'No tienes permiso para acceder a esta Libro' });
+        if (Libro.usuarioId !== req.usuarioId) {
+          return res.status(403).json({ message: 'No tienes permiso para acceder a este Libro' });
         }
 
-        res.json(Libro);
+        res.json(libro);
 
     } catch (err) {
         res.status(500).json({ message: err.message });
   }
   
-}*/
+}

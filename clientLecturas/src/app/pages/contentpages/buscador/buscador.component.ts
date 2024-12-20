@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { LibrosService } from '../../../services/libros.service';
 import { Location } from '@angular/common';
 import { LecturasBBDDService } from '../../../services/lecturas-bbdd.service';
+import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-buscador',
@@ -16,6 +18,7 @@ export class BuscadorComponent {
   librosGuardados: any[] = [];
   cargando: boolean = false; 
   disponibles: boolean = true; 
+  usuarioID: String = ""; 
   // titulo: string;
   // autores: string[];
   // publisher: string;
@@ -34,7 +37,9 @@ export class BuscadorComponent {
     private _librosService: LibrosService,
     private activatedRoute: ActivatedRoute,
     private location: Location,
-    private _lecturasBBDDService: LecturasBBDDService) {
+    private _lecturasBBDDService: LecturasBBDDService,
+    private toastr: ToastrService,
+    private _authService: AuthService) {
     
   }
 
@@ -46,6 +51,25 @@ export class BuscadorComponent {
         this.getLibros(params[('termino')]);
       }
     )
+  }
+
+
+ //Usamos promesa porque la obtención del ID es asíncrona y si la queremos recuperar en guardarEstadoLibros dará undefined si no usamos promesas
+ async getUsuarioID() {
+  const email = localStorage.getItem("email"); 
+   return new Promise((resolve, reject) => {
+     this._authService.getIdByEmail(email).subscribe(
+       (resp: any) => {
+         this.usuarioID = resp;
+         console.log('Usuario ID obtenido:', this.usuarioID);
+         resolve(this.usuarioID);
+       },
+       (err) => {
+         console.error('Error al obtener el usuarioID:', err);
+         reject(err);
+       }
+     );
+   });
   }
 
   
@@ -78,15 +102,16 @@ export class BuscadorComponent {
 
 
   //Primero se guardan en el LocalStorage para probar y una vez terminado el Front se añadirá al backend
-  guardarEstadoLibro(estado: string, libro: any) { 
+  async guardarEstadoLibro(estado: string, libro: any) { 
     
     //Recuperamos lo que haya en el localStorage
-    const librosPrevios = JSON.parse(localStorage.getItem("librosGuardados") || '[]');
+    //const librosPrevios = JSON.parse(localStorage.getItem("librosGuardados") || '[]');
+    const usuarioID = await this.getUsuarioID();
 
     //Hay que crear una instancia para cada libro, si no se añade el mismo varias veces
     const nuevoLibro = {
-      _id: libro.id,
-      _idUsuario: "",
+       _id: libro.id,
+      _idUsuario: usuarioID,
       titulo: libro.info.title,
       autores: libro.info.authors[0],
       editor: libro.info.publisher,
@@ -99,19 +124,21 @@ export class BuscadorComponent {
       imagen: libro.info.imageLinks.thumbnail,
       lengua: "",
       previewLink: "",
-      estado: estado === 'Leído' ? 'Leído' : 'Pendiente'
+      estado: estado === 'Leído' ? 'Leído' : 'Pendiente',
+      categorias: libro.info.categories.join(', ')
     };
 
-    if (nuevoLibro) {
-        this.librosGuardados = librosPrevios; 
+     if (nuevoLibro) {
+        //this.librosGuardados = librosPrevios; 
         this.librosGuardados.push(nuevoLibro);
-        console.log(this.librosGuardados);
-        localStorage.setItem("librosGuardados", JSON.stringify(this.librosGuardados));
-      
-       this._lecturasBBDDService.addlibro(nuevoLibro).subscribe((resp: any) => {
+        this._lecturasBBDDService.addlibro(nuevoLibro).subscribe((resp: any) => {
           console.log(resp);
-        })
-      } 
+           this.toastr.success('Ha sido añadido!', 'Añadido!');
+        },(error) => {
+          console.log(error); 
+          }
+        )
+      }  
 
   }
 
