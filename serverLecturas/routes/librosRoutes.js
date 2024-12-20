@@ -7,10 +7,10 @@ const router = Router();
 //Autenticamos todas las rutas
 //router.use(authenticate); 
 
-//Ruta para añadir una acción
+//Ruta para añadir un libro
 router.post('/', agregarLibro); 
 
-//Ruta para obtener todas las Libros
+//Ruta para obtener todos los libros
 router.get('/todos/:id', obtenerLibros); 
 
 /*
