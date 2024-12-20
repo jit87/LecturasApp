@@ -67,7 +67,7 @@ export class LibrosComponent {
   buscarLibrosGuardados(termino: string) {
     if (this.libroEncontrado == false) {
       for (var i = 0; i < this.librosGuardados[0].length; i++){
-        if (this.librosGuardados[0][i].titulo===termino || this.librosGuardados[0][i].autores===termino) {
+        if (this.librosGuardados[0][i].titulo===termino || this.librosGuardados[0][i].autores[0]===termino) {
           var libroSeleccionado = this.librosGuardados[0][i];
           this.librosSeleccionados.push(libroSeleccionado); 
           this.libroEncontrado = true; 
@@ -87,10 +87,6 @@ export class LibrosComponent {
           var libroSeleccionado = this.librosGuardados[0][i];
           this.librosSeleccionados.push(libroSeleccionado); 
           this.libroEncontrado = true; 
-        }
-        else {
-          this.mostrarLibros();
-          this.libroEncontrado = false; 
         }
       }
     }
