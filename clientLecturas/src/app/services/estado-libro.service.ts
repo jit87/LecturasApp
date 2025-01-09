@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { LecturasBBDDService } from './lecturas-bbdd.service';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +11,14 @@ export class EstadoLibroService {
   private titulo: string = "";
   private estado: string = "";
   private coleccion: string = ""; 
+  resp: any; 
 
-  constructor() { }
+  constructor(
+    private _lecturasBBDDService: LecturasBBDDService,
+  ) {
+      
+
+   }
 
   //GETTERS
   //Libro
@@ -26,8 +34,17 @@ export class EstadoLibroService {
     return this.estado;
   }
 
-  getLibros() {
-     return JSON.parse(localStorage.getItem("librosGuardados")  || '[]');
+  getLibros(usuarioId: string) {
+    this._lecturasBBDDService.getListLibros(usuarioId).subscribe(
+      (resp) => {
+        console.log(resp); 
+        this.resp = resp; 
+      },
+      (err) => {
+        console.log(err); 
+      }
+    ); 
+     return this.resp; 
   }
 
 

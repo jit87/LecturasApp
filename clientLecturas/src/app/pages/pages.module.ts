@@ -10,6 +10,7 @@ import { RouterModule } from '@angular/router';
 import { InfoComponent } from './contentpages/info/info.component';
 import { EditarLibroComponent } from './contentpages/editar-libro/editar-libro.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EstadoLibroComponent } from "../alonecomponents/estado-libro/estado-libro.component";
 
 
 
@@ -29,8 +30,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     RouterModule,
     FormsModule,
-    ReactiveFormsModule
-  ],
+    ReactiveFormsModule,
+    EstadoLibroComponent
+],
   exports: [
     LoginComponent,
     RegistroComponent,

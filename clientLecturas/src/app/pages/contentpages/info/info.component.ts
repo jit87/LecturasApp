@@ -5,6 +5,7 @@ import { Location } from '@angular/common';
 import { EstadoLibroService } from '../../../services/estado-libro.service';
 import { LecturasBBDDService } from '../../../services/lecturas-bbdd.service';
 import { AuthService } from '../../../services/auth.service';
+import { LibroModel } from '../../../models/libro.model';
 
 @Component({
   selector: 'app-info',
@@ -28,15 +29,17 @@ cargando: boolean = false;
 disponibles1: boolean = true; 
 disponibles2: boolean = true; 
 librosGuardados: any[] = [];
-usuarioID: string = ""
+usuarioID: string = ""  
+  
+libro =  new LibroModel;
+
 
 constructor(
     private _librosService: LibrosService,
     private activatedRoute: ActivatedRoute,
     private location: Location,
-    private _estadoLibroService: EstadoLibroService,
     private _lecturasBBDDService: LecturasBBDDService,
-    private _authService: AuthService) {
+) {
    this.activatedRoute.params.subscribe(
      (params:any) => {
         this.libroId = params.id;
@@ -45,59 +48,38 @@ constructor(
     )
   }
 
-//Usamos promesa porque la obtención del ID es asíncrona y si la queremos recuperar en guardarEstadoLibros dará undefined si no usamos promesas
- async getUsuarioID() {
-  const email = localStorage.getItem("email"); 
-   return new Promise((resolve, reject) => {
-     this._authService.getIdByEmail(email).subscribe(
-       (resp: any) => {
-         this.usuarioID = resp;
-         console.log('Usuario ID obtenido:', this.usuarioID);
-         resolve(this.usuarioID);
-         return this.usuarioID;
-       },
-       (err) => {
-         console.error('Error al obtener el usuarioID:', err);
-         reject(err);
-       }
-     );
-   });
-  }
 
-
-
-  getInfoLibro(id: string) {
+  async getInfoLibro(id: string) {
     this.cargando = true; 
     this._lecturasBBDDService.getlibroById(this.libroId).subscribe(
-        (resp: any) => {
-        console.log(resp); 
-         this.titulo = resp.titulo; 
-         this.portada = resp.imagen; 
-         this.descripcion = resp.descripcion.replace(/(<([^>]+)>)/ig,""); 
-         this.autores = resp.autores[0]; 
-         this.editor = resp.editor; 
-         this.categorias = resp.categorias || resp.coleccion; 
-         this.paginas = resp.pageCount; 
-         this.fecha = resp.fechaPublicacion; 
+       (resp: any) => {
+         this.libro.titulo = resp.title; 
+         this.libro.imagen = resp.imagen; 
+         this.libro.descripcion = resp.descripcion.replace(/(<([^>]+)>)/ig,""); 
+         this.libro.autores = resp.autores[0]; 
+         this.libro.editor = resp.editor; 
+         this.libro.categorias = resp.categorias || resp.coleccion; 
+         this.libro.pageCount = resp.pageCount; 
+         this.libro.fechaPublicacion = resp.fechaPublicacion; 
          this.cargando = false; 
       },
       (error) => {
-        console.log(error); 
+        console.log("error InfoLibro1",error); 
         this.disponibles1 = false;
         this.cargando = false;
       }
     )
     this._librosService.getInfoLibroById(id).subscribe(
       (resp) => {
-          console.log(resp); 
-          this.titulo = resp.volumeInfo.title; 
-          this.portada = resp.volumeInfo.imageLinks.thumbnail; 
-          this.descripcion = resp.volumeInfo.description.replace(/(<([^>]+)>)/ig,""); 
-          this.autores = resp.volumeInfo.authors; 
-          this.editor = resp.volumeInfo.publisher; 
-          this.categorias = resp.volumeInfo.categories; 
-          this.paginas = resp.volumeInfo.pageCount.toString(); 
-          this.fecha = resp.volumeInfo.publishedDate; 
+        console.log(resp); 
+          this.libro.titulo = resp.volumeInfo.title; 
+          this.libro.imagen = resp.volumeInfo.imageLinks.thumbnail; 
+          this.libro.descripcion = resp.volumeInfo.description.replace(/(<([^>]+)>)/ig,""); 
+          this.libro.autores = resp.volumeInfo.authors; 
+          this.libro.editor = resp.volumeInfo.publisher; 
+          this.libro.categorias = resp.volumeInfo.categories; 
+          this.libro.pageCount= resp.volumeInfo.pageCount.toString(); 
+          this.libro.fechaPublicacion = resp.volumeInfo.publishedDate; 
           this.cargando = false;
         },
       (error) => {
@@ -112,57 +94,6 @@ constructor(
    regresar() {
     this.location.back(); 
   }
-
-
-  //Primero se guardan en el LocalStorage para probar y una vez terminado el Front se añadirá al backend
-  async guardarEstadoLibro(estado: string) { 
-    //Await espera a que se ejecute la promesa anterior
-    const usuarioID = await this.getUsuarioID();
-    //Recuperamos lo que haya en el localStorage
-    const librosPrevios = JSON.parse(localStorage.getItem("librosGuardados") || '[]');
-    //Hay que crear una instancia para cada libro, si no se añade el mismo varias veces
-    const nuevoLibro = {
-      _id: this.libroId,
-      _idUsuario: usuarioID,
-      titulo: this.titulo,
-      autores: this.autores,
-      editor: this.editor,
-      fechaPublicacion: this.fecha,
-      descripcion: this.descripcion,
-      pageCount:this.paginas,
-      averageRating: 0,
-      ratingsCount: 0,
-      contentVersion: "",
-      imagen: this.portada,
-      lengua: "",
-      previewLink: "",
-      estado: estado === 'Leído' ? 'Leído' : 'Pendiente',
-      categorias: this.categorias
-    };
-    if (nuevoLibro) {
-        this.librosGuardados = librosPrevios; 
-        this.librosGuardados.push(nuevoLibro);
-        console.log(this.librosGuardados);
-        localStorage.setItem("librosGuardados", JSON.stringify(this.librosGuardados));
-       
-        this._lecturasBBDDService.addlibro(nuevoLibro).subscribe((resp: any) => {
-          console.log(resp);
-        })
-      } 
-  }
-
-
-getEstadoLibro(id: string) {
-  var result = 0;   
-  var librosGuardados = this._estadoLibroService.getLibros();
-  for (const element of librosGuardados) {
-    if (element._id === id) {
-      result = 1; 
-      break; 
-    } 
-  }
-  return result; 
-}
 
   
 
