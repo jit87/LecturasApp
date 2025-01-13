@@ -27,21 +27,7 @@
                                         style="max-height: 2.9em; overflow: hidden; text-overflow: ellipsis;font-size: small;">
                                         {{ libro.info.description }}...
                                     </p>
-                                        <div>
-                                            <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-                                                <div class="btn-group" role="group">
-                                                    <button type="button" class="btn btn-success dropdown-toggle btn-sm" data-bs-toggle="dropdown"
-                                                        aria-expanded="false"
-                                                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
-                                                        Guardar
-                                                    </button>
-                                                    <ul class="dropdown-menu">
-                                                        <li><a class="dropdown-item" (click)="guardarEstadoLibro('Pendiente',libro)">Para leer</a></li>
-                                                        <li><a class="dropdown-item" (click)="guardarEstadoLibro('Leído', libro)">Leído</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <app-estado-libro [libro]="libro"></app-estado-libro>
                                 </div>
                             </div>
                         </div>

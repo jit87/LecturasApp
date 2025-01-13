@@ -7,6 +7,11 @@ body {
     background-color:rgb(236, 238, 239);
 }
 
+.container {
+    margin-bottom: 5%;
+}
+
+
 .navbar-container {
     background-color: rgb(175, 230, 248);
 }
@@ -22,5 +27,6 @@ body {
     bottom: 0;
     width: 100%;
     height: 2.5rem;
+    z-index:-2 !important;
 }
 

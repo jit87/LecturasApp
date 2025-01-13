@@ -32,7 +32,9 @@ export class LibrosComponent {
     private toastr: ToastrService) {
     this.mostrarColecciones(); 
     this.getUsuarioID(); 
+    this.mostrarLibros(); 
   }
+  
 
 
   //Obtenemos ID de usuario necesario para mostrar los libros guardados
@@ -52,7 +54,7 @@ export class LibrosComponent {
  async mostrarLibros() {
     this._lecturasBBDDService.getListLibros(this.usuarioID).subscribe(
       (resp: any) => {
-        this.librosGuardados.push(resp);
+        this.librosGuardados = resp;
         this.librosAMostrar = this.librosGuardados;
       },
       (error) => {
@@ -100,7 +102,7 @@ export class LibrosComponent {
   }
 
   //Elimina libro de la BBDD
-  eliminarLibro(libroId: string) {
+ eliminarLibro(libroId: string) {
       this._lecturasBBDDService.deletelibro(libroId).subscribe(
         (resp: any) => {
           console.log(resp, "Libro eliminado");
@@ -111,7 +113,7 @@ export class LibrosComponent {
         (error) => {
           console.log(error); 
         }
-    );
+   );
   }
 
 

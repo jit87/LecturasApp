@@ -101,47 +101,6 @@ export class BuscadorComponent {
   }
 
 
-  //Primero se guardan en el LocalStorage para probar y una vez terminado el Front se añadirá al backend
-  async guardarEstadoLibro(estado: string, libro: any) { 
-    
-    //Recuperamos lo que haya en el localStorage
-    //const librosPrevios = JSON.parse(localStorage.getItem("librosGuardados") || '[]');
-    const usuarioID = await this.getUsuarioID();
-
-    //Hay que crear una instancia para cada libro, si no se añade el mismo varias veces
-    const nuevoLibro = {
-       _id: libro.id,
-      _idUsuario: usuarioID,
-      titulo: libro.info.title,
-      autores: libro.info.authors[0],
-      editor: libro.info.publisher,
-      fechaPublicacion: libro.info.publishedDate,
-      descripcion: libro.info.description,
-      pageCount: libro.info.pageCount.toString(),
-      averageRating: 0,
-      ratingsCount: 0,
-      contentVersion: "",
-      imagen: libro.info.imageLinks.thumbnail,
-      lengua: "",
-      previewLink: "",
-      estado: estado === 'Leído' ? 'Leído' : 'Pendiente',
-      categorias: libro.info.categories.join(', ')
-    };
-
-     if (nuevoLibro) {
-        //this.librosGuardados = librosPrevios; 
-        this.librosGuardados.push(nuevoLibro);
-        this._lecturasBBDDService.addlibro(nuevoLibro).subscribe((resp: any) => {
-          console.log(resp);
-           this.toastr.success('Ha sido añadido!', 'Añadido!');
-        },(error) => {
-          console.log(error); 
-          }
-        )
-      }  
-
-  }
-
 
 
 }

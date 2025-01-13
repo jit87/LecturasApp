@@ -1,6 +1,6 @@
 <section class="animate__animated animate__fadeIn">
     <div class="container mt-5">
-        <h2 class="text-center mb-4">Mis Libros Guardados</h2>
+        <h2 class="text-center mb-4">Mis libros guardados</h2>
 
         <div class="mb-4">
             <input type="text" id="searchInput" class="form-control" placeholder="Buscar libros..." #termino (keyup)="buscarLibrosGuardados(termino.value)">
@@ -30,12 +30,12 @@
 
         <div id="misLibros">
             <!-- Tabla para los libros guardados -->
-            <p class="error" *ngIf="!librosAMostrar[0]">No hay libros guardados</p>
-            <table class="table table-striped" *ngIf="librosAMostrar[0]">
+            <p class="error" *ngIf="!librosAMostrar">No hay libros guardados</p>
+            <table class="table table-striped" *ngIf="librosAMostrar">
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Imagen</th>
+                        <th>Portada</th>
                         <th>Título</th>
                         <th>Autor</th>
                         <th>Editorial</th>
@@ -53,7 +53,7 @@
                             <span class="visually-hidden">Loading...</span>
                         </div>
                     </div> -->
-                    <tr *ngFor="let libro of librosAMostrar[0]; let i = index">
+                    <tr *ngFor="let libro of librosAMostrar; let i = index">
                         <td>{{ i + 1 }}</td>
                         <td><img src="{{libro.imagen}}" style="width: 50px;height: 70px;"></td>
                         <td  [routerLink]="['/info', libro._id]" style="text-decoration: underline;cursor: pointer;">{{ libro.titulo }}</td>
