@@ -68,32 +68,31 @@ export class LibrosComponent {
   //Busca libros dentro de los que hay guardados
   buscarLibrosGuardados(termino: string) {
     if (this.libroEncontrado == false) {
-      for (var i = 0; i < this.librosGuardados[0].length; i++){
-        if (this.librosGuardados[0][i].titulo===termino || this.librosGuardados[0][i].autores[0]===termino) {
-          var libroSeleccionado = this.librosGuardados[0][i];
+      for (var i = 0; i < this.librosGuardados.length; i++){
+        if (this.librosGuardados[i].titulo==termino || this.librosGuardados[i].autores[0]==termino) {
+          var libroSeleccionado = this.librosGuardados[i];
           this.librosSeleccionados.push(libroSeleccionado); 
-          this.libroEncontrado = true; 
-          break; 
+          this.libroEncontrado = true;  
         } 
-        else if (this.librosGuardados[0][i].coleccion==termino) { 
-          var libroSeleccionado = this.librosGuardados[0][i];
-          this.librosSeleccionados.push(libroSeleccionado); 
+        else if (this.librosGuardados[i].coleccion==termino) { 
+          var libroSeleccionado = this.librosGuardados[i];
+         this.librosSeleccionados.push(libroSeleccionado); 
           this.libroEncontrado = true; 
         }
-        else if (this.librosGuardados[0][i].estado==termino) {
-          var libroSeleccionado = this.librosGuardados[0][i];
-          this.librosSeleccionados.push(libroSeleccionado); 
+        else if (this.librosGuardados[i].estado==termino) {
+          var libroSeleccionado = this.librosGuardados[i];
+         this.librosSeleccionados.push(libroSeleccionado); 
           this.libroEncontrado = true; 
         }
-        else if (this.librosGuardados[0][i].editor==termino) {
-          var libroSeleccionado = this.librosGuardados[0][i];
+        else if (this.librosGuardados[i].editor==termino) {
+          var libroSeleccionado = this.librosGuardados[i];
           this.librosSeleccionados.push(libroSeleccionado); 
           this.libroEncontrado = true; 
         }
       }
     }
     this.librosAMostrar = [];
-    this.librosAMostrar.push(this.librosSeleccionados); 
+    this.librosAMostrar= this.librosSeleccionados; 
     if (termino == "" || termino == null) {
       this.librosSeleccionados = []; 
       this.mostrarLibros(); 
