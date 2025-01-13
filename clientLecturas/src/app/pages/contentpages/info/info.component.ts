@@ -77,7 +77,7 @@ constructor(
           this.libro.descripcion = resp.volumeInfo.description.replace(/(<([^>]+)>)/ig,""); 
           this.libro.autores = resp.volumeInfo.authors; 
           this.libro.editor = resp.volumeInfo.publisher; 
-          this.libro.categorias = resp.volumeInfo.categories; 
+          this.libro.categorias = resp.volumeInfo.categories.toString(); 
           this.libro.pageCount= resp.volumeInfo.pageCount.toString(); 
           this.libro.fechaPublicacion = resp.volumeInfo.publishedDate; 
           this.cargando = false;

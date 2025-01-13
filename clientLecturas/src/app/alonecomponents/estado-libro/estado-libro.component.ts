@@ -93,7 +93,7 @@ async guardarEstadoLibro(estado: string) {
       lengua: "",
       previewLink: "",
       estado: estado === 'Leído' ? 'Leído' : 'Pendiente',
-      categorias:  this.libro.categorias.toString() || this.libro.info.categories.join(', ') || "Sin categoría"
+      categorias: this.libro.categorias ||  this.libro.info.categories.join(', ') || "Sin categoría"
     };
   
     this.toastr.success('Ha sido añadido!', 'Añadido!');
