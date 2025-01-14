@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { LecturasBBDDService } from './lecturas-bbdd.service';
 import { AuthService } from './auth.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -67,6 +68,21 @@ export class EstadoLibroService {
 
   getColecciones() {
       return JSON.parse(localStorage.getItem("coleccionesGuardadas")  || '[]');
+  }
+
+  estaGuardado(APIid: string) {
+    var result = false; 
+    this._lecturasBBDDService.getlibroByAPIid(APIid).subscribe(
+      (resp) => {
+        console.log("Está guardado", resp); 
+        result = true; 
+      },
+      (err) => {
+        console.log("No se ha encontrado", err); 
+        result = false; 
+      }
+    ) 
+    return result; 
   }
 
 

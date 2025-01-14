@@ -64,6 +64,10 @@ const libroSchema = new Schema({
   categorias: {
     type: String,
     required: false,
+  },
+  APIid: {
+    type: String,
+    required: false
   }
 }, {
   timestamps: true, 

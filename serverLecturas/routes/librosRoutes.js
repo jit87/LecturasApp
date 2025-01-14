@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { agregarLibro, obtenerLibros, eliminarLibro, obtenerLibro } from '../controllers/librosController.js';
+import { agregarLibro, obtenerLibros, eliminarLibro, obtenerLibro, obtenerLibroAPIid } from '../controllers/librosController.js';
 //import authenticate  from '../middlewares/authenticate.js'; 
 
 const router = Router();
@@ -23,6 +23,10 @@ router.delete('/:id', eliminarLibro);
 
 //Ruta para obtener una Libro por su id
 router.get('/:id', obtenerLibro); 
+
+//Ruta para obtener una Libro por su APIid
+router.get('/:APIid', obtenerLibroAPIid); 
+
 
 
 export default router;

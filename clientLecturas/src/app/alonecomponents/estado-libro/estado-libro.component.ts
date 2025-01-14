@@ -38,8 +38,8 @@ usuarioID: string = ""
   constructor(
     private _lecturasBBDDService: LecturasBBDDService,
     private _authService: AuthService,
-    private toastr: ToastrService) {
-    
+    private toastr: ToastrService,
+    private _estadoLibroService: EstadoLibroService) {
   }
 
 
@@ -68,45 +68,40 @@ async getUsuarioID() {
 
 //Primero se guardan en el LocalStorage para probar y una vez terminado el Front se añadirá al backend
 async guardarEstadoLibro(estado: string) { 
-    console.log("Datos del libro recibidos:", this.libro); 
-    //Await espera a que se ejecute la promesa anterior
-    const usuarioID = await this.getUsuarioID();
+  console.log("Datos del libro recibidos:", this.libro); 
+  //Await espera a que se ejecute la promesa anterior
+  const usuarioID = await this.getUsuarioID();
 
-    //Recuperamos lo que haya en el localStorage
-    //const librosPrevios = JSON.parse(localStorage.getItem("librosGuardados") || '[]');
-    //Hay que crear una instancia para cada libro, si no se añade el mismo varias veces
-    var nuevoLibro = new LibroModel();
+  //Recuperamos lo que haya en BBDD
+  /////////Pendiente/////////// 
 
-    nuevoLibro = {
+  var nuevoLibro = new LibroModel();
+  nuevoLibro = {
       _id: this.libro.id,
       _idUsuario: usuarioID,
       titulo: this.libro.titulo || this.libro.info.title || "Sin título",
       autores: this.libro.autores || this.libro.info.authors[0],
-      editor:  this.libro.editor || this.libro.info.publisher,
+      editor: this.libro.editor || this.libro.info.publisher,
       fechaPublicacion: this.libro.fechaPublicacion || this.libro.info.publisherDate,
       descripcion: this.libro.descripcion || this.libro.info.description,
-      pageCount:   this.libro.pageCount || this.libro.info.pageCount.toString(),
+      pageCount: this.libro.pageCount || this.libro.info.pageCount.toString(),
       averageRating: 0,
       ratingsCount: 0,
       contentVersion: "",
-      imagen:  this.libro.imagen || this.libro.info.imageLinks.thumbnail,
+      imagen: this.libro.imagen || this.libro.info.imageLinks.thumbnail,
       lengua: "",
       previewLink: "",
       estado: estado === 'Leído' ? 'Leído' : 'Pendiente',
-      categorias: this.libro.categorias ||  this.libro.info.categories.join(', ') || "Sin categoría"
+      categorias: this.libro.categorias || this.libro.info.categories.join(', ') || "Sin categoría",
+      APIid: this.libro.APIid || this.libro.id
     };
   
     this.toastr.success('Ha sido añadido!', 'Añadido!');
     this._lecturasBBDDService.addlibro(nuevoLibro).subscribe((resp: any) => {
-      console.log("Libro añadido",resp);
+      console.log("Libro añadido", resp);
     })
-    
   }
   
-
-
-
-
 
 
 

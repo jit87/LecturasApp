@@ -61,6 +61,7 @@ constructor(
          this.libro.categorias = resp.categorias || resp.coleccion; 
          this.libro.pageCount = resp.pageCount; 
          this.libro.fechaPublicacion = resp.fechaPublicacion; 
+         this.libro.APIid = resp.id; 
          this.cargando = false; 
       },
       (error) => {
@@ -80,6 +81,7 @@ constructor(
           this.libro.categorias = resp.volumeInfo.categories.toString(); 
           this.libro.pageCount= resp.volumeInfo.pageCount.toString(); 
           this.libro.fechaPublicacion = resp.volumeInfo.publishedDate; 
+          this.libro.APIid = resp.id; 
           this.cargando = false;
         },
       (error) => {

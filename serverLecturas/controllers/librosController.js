@@ -4,7 +4,7 @@ import Libro from "../models/Libro.js";
 
 export async function agregarLibro(req, res) {
 
-  const { _idUsuario,titulo,autores,editor,fechaPublicacion,descripcion,pageCount,averageRating,ratingsCount,contentVersion,imagen,lengua,previewLink,estado,coleccion,categorias } = req.body;
+  const { _idUsuario,titulo,autores,editor,fechaPublicacion,descripcion,pageCount,averageRating,ratingsCount,contentVersion,imagen,lengua,previewLink,estado,coleccion,categorias,APIid } = req.body;
 
   const nuevoLibro = new Libro({
         _idUsuario,
@@ -22,7 +22,8 @@ export async function agregarLibro(req, res) {
         previewLink,
         estado,
         coleccion,
-        categorias
+        categorias,
+        APIid
   });
   
   try {
@@ -48,10 +49,10 @@ export async function obtenerLibros(req, res) {
   
 }
 
+
+
+
 /*
-
-
-
 export async function actualizarLibro(req, res) {
 
      try {
@@ -129,3 +130,26 @@ export async function obtenerLibro(req, res) {
   }
   
 }
+
+
+
+export async function obtenerLibroAPIid(req, res) {
+
+    try {
+        const libro = await Libro.findById(req.params.APIid);
+
+        if (!libro) return res.status(404).json({ message: 'Libro no encontrado' });
+
+        if (Libro.usuarioId !== req.usuarioId) {
+          return res.status(403).json({ message: 'No tienes permiso para acceder a este Libro' });
+        }
+
+        res.json("Libro encontrado");
+
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+  }
+  
+}
+
+

@@ -42,6 +42,12 @@ export class LecturasBBDDService {
   }
 
 
+
+  getlibroByAPIid(APIid: string) {
+    return this.http.get(this.url + "/libros/" + APIid); 
+  }
+
+
   
   updatelibro(libro: LibroModel, libroId: String | undefined): Observable<any> {
     return this.http.put(this.url + "/" + libroId, libro);
