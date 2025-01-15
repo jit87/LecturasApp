@@ -101,7 +101,7 @@ export class LibrosComponent {
   }
 
   //Elimina libro de la BBDD
- eliminarLibro(libroId: string) {
+  eliminarLibro(libroId: string) {
       this._lecturasBBDDService.deletelibro(libroId).subscribe(
         (resp: any) => {
           console.log(resp, "Libro eliminado");

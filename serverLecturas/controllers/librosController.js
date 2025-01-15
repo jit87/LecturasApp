@@ -34,13 +34,15 @@ export async function agregarLibro(req, res) {
   }
 }
 
-
-
+//NOTA
+/*Para que funcione bien el parámetro de usuario (en este caso _idUsuario) 
+y poder autenticar cada consulta a la BBDD  se requiere configurar un middleware (authenticate.js) en este backend 
+y luego configurar un interceptor en el frontend*/
 
 export async function obtenerLibros(req, res) {
 
     try {
-        const libros = await Libro.find({ _idUsuario: req.params.id }); 
+        const libros = await Libro.find({ _idUsuario: req._idUsuario}); 
         res.json(libros); 
     } catch (error) {
         console.error(error);
@@ -98,7 +100,7 @@ export async function eliminarLibro(req, res) {
         
         if (!libro) return res.status(404).json({ message: 'Libro no encontrado' });
 
-        if (Libro._idUsuario !== req.usuarioId) {
+        if (libro._idUsuario.toString() !== req._idUsuario) {
             return res.status(403).json({ message: 'No tienes permiso para eliminar este Libro' });
         }
         
@@ -119,7 +121,7 @@ export async function obtenerLibro(req, res) {
 
         if (!libro) return res.status(404).json({ message: 'Libro no encontrado' });
 
-        if (Libro.usuarioId !== req.usuarioId) {
+        if (libro._idUsuario.toString() !== req._idUsuario) {
           return res.status(403).json({ message: 'No tienes permiso para acceder a este Libro' });
         }
 
@@ -134,22 +136,24 @@ export async function obtenerLibro(req, res) {
 
 
 export async function obtenerLibroAPIid(req, res) {
-
     try {
-        const libro = await Libro.findById(req.params.APIid);
+        const libro = await Libro.findOne({ APIid: req.params.APIid });
 
-        if (!libro) return res.status(404).json({ message: 'Libro no encontrado' });
-
-        if (Libro.usuarioId !== req.usuarioId) {
-          return res.status(403).json({ message: 'No tienes permiso para acceder a este Libro' });
+        if (!libro) {
+            return res.status(404).json({ message: 'Libro no encontrado' });
         }
 
-        res.json("Libro encontrado");
+        if (libro._idUsuario.toString() !== req._idUsuario) {
+            return res.status(403).json({ message: 'No tienes permiso para acceder a este Libro' });
+        }
+
+        res.json({ encontrado: true });
 
     } catch (err) {
-        res.status(500).json({ message: err.message });
-  }
-  
+        console.error('Error al buscar el libro:', err.message);
+        res.status(500).json({ message: 'Error interno del servidor' });
+    }
 }
+
 
 

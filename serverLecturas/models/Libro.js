@@ -3,7 +3,7 @@ import { Schema, model } from 'mongoose';
 const libroSchema = new Schema({
   _idUsuario: {
     type: String,
-    required: false,
+    required: true,
   },
   titulo: {
     type: String,
