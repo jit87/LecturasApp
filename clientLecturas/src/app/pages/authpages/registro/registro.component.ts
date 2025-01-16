@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service'; 
 import { Router } from '@angular/router';
-//import { ToastrService } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-registro',
@@ -13,12 +13,13 @@ export class RegistroComponent {
 
   registroForm: FormGroup;
   error: boolean = false; 
+  correcto: boolean = false; 
 
     constructor(
         private fb: FormBuilder,
         private _authService: AuthService,
         private router: Router,
-       // private toastr: ToastrService
+        private toastr: ToastrService
       ) {
         this.registroForm = this.fb.group({
           nombre: ['', [Validators.required]],
@@ -34,7 +35,7 @@ export class RegistroComponent {
       this._authService.registro(nombre, email, password).subscribe(
         () => {
           this.router.navigate(['/home']);
-        //  this.toastr.success('Inicie sesión','Registro exitoso'); 
+          this.toastr.success('Inicie sesión','Registro exitoso'); 
         },
         error => {
           console.error('Error durante el registro:', error);

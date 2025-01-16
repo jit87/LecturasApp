@@ -25,7 +25,7 @@ router.delete('/:id', eliminarLibro);
 router.get('/:id', obtenerLibro); 
 
 //Ruta para obtener una Libro por su APIid
-router.get('/:APIid', obtenerLibroAPIid); 
+router.get('/APIid/:APIid', obtenerLibroAPIid); 
 
 
 

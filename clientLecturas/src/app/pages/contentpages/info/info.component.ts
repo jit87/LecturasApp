@@ -53,7 +53,7 @@ constructor(
     this.cargando = true; 
     this._lecturasBBDDService.getlibroById(this.libroId).subscribe(
        (resp: any) => {
-         this.libro.titulo = resp.title; 
+         this.libro.titulo = resp.titulo; 
          this.libro.imagen = resp.imagen; 
          this.libro.descripcion = resp.descripcion.replace(/(<([^>]+)>)/ig,""); 
          this.libro.autores = resp.autores[0]; 

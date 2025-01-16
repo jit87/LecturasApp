@@ -44,7 +44,7 @@ export class LecturasBBDDService {
 
 
   getlibroByAPIid(APIid: string) {
-    return this.http.get(this.url + "/libros/" + APIid); 
+    return this.http.get(this.url + "/libros/APIid/" + APIid); 
   }
 
 

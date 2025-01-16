@@ -5,10 +5,10 @@ import authRoutes from './routes/authRoutes.js';
 import librosRoutes from './routes/librosRoutes.js'; 
 
 
-// Crear servidor
+//Crear servidor
 const app = express();
 
-// Habilitar middleware para parsear JSON
+//Habilitar middleware para parsear JSON
 app.use(express.json());
 
 //Configurar CORS

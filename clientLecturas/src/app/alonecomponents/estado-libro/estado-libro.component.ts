@@ -32,16 +32,25 @@ disponibles1: boolean = true;
 disponibles2: boolean = true; 
 librosGuardados: any[] = [];
 usuarioID: string = ""
+guardado: boolean = false;   
 
 @Input() libro!: any; 
+  
 
-  constructor(
+constructor(
     private _lecturasBBDDService: LecturasBBDDService,
     private _authService: AuthService,
     private toastr: ToastrService,
-    private _estadoLibroService: EstadoLibroService) {
-  }
+    private _estadoLibroService: EstadoLibroService) {}
 
+
+
+//Conviene usar OnInit para obtener el valor de @Input
+ngOnInit() {
+  if (this.libro && this.libro.id) {
+    this.esGuardado(this.libro.id);
+  }
+}
 
 
 //Usamos promesa porque la obtención del ID es asíncrona y si la queremos recuperar en guardarEstadoLibros dará undefined si no usamos promesas
@@ -65,42 +74,55 @@ async getUsuarioID() {
   
 
 
-
-//Primero se guardan en el LocalStorage para probar y una vez terminado el Front se añadirá al backend
 async guardarEstadoLibro(estado: string) { 
   console.log("Datos del libro recibidos:", this.libro); 
+
   //Await espera a que se ejecute la promesa anterior
   const usuarioID = await this.getUsuarioID();
 
-  //Recuperamos lo que haya en BBDD
-  /////////Pendiente/////////// 
-
-  var nuevoLibro = new LibroModel();
-  nuevoLibro = {
-      _id: this.libro.id,
-      _idUsuario: usuarioID,
-      titulo: this.libro.titulo || this.libro.info.title || "Sin título",
-      autores: this.libro.autores || this.libro.info.authors[0],
-      editor: this.libro.editor || this.libro.info.publisher,
-      fechaPublicacion: this.libro.fechaPublicacion || this.libro.info.publisherDate,
-      descripcion: this.libro.descripcion || this.libro.info.description,
-      pageCount: this.libro.pageCount || this.libro.info.pageCount.toString(),
-      averageRating: 0,
-      ratingsCount: 0,
-      contentVersion: "",
-      imagen: this.libro.imagen || this.libro.info.imageLinks.thumbnail,
-      lengua: "",
-      previewLink: "",
-      estado: estado === 'Leído' ? 'Leído' : 'Pendiente',
-      categorias: this.libro.categorias || this.libro.info.categories.join(', ') || "Sin categoría",
-      APIid: this.libro.APIid || this.libro.id
-    };
+    var nuevoLibro = new LibroModel();
+    nuevoLibro = {
+        _id: this.libro.id,
+        _idUsuario: usuarioID,
+        titulo: this.libro.titulo || this.libro.info.title || "Sin título",
+        autores: this.libro.autores || this.libro.info.authors[0],
+        editor: this.libro.editor || this.libro.info.publisher,
+        fechaPublicacion: this.libro.fechaPublicacion || this.libro.info.publisherDate,
+        descripcion: this.libro.descripcion || this.libro.info.description,
+        pageCount: this.libro.pageCount || this.libro.info.pageCount.toString(),
+        averageRating: 0,
+        ratingsCount: 0,
+        contentVersion: "",
+        imagen: this.libro.imagen || this.libro.info.imageLinks.thumbnail,
+        lengua: "",
+        previewLink: "",
+        estado: estado === 'Leído' ? 'Leído' : 'Pendiente',
+        categorias: this.libro.categorias || this.libro.info.categories.join(', ') || "Sin categoría",
+        APIid: this.libro.APIid || this.libro.id
+      };
+    
+      this.toastr.success('Ha sido añadido!', 'Añadido!');
+      this._lecturasBBDDService.addlibro(nuevoLibro).subscribe((resp: any) => {
+        console.log("Libro añadido", resp);
+      })
   
-    this.toastr.success('Ha sido añadido!', 'Añadido!');
-    this._lecturasBBDDService.addlibro(nuevoLibro).subscribe((resp: any) => {
-      console.log("Libro añadido", resp);
-    })
   }
+
+
+  
+  //Comprobación de si está guardado para bloquear que se pueda guardar duplicado
+  esGuardado(libroId: string) {
+    this._lecturasBBDDService.getlibroByAPIid(libroId).subscribe(
+      (resp) => {
+        console.log("Está guardado en la BBDD", resp);  
+        this.guardado = true; 
+      },
+      (err) => {
+        console.log("No se encuentra", err); 
+      }
+    )
+  }
+
   
 
 
