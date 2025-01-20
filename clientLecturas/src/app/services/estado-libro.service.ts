@@ -66,9 +66,12 @@ export class EstadoLibroService {
     return coleccion; 
   }
 
+
+  //PENDIENTE: Falta incluir las funcionalidades en el Backend
   getColecciones() {
       return JSON.parse(localStorage.getItem("coleccionesGuardadas")  || '[]');
   }
+
 
   estaGuardado(APIid: string) {
     var result = false; 

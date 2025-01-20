@@ -104,8 +104,8 @@ async guardarEstadoLibro(estado: string) {
       this.toastr.success('Ha sido añadido!', 'Añadido!');
       this._lecturasBBDDService.addlibro(nuevoLibro).subscribe((resp: any) => {
         console.log("Libro añadido", resp);
+        this.guardado = true; 
       })
-  
   }
 
 

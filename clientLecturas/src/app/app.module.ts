@@ -7,8 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { APP_ROUTING } from './app.routes';
 import { BrowserModule } from '@angular/platform-browser';
 
-
-//Componentes
+//Otros
 import { AppComponent } from './app.component';
 import { ComponentsModule } from './components/components.module';
 import { CommonModule } from '@angular/common';

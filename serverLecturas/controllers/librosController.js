@@ -137,8 +137,11 @@ export async function obtenerLibro(req, res) {
 //Si encuentra el libro guardado en la BBDD, devuelve un objeto JSON con la propiedad encontrado a true.
 export async function obtenerLibroAPIid(req, res) {
     try {
-
-        const libro = await Libro.findOne({ APIid: req.params.APIid });
+        //Buscamos por usuario y APIid
+        const libro = await Libro.findOne({
+            APIid: req.params.APIid,
+             _idUsuario: req._idUsuario 
+         });
 
         if (!libro) {
             return res.status(404).json({ message: 'Libro no encontrado' });
