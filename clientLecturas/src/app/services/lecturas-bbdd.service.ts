@@ -37,8 +37,8 @@ export class LecturasBBDDService {
 
 
   
-  getlibroById(_id: string) {
-    return this.http.get(this.url + "/libros/" + _id); 
+  getlibroById(libroId: string) {
+    return this.http.get(this.url + "/libros/libro/" + libroId); 
   }
 
 

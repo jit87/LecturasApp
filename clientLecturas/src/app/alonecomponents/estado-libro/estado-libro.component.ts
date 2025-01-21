@@ -47,13 +47,18 @@ constructor(
 
 //Conviene usar OnInit para obtener el valor de @Input
 ngOnInit() {
+   console.log("Datos del libro en EstadoLibroComponent:", this.libro);
   if (this.libro && this.libro.id) {
     this.esGuardado(this.libro.id);
+  }
+  if (this.libro && this.libro.APIid) {
+    this.esGuardado(this.libro.APIid);
   }
 }
 
 
-//Usamos promesa porque la obtención del ID es asíncrona y si la queremos recuperar en guardarEstadoLibros dará undefined si no usamos promesas
+//Usamos promesa porque la obtención del usuarioID es asíncrona 
+//y si lo queremos recuperar en guardarEstadoLibros dará undefined si no usamos promesas
 async getUsuarioID() {
  const email = localStorage.getItem("email"); 
   return new Promise((resolve, reject) => {
@@ -84,20 +89,20 @@ async guardarEstadoLibro(estado: string) {
     nuevoLibro = {
         _id: this.libro.id,
         _idUsuario: usuarioID,
-        titulo: this.libro.titulo || this.libro.info.title || "Sin título",
-        autores: this.libro.autores || this.libro.info.authors[0],
-        editor: this.libro.editor || this.libro.info.publisher,
-        fechaPublicacion: this.libro.fechaPublicacion || this.libro.info.publisherDate,
-        descripcion: this.libro.descripcion || this.libro.info.description,
-        pageCount: this.libro.pageCount || this.libro.info.pageCount.toString(),
+        titulo: this.libro.titulo || this.libro.info?.title || "Sin título",
+        autores: this.libro.autores || this.libro.info?.authors[0],
+        editor: this.libro.editor || this.libro.info?.publisher,
+        fechaPublicacion: this.libro.fechaPublicacion || this.libro.info?.publisherDate,
+        descripcion: this.libro.descripcion || this.libro.info?.description,
+        pageCount: this.libro.pageCount || this.libro.info?.pageCount.toString(),
         averageRating: 0,
         ratingsCount: 0,
         contentVersion: "",
-        imagen: this.libro.imagen || this.libro.info.imageLinks.thumbnail,
+        imagen: this.libro.imagen || this.libro.info?.imageLinks.thumbnail,
         lengua: "",
         previewLink: "",
         estado: estado === 'Leído' ? 'Leído' : 'Pendiente',
-        categorias: this.libro.categorias || this.libro.info.categories.join(', ') || "Sin categoría",
+        categorias: this.libro.categorias || this.libro.info?.categories.join(', ') || "Sin categoría",
         APIid: this.libro.APIid || this.libro.id
       };
     
@@ -110,18 +115,18 @@ async guardarEstadoLibro(estado: string) {
 
 
   
-  //Comprobación de si está guardado para bloquear que se pueda guardar duplicado
-  esGuardado(libroId: string) {
-    this._lecturasBBDDService.getlibroByAPIid(libroId).subscribe(
-      (resp) => {
-        console.log("Está guardado en la BBDD", resp);  
-        this.guardado = true; 
-      },
-      (err) => {
-        console.log("No se encuentra", err); 
-      }
-    )
-  }
+//Comprobación de si está guardado para bloquear que se pueda guardar duplicado
+esGuardado(libroId: string) {
+  this._lecturasBBDDService.getlibroByAPIid(libroId).subscribe(
+    (resp) => {
+      console.log("Está guardado en la BBDD", resp);  
+      this.guardado = true; 
+    },
+    (err) => {
+      console.log("No se encuentra", err); 
+    }
+  )
+}
 
   
 

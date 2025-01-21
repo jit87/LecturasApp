@@ -1,7 +1,7 @@
 <div class="container"  class="home py-5 animate__animated animate__fadeIn">
     <button class="btn btn-outline-secondary mt-3" (click)="regresar()">Volver</button>
     <p *ngIf="disponibles1==false && disponibles2 == false" class="error">No hay información disponible</p>
-    <div class="mt-4" *ngIf="cargando==true" style="text-align: center;">
+    <div class="mt-4" *ngIf="cargado==false" style="text-align: center;">
         <div class="spinner-border m-5" role="status">
             <span class="visually-hidden">Cargando...</span>
         </div>
@@ -9,29 +9,27 @@
     <br>
     <br>
     <div>
-    <div class="this.libro.titulo"><h2>{{ this.libro.titulo }}</h2>
-    <h4 style="font-weight:350;">{{ this.libro.autores }}</h4> 
+    <div class="libro.titulo"><h2>{{ libro.titulo }}</h2>
+    <h4 style="font-weight:350;">{{ libro.autores }}</h4> 
     </div>
     <br>
-    <img src="{{this.libro.imagen}}" alt="Portada del libro" class="image">
+    <img src="{{libro.imagen}}" alt="Portada del libro" class="image">
     <br>
     <br>
-    <div class="publisher"><strong>Editorial:</strong> {{ this.libro.editor }}</div>
-    <div class="date"><strong>Fecha de publicación:</strong> {{ this.libro.fechaPublicacion }}</div>
-    <div class="categories"><strong>Categorías:</strong> {{ this.libro.categorias }}</div>
+    <div class="publisher"><strong>Editorial:</strong> {{ libro.editor }}</div>
+    <div class="date"><strong>Fecha de publicación:</strong> {{ libro.fechaPublicacion }}</div>
+    <div class="categories"><strong>Categorías:</strong> {{ libro.categorias }}</div>
 
     <div class="description">
         <strong>Descripción:</strong>
-            {{ this.libro.descripcion }}
+            {{ libro.descripcion }}
     </div>
     <div class="pages">
         <strong>Número de páginas:</strong>
-        {{ this.libro.pageCount }}
+        {{ libro.pageCount }}
     </div>
     <br>
-    <div>
-        <app-estado-libro [libro]="this.libro"></app-estado-libro>  
-    </div>
+        <app-estado-libro [libro]="libro"></app-estado-libro>  
     <br>
 
 </div>

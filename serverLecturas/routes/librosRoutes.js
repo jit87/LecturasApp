@@ -21,10 +21,10 @@ router.put('/:id', actualizarLibro);
 router.delete('/:id', eliminarLibro); 
 
 
-//Ruta para obtener una Libro por su id
-router.get('/:id', obtenerLibro); 
+//Ruta para obtener un libro por su id
+router.get('/libro/:id', obtenerLibro); 
 
-//Ruta para obtener una Libro por su APIid
+//Ruta para obtener un libro por su APIid
 router.get('/APIid/:APIid', obtenerLibroAPIid); 
 
 
