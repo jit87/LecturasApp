@@ -1,40 +1,42 @@
 <section class="animate__animated animate__fadeIn">
     <div class="container mt-5">
         <h2 class="text-center mb-4">Mis libros guardados</h2>
-
-        <div class="mb-4" class="inputLibros">
-            <h4 class="ms-1">Libros</h4>
-            <div id="buscadorMisLibros"> 
-                <input  type="text" 
-                        id="searchInput" 
-                        class="form-control" 
-                        placeholder="Buscar libros..." 
-                        style="width: 25%;" 
-                        #termino  
-                        (keyup)="limpiarBuscador(termino.value)">
-                <button class="btn btn-outline-primary ms-1" type="button" (click)="buscarLibrosGuardados(termino.value)">Buscar</button>  
-            </div>  
-        </div>
-        <br>
-        <div class="mb-4"  class="inputLibros">
-            <h4 class="ms-1">Colecciones</h4>
-            <div id="buscadorMisColecciones">
-                <input type="text" id="coleccionInput" class="form-control" placeholder="Añadir colección..." #coleccion  style="width: 25%;"> 
-                <button id="btnAgregarColeccion" 
-                        class="btn btn btn-success ms-1" 
-                        data-toggle="modal"
-                        data-target="#modalAgregarColeccion" 
-                        (click)="crearColeccion(coleccion)"><i (click)="crearColeccion(coleccion)" class="fa-solid fa-plus"></i>
-                </button>
+            <div id="librosYcolecciones">
+                <div class="mb-4" class="me-3">
+                    <h6 class="ms-1">Libros</h6>
+                    <div id="buscadorMisLibros"> 
+                        <input  type="text" 
+                                id="searchInput" 
+                                class="form-control" 
+                                placeholder="Buscar libros..." 
+                                #termino  
+                                (keyup)="limpiarBuscador(termino.value)">
+                        <button class="btn btn-outline-primary ms-1" type="button" (click)="buscarLibrosGuardados(termino.value)">Buscar</button>  
+                    </div>  
+                </div>
+                <br>
+                <div class="mb-4">
+                    <h6 class="ms-1">Colecciones</h6>
+                    <div id="agregadorMisColecciones">
+                        <input type="text" id="coleccionInput" class="form-control" placeholder="Añadir colección..." #coleccion > 
+                        <button id="btnAgregarColeccion" 
+                                class="btn btn btn-success ms-1" 
+                                data-toggle="modal"
+                                data-target="#modalAgregarColeccion" 
+                                (click)="crearColeccion(coleccion)"><i (click)="crearColeccion(coleccion)" class="fa-solid fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
             </div>
-            <br>
-            <br>
-            <span class="badge text-bg-primary" style="margin-left: 3px;cursor: pointer;" *ngFor="let coleccion of colecciones;let i=index" (click)="filtrarPorColeccion(coleccion)">{{ coleccion.nombre }} 
-                <i class="fa-solid fa-xmark"  style="cursor: pointer;" (click)="eliminarColeccion(i)"></i>
-            </span>
-            <span class="badge text-bg-secondary" style="margin-left: 3px;cursor: pointer; padding:5px;" *ngIf="colecciones.length > 1" (click)="mostrarTodasColecciones()"> Mostrar todas
-            </span>
-        </div>
+            <div id="seccionEtiquetasCol mt-3">
+                <span class="badge text-bg-primary" style="margin-left: 3px;cursor: pointer;"
+                    *ngFor="let coleccion of colecciones;let i=index" (click)="filtrarPorColeccion(coleccion)">{{ coleccion.nombre }}
+                    <i class="fa-solid fa-xmark" style="cursor: pointer;" (click)="eliminarColeccion(i)"></i>
+                </span>
+                <span class="badge text-bg-secondary" style="margin-left: 3px;cursor: pointer; padding:5px;"
+                    *ngIf="colecciones.length > 1" (click)="mostrarTodasColecciones()"> Mostrar todas
+                </span> 
+            </div>
         <br>
         <div id="misLibros">
             <!-- Tabla para los libros guardados -->

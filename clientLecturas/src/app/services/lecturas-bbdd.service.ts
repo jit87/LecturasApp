@@ -50,7 +50,7 @@ export class LecturasBBDDService {
 
   
   updatelibro(libro: LibroModel, libroId: String | undefined): Observable<any> {
-    return this.http.put(this.url + "/" + libroId, libro);
+    return this.http.put(this.url + "/libros/" + libroId, libro);
   }
 
 

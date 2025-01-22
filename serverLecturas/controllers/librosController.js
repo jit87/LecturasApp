@@ -54,34 +54,28 @@ export async function obtenerLibros(req, res) {
 
 
 
-/*
+
 export async function actualizarLibro(req, res) {
 
      try {
-        const { nombre, ticker, precio, cantidad, capitalInvertido, industria, valoracion } = req.body;
+        const { estado, coleccion } = req.body;
 
-        const Libro = await Libro.findById(req.params.id);
+        const libro = await Libro.findById(req.params.id);
 
-        if (!Libro) {
-            return res.status(404).json({ msg: 'No existe esta Libro' });
+        if (!libro) {
+            return res.status(404).json({ msg: 'No existe este Libro' });
         }
 
-        if (Libro.usuarioId.toString() !== req.usuarioId) {
-            return res.status(403).json({ message: 'No tienes permiso para actualizar esta Libro' });
+        if (libro._idUsuario.toString() !== req._idUsuario) {
+            return res.status(403).json({ message: 'No tienes permiso para actualizar este Libro' });
         }
 
-        Libro.nombre = nombre || Libro.nombre;
-        Libro.ticker = ticker || Libro.ticker;
-        Libro.precio = precio || Libro.precio;
-        Libro.cantidad = cantidad || Libro.cantidad;
-        Libro.capitalInvertido = capitalInvertido || Libro.capitalInvertido;
-        Libro.industria = industria || Libro.industria;
-        Libro.valoracion = valoracion || Libro.valoracion; 
+        libro.estado = estado || libro.estado;
+        libro.coleccion = coleccion || libro.coleccion;
        
 
-        const LibroActualizada = await Libro.save();
-
-        res.json(LibroActualizada);
+        const libroActualizado = await libro.save();
+        res.json(libroActualizado);
 
     } catch (error) {
         console.error(error);
@@ -90,7 +84,7 @@ export async function actualizarLibro(req, res) {
   
 }
 
-*/
+
 
 
 export async function eliminarLibro(req, res) {

@@ -4,8 +4,24 @@
 }
 
 
-#buscadorMisColecciones {
+#buscadorMisLibros input {
+    width: max-content;
+}
+
+
+#agregadorMisColecciones {
     display: flex;
     flex-wrap: wrap;
 }
 
+
+#agregadorMisColecciones input {
+    width: max-content;
+}
+
+
+#librosYcolecciones {
+    display: flex;
+    flex-wrap: wrap;
+    width:100%; 
+}

@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 import { LibroModel } from '../../../models/libro.model';
 import { ColeccionModel } from '../../../models/coleccion.model';
 import { EstadoLibroService } from '../../../services/estado-libro.service';
+import { LecturasBBDDService } from '../../../services/lecturas-bbdd.service';
 
 @Component({
   selector: 'app-editar-libro',
@@ -24,7 +25,7 @@ libro: LibroModel = new LibroModel();
 colecciones: any[] = []; 
 
 
-constructor(private _estadoLibroService: EstadoLibroService) {
+constructor(private _estadoLibroService: EstadoLibroService, private _lecturasBBDDService: LecturasBBDDService ) {
   this.libro._id = this._estadoLibroService.getIdLibro(); 
   this.libro.titulo = this._estadoLibroService.getTituloLibro();
   this.libro.estado = this._estadoLibroService.getEstadoLibro(); 
@@ -35,12 +36,6 @@ constructor(private _estadoLibroService: EstadoLibroService) {
     });
     this.colecciones.push("No asignado"); 
   }
-  var datos2 = this._estadoLibroService.getColeccionByName(this.libro.titulo);
-  if (datos2) {
-    this.libro.coleccion = datos2;  
-  } else {
-    this.libro.coleccion = 'No asignado'; 
-  }
 }
 
 //Cambiar el acceso del lS a la BBDD cuando se cree el backend
@@ -49,23 +44,22 @@ guardarCambios(form: NgForm) {
     console.log("Formulario no valido");
     return;
   }
-  //Obtenemos del LS los libros almacenados
-  let libros = JSON.parse(localStorage.getItem('librosGuardados') || '[]');
-  //Buscamos la posición del libro a modificar
-  let libroIndex = 0;
-  for (var i = 0; i <= libros.length; i++) {
-    if (libros[i]._id == this.libro._id) {
-        libroIndex = i;
-        break; 
+
+  console.log(this.libro); 
+
+  this._lecturasBBDDService.updatelibro(this.libro, this.libro._id).subscribe(
+    (resp) => {
+      console.log("Libro actualizado", resp);
+    },
+    (error) => {
+      console.log(error); 
     }
-  }
+  )
+
+  
   //Actualizamos el libro y lo notificamos al padre
-  if (libroIndex !== -1) {
-    libros[libroIndex].estado = this.libro.estado;
-    libros[libroIndex].coleccion = this.libro.coleccion;
-    localStorage.setItem('librosGuardados', JSON.stringify(libros));
-    this.libroEditado.emit(true); 
-  }
+  this.libroEditado.emit(true); 
+  
 }
   
 
