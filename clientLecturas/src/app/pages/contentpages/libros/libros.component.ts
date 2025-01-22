@@ -1,9 +1,6 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { LibrosService } from '../../../services/libros.service';
 import { ColeccionModel } from '../../../models/coleccion.model';
 import { EstadoLibroService } from '../../../services/estado-libro.service';
-import { EditarLibroComponent } from '../editar-libro/editar-libro.component';
-import { LibroModel } from '../../../models/libro.model';
 import { AuthService } from '../../../services/auth.service';
 import { LecturasBBDDService } from '../../../services/lecturas-bbdd.service';
 import { ToastrService } from 'ngx-toastr';
@@ -49,8 +46,8 @@ export class LibrosComponent {
   }
 
 
-  //LIBROS
-  //Obtiene los libros guardados en la BBDD de MongoDB
+ //LIBROS
+ //Obtiene los libros guardados en la BBDD de MongoDB
  async mostrarLibros() {
     this._lecturasBBDDService.getListLibros(this.usuarioID).subscribe(
       (resp: any) => {
@@ -69,7 +66,11 @@ export class LibrosComponent {
   buscarLibrosGuardados(termino: string) {
     if (this.libroEncontrado == false) {
       for (var i = 0; i < this.librosGuardados.length; i++){
-        if (this.librosGuardados[i].titulo==termino || this.librosGuardados[i].autores[0]==termino) {
+        if (
+          this.librosGuardados[i].titulo == termino 
+          || this.librosGuardados[i].autores[0] == termino
+          || this.librosGuardados[i].titulo.match(termino)
+        ) {
           var libroSeleccionado = this.librosGuardados[i];
           this.librosSeleccionados.push(libroSeleccionado); 
           this.libroEncontrado = true;  
@@ -93,12 +94,19 @@ export class LibrosComponent {
     }
     this.librosAMostrar = [];
     this.librosAMostrar= this.librosSeleccionados; 
+  }
+
+
+
+  limpiarBuscador(termino: string) {
     if (termino == "" || termino == null) {
       this.librosSeleccionados = []; 
       this.mostrarLibros(); 
       this.libroEncontrado = false; 
     }
   }
+
+
 
   //Elimina libro de la BBDD
   eliminarLibro(libroId: string) {
@@ -117,7 +125,7 @@ export class LibrosComponent {
 
 
   //COLECCIONES
-  //Cambiar el acceso del lS a la BBDD cuando se cree el backend
+  //PENDIENTE: actualizar para que se guarden en el Backend
   mostrarColecciones() {
     var coleccionGuardada = localStorage.getItem("coleccionesGuardadas");
     if(coleccionGuardada)

@@ -1,0 +1,11 @@
+#buscadorMisLibros {
+    display: flex; 
+    flex-wrap: wrap;
+}
+
+
+#buscadorMisColecciones {
+    display: flex;
+    flex-wrap: wrap;
+}
+

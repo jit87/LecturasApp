@@ -2,22 +2,30 @@
     <div class="container mt-5">
         <h2 class="text-center mb-4">Mis libros guardados</h2>
 
-        <div class="mb-4">
-            <input type="text" id="searchInput" class="form-control" placeholder="Buscar libros..." #termino (keyup)="buscarLibrosGuardados(termino.value)">
+        <div class="mb-4" class="inputLibros">
+            <h4 class="ms-1">Libros</h4>
+            <div id="buscadorMisLibros"> 
+                <input  type="text" 
+                        id="searchInput" 
+                        class="form-control" 
+                        placeholder="Buscar libros..." 
+                        style="width: 25%;" 
+                        #termino  
+                        (keyup)="limpiarBuscador(termino.value)">
+                <button class="btn btn-outline-primary ms-1" type="button" (click)="buscarLibrosGuardados(termino.value)">Buscar</button>  
+            </div>  
         </div>
-
-        <div class="mb-4" style="width: 100%;">
-            <h4>Colecciones</h4>
-            <div style="width: 25%;display:inline-block;">
-                 <input type="text" id="coleccionInput" class="form-control" placeholder="Añadir colección..." #coleccion>
-            </div>
-            <div class="col-md-6" style="width: 50%;display:inline-block;">
+        <br>
+        <div class="mb-4"  class="inputLibros">
+            <h4 class="ms-1">Colecciones</h4>
+            <div id="buscadorMisColecciones">
+                <input type="text" id="coleccionInput" class="form-control" placeholder="Añadir colección..." #coleccion  style="width: 25%;"> 
                 <button id="btnAgregarColeccion" 
-                        class="btn btn-secondary btn-sm" 
+                        class="btn btn btn-success ms-1" 
                         data-toggle="modal"
                         data-target="#modalAgregarColeccion" 
-                        style="margin-left: 5px;padding: 7px;" 
-                        (click)="crearColeccion(coleccion)">Añadir colección</button>
+                        (click)="crearColeccion(coleccion)"><i (click)="crearColeccion(coleccion)" class="fa-solid fa-plus"></i>
+                </button>
             </div>
             <br>
             <br>
@@ -27,7 +35,7 @@
             <span class="badge text-bg-secondary" style="margin-left: 3px;cursor: pointer; padding:5px;" *ngIf="colecciones.length > 1" (click)="mostrarTodasColecciones()"> Mostrar todas
             </span>
         </div>
-
+        <br>
         <div id="misLibros">
             <!-- Tabla para los libros guardados -->
             <p class="error" *ngIf="!librosAMostrar">No hay libros guardados</p>

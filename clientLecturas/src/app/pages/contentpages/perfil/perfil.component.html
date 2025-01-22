@@ -16,6 +16,10 @@
             </div>
             <div class="card-body" *ngFor="let elem of DatosPerfil">
                 <div class="row mb-3">
+                    <div class="col-4 text-end fw-bold">Imagen de perfil:</div>
+                    <div class="col-8"><img style="width: 50px;height: 50px;"></div>
+                </div>
+                <div class="row mb-3">
                     <div class="col-4 text-end fw-bold">Nombre:</div>
                     <div class="col-8">{{ elem.nombre }}</div>
                 </div>
