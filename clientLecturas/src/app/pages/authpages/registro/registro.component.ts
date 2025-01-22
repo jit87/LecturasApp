@@ -35,7 +35,7 @@ export class RegistroComponent {
       this._authService.registro(nombre, email, password).subscribe(
         () => {
           this.router.navigate(['/home']);
-          this.toastr.success('Inicie sesión','Registro exitoso'); 
+          this.toastr.info('Inicie sesión','Registro exitoso'); 
         },
         error => {
           console.error('Error durante el registro:', error);

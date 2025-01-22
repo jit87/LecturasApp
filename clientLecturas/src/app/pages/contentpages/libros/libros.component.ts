@@ -1,5 +1,4 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { ColeccionModel } from '../../../models/coleccion.model';
 import { EstadoLibroService } from '../../../services/estado-libro.service';
 import { AuthService } from '../../../services/auth.service';
 import { LecturasBBDDService } from '../../../services/lecturas-bbdd.service';
@@ -18,8 +17,6 @@ export class LibrosComponent {
   librosAMostrar: any[] = []; 
   libroEncontrado: boolean = false; 
   mostrarForm: boolean = false; 
-  colecciones: ColeccionModel[] = []; 
-  coleccion: ColeccionModel = new ColeccionModel(); 
   usuarioID: string = ""; 
 
 
@@ -115,7 +112,7 @@ export class LibrosComponent {
           console.log(resp, "Libro eliminado");
            this.librosGuardados = this.librosGuardados.filter(libro => libro._id !== libroId);
            this.librosAMostrar = this.librosGuardados;
-           this.toastr.success('Ha sido eliminado!', 'Eliminado!');
+           this.toastr.info('Ha sido eliminado!', 'Eliminado!');
         },
         (error) => {
           console.log(error); 
@@ -129,8 +126,8 @@ export class LibrosComponent {
   //PENDIENTE: actualizar para que se guarden en el Backend
   mostrarColecciones() {
     var coleccionGuardada = localStorage.getItem("coleccionesGuardadas");
-    if(coleccionGuardada)
-      this.colecciones = JSON.parse(coleccionGuardada);
+    //if(coleccionGuardada)
+     // this.colecciones = JSON.parse(coleccionGuardada);
   }
 
 
@@ -138,21 +135,13 @@ export class LibrosComponent {
     if (coleccion.value=="") {
       return; 
     }
-    this.coleccion = {
-      _id: "default", 
-      _idUsuario: "default",
-      libros: [],
-      nombre: coleccion.value
-    }
-    this.colecciones.push(this.coleccion); 
-    localStorage.setItem("coleccionesGuardadas", JSON.stringify(this.colecciones)); 
   }
 
 
   eliminarColeccion(index: number) {
     //Filtramos la coleccion que pasamos como parámetro
-    var coleccionesModificadas = this.colecciones.filter((elem) => elem.nombre !== this.colecciones.at(index)?.nombre);
-    localStorage.setItem("coleccionesGuardadas", JSON.stringify(coleccionesModificadas)); 
+    //var coleccionesModificadas = this.colecciones.filter((elem) => elem.nombre !== this.colecciones.at(index)?.nombre);
+   // localStorage.setItem("coleccionesGuardadas", JSON.stringify(coleccionesModificadas)); 
     //Eliminamos la coleccion de los libros a los que está asignada
     this.eliminarAsignacionColeccion(index);
     this.mostrarColecciones();
@@ -160,18 +149,18 @@ export class LibrosComponent {
 
 
   eliminarAsignacionColeccion(index: number) {
-    var nombreColeccion = this.colecciones.at(index)?.nombre; 
-    for (var i = 0; i < this.librosGuardados[0].length; i++) {
+    //var nombreColeccion = this.colecciones.at(index)?.nombre; 
+   /* for (var i = 0; i < this.librosGuardados[0].length; i++) {
       if (this.librosGuardados[0][i].coleccion== nombreColeccion) {
         this.librosGuardados[0][i].coleccion = "";
       }
-    }
+    }*/
    localStorage.setItem("librosGuardados", JSON.stringify(this.librosGuardados[0])); 
   }
   
 
-  filtrarPorColeccion(coleccion: ColeccionModel) {
-    this.buscarLibrosGuardados(coleccion.nombre);  
+  filtrarPorColeccion() {
+    //this.buscarLibrosGuardados(coleccion.nombre);  
   }
 
 
