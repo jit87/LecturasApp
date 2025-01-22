@@ -44,9 +44,6 @@ guardarCambios(form: NgForm) {
     console.log("Formulario no valido");
     return;
   }
-
-  console.log(this.libro); 
-
   this._lecturasBBDDService.updatelibro(this.libro, this.libro._id).subscribe(
     (resp) => {
       console.log("Libro actualizado", resp);
