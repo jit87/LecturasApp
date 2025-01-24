@@ -33,25 +33,17 @@ async function main() {
         });
         console.log("Conectado a MongoDB correctamente");
 
-        // Ruta principal
-        /*app.get('/', (req, res) => {
-            res.send('Hola mundo');
-        });*/
-
         //Permite usar objetos js
         app.use(express.json()); 
-
         
         //Registra el enrutador para la ruta de autenticación 
         app.use('/', authRoutes);
-
 
         //Registra la ruta de gestión de libros
         app.use('/libros', librosRoutes);
 
         //Registra la ruta de gestión de colecciones
         app.use('/colecciones', coleccionesRoutes);
-
 
         // Iniciar servidor en el puerto 4000
         app.listen(4000, () => {

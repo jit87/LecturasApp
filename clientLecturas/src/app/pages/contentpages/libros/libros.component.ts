@@ -18,26 +18,25 @@ export class LibrosComponent {
   libroEncontrado: boolean = false; 
   mostrarForm: boolean = false; 
   usuarioID: string = ""; 
+  colecciones: string[] = [];
 
 
   constructor(private _estadoLibroService: EstadoLibroService,
     private _authService: AuthService,
     private _lecturasBBDDService: LecturasBBDDService,
-    private toastr: ToastrService) {
-    this.mostrarColecciones(); 
+    private toastr: ToastrService) { 
     this.getUsuarioID(); 
-    this.mostrarLibros(); 
   }
-  
 
 
-  //Obtenemos ID de usuario necesario para mostrar los libros guardados
+  //Obtenemos ID de usuario necesario para mostrar los libros y colecciones guardados
   getUsuarioID() {
     const email = localStorage.getItem("email"); 
     this._authService.getUserByEmail(email).subscribe(
       (resp: any) => {
         this.usuarioID = resp._id; 
         this.mostrarLibros();
+        this.mostrarColecciones(); 
       }
     ); 
   }
@@ -45,7 +44,7 @@ export class LibrosComponent {
 
  //LIBROS
  //Obtiene los libros guardados en la BBDD de MongoDB
- async mostrarLibros() {
+ mostrarLibros() {
     this._lecturasBBDDService.getListLibros(this.usuarioID).subscribe(
       (resp: any) => {
         this.librosGuardados = resp;
@@ -125,7 +124,15 @@ export class LibrosComponent {
   //COLECCIONES
   //PENDIENTE: actualizar para que se guarden en el Backend
   mostrarColecciones() {
-  
+    this._lecturasBBDDService.getListColecciones(this.usuarioID).subscribe(
+      (resp) => {
+        console.log(resp); 
+        this.colecciones = resp; 
+      },
+      (error) => {
+        console.log(error); 
+      }
+    )
   }
 
   //Añade la colección en la BBDD de mongoDB
@@ -136,6 +143,8 @@ export class LibrosComponent {
     this._lecturasBBDDService.addColeccion(coleccion).subscribe(
       (resp) => {
         console.log("Colección añadida", resp);
+        this.toastr.info('Colección añadida');
+        this.mostrarColecciones(); 
       },
       (error) => {
         console.log("Fallo al añadir la colección", error); 
@@ -145,12 +154,16 @@ export class LibrosComponent {
 
 
   eliminarColeccion(index: number) {
-    //Filtramos la coleccion que pasamos como parámetro
-    //var coleccionesModificadas = this.colecciones.filter((elem) => elem.nombre !== this.colecciones.at(index)?.nombre);
-    // localStorage.setItem("coleccionesGuardadas", JSON.stringify(coleccionesModificadas)); 
-    //Eliminamos la coleccion de los libros a los que está asignada
-    this.eliminarAsignacionColeccion(index);
-    this.mostrarColecciones();
+    this._lecturasBBDDService.deleteColeccion(index).subscribe(
+      (resp) => {
+        console.log("Eliminada la coleccion", resp);
+        this.toastr.info("Colección eliminada"); 
+        this.mostrarColecciones(); 
+      },
+      (error) => {
+        console.log(error); 
+      }
+    )
   }
 
 
@@ -171,7 +184,7 @@ export class LibrosComponent {
 
 
   mostrarTodasColecciones() {
-    this.mostrarColecciones();
+    //this.mostrarColecciones();
     this.mostrarLibros(); 
   }
 

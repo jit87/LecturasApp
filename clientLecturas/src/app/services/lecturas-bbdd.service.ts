@@ -58,6 +58,16 @@ export class LecturasBBDDService {
     return this.http.post(this.url + '/colecciones', { coleccion }); 
   }
 
+  getListColecciones(_idUsuario: string): Observable<any> {
+     return this.http.get(this.url + "/colecciones/todas/" + _idUsuario);
+  }
 
+  deleteColeccion(coleccionId: number): Observable<any> {
+    return this.http.delete(this.url +  "/colecciones/" +  coleccionId); 
+  }
+
+
+
+  
 
 }
