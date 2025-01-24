@@ -17,6 +17,7 @@ export class LecturasBBDDService {
   }
 
 
+  //LIBROS
   //Obtenemos las libros guardades en mongoDB
   getListLibros(_idUsuario: string): Observable<any> {
     return this.http.get(this.url + "/libros/todos/" + _idUsuario);
@@ -35,18 +36,15 @@ export class LecturasBBDDService {
     return this.http.delete(this.url + "/libros/" +  libroId); 
   }
 
-
   
   getlibroById(libroId: string) {
     return this.http.get(this.url + "/libros/libro/" + libroId); 
   }
 
 
-
   getlibroByAPIid(APIid: string) {
     return this.http.get(this.url + "/libros/APIid/" + APIid); 
   }
-
 
   
   updatelibro(libro: LibroModel, libroId: String | undefined): Observable<any> {
@@ -55,6 +53,10 @@ export class LecturasBBDDService {
 
 
 
+  //COLECCIONES
+  addColeccion(coleccion: string) {
+    return this.http.post(this.url + '/colecciones', { coleccion }); 
+  }
 
 
 

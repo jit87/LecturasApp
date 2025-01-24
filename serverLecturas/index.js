@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import authRoutes from './routes/authRoutes.js'; 
 import librosRoutes from './routes/librosRoutes.js'; 
+import coleccionesRoutes from './routes/coleccionesRoutes.js';
 
 
 //Crear servidor
@@ -47,6 +48,9 @@ async function main() {
 
         //Registra la ruta de gestión de libros
         app.use('/libros', librosRoutes);
+
+        //Registra la ruta de gestión de colecciones
+        app.use('/colecciones', coleccionesRoutes);
 
 
         // Iniciar servidor en el puerto 4000

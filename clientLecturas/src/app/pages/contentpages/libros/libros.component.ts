@@ -117,7 +117,7 @@ export class LibrosComponent {
         (error) => {
           console.log(error); 
         }
-   );
+    );
   }
 
 
@@ -125,23 +125,29 @@ export class LibrosComponent {
   //COLECCIONES
   //PENDIENTE: actualizar para que se guarden en el Backend
   mostrarColecciones() {
-    var coleccionGuardada = localStorage.getItem("coleccionesGuardadas");
-    //if(coleccionGuardada)
-     // this.colecciones = JSON.parse(coleccionGuardada);
+  
   }
 
-
-  crearColeccion(coleccion: any) {
-    if (coleccion.value=="") {
+  //Añade la colección en la BBDD de mongoDB
+  crearColeccion(coleccion: string) {
+    if (!coleccion || coleccion.trim() === '') {
       return; 
     }
+    this._lecturasBBDDService.addColeccion(coleccion).subscribe(
+      (resp) => {
+        console.log("Colección añadida", resp);
+      },
+      (error) => {
+        console.log("Fallo al añadir la colección", error); 
+      }
+    )
   }
 
 
   eliminarColeccion(index: number) {
     //Filtramos la coleccion que pasamos como parámetro
     //var coleccionesModificadas = this.colecciones.filter((elem) => elem.nombre !== this.colecciones.at(index)?.nombre);
-   // localStorage.setItem("coleccionesGuardadas", JSON.stringify(coleccionesModificadas)); 
+    // localStorage.setItem("coleccionesGuardadas", JSON.stringify(coleccionesModificadas)); 
     //Eliminamos la coleccion de los libros a los que está asignada
     this.eliminarAsignacionColeccion(index);
     this.mostrarColecciones();
