@@ -1,4 +1,5 @@
 import Usuario from "../models/Usuario.js";
+import Libro from "../models/Libro.js";
 
 
 export async function agregarColeccion(req, res) { 
@@ -39,7 +40,7 @@ export async function obtenerColecciones(req, res) {
   
 }
 
-
+//Elimina la colección en la propiedad del usuario
 export async function eliminarColeccion(req, res) {
 
     try {
@@ -49,7 +50,10 @@ export async function eliminarColeccion(req, res) {
         }
         usuario.colecciones.pop(req.params.id);
         await usuario.save();
+        //Eliminamos la asignación de la colección en la tabla de libros
+        //await eliminarColeccionAsignada(usuario.colecciones[req.params.id]);
         res.json({ message: 'Colección eliminada' });
+
         
     } catch (error) {
         console.error(error);
@@ -57,3 +61,20 @@ export async function eliminarColeccion(req, res) {
   }
   
 }
+
+
+
+//Elimina la colección asignada en la tabla de libros
+/*async function eliminarColeccionAsignada(coleccionId) {
+    try {
+        await Libro.updateMany(
+            { coleccion: coleccionId }, 
+            { $unset: { coleccion: "" } } 
+        );
+    } catch (error) {
+        console.error('Error al eliminar la colección de los libros:', error);
+        throw error; 
+    }
+}
+*/
+

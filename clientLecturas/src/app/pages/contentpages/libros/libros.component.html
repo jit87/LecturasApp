@@ -88,7 +88,7 @@
             </table>
             <div *ngIf="mostrarForm"
                 style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.7); z-index: 10; display: flex; justify-content: center; align-items: center;">
-                <app-editar-libro *ngIf="mostrarForm==true" (cerrarFormulario)="cerrarFormulario()" (libroEditado)="recibirConfEditado($event)"></app-editar-libro>
+                <app-editar-libro *ngIf="mostrarForm==true" (cerrarFormulario)="cerrarFormulario()" (libroEditado)="recibirConfEditado($event)" [usuarioID]="usuarioID"></app-editar-libro>
             </div>
         </div>
     </div>

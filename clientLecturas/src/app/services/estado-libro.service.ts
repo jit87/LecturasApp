@@ -49,30 +49,6 @@ export class EstadoLibroService {
   }
 
 
-  //Colecciones
-  getColeccionLibro() {
-    return this.coleccion; 
-  }
-
-  //Cambiar por Id cuando conectemos con el backend
-  getColeccionByName(nombre: string) {
-    var coleccion = "";
-    var libros = JSON.parse(localStorage.getItem("librosGuardados") || '[]');
-    libros.forEach((elem:any) => {
-      if (elem.titulo == nombre) {
-        coleccion = elem.coleccion; 
-      }
-    });
-    return coleccion; 
-  }
-
-
-  //PENDIENTE: Falta incluir las funcionalidades en el Backend
-  getColecciones() {
-      return JSON.parse(localStorage.getItem("coleccionesGuardadas")  || '[]');
-  }
-
-
   estaGuardado(APIid: string) {
     var result = false; 
     this._lecturasBBDDService.getlibroByAPIid(APIid).subscribe(
@@ -87,6 +63,7 @@ export class EstadoLibroService {
     ) 
     return result; 
   }
+
 
 
   //SETTERS

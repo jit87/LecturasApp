@@ -21,12 +21,12 @@
 
                     <div class="mb-3">
                         <label for="coleccion" class="form-label">Colección</label>
-                        <small class="fst-italic" *ngIf="colecciones.length==1" style="font-size: x-small;"> (No hay colecciones creadas)</small>
+                        <small class="fst-italic" *ngIf="colecciones.length==0" style="font-size: x-small;"> (No hay colecciones creadas)</small>
                         <select id="coleccion" 
                                 class="form-select" 
                                 name="coleccion" 
                                 [(ngModel)]="libro.coleccion">
-                            <option value="" disabled selected *ngIf="colecciones.length==1">No hay colecciones creadas</option>
+                            <option value="" disabled selected *ngIf="colecciones.length==0">No hay colecciones creadas</option>
                             <option *ngFor="let coleccion of colecciones" 
                                     [value]="coleccion">{{ coleccion }}</option>
                         </select>

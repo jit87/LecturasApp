@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { LibrosService } from '../../../services/libros.service';
 import { NgForm } from '@angular/forms';
 import { LibroModel } from '../../../models/libro.model';
@@ -20,7 +20,10 @@ export class EditarLibroComponent {
 //Evento para notificar al padre (libros) el cierre del formulario
 @Output() cerrarFormulario = new EventEmitter<void>();
   
+//Recibimos el usuario
+@Input() usuarioID!: string;
 
+  
 libro: LibroModel = new LibroModel();   
 colecciones: any[] = []; 
 
@@ -29,14 +32,29 @@ constructor(private _estadoLibroService: EstadoLibroService, private _lecturasBB
   this.libro._id = this._estadoLibroService.getIdLibro(); 
   this.libro.titulo = this._estadoLibroService.getTituloLibro();
   this.libro.estado = this._estadoLibroService.getEstadoLibro(); 
-  var datos = this._estadoLibroService.getColecciones(); 
-  if (datos) {
-    datos.forEach((element:any) => {
-      this.colecciones.push(element.nombre); 
-    });
-    this.colecciones.push("No asignado"); 
-  }
 }
+
+
+  
+ngOnInit() {
+  this.getColecciones(this.usuarioID); 
+}
+  
+
+  
+getColecciones(usuarioId: string) {
+  this._lecturasBBDDService.getListColecciones(usuarioId).subscribe(
+    (resp) => {
+      console.log("Colecciones obtenidas", resp);
+      this.colecciones = resp; 
+    },
+    (error) => {
+      console.log("Error al obtener colecciones", error); 
+    }
+  )
+}
+
+
 
 //Cambiar el acceso del lS a la BBDD cuando se cree el backend
 guardarCambios(form: NgForm) {  
@@ -53,8 +71,7 @@ guardarCambios(form: NgForm) {
       console.log(error); 
     }
   )
-
-  
+ 
   //Actualizamos el libro y lo notificamos al padre
   this.libroEditado.emit(true); 
   this.cerrar(); 

@@ -122,7 +122,6 @@ export class LibrosComponent {
 
 
   //COLECCIONES
-  //PENDIENTE: actualizar para que se guarden en el Backend
   mostrarColecciones() {
     this._lecturasBBDDService.getListColecciones(this.usuarioID).subscribe(
       (resp) => {
@@ -135,7 +134,7 @@ export class LibrosComponent {
     )
   }
 
-  //Añade la colección en la BBDD de mongoDB
+  //Añade la colección en la BBDD de MongoDB
   crearColeccion(coleccion: string) {
     if (!coleccion || coleccion.trim() === '') {
       return; 
@@ -184,7 +183,7 @@ export class LibrosComponent {
 
 
   mostrarTodasColecciones() {
-    //this.mostrarColecciones();
+    this.mostrarColecciones();
     this.mostrarLibros(); 
   }
 
@@ -198,6 +197,7 @@ export class LibrosComponent {
     this._estadoLibroService.setEstadoLibro(estado); 
     this._estadoLibroService.setColeccionLibro(coleccion);
     this.mostrarLibros(); 
+    this.mostrarColecciones(); 
   }
 
   cerrarFormulario() {
