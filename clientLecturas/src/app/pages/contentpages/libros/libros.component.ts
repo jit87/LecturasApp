@@ -20,6 +20,11 @@ export class LibrosComponent {
   usuarioID: string = ""; 
   colecciones: string[] = [];
   mostrarBoton: boolean = false; 
+  librosPaginados: any[] = [];
+  paginaActual: number = 1;
+  totalPaginas: number = 1; 
+  librosPorPagina: number = 5; 
+  
 
   constructor(private _estadoLibroService: EstadoLibroService,
     private _authService: AuthService,
@@ -49,6 +54,8 @@ export class LibrosComponent {
       (resp: any) => {
         this.librosGuardados = resp;
         this.librosAMostrar = this.librosGuardados;
+        this.totalPaginas = Math.ceil(this.librosAMostrar.length / this.librosPorPagina);
+        this.actualizarPagina();
       },
       (error) => {
         console.log(error); 
@@ -106,17 +113,19 @@ export class LibrosComponent {
 
   //Elimina libro de la BBDD
   eliminarLibro(libroId: string) {
+    if (confirm("¿Está seguro de eliminarlo?")) {
       this._lecturasBBDDService.deletelibro(libroId).subscribe(
         (resp: any) => {
           console.log(resp, "Libro eliminado");
-           this.librosGuardados = this.librosGuardados.filter(libro => libro._id !== libroId);
-           this.librosAMostrar = this.librosGuardados;
-           this.toastr.info('Ha sido eliminado!', 'Eliminado!');
+          this.librosGuardados = this.librosGuardados.filter(libro => libro._id !== libroId);
+          this.librosAMostrar = this.librosGuardados;
+          this.toastr.info('Ha sido eliminado!', 'Eliminado!'); 
         },
         (error) => {
-          console.log(error); 
+          console.log(error);
         }
-    );
+      );
+    }
   }
 
 
@@ -160,16 +169,18 @@ export class LibrosComponent {
 
   eliminarColeccion(index: number, event: Event) {
     event.stopPropagation();
-    this._lecturasBBDDService.deleteColeccion(index).subscribe(
-      (resp) => {
-        console.log("Eliminada la coleccion", resp);
-        this.toastr.info("Colección eliminada"); 
-        this.mostrarColecciones(); 
-      },
-      (error) => {
-        console.log(error); 
-      }
-    )
+    if (confirm("¿Está seguro de eliminarlo?")) {
+      this._lecturasBBDDService.deleteColeccion(index).subscribe(
+        (resp) => {
+          console.log("Eliminada la coleccion", resp);
+          this.toastr.info("Colección eliminada");
+          this.mostrarColecciones();
+        },
+        (error) => {
+          console.log(error);
+        }
+      )
+    }
   }
 
 
@@ -209,6 +220,29 @@ export class LibrosComponent {
    if(confirmado)
     this.mostrarLibros(); 
   }  
+
+
+
+  //PAGINACION
+  actualizarPagina() {
+    const inicio = (this.paginaActual - 1) * this.librosPorPagina;
+    const fin = inicio + this.librosPorPagina;
+    this.librosAMostrar = this.librosGuardados.slice(inicio, fin);
+  }
+
+  paginaAnterior() {
+    if (this.paginaActual > 1) {
+      this.paginaActual--;
+      this.actualizarPagina();
+    }
+  }
+
+  paginaSiguiente() {
+     if (this.paginaActual < this.totalPaginas) {
+      this.paginaActual++;
+      this.actualizarPagina();
+    }
+  }
 
 
 

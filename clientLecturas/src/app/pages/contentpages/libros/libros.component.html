@@ -86,6 +86,19 @@
                     </tr>
                 </tbody>
             </table>
+            <nav aria-label="Paginación de libros">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item" [class.disabled]="paginaActual === 1">
+                        <button class="page-link" (click)="paginaAnterior()">❮ Anterior</button>
+                    </li>
+                    <li class="page-item disabled">
+                        <span class="page-link">Página {{ paginaActual }} de {{ totalPaginas }}</span>
+                    </li>
+                    <li class="page-item" [class.disabled]="paginaActual === totalPaginas">
+                        <button class="page-link" (click)="paginaSiguiente()">Siguiente ❯</button>
+                    </li>
+                </ul>
+            </nav>
             <div *ngIf="mostrarForm"
                 style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.7); z-index: 10; display: flex; justify-content: center; align-items: center;">
                 <app-editar-libro *ngIf="mostrarForm==true" (cerrarFormulario)="cerrarFormulario()" (libroEditado)="recibirConfEditado($event)" [usuarioID]="usuarioID"></app-editar-libro>
