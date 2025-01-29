@@ -40,6 +40,7 @@ export async function obtenerColecciones(req, res) {
   
 }
 
+
 //Elimina la colección en la propiedad del usuario
 export async function eliminarColeccion(req, res) {
 
@@ -48,12 +49,13 @@ export async function eliminarColeccion(req, res) {
         if (!usuario) {
             return res.status(404).json({ message: 'Usuario no encontrado' });
         }
-        usuario.colecciones.pop(req.params.id);
-        await usuario.save();
-        //Eliminamos la asignación de la colección en la tabla de libros
-        //await eliminarColeccionAsignada(usuario.colecciones[req.params.id]);
-        res.json({ message: 'Colección eliminada' });
+        //Eliminamos la asignación de la colección en la tabla de libros en función del usuario
+        await eliminarColeccionAsignada(usuario.colecciones[req.params.id], req._idUsuario);
 
+        //Eliminamos la colección en la propiedad del usuario
+        usuario.colecciones.splice(req.params.id, 1);
+        await usuario.save();
+        res.json({ message: 'Colección eliminada' });
         
     } catch (error) {
         console.error(error);
@@ -65,16 +67,20 @@ export async function eliminarColeccion(req, res) {
 
 
 //Elimina la colección asignada en la tabla de libros
-/*async function eliminarColeccionAsignada(coleccionId) {
+async function eliminarColeccionAsignada(coleccionId, usuarioID) {
+
     try {
         await Libro.updateMany(
-            { coleccion: coleccionId }, 
+            { _idUsuario: usuarioID, coleccion: coleccionId }, 
             { $unset: { coleccion: "" } } 
         );
+        return { success: true, message: 'Libros actualizados' };
+        
     } catch (error) {
         console.error('Error al eliminar la colección de los libros:', error);
         throw error; 
     }
+
 }
-*/
+
 

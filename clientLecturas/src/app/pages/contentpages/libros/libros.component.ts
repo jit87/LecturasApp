@@ -73,12 +73,12 @@ export class LibrosComponent {
         } 
         else if (this.librosGuardados[i].coleccion==termino) { 
           var libroSeleccionado = this.librosGuardados[i];
-         this.librosSeleccionados.push(libroSeleccionado); 
+          this.librosSeleccionados.push(libroSeleccionado); 
           this.libroEncontrado = true; 
         }
         else if (this.librosGuardados[i].estado==termino) {
           var libroSeleccionado = this.librosGuardados[i];
-         this.librosSeleccionados.push(libroSeleccionado); 
+          this.librosSeleccionados.push(libroSeleccionado); 
           this.libroEncontrado = true; 
         }
         else if (this.librosGuardados[i].editor==termino) {
@@ -153,6 +153,7 @@ export class LibrosComponent {
 
 
   eliminarColeccion(index: number) {
+    console.log(index); 
     this._lecturasBBDDService.deleteColeccion(index).subscribe(
       (resp) => {
         console.log("Eliminada la coleccion", resp);
@@ -165,17 +166,6 @@ export class LibrosComponent {
     )
   }
 
-
-  eliminarAsignacionColeccion(index: number) {
-    //var nombreColeccion = this.colecciones.at(index)?.nombre; 
-   /* for (var i = 0; i < this.librosGuardados[0].length; i++) {
-      if (this.librosGuardados[0][i].coleccion== nombreColeccion) {
-        this.librosGuardados[0][i].coleccion = "";
-      }
-    }*/
-   localStorage.setItem("librosGuardados", JSON.stringify(this.librosGuardados[0])); 
-  }
-  
 
   filtrarPorColeccion() {
     //this.buscarLibrosGuardados(coleccion.nombre);  
