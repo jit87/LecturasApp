@@ -22,7 +22,6 @@ export class EstadoLibroService {
    }
 
   //GETTERS
-  //Libro
   getIdLibro(): string {
     return this.id;
   }
@@ -65,9 +64,13 @@ export class EstadoLibroService {
   }
 
 
+  getColeccionById() {
+    return  this.coleccion; 
+  }
+
+  
 
   //SETTERS
-  //Libro
   setIdLibro(id: string): void {
     this.id = id;
   }

@@ -32,6 +32,7 @@ constructor(private _estadoLibroService: EstadoLibroService, private _lecturasBB
   this.libro._id = this._estadoLibroService.getIdLibro(); 
   this.libro.titulo = this._estadoLibroService.getTituloLibro();
   this.libro.estado = this._estadoLibroService.getEstadoLibro(); 
+  this.libro.coleccion = this._estadoLibroService.getColeccionById(); 
 }
 
 
@@ -41,7 +42,7 @@ ngOnInit() {
 }
   
 
-  
+//Colecciones a mostrar en el selector del formulario
 getColecciones(usuarioId: string) {
   this._lecturasBBDDService.getListColecciones(usuarioId).subscribe(
     (resp) => {
