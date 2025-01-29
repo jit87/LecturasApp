@@ -29,12 +29,12 @@
                 </div>
             </div>
             <div id="seccionEtiquetasCol mt-3">
-                 <span class="badge text-bg-primary" style="margin-left: 3px;cursor: pointer;"
-                    *ngFor="let coleccion of colecciones;let i=index">{{ coleccion }}
-                    <i class="fa-solid fa-xmark" style="cursor: pointer;" (click)="eliminarColeccion(i)"></i>
-                </span>
+                 <div class="badge text-bg-primary" style="margin-left: 3px;cursor: pointer;"
+                    *ngFor="let coleccion of colecciones;let i=index" (click)="filtrarPorColeccion(coleccion)">{{ coleccion }}
+                    <i class="fa-solid fa-xmark" style="cursor: pointer;" (click)="eliminarColeccion(i, $event)" *ngIf="mostrarBoton==false"></i>
+            </div>
                 <span class="badge text-bg-secondary" style="margin-left: 3px;cursor: pointer; padding:5px;"
-                    *ngIf="colecciones.length > 1" (click)="mostrarTodasColecciones()"> Mostrar todas
+                    *ngIf="colecciones.length!=0 && mostrarBoton==true" (click)="mostrarTodasColecciones()"> Mostrar todas
                 </span>  
             </div>
         <br>

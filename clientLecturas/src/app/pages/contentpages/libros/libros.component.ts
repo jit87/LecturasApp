@@ -19,7 +19,7 @@ export class LibrosComponent {
   mostrarForm: boolean = false; 
   usuarioID: string = ""; 
   colecciones: string[] = [];
-
+  mostrarBoton: boolean = false; 
 
   constructor(private _estadoLibroService: EstadoLibroService,
     private _authService: AuthService,
@@ -74,7 +74,7 @@ export class LibrosComponent {
         else if (this.librosGuardados[i].coleccion==termino) { 
           var libroSeleccionado = this.librosGuardados[i];
           this.librosSeleccionados.push(libroSeleccionado); 
-          this.libroEncontrado = true; 
+          this.libroEncontrado = true;  
         }
         else if (this.librosGuardados[i].estado==termino) {
           var libroSeleccionado = this.librosGuardados[i];
@@ -89,7 +89,7 @@ export class LibrosComponent {
       }
     }
     this.librosAMostrar = [];
-    this.librosAMostrar= this.librosSeleccionados; 
+    this.librosAMostrar = this.librosSeleccionados; 
   }
 
 
@@ -139,6 +139,12 @@ export class LibrosComponent {
     if (!coleccion || coleccion.trim() === '') {
       return; 
     }
+    for (var i = 0; i <= this.colecciones.length;i++){
+      if (coleccion == this.colecciones[i]) {
+        this.toastr.error('Ya hay una colección con el mismo nombre');
+        return; 
+      }
+    }
     this._lecturasBBDDService.addColeccion(coleccion).subscribe(
       (resp) => {
         console.log("Colección añadida", resp);
@@ -152,8 +158,8 @@ export class LibrosComponent {
   }
 
 
-  eliminarColeccion(index: number) {
-    console.log(index); 
+  eliminarColeccion(index: number, event: Event) {
+    event.stopPropagation();
     this._lecturasBBDDService.deleteColeccion(index).subscribe(
       (resp) => {
         console.log("Eliminada la coleccion", resp);
@@ -167,14 +173,18 @@ export class LibrosComponent {
   }
 
 
-  filtrarPorColeccion() {
-    //this.buscarLibrosGuardados(coleccion.nombre);  
+  filtrarPorColeccion(coleccion: string) {
+    this.buscarLibrosGuardados(coleccion);  
+    this.colecciones = [coleccion]; 
+    this.mostrarBoton = true; 
   }
 
 
   mostrarTodasColecciones() {
     this.mostrarColecciones();
     this.mostrarLibros(); 
+    this.limpiarBuscador(""); 
+    this.mostrarBoton = false;
   }
 
 
@@ -199,6 +209,9 @@ export class LibrosComponent {
    if(confirmado)
     this.mostrarLibros(); 
   }  
+
+
+
 
 
 }
