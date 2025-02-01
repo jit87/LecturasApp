@@ -89,13 +89,19 @@
             <nav aria-label="Paginación de libros">
                 <ul class="pagination justify-content-center">
                     <li class="page-item" [class.disabled]="paginaActual === 1">
-                        <button class="page-link" (click)="paginaAnterior()">❮ Anterior</button>
+                        <button class="page-link" (click)="volverAlInicio()"><i class="fa-solid fa-angles-left"></i></button>
+                    </li>
+                    <li class="page-item" [class.disabled]="paginaActual === 1">
+                        <button class="page-link" (click)="paginaAnterior()"><i class="fa-solid fa-angle-left"></i></button>
                     </li>
                     <li class="page-item disabled">
                         <span class="page-link">Página {{ paginaActual }} de {{ totalPaginas }}</span>
                     </li>
                     <li class="page-item" [class.disabled]="paginaActual === totalPaginas">
-                        <button class="page-link" (click)="paginaSiguiente()">Siguiente ❯</button>
+                        <button class="page-link" (click)="paginaSiguiente()"><i class="fa-solid fa-angle-right"></i></button>
+                    </li>
+                    <li class="page-item" [class.disabled]="paginaActual === totalPaginas">
+                        <button class="page-link" (click)="irAlfinal()"><i class="fa-solid fa-angles-right"></i></button>
                     </li>
                 </ul>
             </nav>

@@ -244,6 +244,20 @@ export class LibrosComponent {
     }
   }
 
+  volverAlInicio() {
+    const inicio = 0;
+    const fin = 0 + this.librosPorPagina;
+    this.paginaActual = 1; 
+    this.librosAMostrar = this.librosGuardados.slice(inicio, fin); 
+  }
+
+
+  irAlfinal() {
+    const inicio = (this.totalPaginas - 1) * this.librosPorPagina;
+    const fin = inicio + this.librosPorPagina;
+    this.paginaActual = this.totalPaginas; 
+    this.librosAMostrar = this.librosGuardados.slice(inicio, fin); 
+  }
 
 
 
