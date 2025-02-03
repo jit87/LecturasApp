@@ -120,6 +120,7 @@ export class LibrosComponent {
           this.librosGuardados = this.librosGuardados.filter(libro => libro._id !== libroId);
           this.librosAMostrar = this.librosGuardados;
           this.toastr.info('Ha sido eliminado!', 'Eliminado!'); 
+          this.actualizarPagina();
         },
         (error) => {
           console.log(error);
@@ -225,6 +226,13 @@ export class LibrosComponent {
 
   //PAGINACION
   actualizarPagina() {
+    this.totalPaginas = Math.ceil(this.librosGuardados.length / this.librosPorPagina);
+    if (this.paginaActual > this.totalPaginas) {
+      this.paginaActual = this.totalPaginas;
+    }
+    if (this.paginaActual < 1) {
+      this.paginaActual = 1;
+    }
     const inicio = (this.paginaActual - 1) * this.librosPorPagina;
     const fin = inicio + this.librosPorPagina;
     this.librosAMostrar = this.librosGuardados.slice(inicio, fin);
@@ -250,7 +258,6 @@ export class LibrosComponent {
     this.paginaActual = 1; 
     this.librosAMostrar = this.librosGuardados.slice(inicio, fin); 
   }
-
 
   irAlfinal() {
     const inicio = (this.totalPaginas - 1) * this.librosPorPagina;
