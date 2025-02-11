@@ -5,6 +5,7 @@ email: string | undefined;
 password: string | undefined;
 nombre: string | undefined; 
 colecciones?: string[];
+imagen?: string | undefined;
     
 constructor(){}
 

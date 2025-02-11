@@ -5,7 +5,8 @@ const userSchema = new mongoose.Schema({
   nombre: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  colecciones:{ type: [String], required: false, default: [] }
+  colecciones: { type: [String], required: false, default: [] },
+  imagen: { type: String, required: false, default: '' }
 });
 
 userSchema.methods.comparePassword = function(password) {

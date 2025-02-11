@@ -13,6 +13,9 @@ export class NavbarComponent {
   autenticado: boolean | any = false;
   isAuthenticated: boolean = false;
 
+  ImagenPerfil: string | undefined; 
+  email: string | null = ""; 
+
   constructor(private router: Router,
               private _authService: AuthService
 
@@ -20,8 +23,26 @@ export class NavbarComponent {
      if(this._authService.isAuthenticated()) {
       this.autenticado = true;
     }
-     this.checkAuthentication();
-   }
+    this.checkAuthentication();
+    this.cargarImagen(); 
+  }
+
+  ngInit() {
+    this.cargarImagen();
+  }
+  
+
+  cargarImagen() {
+    this.email = localStorage.getItem("email"); 
+    this._authService.getUserByEmail(this.email).subscribe(
+      (resp: any) => {
+        this.ImagenPerfil = "";  
+        this.ImagenPerfil= resp.imagen; 
+      }, (err) => {
+        console.log("Error de obtención de datos", err); 
+      })
+  }
+
 
 
   

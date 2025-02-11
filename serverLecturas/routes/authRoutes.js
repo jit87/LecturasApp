@@ -103,7 +103,7 @@ router.get('/usuarioId/:email', async (req, res) => {
 });
 
 //Ruta para modificar contraseña
-/*router.put('/modificar-pass', async (req, res) => {
+router.put('/modificar-pass', async (req, res) => {
 
     try {
         const { email, actualPassword, nuevaPassword } = req.body;
@@ -179,6 +179,31 @@ router.put('/modificar-email', async (req, res) => {
         res.status(500).send(err);
     }
 });
-*/
+
+
+//Ruta para modificar imagen
+router.put('/modificar-imagen', async (req, res) => {
+
+    try {
+        const { email, file } = req.body;
+
+            //Busca al usuario por email
+            const usuario = await Usuario.findOne({ email });
+            if (!usuario) {
+                return res.status(404).json({ message: 'Usuario no encontrado' });
+            }
+
+            //Actualiza la imagen
+            usuario.imagen = file;
+            await usuario.save();
+            console.log("Imagen modificada"); 
+            res.json({ nuevaImagen: file }); 
+    } catch (err) {
+        res.status(500).send(err);
+    }
+});
+
+
+
 
 export default router;

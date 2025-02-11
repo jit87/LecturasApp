@@ -1,32 +1,42 @@
-<!DOCTYPE html>
-<html lang="es">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil de suario</title>
-</head>
 
-<body>
-    <div class="container mt-5">
+
+    <div class="container mt-5 animate__animated animate__fadeIn">
         <!-- Tarjeta del perfil de usuario -->
         <div class="card shadow">
             <div class="card-header bg-primary text-white text-center">
                 <h3>Perfil de Usuario</h3>
             </div>
             <div class="card-body" *ngFor="let elem of DatosPerfil">
+                <br>
                 <div class="row mb-3">
                     <div class="col-4 text-end fw-bold">Imagen de perfil:</div>
-                    <div class="col-8"><img style="width: 50px;height: 50px;"></div>
+                    <div class="col-3"><img style="width: 50px;height: 50px;" src="{{elem.imagen}}"></div>
+                    <div class="col-2">
+                    <i class="fa-regular fa-pen-to-square" (click)="abrirFormularioImg()"></i>
+                    </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-4 text-end fw-bold">Nombre:</div>
-                    <div class="col-8">{{ elem.nombre }}</div>
+                    <div class="col-3">{{ elem.nombre }}</div>
+                    <div class="col-2">
+                        <i class="fa-regular fa-pen-to-square" (click)="abrirFormularioNom()"></i>
+                    </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-4 text-end fw-bold">Email:</div>
-                    <div class="col-8">{{ elem.email }}</div>
+                    <div class="col-3">{{ elem.email }}</div>
+                    <div class="col-2">
+                        <i class="fa-regular fa-pen-to-square"  (click)="abrirFormularioEma()"></i>
+                    </div>
                 </div>
+                    <div class="row mb-3">
+                        <div class="col-4 text-end fw-bold">Contraseña:</div>
+                        <div class="col-3">{{ elem.password }}</div>
+                        <div class="col-2">
+                            <i class="fa-regular fa-pen-to-square" (click)="abrirFormularioPass()"></i>
+                        </div>
+                    </div>
                 <div class="row mb-3">
                     <div class="col-4 text-end fw-bold">ID de Usuario:</div>
                     <div class="col-8">{{ elem._id }}</div>
@@ -34,7 +44,7 @@
                 <!-- Sección opcional: Información adicional -->
                 <div class="row mt-4">
                     <div class="col-12 text-center">
-                        <button class="btn btn-warning btn-sm  me-3">Editar perfil</button>
+                        <!-- <button class="btn btn-warning btn-sm  me-3" (click)="abrirFormularioEma()">Editar perfil</button> -->
                         <button class="btn btn-danger btn-sm">Eliminar cuenta</button>
                     </div>
                 </div>
@@ -42,7 +52,124 @@
         </div>
     </div>
 
-  
-</body>
 
-</html>
+
+    <!--Formularios-->
+    <section class="animate__animated animate__fadeIn">
+        <div class="container">
+            <!-- Fondo oscuro cuando el formulario está abierto -->
+            <div *ngIf="mostrarFormularioPass || mostrarFormularioNom || mostrarFormularioEma || mostrarFormularioImg" class="backdrop"
+                (click)="$event.stopPropagation()"></div>
+
+
+            <!-- Subir imagen -->
+            <div class="card shadow-lg modal-form animate__animated animate__fadeIn" *ngIf="mostrarFormularioImg">
+                <div class="card-header text-center">
+                    <h4 class="mb-0">Subir Imagen</h4>
+                    <button class="btn btn-close" (click)="cerrarFormularioImg()"></button>
+                </div>
+                <div class="card-body">
+                    <form (ngSubmit)="subirImagen()" novalidate>
+                        <div *ngIf="loading" class="text-center">
+                            <i class="fas fa-spinner fa-spin" style="font-size: 24px;"></i>
+                            <p>Subiendo imagen, por favor espera...</p>
+                        </div>
+            
+                        <label for="imagen" class="form-label">Selecciona una imagen</label>
+                        <div class="mb-3">
+                            <input type="file" id="imagen" (change)="onFileSelected($event)" class="form-control" required>
+                        </div>
+            
+                        <!-- Previsualización de la imagen -->
+                        <div *ngIf="imagePreview" class="text-center mt-3">
+                            <p>Vista previa:</p>
+                            <img [src]="imagePreview" alt="Imagen seleccionada" class="img-thumbnail" width="200">
+                        </div>
+                        
+                        <br>
+                        <div class="text-center">
+                            <button class="btn btn-primary" (click)="onUpload()" [disabled]="!file">Subir</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+            <!-- Cambiar contraseña -->
+            <div class="card shadow-lg modal-form animate__animated animate__fadeIn" *ngIf="mostrarFormularioPass">
+                <div class="card-header text-center">
+                    <h4 class="mb-0">Cambiar Contraseña</h4>
+                    <button class="btn btn-close" (click)="cerrarFormularioPass()"></button>
+                </div>
+                <div class="card-body">
+                    <form (ngSubmit)="cambiarPassword()" novalidate>
+                        <div *ngIf="loading" class="text-center">
+                            <i class="fas fa-spinner fa-spin" style="font-size: 24px;"></i>
+                            <p>Modificando la contraseña, por favor espera...</p>
+                        </div> 
+                        <label for="actualPassword" class="form-label">Contraseña actual</label>
+                        <div class="mb-3" class="cajaPass">
+                            <input type="password" id="actualPassword" [(ngModel)]="actualPassword" class="form-control" required>
+                            &nbsp;
+                            <button type="button" (click)="visualizarPasswordActual()" class="btn btn-outline-secondary">
+                                <i class="fa fa-eye" aria-hidden="true" *ngIf="!show"></i>
+                                <i class="fa fa-eye-slash" aria-hidden="true" *ngIf="show"></i>
+                            </button>
+                        </div>
+                        <br>   
+                        <label for="nuevaPassword" class="form-label">Nueva contraseña</label>
+                        <div class="mb-3" class="cajaPass">
+                            <input type="password" id="nuevaPassword" [(ngModel)]="nuevaPassword" class="form-control" required>
+                            &nbsp;
+                            <button type="button" (click)="visualizarPasswordNueva()" class="btn btn-outline-secondary">
+                                <i class="fa fa-eye" aria-hidden="true" *ngIf="!show"></i>
+                                <i class="fa fa-eye-slash" aria-hidden="true" *ngIf="show"></i>
+                            </button>    
+                        </div>
+                        <br>
+                        <div class="text-center">
+                            <button class="btn btn-primary" type="submit">Cambiar contraseña</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Cambiar nombre -->
+            <div class="card shadow-lg modal-form animate__animated animate__fadeIn" *ngIf="mostrarFormularioNom">
+                <div class="card-header text-center">
+                    <h4 class="mb-0">Cambiar Nombre</h4>
+                    <button class="btn btn-close" (click)="cerrarFormularioNom()"></button>
+                </div>
+                <div class="card-body">
+                    <form (ngSubmit)="cambiarNombre()" novalidate>
+                        <div class="mb-3">
+                            <label for="nuevoNombre" class="form-label">Nuevo nombre</label>
+                            <input type="text" id="nuevoNombre" [(ngModel)]="nuevoNombre" class="form-control" required>
+                        </div>
+                        <div class="text-center">
+                            <button class="btn btn-primary" type="submit">Cambiar nombre</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Cambiar email -->
+            <div class="card shadow-lg modal-form animate__animated animate__fadeIn" *ngIf="mostrarFormularioEma">
+                <div class="card-header text-center">
+                    <h4 class="mb-0">Cambiar Email</h4>
+                    <button class="btn btn-close" (click)="cerrarFormularioEma()"></button>
+                </div>
+                <div class="card-body">
+                    <form (ngSubmit)="cambiarEmail()" novalidate>
+                        <div class="mb-3">
+                            <label for="nuevoEmail" class="form-label">Nuevo email</label>
+                            <input type="email" id="nuevoEmail" [(ngModel)]="nuevoEmail" class="form-control" required>
+                        </div>
+                        <div class="text-center">
+                            <button class="btn btn-primary" type="submit">Cambiar email</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>

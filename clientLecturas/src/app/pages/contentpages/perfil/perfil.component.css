@@ -1,0 +1,37 @@
+.fa-regular.fa-pen-to-square {
+    cursor: pointer;
+}
+
+
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1040;
+}
+
+.modal-form {
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1050;
+    width: 30%;
+    background: white;
+    border-radius: 8px;
+}
+
+
+.btn.btn-close {
+    float: right;
+}
+
+
+
+.cajaPass{
+    display: flex;
+    flex-wrap: nowrap;
+}

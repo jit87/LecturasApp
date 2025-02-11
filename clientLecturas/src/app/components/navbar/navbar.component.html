@@ -2,9 +2,10 @@
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
             <div>
-                <img  src="https://icons.iconarchive.com/icons/george-ui/ancient-legend/48/Green-Books-Library-icon.png" width="48" height="48" style="margin-right: 10px;">
+                <img  src="https://icons.iconarchive.com/icons/george-ui/ancient-legend/48/Green-Books-Library-icon.png" width="40" height="40" style="margin-right: 10px;"> 
+                <a class="navbar-brand" href="#">LecturasApp</a>
             </div>
-            <a class="navbar-brand" href="#">LecturasApp</a>
+            
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -19,7 +20,8 @@
                     </li>
                     <li class="nav-item" *ngIf="autenticado">
                         <a class="nav-link" [routerLink]="['/perfil']" routerLinkActive="router-link-active">Perfil</a>
-                    </li>
+                    </li> 
+                    <img class="nav-link" src="{{ImagenPerfil}}" style="width: 45px;height: 45px;border-radius: 4px;" *ngIf="autenticado">
                 </ul>
                 <form class="d-flex" role="search" *ngIf="autenticado">
                     <input #termino class="form-control me-2" type="search" placeholder="Search" aria-label="Buscar">
