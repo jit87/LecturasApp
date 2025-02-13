@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output, signal } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -62,10 +62,6 @@ export class PerfilComponent {
   //FORMULARIOS
   /*Imagen*/
 
-  subirImagen() {
-    
-  }
-
   onFileSelected(event: Event) {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files[0]) {
@@ -91,7 +87,7 @@ export class PerfilComponent {
             this._authService.saveImage(this.email, reader.result as string).subscribe(
               (resp) => {
                 this.toastr.success('Imagen subida');
-                this.cargarDatos(); 
+                this.cargarDatos();
               },
               (err) => console.log("Error al subir la imagen:", err)
             );

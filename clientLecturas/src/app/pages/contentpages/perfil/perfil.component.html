@@ -11,7 +11,8 @@
                 <br>
                 <div class="row mb-3">
                     <div class="col-4 text-end fw-bold">Imagen de perfil:</div>
-                    <div class="col-3"><img style="width: 50px;height: 50px;" src="{{elem.imagen}}"></div>
+                    <div class="col-3" *ngIf="elem.imagen"><img style="width: 50px;height: 50px;" src="{{elem.imagen}}"></div>
+                    <div class="col-3" *ngIf="!elem.imagen"><img style="width: 50px;height: 50px;" src="http://i38.photobucket.com/albums/e149/eloginko/profile_male_large_zpseedb2954.jpg"></div>
                     <div class="col-2">
                     <i class="fa-regular fa-pen-to-square" (click)="abrirFormularioImg()"></i>
                     </div>
@@ -69,7 +70,7 @@
                     <button class="btn btn-close" (click)="cerrarFormularioImg()"></button>
                 </div>
                 <div class="card-body">
-                    <form (ngSubmit)="subirImagen()" novalidate>
+                    <form novalidate>
                         <div *ngIf="loading" class="text-center">
                             <i class="fas fa-spinner fa-spin" style="font-size: 24px;"></i>
                             <p>Subiendo imagen, por favor espera...</p>
