@@ -88,6 +88,8 @@ export class PerfilComponent {
               (resp) => {
                 this.toastr.success('Imagen subida');
                 this.cargarDatos();
+                //Avisamos al servicio que indica al navbar que cambie la imagen de perfil
+                this._authService.actualizarImagenPerfil(reader.result as string);
               },
               (err) => console.log("Error al subir la imagen:", err)
             );

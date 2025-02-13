@@ -18,7 +18,6 @@ export class NavbarComponent {
 
   constructor(private router: Router,
               private _authService: AuthService
-
   ) {
      if(this._authService.isAuthenticated()) {
       this.autenticado = true;
@@ -29,11 +28,12 @@ export class NavbarComponent {
 
 
   ngOnInit() {
-    this.cargarImagen(); 
-  }
-
-  ngOnChanges() {
-    this.cargarImagen(); 
+    this.cargarImagen();
+    this._authService.perfilImagen$.subscribe(
+      (resp) => {
+        this.ImagenPerfil = resp;
+      }
+    )
   }
   
 
@@ -61,11 +61,11 @@ export class NavbarComponent {
 
 
 
-
   ngDoCheck(): void {
     this.checkAuthentication();
   }
 
+  
   checkAuthentication() {
     const token = localStorage.getItem('auth-token');
     this.isAuthenticated = !!token; 
@@ -79,7 +79,6 @@ export class NavbarComponent {
     this._authService.logout(); 
     this.autenticado = false; 
     //Eliminamos los datos guardados en el navegador
-    localStorage.clear();
     localStorage.removeItem("email");
     localStorage.removeItem("auth-token");
   }

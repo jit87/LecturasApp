@@ -20,6 +20,9 @@ export class AuthService {
 
   usuarioID: string = "";
 
+  private perfilImagenSource = new BehaviorSubject<string>('');
+  perfilImagen$ = this.perfilImagenSource.asObservable();
+
   constructor(private http: HttpClient, private router: Router) { }
 
 
@@ -201,6 +204,10 @@ export class AuthService {
   }
 
 
+  //Para que el navbar actualice su imagen
+   actualizarImagenPerfil(nuevaImagen: string) {
+    this.perfilImagenSource.next(nuevaImagen); 
+  }
 
 
 
