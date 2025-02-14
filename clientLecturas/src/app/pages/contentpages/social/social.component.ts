@@ -11,6 +11,7 @@ export class SocialComponent {
 
   posts: any[] = [];
   seguidos: any[] = []; 
+  usuarios: any[] = []; 
 
   constructor(private _lecturasBBDDService: LecturasBBDDService,
               private _authService: AuthService
@@ -25,21 +26,22 @@ export class SocialComponent {
     
   }
 
- getActividad() {
+  getActividad() {
     this._lecturasBBDDService.getListLibrosUsuarios().subscribe(
       (resp) => {
         console.log(resp); 
         this.posts = resp; 
-        var nombre = this.getNombrePorId(resp._idUsuario); 
-        console.log("Nombre de usuario:", nombre); 
+         for (var i = 0; i <= resp.length; i++){
+           this.getDatosPorId(resp[i]._idUsuario); 
+         }
       }
     )
   }
 
-  getNombrePorId(id: any) {
+  getDatosPorId(id: any) {
     this._authService.getUserById(id).subscribe(
       (resp) => {
-        console.log(resp); 
+        this.usuarios.push(resp); 
       },
       (err) => {
         console.log(err); 

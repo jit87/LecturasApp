@@ -204,6 +204,24 @@ router.put('/modificar-imagen', async (req, res) => {
 });
 
 
+//Ruta para obtener el usuario en función del ID (para la parte de Social)
+router.get('/usuarioPorId/:id', async (req, res) => {
+
+    try {
+         
+        const user = await Usuario.findOne({ _id: req.params.id });
+
+        if (!user) {
+        return res.status(404).json({ message: 'Usuario no encontrado' });
+        }
+
+        res.json(user);
+    } catch (error) {
+        res.status(500).json({ message: 'Error en el servidor', error });
+    }
+    
+});
+
 
 
 export default router;

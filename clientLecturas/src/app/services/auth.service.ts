@@ -93,7 +93,7 @@ export class AuthService {
 
 
   getUserById(id: string): Observable<any> {
-    return this.http.get<any>(`${this.authUrl}/${id}`);
+    return this.http.get<any>(`${this.authUrl}/usuarioPorId/${id}`);
   }
 
 
