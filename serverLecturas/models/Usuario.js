@@ -6,7 +6,9 @@ const userSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   colecciones: { type: [String], required: false, default: [] },
-  imagen: { type: String, required: false, default: '' }
+  imagen: { type: String, required: false, default: '' },
+  seguidores: { type: [mongoose.Schema.Types.ObjectId], ref: 'Usuario', default: [] },
+  seguidos: { type: [mongoose.Schema.Types.ObjectId], ref: 'Usuario', default: [] }
 });
 
 userSchema.methods.comparePassword = function(password) {

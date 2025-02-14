@@ -1,0 +1,33 @@
+<div class="container mt-4 animate__animated animate__fadeIn">
+    <div class="row">
+        <div class="col-md-6 offset-md-3" style="margin-top: 2%;">
+            <h2 class="text-center">Actividad</h2>
+            <br>
+            <div *ngFor="let post of posts" class="card mb-3 p-3">
+                <div class="card-body">
+                    <p>El usuario {{ post._idUsuario }} ha actualizado su librería con:</p>
+
+                    <div class="d-flex">
+                        <img [src]="post.imagen || 'default.png'" class="rounded me-3" width="80" height="120">
+                        <div>
+                            <h5 class="mb-1"  [routerLink]="['/info', post._id]" routerLinkActive="router-link-active">{{ post.titulo }}</h5>
+                            <p class="text-muted mb-1">De {{ post.autores }}</p>
+                            <p class="solo-3-lineas mb-2">{{ post.descripcion }}</p>
+                            <app-estado-libro [libro]="post"></app-estado-libro>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3" style="margin-top: 2.5%;">
+            <h5>Amigos</h5>
+            <ul class="list-group">
+                <li *ngFor="let seguido of seguidos" class="list-group-item d-flex align-items-center">
+                    <img [src]="seguido.imagen || 'default.png'" class="rounded-circle me-2" width="40" height="40">
+                    <span>{{ seguido.nombre }}</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

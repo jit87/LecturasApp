@@ -11,6 +11,7 @@ import { InfoComponent } from './contentpages/info/info.component';
 import { EditarLibroComponent } from './contentpages/editar-libro/editar-libro.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EstadoLibroComponent } from "../alonecomponents/estado-libro/estado-libro.component";
+import { SocialComponent } from './contentpages/social/social.component';
 
 
 
@@ -24,7 +25,8 @@ import { EstadoLibroComponent } from "../alonecomponents/estado-libro/estado-lib
     LibrosComponent,
     BuscadorComponent,
     InfoComponent,
-    EditarLibroComponent
+    EditarLibroComponent,
+    SocialComponent
   ],
   imports: [
     CommonModule,
@@ -41,7 +43,8 @@ import { EstadoLibroComponent } from "../alonecomponents/estado-libro/estado-lib
     LibrosComponent,
     BuscadorComponent,
     InfoComponent,
-    EditarLibroComponent
+    EditarLibroComponent,
+    SocialComponent
   ]
 })
 export class PagesModule { }

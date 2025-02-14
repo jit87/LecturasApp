@@ -9,6 +9,7 @@ import { BuscadorComponent } from './pages/contentpages/buscador/buscador.compon
 import { InfoComponent } from './pages/contentpages/info/info.component';
 import { EditarLibroComponent } from './pages/contentpages/editar-libro/editar-libro.component';
 import { AuthGuard } from './guards/auth.guard';
+import { SocialComponent } from './pages/contentpages/social/social.component';
 
 
 export const APP_ROUTES: Routes = [
@@ -19,6 +20,7 @@ export const APP_ROUTES: Routes = [
     { path: 'libros', component: LibrosComponent, canActivate: [AuthGuard] },
     { path: 'buscador/:termino', component: BuscadorComponent, canActivate: [AuthGuard] },
     { path: 'info/:id', component: InfoComponent, canActivate: [AuthGuard] }, 
+    { path: 'social', component: SocialComponent, canActivate: [AuthGuard] }, 
     { path: '**', pathMatch:'full', redirectTo:'home'}
 ];
 

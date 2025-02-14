@@ -67,6 +67,11 @@ export class LecturasBBDDService {
   }
 
 
+  //ACTIVIDAD GENERAL
+  getListLibrosUsuarios(): Observable<any> {
+    return this.http.get(this.url + "/libros/todos/");
+  }
+
 
   
 

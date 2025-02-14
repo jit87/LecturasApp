@@ -6,6 +6,8 @@ password: string | undefined;
 nombre: string | undefined; 
 colecciones?: string[];
 imagen?: string | undefined;
+seguidores?: string[];
+seguidos?: string[];
     
 constructor(){}
 

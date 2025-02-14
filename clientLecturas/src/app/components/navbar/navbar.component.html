@@ -16,6 +16,9 @@
                         <a class="nav-link" [routerLink]="['/home']"  routerLinkActive="router-link-active">Home</a>
                     </li>
                     <li class="nav-item" *ngIf="autenticado">
+                        <a class="nav-link" [routerLink]="['/social']" routerLinkActive="router-link-active">Social</a>
+                    </li>
+                    <li class="nav-item" *ngIf="autenticado">
                         <a class="nav-link" [routerLink]="['/libros']" routerLinkActive="router-link-active">Mis libros</a>
                     </li>
                     <li class="nav-item" *ngIf="autenticado">

@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { agregarLibro, obtenerLibros, eliminarLibro, obtenerLibro, obtenerLibroAPIid, actualizarLibro } from '../controllers/librosController.js';
+import { agregarLibro, obtenerLibros, eliminarLibro, obtenerLibro, obtenerLibroAPIid, actualizarLibro, obtenerTodosLibros } from '../controllers/librosController.js';
 import authenticate  from '../middlewares/authenticate.js'; 
 
 const router = Router();
@@ -31,6 +31,9 @@ router.get('/libro/:id', obtenerLibro);
 //Ruta para obtener un libro por su APIid
 router.get('/APIid/:APIid', obtenerLibroAPIid); 
 
+
+//Ruta para obtener todos los libros
+router.get('/todos', obtenerTodosLibros);
 
 
 export default router;
