@@ -224,4 +224,5 @@ router.get('/usuarioPorId/:id', async (req, res) => {
 
 
 
+
 export default router;

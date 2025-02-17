@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, Observable, tap, throwError } from 'rxjs';
 import { LibroModel } from '../models/libro.model';
 import { AuthService } from './auth.service';
 
@@ -67,11 +67,27 @@ export class LecturasBBDDService {
   }
 
 
-  //ACTIVIDAD GENERAL
+  //ACTIVIDAD GENERAL/SOCIAL
   getListLibrosUsuarios(): Observable<any> {
     return this.http.get(this.url + "/libros/todos/");
   }
 
+
+  setSeguido(email: any, idSeguido: any): Observable<any> {
+     return this.http.post(this.url + "/agregar-seguido", {
+      email,
+      idSeguido
+    }).pipe(
+      tap(response => {
+        console.log('Seguido añadido', response);
+      }),
+      catchError(error => {
+        console.error('Error', error);
+        return throwError(error);
+      })
+    );
+  }
+  
 
   
 

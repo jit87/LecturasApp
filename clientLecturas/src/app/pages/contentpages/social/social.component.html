@@ -7,6 +7,10 @@
             <div *ngFor="let post of posts; let i = index" class="card mb-3 p-3">
                 <div class="card-body">
                     <img [src]="usuarios[i].imagen || 'default.png'" class="rounded-circle me-3" width="50" height="50"><b style="font-size: large;">{{ usuarios[i].nombre }}</b>
+                    &nbsp;&nbsp;&nbsp;<button class="btn btn-outline-primary btn-sm" 
+                                              type="button" 
+                                              (click)="seguir(usuarios[i]._id, this.emailLogueado)" 
+                                              *ngIf="usuarios[i]._id!=idLogueado"><i class="fa-solid fa-user-plus"></i></button>
                     <br>
                     <hr/>
                     <p>El usuario <b>{{ usuarios[i].nombre }}</b> ha actualizado su librería con el libro:</p>
