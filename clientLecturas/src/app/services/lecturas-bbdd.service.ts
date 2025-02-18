@@ -73,19 +73,8 @@ export class LecturasBBDDService {
   }
 
 
-  setSeguido(email: any, idSeguido: any): Observable<any> {
-     return this.http.post(this.url + "/agregar-seguido", {
-      email,
-      idSeguido
-    }).pipe(
-      tap(response => {
-        console.log('Seguido añadido', response);
-      }),
-      catchError(error => {
-        console.error('Error', error);
-        return throwError(error);
-      })
-    );
+  setSeguido(idSeguido: string): Observable<any> {
+    return this.http.post(this.url + "/seguidos", { idSeguido }); 
   }
   
 

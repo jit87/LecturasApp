@@ -10,7 +10,7 @@
                         <b style="font-size: large;"> {{ post.nombreUsuario }}</b>
                         &nbsp;&nbsp;&nbsp;<button class="btn btn-outline-primary btn-sm" 
                                                 type="button" 
-                                                (click)="seguir(post._idUsuario, this.emailLogueado)" 
+                                                (click)="seguir(post._idUsuario)" 
                                                 *ngIf="post._idUsuario!=idLogueado"><i class="fa-solid fa-user-plus"></i></button>
                         <br>
                         <hr/>

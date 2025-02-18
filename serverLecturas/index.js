@@ -4,6 +4,7 @@ import cors from 'cors';
 import authRoutes from './routes/authRoutes.js'; 
 import librosRoutes from './routes/librosRoutes.js'; 
 import coleccionesRoutes from './routes/coleccionesRoutes.js';
+import seguidosRoutes from './routes/seguidosRoutes.js';
 
 
 //Crear servidor
@@ -12,7 +13,7 @@ const app = express();
 //Habilitar middleware para parsear JSON
 app.use(express.json());
 
-//Configurar CORS
+//Configuración de CORS
 const corsOptions = {
   origin: 'http://localhost:4200',
   methods: 'GET,POST,PUT,DELETE',
@@ -21,7 +22,7 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-// URI de conexión
+//URI de conexión
 const uri = "mongodb://localhost:27017/LecturasApp";
 
 async function main() {
@@ -44,6 +45,9 @@ async function main() {
 
         //Registra la ruta de gestión de colecciones
         app.use('/colecciones', coleccionesRoutes);
+
+        //Registra la ruta de gestión de seguidos
+        app.use('/seguidos', seguidosRoutes);
 
         // Iniciar servidor en el puerto 4000
         app.listen(4000, () => {

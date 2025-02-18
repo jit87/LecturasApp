@@ -8,7 +8,7 @@ const router = Router();
 router.use(authenticate); 
 
 //Ruta para añadir un seguido
-router.post('/agregar-seguido', agregarSeguido); 
+router.post('/', agregarSeguido); 
 
 
 export default router;

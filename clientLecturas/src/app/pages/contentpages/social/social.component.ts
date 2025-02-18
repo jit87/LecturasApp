@@ -40,8 +40,8 @@ export class SocialComponent {
   }
 
 
-  seguir(id: any, email: any) {
-    this._lecturasBBDDService.setSeguido(id, email).subscribe(
+  seguir(idSeguido: any) {
+    this._lecturasBBDDService.setSeguido(idSeguido).subscribe(
       (resp) => {
         console.log("Añadido", resp);
       },
