@@ -3,25 +3,27 @@
         <div class="col-md-6 offset-md-3" style="margin-top: 2%;">
             <h2 class="text-center">Actividad</h2>
             <br>
+            <div class="caja-muro"> 
+                <div *ngFor="let post of posts; let i = index" class="card mb-3 p-3">
+                    <div class="card-body">
+                        <img [src]="post.imagenUsuario"  class="rounded-circle me-3" width="50" height="50">
+                        <b style="font-size: large;"> {{ post.nombreUsuario }}</b>
+                        &nbsp;&nbsp;&nbsp;<button class="btn btn-outline-primary btn-sm" 
+                                                type="button" 
+                                                (click)="seguir(post._idUsuario, this.emailLogueado)" 
+                                                *ngIf="post._idUsuario!=idLogueado"><i class="fa-solid fa-user-plus"></i></button>
+                        <br>
+                        <hr/>
+                        <p>El usuario <b>{{ post.nombreUsuario }}</b> ha actualizado su librería con el libro:</p>
 
-            <div *ngFor="let post of posts; let i = index" class="card mb-3 p-3">
-                <div class="card-body">
-                    <img [src]="usuarios[i].imagen || 'default.png'" class="rounded-circle me-3" width="50" height="50"><b style="font-size: large;">{{ usuarios[i].nombre }}</b>
-                    &nbsp;&nbsp;&nbsp;<button class="btn btn-outline-primary btn-sm" 
-                                              type="button" 
-                                              (click)="seguir(usuarios[i]._id, this.emailLogueado)" 
-                                              *ngIf="usuarios[i]._id!=idLogueado"><i class="fa-solid fa-user-plus"></i></button>
-                    <br>
-                    <hr/>
-                    <p>El usuario <b>{{ usuarios[i].nombre }}</b> ha actualizado su librería con el libro:</p>
-
-                    <div class="d-flex">
-                        <img [src]="post.imagen || 'default.png'" class="rounded me-3" width="124" height="164">
-                        <div>
-                            <h5 class="mb-1"  [routerLink]="['/info', post._id]" routerLinkActive="router-link-active">{{ post.titulo }}</h5>
-                            <p class="text-muted mb-1">De {{ post.autores }}</p>
-                            <p class="solo-3-lineas mb-2">{{ post.descripcion }}</p>
-                            <app-estado-libro [libro]="post"></app-estado-libro>
+                        <div class="d-flex">
+                            <img [src]="post.imagen || 'default.png'" class="rounded me-3" width="124" height="164">
+                            <div>
+                                <h5 class="mb-1"  [routerLink]="['/info', post.APIid]" routerLinkActive="router-link-active">{{ post.titulo }}</h5>
+                                <p class="text-muted mb-1">De {{ post.autores }}</p>
+                                <p class="solo-3-lineas mb-2">{{ post.descripcion }}</p>
+                                <app-estado-libro [libro]="post"></app-estado-libro>
+                            </div>
                         </div>
                     </div>
                 </div>

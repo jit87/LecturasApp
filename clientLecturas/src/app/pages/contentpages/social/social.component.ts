@@ -11,14 +11,17 @@ export class SocialComponent {
 
   posts: any[] = [];
   seguidos: any[] = []; 
-  usuarios: any[] = []; 
   idLogueado: string = ""; 
   emailLogueado: string = ""; 
+
+
 
   constructor(private _lecturasBBDDService: LecturasBBDDService,
               private _authService: AuthService
   ) {
   }
+
+
 
   ngOnInit() {
     this.getActividad(); 
@@ -26,10 +29,9 @@ export class SocialComponent {
     const email = localStorage.getItem("email");
     this._authService.getIdByEmail(email).subscribe(
       (resp) => {
-        console.log(resp); 
         this.idLogueado = resp; 
         if(email)
-        this.emailLogueado = email; 
+          this.emailLogueado = email; 
       },
       (err) => {
         console.log(err); 
@@ -51,27 +53,49 @@ export class SocialComponent {
 
 
 
-  getActividad() {
-    this._lecturasBBDDService.getListLibrosUsuarios().subscribe(
-      (resp) => {
-        console.log(resp); 
-        this.posts = resp; 
-         for (var i = 0; i <= resp.length; i++){
-           this.getDatosPorId(resp[i]._idUsuario); 
-         }
-      }
-    )
-  }
+getActividad() {
+  this.posts = []; 
+  this._lecturasBBDDService.getListLibrosUsuarios().subscribe(
+    (resp) => { 
+      resp.forEach((libro: any) => {
+        let post = {
+          APIid: libro.APIid,
+          _id: libro._id,
+          _idUsuario: libro._idUsuario,
+          nombreUsuario: "", 
+          imagenUsuario: "",
+          titulo: libro.titulo,
+          autores: libro.autores,
+          editor: libro.editor,
+          descripcion: libro.descripcion || "",
+          imagen: libro.imagen || "default.png"
+        };
+        this._authService.getUserById(libro._idUsuario).subscribe(
+          (usuario: any) => {
+            post.nombreUsuario = usuario.nombre;  
+            post.imagenUsuario = usuario.imagen; 
+          },
+          (err) => {
+            console.log(err);
+          }
+        );
+        this.posts.push(post);
+      });
+    },
+    (err) => {
+      console.log(err);
+    }
+  );
+  console.log(this.posts); 
+}
 
-  getDatosPorId(id: any) {
-    this._authService.getUserById(id).subscribe(
-      (resp) => {
-        this.usuarios.push(resp); 
-      },
-      (err) => {
-        console.log(err); 
-      }
-    )
-  }
+
+
+
+
+
+
+
+
 
 }
