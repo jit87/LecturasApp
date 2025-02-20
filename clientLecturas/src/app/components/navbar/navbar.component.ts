@@ -15,6 +15,7 @@ export class NavbarComponent {
 
   ImagenPerfil: string | undefined | any; 
   email: string | null = "";  
+  idLogueado: string = ""; 
 
   constructor(private router: Router,
               private _authService: AuthService
@@ -43,6 +44,7 @@ export class NavbarComponent {
       (resp: any) => {
         this.ImagenPerfil = "";  
         this.ImagenPerfil = resp.imagen; 
+        this.idLogueado = resp._id; 
         if (!resp.imagen) {
           this.ImagenPerfil = "http://i38.photobucket.com/albums/e149/eloginko/profile_male_large_zpseedb2954.jpg"; 
         }

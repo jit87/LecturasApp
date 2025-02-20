@@ -20,11 +20,13 @@ h2 {
 
 
 .navbar-container {
-    background-color: rgb(175, 230, 248);
+   /* background-color: rgb(175, 230, 248);*/
+    background-color: aquamarine; 
 }
 
 .navbar {
-    background-color: rgb(175, 230, 248) !important;
+    /* background-color: rgb(175, 230, 248) !important; */
+    background-color: aquamarine !important;
     margin-left: 16%;
     margin-right: 16%;
 }

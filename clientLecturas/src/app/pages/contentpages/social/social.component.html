@@ -3,10 +3,10 @@
         <div class="col-md-6 offset-md-3" style="margin-top: 2%;">
             <h2 class="text-center">Actividad</h2>
             <br>
-            <div class="caja-muro"> 
+            <div class="caja-muro mt-2"> 
                 <div *ngFor="let post of posts; let i = index" class="card mb-3 p-3">
                     <div class="card-body">
-                        <img [src]="post.imagenUsuario"  class="rounded-circle me-3" width="50" height="50">
+                        <img class="imagenUsuario" [src]="post.imagenUsuario"  class="rounded-circle me-3" width="50" height="50">
                         <b style="font-size: large;"> {{ post.nombreUsuario }}</b>
                         &nbsp;&nbsp;&nbsp;<button class="btn btn-outline-primary btn-sm" 
                                                 type="button" 
@@ -19,7 +19,7 @@
                         <div class="d-flex">
                             <img [src]="post.imagen || 'default.png'" class="rounded me-3" width="124" height="164">
                             <div>
-                                <h5 class="mb-1"  [routerLink]="['/info', post.APIid]" routerLinkActive="router-link-active">{{ post.titulo }}</h5>
+                                <h5 class="mb-1"  [routerLink]="['/info', post.APIid]" routerLinkActive="router-link-active" style="cursor: pointer;">{{ post.titulo }}</h5>
                                 <p class="text-muted mb-1">De {{ post.autores }}</p>
                                 <p class="solo-3-lineas mb-2">{{ post.descripcion }}</p>
                                 <app-estado-libro [libro]="post"></app-estado-libro>
@@ -32,10 +32,10 @@
 
         <div class="col-md-3" style="margin-top: 2.5%;">
             <h5>Seguidos</h5>
-            <ul class="list-group">
-                <li *ngFor="let seguido of seguidos" class="list-group-item d-flex align-items-center">
+            <ul class="list-group mt-5">
+                <li *ngFor="let seguido of seguidos" class="list-group-item d-flex align-items-center"  [routerLink]="['/perfilpublico', seguido._id]">
                     <img [src]="seguido.imagen || 'default.png'" class="rounded-circle me-2" width="40" height="40">
-                    <span>{{ seguido.nombre }}</span>
+                    <span><b>{{ seguido.nombre }}</b></span>
                 </li>
             </ul>
         </div>

@@ -4,3 +4,7 @@
     text-overflow: ellipsis;
 }
 
+.list-group-item:hover{
+    background-color: aquamarine;
+    cursor: pointer;
+}

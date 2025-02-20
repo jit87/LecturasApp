@@ -79,7 +79,7 @@ constructor(
     }
 
 
-   regresar() {
+  regresar() {
     this.location.back(); 
   }
 

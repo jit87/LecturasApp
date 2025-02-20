@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { agregarSeguido } from '../controllers/seguidosController.js';
+import { agregarSeguido, obtenerSeguidos } from '../controllers/seguidosController.js';
 import authenticate  from '../middlewares/authenticate.js'; 
 
 const router = Router();
@@ -9,6 +9,9 @@ router.use(authenticate);
 
 //Ruta para añadir un seguido
 router.post('/', agregarSeguido); 
+
+//Ruta para obtener todos los seguidos por el usuario
+router.get('/todos', obtenerSeguidos); 
 
 
 export default router;

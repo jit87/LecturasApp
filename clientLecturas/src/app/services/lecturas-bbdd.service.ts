@@ -76,6 +76,10 @@ export class LecturasBBDDService {
   setSeguido(idSeguido: string): Observable<any> {
     return this.http.post(this.url + "/seguidos", { idSeguido }); 
   }
+
+  getSeguidos(): Observable<any> {
+      return this.http.get(this.url + "/seguidos/todos"); 
+  }
   
 
   

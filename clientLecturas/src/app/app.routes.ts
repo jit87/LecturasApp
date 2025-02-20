@@ -10,6 +10,7 @@ import { InfoComponent } from './pages/contentpages/info/info.component';
 import { EditarLibroComponent } from './pages/contentpages/editar-libro/editar-libro.component';
 import { AuthGuard } from './guards/auth.guard';
 import { SocialComponent } from './pages/contentpages/social/social.component';
+import { PublicoperfilComponent } from './pages/contentpages/publicoperfil/publicoperfil.component';
 
 
 export const APP_ROUTES: Routes = [
@@ -21,6 +22,7 @@ export const APP_ROUTES: Routes = [
     { path: 'buscador/:termino', component: BuscadorComponent, canActivate: [AuthGuard] },
     { path: 'info/:id', component: InfoComponent, canActivate: [AuthGuard] }, 
     { path: 'social', component: SocialComponent, canActivate: [AuthGuard] }, 
+    { path: 'perfilpublico/:id', component: PublicoperfilComponent, canActivate: [AuthGuard] },
     { path: '**', pathMatch:'full', redirectTo:'home'}
 ];
 

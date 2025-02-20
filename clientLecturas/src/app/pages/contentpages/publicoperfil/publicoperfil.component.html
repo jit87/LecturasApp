@@ -1,0 +1,39 @@
+<div class="container mt-5 animate__animated animate__fadeIn" *ngIf="DatosPerfil.length > 0">
+    <button class="btn btn-outline-secondary mt-3" (click)="regresar()">Volver</button>
+    <div class="card mx-auto shadow-lg" style="max-width: 1000px;">
+        <div class="card-body" *ngFor="let usuario of DatosPerfil">
+            <div class="row">
+                <div class="col-md-3 text-center">
+                    <img [src]="usuario.imagen || 'https://via.placeholder.com/150'" class="rounded-circle img-fluid"
+                        alt="Foto de perfil" height="150" width="150">
+                    <button class="btn btn-primary btn-sm mt-3">Agregar Amigo</button>
+                </div>
+                <div class="col-md-6">
+                    <h3 class="card-title">{{ usuario.nombre }}</h3>
+                    <p class="text-muted">{{ usuario.usuario }}</p>
+                    <p>{{ usuario.biografia }}</p>
+                    <h5 class="mt-4">Seguidores ({{ usuario.seguidores.length }})</h5>
+                    <h5 class="mt-4">Seguidos ({{ usuario.seguidos.length }})</h5>
+                    <h5 class="mt-4">Libros Leídos</h5>
+                    <ul class="list-group">
+                        <!-- <li class="list-group-item" *ngFor="let libro of usuario.librosLeidos">{{ libro }}</li> -->
+                    </ul>
+                    <h5 class="mt-4">Pendientes por Leer</h5>
+                    <ul class="list-group">
+                        <!-- <li class="list-group-item" *ngFor="let libro of usuario.librosPendientes">{{ libro }}</li> -->
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5 class="mt-4">Lista de Seguidores</h5>
+                    <ul class="list-group">
+                        <li *ngFor="let seguido of seguidos" class="list-group-item d-flex align-items-center"
+                            [routerLink]="['/perfilpublico', seguido]">
+                            <img [src]="seguido|| 'default.png'" class="rounded-circle me-2" width="40" height="40">
+                            <span><b>{{ seguido }}</b></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
