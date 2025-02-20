@@ -8,3 +8,19 @@
     background-color: aquamarine;
     cursor: pointer;
 }
+
+.nombre:hover{
+    text-decoration: underline;
+}
+
+.titulo:hover {
+    text-decoration: underline;
+}
+
+.infoSeguidores{
+    background-color: lightsalmon;
+    border-radius: 5px;
+    border: 1px solid rebeccapurple;
+    text-align: center;
+    font-weight: 600;
+}

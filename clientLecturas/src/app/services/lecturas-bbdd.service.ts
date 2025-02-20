@@ -80,6 +80,10 @@ export class LecturasBBDDService {
   getSeguidos(): Observable<any> {
       return this.http.get(this.url + "/seguidos/todos"); 
   }
+
+   getSeguidores(): Observable<any> {
+      return this.http.get(this.url + "/seguidos/seguidores"); 
+  }
   
 
   

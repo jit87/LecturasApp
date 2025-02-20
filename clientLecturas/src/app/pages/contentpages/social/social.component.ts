@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { LecturasBBDDService } from '../../../services/lecturas-bbdd.service';
 import { AuthService } from '../../../services/auth.service';
 import { UsuarioModel } from '../../../models/usuario.model';
+import e from 'cors';
 
 @Component({
   selector: 'app-social',
@@ -12,8 +13,10 @@ export class SocialComponent {
 
   posts: any[] = [];
   seguidos: any[] = []; 
+  seguidores: any[] = [];
   idLogueado: string = ""; 
   emailLogueado: string = ""; 
+  mostrarBotonAgregar: number = -1; 
 
 
 
@@ -25,8 +28,8 @@ export class SocialComponent {
 
 
   ngOnInit() {
-    this.getActividad(); 
     this.getSeguidos(); 
+    this.getActividad(); 
     //Obtenemos el id logueado para ocultar el boton de seguir si coincide consigo mismo
     const email = localStorage.getItem("email");
     this._authService.getIdByEmail(email).subscribe(
@@ -39,18 +42,6 @@ export class SocialComponent {
         console.log(err); 
       }
     ) 
-  }
-
-
-  seguir(idSeguido: any) {
-    this._lecturasBBDDService.setSeguido(idSeguido).subscribe(
-      (resp) => {
-        console.log("Añadido", resp);
-      },
-      (err) => {
-        console.log(err); 
-      }
-    )   
   }
 
 
@@ -70,12 +61,12 @@ export class SocialComponent {
             autores: libro.autores,
             editor: libro.editor,
             descripcion: libro.descripcion || "",
-            imagen: libro.imagen || "default.png"
+            imagen: libro.imagen || "default.png",
           };
           this._authService.getUserById(libro._idUsuario).subscribe(
             (usuario: any) => {
               post.nombreUsuario = usuario.nombre;  
-              post.imagenUsuario = usuario.imagen; 
+              post.imagenUsuario = usuario.imagen;  
             },
             (err) => {
               console.log(err);
@@ -99,8 +90,9 @@ export class SocialComponent {
         resp.forEach((id:any) => {
            this._authService.getUserById(id).subscribe(
              (usuario: any) => {
-               if(usuario!=undefined)
-                this.seguidos.push(usuario); 
+               if (usuario != undefined) {
+                this.seguidos.push(usuario);
+               }
               }
             )
         });
@@ -111,6 +103,26 @@ export class SocialComponent {
     )
   }
 
+
+  getSeguidores() {
+    this.seguidores = []; 
+    this._lecturasBBDDService.getSeguidores().subscribe(
+      (resp) => {
+        resp.forEach((id:any) => {
+           this._authService.getUserById(id).subscribe(
+             (usuario: any) => {
+               if (usuario != undefined) {
+                this.seguidores.push(usuario);
+               }
+              }
+            )
+        });
+      },
+      (err) => {
+        console.log(err); 
+      }
+    )
+  }
 
 
 

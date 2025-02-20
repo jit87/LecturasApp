@@ -7,19 +7,14 @@
                 <div *ngFor="let post of posts; let i = index" class="card mb-3 p-3">
                     <div class="card-body">
                         <img class="imagenUsuario" [src]="post.imagenUsuario"  class="rounded-circle me-3" width="50" height="50">
-                        <b style="font-size: large;"> {{ post.nombreUsuario }}</b>
-                        &nbsp;&nbsp;&nbsp;<button class="btn btn-outline-primary btn-sm" 
-                                                type="button" 
-                                                (click)="seguir(post._idUsuario)" 
-                                                *ngIf="post._idUsuario!=idLogueado"><i class="fa-solid fa-user-plus"></i></button>
+                        <b style="font-size: large;cursor: pointer;" [routerLink]="['/perfilpublico', post._idUsuario]" class="nombre">{{ post.nombreUsuario }}</b>
+                         &nbsp;ha actualizado su biblioteca con el libro:
                         <br>
-                        <hr/>
-                        <p>El usuario <b>{{ post.nombreUsuario }}</b> ha actualizado su librería con el libro:</p>
-
-                        <div class="d-flex">
+                        <hr />
+                        <div class="d-flex" style="padding: 2%;">
                             <img [src]="post.imagen || 'default.png'" class="rounded me-3" width="124" height="164">
                             <div>
-                                <h5 class="mb-1"  [routerLink]="['/info', post.APIid]" routerLinkActive="router-link-active" style="cursor: pointer;">{{ post.titulo }}</h5>
+                                <h5 class="mb-1"  [routerLink]="['/info', post.APIid]" routerLinkActive="router-link-active" style="cursor: pointer;" class="titulo">{{ post.titulo }}</h5>
                                 <p class="text-muted mb-1">De {{ post.autores }}</p>
                                 <p class="solo-3-lineas mb-2">{{ post.descripcion }}</p>
                                 <app-estado-libro [libro]="post"></app-estado-libro>
@@ -38,6 +33,20 @@
                     <span><b>{{ seguido.nombre }}</b></span>
                 </li>
             </ul>
+            <br>
+            <br>
+            <br>
+            <h5>Seguidores</h5>
+            <ul class="list-group mt-5">
+                <li *ngFor="let seguidor of seguidores" class="list-group-item d-flex align-items-center"
+                    [routerLink]="['/perfilpublico', seguidor._id]">
+                    <img [src]="seguidor.imagen || 'default.png'" class="rounded-circle me-2" width="40" height="40">
+                    <span><b>{{ seguidor.nombre }}</b></span>
+                </li>
+            </ul>
+            <p class="infoSeguidores" *ngIf="seguidores.length==0" style="padding: 2%;">No hay seguidores</p>
         </div>
+        
+        
     </div>
 </div>
