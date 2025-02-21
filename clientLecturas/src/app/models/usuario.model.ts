@@ -8,6 +8,7 @@ colecciones?: string[];
 imagen?: string | undefined;
 seguidores?: string[];
 seguidos?: string[];
+bio?: string | undefined;
     
 constructor(){}
 

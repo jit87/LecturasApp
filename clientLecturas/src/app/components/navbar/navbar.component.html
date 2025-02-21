@@ -24,7 +24,7 @@
                     <li class="nav-item" *ngIf="autenticado">
                         <a class="nav-link" [routerLink]="['/perfil']" routerLinkActive="router-link-active">Perfil</a>
                     </li> 
-                    <img class="nav-link" src="{{ ImagenPerfil }}"  [routerLink]="['/perfilpublico', this.idLogueado]" style="width: 45px;height: 45px;border-radius: 50px;cursor: pointer;" *ngIf="autenticado">
+                    <img class="nav-link" src="{{ ImagenPerfil }}" routerLinkActive="perfil-active"  [routerLink]="['/perfilpublico', this.idLogueado]" style="width: 45px;height: 45px;border-radius: 50px;cursor: pointer;" *ngIf="autenticado">
                 </ul>
                 <form class="d-flex" role="search" *ngIf="autenticado">
                     <input #termino class="form-control me-2" type="search" placeholder="Search" aria-label="Buscar">

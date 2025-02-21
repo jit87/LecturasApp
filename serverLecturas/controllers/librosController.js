@@ -1,4 +1,5 @@
 import Libro from "../models/Libro.js";
+import Usuario from "../models/Usuario.js";
 
 
 
@@ -158,12 +159,35 @@ export async function obtenerLibroAPIid(req, res) {
 //Para la parte de Social de la app
 export async function obtenerTodosLibros(req, res) {
 
-  try {
+    try {
+        const usuarioId = req._idUsuario;
+
+        //Obtenemos los seguidos por el usuario logueado
+        const data = await Usuario.findById(usuarioId).select("seguidos");
+        const seguidos = data ? data.seguidos : [];
+
+        //Libros de los seguidos
+        const librosSeguidos = await Libro.find({ _idUsuario: { $in: seguidos } })
+            .sort({ updatedAt: -1 })
+            .limit(8);
+
+        //Si no hay suficientes libros de seguidos completamos con otros libros recientes
+        const librosResto = await Libro.find({ _idUsuario: { $nin: seguidos } })
+            .sort({ updatedAt: -1 })
+            .limit(8 - librosSeguidos.length); 
+
+        // Unir ambas listas
+        const libros = [...librosSeguidos, ...librosResto];
+
+        res.json(libros);
+
+      /*
       const libros = await Libro.find({})
         .sort({ createdAt: -1,  updatedAt: -1 })
         .limit(8); 
 
-        res.json(libros);
+        res.json(libros);*/
+      
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: "Error al obtener los libros recientes" });

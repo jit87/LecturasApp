@@ -42,6 +42,7 @@ export class SocialComponent {
         console.log(err); 
       }
     ) 
+    this.getSeguidores(); 
   }
 
 
@@ -111,8 +112,10 @@ export class SocialComponent {
         resp.forEach((id:any) => {
            this._authService.getUserById(id).subscribe(
              (usuario: any) => {
+               console.log("Usuario:",usuario); 
                if (usuario != undefined) {
-                this.seguidores.push(usuario);
+                 this.seguidores.push(usuario);
+                 console.log("Seguidores:",this.seguidores); 
                }
               }
             )
