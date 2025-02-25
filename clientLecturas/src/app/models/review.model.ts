@@ -5,7 +5,7 @@ export class ReviewModel {
   texto: string; 
   puntuacion?: number; 
   fecha: Date; 
-  comentarios: ComentarioModel[];
+  comentarios?: ComentarioModel[];
 
   constructor(
     _idUsuario: string,

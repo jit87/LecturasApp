@@ -39,3 +39,7 @@ h2 {
     z-index:-2 !important;
 }
 
+.dropdown-item:hover {
+    background-color: aquamarine !important;
+}
+
