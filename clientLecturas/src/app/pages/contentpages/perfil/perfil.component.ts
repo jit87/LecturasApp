@@ -9,7 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class PerfilComponent {
 
-  DatosPerfil: any[] = []; 
+  DatosPerfil: any = []; 
   email: string | null = ""; 
 
   //Propiedades de la contraseña
@@ -50,8 +50,7 @@ export class PerfilComponent {
     this.email = localStorage.getItem("email"); 
     this._authService.getUserByEmail(this.email).subscribe(
       (resp: any) => {
-        this.DatosPerfil = [];  
-        this.DatosPerfil.push(resp); 
+        this.DatosPerfil = resp;  
       }, (err) => {
         console.log("Error de obtención de datos", err); 
       })
@@ -216,10 +215,29 @@ export class PerfilComponent {
 
 
   /*Apariencia*/
- cambiarApariencia() {
-  document.body.style.backgroundColor = "#102A2D "; 
-  document.body.classList.add("modo-oscuro");
-}
+  cambiarApariencia() {
+    this.cargarDatos();
+    var aparienciaValue; 
+    console.log(this.DatosPerfil.apariencia); 
+    if (this.DatosPerfil.apariencia == "oscura") {
+        aparienciaValue = "clara"; 
+    } else {
+        aparienciaValue = "oscura";
+    }
+
+    if(this.email && aparienciaValue)
+      this._authService.modificarApariencia(this.email, aparienciaValue).subscribe(
+          (resp) => {
+            console.log(resp);
+          },
+          (err) => {
+            console.log(err); 
+        }
+      )
+  
+  }
+  
+  
   
 
 

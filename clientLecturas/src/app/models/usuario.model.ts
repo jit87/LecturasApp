@@ -9,6 +9,7 @@ imagen?: string | undefined;
 seguidores?: string[];
 seguidos?: string[];
 bio?: string | undefined;
+apariencia?: string | undefined; 
     
 constructor(){}
 

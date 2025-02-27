@@ -210,6 +210,22 @@ export class AuthService {
   }
 
 
+   modificarApariencia(email: string | null, value: string): Observable<any> {
+    return this.http.put<any>(`${this.authUrl}/modificar-apariencia`, {
+      email,
+      value
+    }).pipe(
+      tap(response => {
+        console.log('Apariencia cambiada', response);
+      }),
+      catchError(error => {
+        console.error('Error', error);
+        return throwError(error);
+      })
+    );
+  }
+
+
 
 
 

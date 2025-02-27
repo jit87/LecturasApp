@@ -7,40 +7,40 @@
             <div class="card-header bg-primary text-white text-center">
                 <h3>Perfil de Usuario</h3>
             </div>
-            <div class="card-body" *ngFor="let elem of DatosPerfil">
+            <div class="card-body">
                 <br>
                 <div class="row mb-3">
                     <div class="col-4 text-end fw-bold">Imagen de perfil:</div>
-                    <div class="col-3" *ngIf="elem.imagen"><img style="width: 50px;height: 50px;" src="{{elem.imagen}}"></div>
-                    <div class="col-3" *ngIf="!elem.imagen"><img style="width: 50px;height: 50px;" src="http://i38.photobucket.com/albums/e149/eloginko/profile_male_large_zpseedb2954.jpg"></div>
+                    <div class="col-3" *ngIf="DatosPerfil.imagen"><img style="width: 50px;height: 50px;" src="{{DatosPerfil.imagen}}"></div>
+                    <div class="col-3" *ngIf="!DatosPerfil.imagen"><img style="width: 50px;height: 50px;" src="http://i38.photobucket.com/albums/e149/eloginko/profile_male_large_zpseedb2954.jpg"></div>
                     <div class="col-2">
                     <i class="fa-regular fa-pen-to-square" (click)="abrirFormularioImg()"></i>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-4 text-end fw-bold">Nombre:</div>
-                    <div class="col-3">{{ elem.nombre }}</div>
+                    <div class="col-3">{{ DatosPerfil.nombre }}</div>
                     <div class="col-2">
                         <i class="fa-regular fa-pen-to-square" (click)="abrirFormularioNom()"></i>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-4 text-end fw-bold">Email:</div>
-                    <div class="col-3">{{ elem.email }}</div>
+                    <div class="col-3">{{ DatosPerfil.email }}</div>
                     <div class="col-2">
                         <i class="fa-regular fa-pen-to-square"  (click)="abrirFormularioEma()"></i>
                     </div>
                 </div>
                     <div class="row mb-3">
                         <div class="col-4 text-end fw-bold">Contraseña:</div>
-                        <div class="col-3">{{ elem.password }}</div>
+                        <div class="col-3">{{ DatosPerfil.password }}</div>
                         <div class="col-2">
                             <i class="fa-regular fa-pen-to-square" (click)="abrirFormularioPass()"></i>
                         </div>
                     </div>
                 <div class="row mb-3">
                     <div class="col-4 text-end fw-bold">ID de Usuario:</div>
-                    <div class="col-8">{{ elem._id }}</div>
+                    <div class="col-8">{{ DatosPerfil._id }}</div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-4 text-end fw-bold">Apariencia:</div>
@@ -59,8 +59,7 @@
                 </div>
             </div>
         </div>
-    </div>
-
+    
 
 
     <!--Formularios-->

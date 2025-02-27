@@ -9,7 +9,8 @@ const userSchema = new mongoose.Schema({
   imagen: { type: String, required: false, default: '' },
   seguidores: { type: [mongoose.Schema.Types.ObjectId], ref: 'Usuario', default: [] },
   seguidos: { type: [mongoose.Schema.Types.ObjectId], ref: 'Usuario', default: [] },
-  bio: { type: String, required: false }
+  bio: { type: String, required: false },
+  apariencia: { type: String, required: false }
 });
 
 userSchema.methods.comparePassword = function(password) {

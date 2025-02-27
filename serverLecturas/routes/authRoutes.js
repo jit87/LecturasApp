@@ -204,6 +204,29 @@ router.put('/modificar-imagen', async (req, res) => {
 });
 
 
+//Ruta para modificar apariencia
+router.put('/modificar-apariencia', async (req, res) => {
+
+    try {
+        const { email, value } = req.body;
+
+            //Busca al usuario por email
+            const usuario = await Usuario.findOne({ email });
+            if (!usuario) {
+                return res.status(404).json({ message: 'Usuario no encontrado' });
+            }
+
+            //Actualiza la imagen
+            usuario.apariencia = value;
+            await usuario.save();
+            console.log("Apariencia cambiada"); 
+            res.json({ nuevaApariencia: value }); 
+    } catch (err) {
+        res.status(500).send(err);
+    }
+});
+
+
 //Ruta para obtener el usuario en función del ID (para la parte de Social)
 router.get('/usuarioPorId/:id', async (req, res) => {
 

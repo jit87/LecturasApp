@@ -49,6 +49,10 @@ h2 {
     box-shadow: 3px 3px 29px -12px rgba(0, 0, 0, 0.75);
 } */
 
+table {
+    border-radius: 5px;
+}
+
 .modo-oscuro h5 {
     color: #ffffff !important;
 }
@@ -59,4 +63,20 @@ h2 {
 
 .modo-oscuro .card {
     background-color: rgb(185, 208, 198) !important;
+}
+
+.modo-oscuro .card h5 {
+    color: rgb(26, 27, 27) !important;
+}
+
+.modo-oscuro table {
+    background-color: rgb(185, 208, 198) !important;
+}
+
+.modo-oscuro .list-group-item  {
+    background-color: rgb(185, 208, 198) !important;
+}
+
+.modo-oscuro .home {
+    color: white; 
 }
