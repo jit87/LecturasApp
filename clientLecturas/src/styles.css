@@ -49,6 +49,14 @@ h2 {
     box-shadow: 3px 3px 29px -12px rgba(0, 0, 0, 0.75);
 } */
 
-.modo-oscuro h2,h5 {
+.modo-oscuro h5 {
     color: #ffffff !important;
+}
+
+.modo-oscuro h2 {
+    color: #ffffff !important;
+}
+
+.modo-oscuro .card {
+    background-color: rgb(185, 208, 198) !important;
 }
