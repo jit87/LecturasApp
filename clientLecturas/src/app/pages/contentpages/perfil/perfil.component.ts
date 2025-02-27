@@ -215,5 +215,12 @@ export class PerfilComponent {
   }
 
 
+  /*Apariencia*/
+ cambiarApariencia() {
+  document.body.style.backgroundColor = "#102A2D "; 
+  document.body.classList.add("modo-oscuro");
+}
+  
+
 
 }
