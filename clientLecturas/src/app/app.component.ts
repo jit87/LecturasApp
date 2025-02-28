@@ -16,11 +16,12 @@ export class AppComponent {
     this.cargarDatos(); 
   }
 
+
   cargarDatos() {
     this.email = localStorage.getItem("email"); 
     this._authService.getUserByEmail(this.email).subscribe(
       (resp: any) => {
-        this.datos = resp; 
+       this.datos = resp; 
         this.cargarApariencia(); 
       }, (err) => {
         console.log("Error de obtención de datos", err); 
@@ -29,12 +30,13 @@ export class AppComponent {
 
   
   cargarApariencia() {
-      if (this.datos.apariencia == "oscura") {
-        document.body.style.backgroundColor = "rgb(236, 238, 239);"; 
-        document.body.classList.remove("modo-oscuro");
-    } else {
-        document.body.style.backgroundColor = "#102A2D"; 
-        document.body.classList.add("modo-oscuro"); 
+      if (this.datos.apariencia == "clara"){
+      document.body.style.backgroundColor = "rgb(236, 238, 239);"; 
+      document.body.classList.remove("modo-oscuro");
+    }
+      if(this.datos.apariencia == "oscura"){
+      document.body.style.backgroundColor = "#102A2D"; 
+      document.body.classList.add("modo-oscuro"); 
     }
   }
 

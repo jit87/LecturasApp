@@ -38,11 +38,19 @@ export class PerfilComponent {
   imagePreview: string | ArrayBuffer | null = null; 
   file: File | null = null; 
 
+  //Propiedad del toggle button
+  isChecked: boolean = false;
+
 
   constructor(private _authService: AuthService,
               private toastr: ToastrService
   ) {
     this.cargarDatos(); 
+  }
+
+  ngOnInit() {
+    const savedState = localStorage.getItem('toggleState');
+    this.isChecked = savedState === 'true';
   }
 
 
@@ -215,16 +223,19 @@ export class PerfilComponent {
 
 
   /*Apariencia*/
-  cambiarApariencia() {
+  cambiarApariencia(event: Event) {
     this.cargarDatos();
     var aparienciaValue; 
-    console.log(this.DatosPerfil.apariencia); 
+    const inputElement = event.target as HTMLInputElement;
+
+    this.isChecked = inputElement.checked;
+    localStorage.setItem('toggleState', this.isChecked.toString());
+
     if (this.DatosPerfil.apariencia == "oscura") {
         aparienciaValue = "clara"; 
     } else {
         aparienciaValue = "oscura";
     }
-
     if(this.email && aparienciaValue)
       this._authService.modificarApariencia(this.email, aparienciaValue).subscribe(
           (resp) => {
@@ -234,7 +245,6 @@ export class PerfilComponent {
             console.log(err); 
         }
       )
-  
   }
   
   

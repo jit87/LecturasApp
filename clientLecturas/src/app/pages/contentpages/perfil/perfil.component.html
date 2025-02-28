@@ -46,7 +46,8 @@
                     <div class="col-4 text-end fw-bold">Apariencia:</div>
                     <div class="col-8" style="font-size:xx-large">
                     <label class="switch">
-                        <input type="checkbox" checked (click)="cambiarApariencia()">
+                        <input type="checkbox" [checked]="isChecked" (click)="cambiarApariencia($event)">
+                        
                         <span class="slider round"></span>
                     </label></div>
                 </div>
