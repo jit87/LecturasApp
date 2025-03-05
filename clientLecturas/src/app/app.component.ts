@@ -11,9 +11,23 @@ export class AppComponent {
   title = 'clientLecturas';
   email: string | null = ""; 
   datos: any; 
+  
 
   constructor(private _authService: AuthService) {
     this.cargarDatos(); 
+  }
+
+  ngOnInit() {
+    this._authService.perfilApariencia$.subscribe((resp: any) => {
+      if (resp.nuevaApariencia=="clara") {
+        document.body.style.backgroundColor = "rgb(236, 238, 239)"; 
+        document.body.classList.remove("modo-oscuro");
+      }
+      if (resp.nuevaApariencia=="oscura") {
+        document.body.style.backgroundColor = "#102A2D"; 
+        document.body.classList.add("modo-oscuro"); 
+      }
+    })
   }
 
 
@@ -29,12 +43,12 @@ export class AppComponent {
   }
 
   
-  cargarApariencia() {
-      if (this.datos.apariencia == "clara"){
+  cargarApariencia() { 
+    if (this.datos.apariencia == "clara"){
       document.body.style.backgroundColor = "rgb(236, 238, 239);"; 
       document.body.classList.remove("modo-oscuro");
     }
-      if(this.datos.apariencia == "oscura"){
+    if(this.datos.apariencia == "oscura"){
       document.body.style.backgroundColor = "#102A2D"; 
       document.body.classList.add("modo-oscuro"); 
     }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, signal } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Output, signal } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -43,7 +43,7 @@ export class PerfilComponent {
 
 
   constructor(private _authService: AuthService,
-              private toastr: ToastrService
+              private toastr: ToastrService,
   ) {
     this.cargarDatos(); 
   }
@@ -225,7 +225,7 @@ export class PerfilComponent {
   /*Apariencia*/
   cambiarApariencia(event: Event) {
     this.cargarDatos();
-    var aparienciaValue; 
+    var aparienciaValue = ""; 
     const inputElement = event.target as HTMLInputElement;
 
     this.isChecked = inputElement.checked;
@@ -239,7 +239,7 @@ export class PerfilComponent {
     if(this.email && aparienciaValue)
       this._authService.modificarApariencia(this.email, aparienciaValue).subscribe(
           (resp) => {
-            console.log(resp);
+          console.log(resp);
           },
           (err) => {
             console.log(err); 

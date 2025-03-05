@@ -14,6 +14,7 @@ export class AuthService {
   
   private userSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
   user$: Observable<any> = this.userSubject.asObservable();
+
   public usuarioData: any = [];
 
   private authStatus = new BehaviorSubject<boolean>(this.isLoggedIn());
@@ -23,7 +24,13 @@ export class AuthService {
   private perfilImagenSource = new BehaviorSubject<string>('');
   perfilImagen$ = this.perfilImagenSource.asObservable();
 
+  private perfilApariencia = new BehaviorSubject<string>('');
+  perfilApariencia$ = this.perfilApariencia.asObservable(); 
+
+
+
   constructor(private http: HttpClient, private router: Router) { }
+
 
 
   login(email: string, password: string): Observable<any> {
@@ -217,6 +224,7 @@ export class AuthService {
     }).pipe(
       tap(response => {
         console.log('Apariencia cambiada', response);
+        this.perfilApariencia.next(response); 
       }),
       catchError(error => {
         console.error('Error', error);
