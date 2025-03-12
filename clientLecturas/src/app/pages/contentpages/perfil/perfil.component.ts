@@ -228,14 +228,17 @@ export class PerfilComponent {
     var aparienciaValue = ""; 
     const inputElement = event.target as HTMLInputElement;
 
-    this.isChecked = inputElement.checked;
-    localStorage.setItem('toggleState', this.isChecked.toString());
-
     if (this.DatosPerfil.apariencia == "oscura") {
-        aparienciaValue = "clara"; 
-    } else {
-        aparienciaValue = "oscura";
+       aparienciaValue = "clara"; 
+       this.isChecked = false;
+       localStorage.setItem('toggleState', this.isChecked.toString());
     }
+    if (this.DatosPerfil.apariencia == "clara") {
+       aparienciaValue = "oscura";
+       this.isChecked = inputElement.checked;
+       localStorage.setItem('toggleState', this.isChecked.toString());
+    }
+
     if(this.email && aparienciaValue)
       this._authService.modificarApariencia(this.email, aparienciaValue).subscribe(
           (resp) => {
