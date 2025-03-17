@@ -235,12 +235,12 @@ export class PerfilComponent {
        this.isChecked = false;
        localStorage.setItem('toggleState', this.isChecked.toString());
     }
-    else if (this.DatosPerfil.apariencia == "clara") {
+    else if (this.DatosPerfil.apariencia == "clara" || this.DatosPerfil.apariencia == "") {
        aparienciaValue = "oscura";
        this.isChecked = true;
        localStorage.setItem('toggleState', this.isChecked.toString());
     }
-    if (this.email && aparienciaValue) {
+    if (this.email) {
         this._authService.modificarApariencia(this.email, aparienciaValue).subscribe(
           (resp) => {
             console.log(resp); 
@@ -251,6 +251,21 @@ export class PerfilComponent {
         }
       )
     }    
+  }
+
+
+  eliminarCuenta(id: any) {
+    this.cargarDatos(); 
+    console.log(id); 
+    if(this.email)
+      this._authService.eliminarUsuario(id).subscribe(
+        (resp) => {
+          console.log("Usuario eliminado: ", resp); 
+        },
+        (err) => {
+          console.log(err); 
+        }
+      ); 
   }
 
   

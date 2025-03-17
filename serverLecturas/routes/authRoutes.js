@@ -246,6 +246,33 @@ router.get('/usuarioPorId/:id', async (req, res) => {
 });
 
 
+//Ruta para eliminar usuario
+router.delete('/eliminar-usuario/:id', async (req, res) => {
+
+    try {
+            const usuario = await Usuario.findOne({ _id: req.params.id });
+
+            if (!usuario) {
+                 return res.status(404).json({ message: 'Usuario no encontrado' });
+            }
+        
+            Usuario.findByIdAndDelete(req.params.id, function (err, docs) {
+                if (err){
+                    console.log(err)
+                }
+                else{
+                    console.log("Eliminado usuario : ", docs);
+                }
+            });
+        
+        res.json({ resultado: "Eliminado usuario" }); 
+        
+    } catch (err) {
+        res.status(500).send(err);
+    }
+});
+
+
 
 
 export default router;

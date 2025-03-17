@@ -234,6 +234,18 @@ export class AuthService {
   }
 
 
+  eliminarUsuario(id: string) {
+     return this.http.delete<any>(`${this.authUrl}/eliminar-usuario/${id}`).pipe(
+      tap(response => {
+        console.log('Usuario eliminado', response);
+      }),
+      catchError(error => {
+        console.error('Error', error);
+        return throwError(error);
+      })
+    );
+  }
+
 
 
 
