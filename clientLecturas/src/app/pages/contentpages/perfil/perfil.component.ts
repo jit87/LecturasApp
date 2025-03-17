@@ -49,8 +49,12 @@ export class PerfilComponent {
   }
 
   ngOnInit() {
-    const savedState = localStorage.getItem('toggleState');
-    this.isChecked = savedState === 'true';
+    const estado = localStorage.getItem('toggleState');
+    if (estado == 'true') {
+        this.isChecked = true; 
+    } else {
+        this.isChecked = false; 
+    }
   }
 
 
@@ -223,32 +227,33 @@ export class PerfilComponent {
 
 
   /*Apariencia*/
-  cambiarApariencia(event: Event) {
-    this.cargarDatos();
+  cambiarApariencia() {
     var aparienciaValue = ""; 
-    const inputElement = event.target as HTMLInputElement;
-
+    
     if (this.DatosPerfil.apariencia == "oscura") {
        aparienciaValue = "clara"; 
        this.isChecked = false;
        localStorage.setItem('toggleState', this.isChecked.toString());
     }
-    if (this.DatosPerfil.apariencia == "clara") {
+    else if (this.DatosPerfil.apariencia == "clara") {
        aparienciaValue = "oscura";
-       this.isChecked = inputElement.checked;
+       this.isChecked = true;
        localStorage.setItem('toggleState', this.isChecked.toString());
     }
-
-    if(this.email && aparienciaValue)
-      this._authService.modificarApariencia(this.email, aparienciaValue).subscribe(
+    if (this.email && aparienciaValue) {
+        this._authService.modificarApariencia(this.email, aparienciaValue).subscribe(
           (resp) => {
-          console.log(resp);
+            console.log(resp); 
+            this.cargarDatos(); 
           },
           (err) => {
             console.log(err); 
         }
       )
+    }    
   }
+
+  
   
   
   

@@ -1,6 +1,14 @@
 
 @import 'ngx-toastr/toastr';
 
+/*Variables*/
+:root {
+    --background-color1:rgb(185, 208, 198);
+    --background-color2: aquamarine;
+    --text-color1: #ffffff; 
+}
+
+
 body {
     position: relative;
     min-height: 100vh;
@@ -21,12 +29,12 @@ h2 {
 
 .navbar-container {
    /* background-color: rgb(175, 230, 248);*/
-    background-color: aquamarine; 
+    background-color: var(--background-color2); 
 }
 
 .navbar {
     /* background-color: rgb(175, 230, 248) !important; */
-    background-color: aquamarine !important;
+    background-color: var(--background-color2) !important;
     margin-left: 16%;
     margin-right: 16%;
 }
@@ -40,7 +48,7 @@ h2 {
 }
 
 .dropdown-item:hover {
-    background-color: aquamarine !important;
+    background-color: var(--background-color2) !important;
 }
 
 /* .card {
@@ -59,15 +67,15 @@ table {
 }
 
 .modo-oscuro h5 {
-    color: #ffffff !important;
+    color: var(--text-color1) !important;
 }
 
 .modo-oscuro h2 {
-    color: #ffffff !important;
+    color: var(--text-color1) !important;
 }
 
 .modo-oscuro .card {
-    background-color: rgb(185, 208, 198) !important;
+    background-color: var(--background-color1) !important;
 }
 
 .modo-oscuro .card h5 {
@@ -75,7 +83,7 @@ table {
 }
 
 .modo-oscuro .list-group-item  {
-    background-color: rgb(185, 208, 198) !important;
+    background-color: var(--background-color1) !important;
 }
 
 .modo-oscuro .home {

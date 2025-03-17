@@ -18,6 +18,7 @@ export class AppComponent {
   }
 
   ngOnInit() {
+    this.cargarDatos();
     this._authService.perfilApariencia$.subscribe((resp: any) => {
       if (resp.nuevaApariencia=="clara") {
         document.body.style.backgroundColor = "rgb(236, 238, 239)"; 
