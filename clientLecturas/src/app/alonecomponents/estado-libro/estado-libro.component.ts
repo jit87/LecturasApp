@@ -102,7 +102,7 @@ async guardarEstadoLibro(estado: string) {
         lengua: "",
         previewLink: "",
         estado: estado === 'Leído' ? 'Leído' : 'Pendiente',
-        categorias: this.libro.categorias || this.libro.info?.categories.join(', ') || "Sin categoría",
+        categorias: this.libro.categorias || this.libro.info?.categories?.join(', ') || "Sin categoría",
         APIid: this.libro.APIid || this.libro.id
       };
     

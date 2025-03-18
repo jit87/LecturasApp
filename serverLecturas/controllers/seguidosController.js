@@ -62,3 +62,24 @@ export async function obtenerSeguidores(req, res) {
   }
   
 }
+
+
+
+//Función para eliminar seguidos
+export async function eliminarSeguido(req, res) {
+    try {
+        const { idSeguido } = req.body;
+            //Busca al usuario logueado 
+            const usuario =  await Usuario.findById(req._idUsuario); 
+            if (!usuario) {
+                return res.status(404).json({ message: 'Usuario no encontrado' });
+            }
+            //Busca la posición del seguido en el seguidor
+            const posicion = usuario.seguidos.indexOf(idSeguido);
+            usuario.seguidos.pop(posicion);
+            await usuario.save();
+
+    } catch (err) {
+        res.status(500).send(err);
+    }
+}

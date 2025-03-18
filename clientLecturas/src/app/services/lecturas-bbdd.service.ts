@@ -72,16 +72,19 @@ export class LecturasBBDDService {
     return this.http.get(this.url + "/libros/todos/");
   }
 
-
   setSeguido(idSeguido: string): Observable<any> {
     return this.http.post(this.url + "/seguidos", { idSeguido }); 
+  }
+
+  deleteSeguido(idSeguido: string): Observable<any> {
+    return this.http.delete(this.url + "/seguidos/" + idSeguido); 
   }
 
   getSeguidos(): Observable<any> {
       return this.http.get(this.url + "/seguidos/todos"); 
   }
 
-   getSeguidores(): Observable<any> {
+  getSeguidores(): Observable<any> {
       return this.http.get(this.url + "/seguidos/seguidores"); 
   }
   

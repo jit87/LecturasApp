@@ -112,6 +112,7 @@ export class PublicoperfilComponent {
     this._lecturasBBDDService.setSeguido(idSeguido).subscribe(
       (resp) => {
         console.log("Añadido", resp);
+        this.cargarDatos(this.idUsuario); 
       },
       (err) => {
         console.log(err); 
@@ -119,6 +120,17 @@ export class PublicoperfilComponent {
     )   
   }
 
+  noseguir(idSeguido: any) {
+    this._lecturasBBDDService.deleteSeguido(idSeguido).subscribe(
+      (resp) => {
+        console.log("Has dejado de seguir al usuario" + idSeguido, resp); 
+        this.cargarDatos(this.idUsuario);
+      },
+      (err) => {
+        console.log(err); 
+      }
+    )
+  }
 
 
 
