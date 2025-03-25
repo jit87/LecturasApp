@@ -6,6 +6,7 @@
     --background-color1:rgb(185, 208, 198);
     --background-color2: aquamarine;
     --text-color1: #ffffff; 
+    --text-color2: rgb(26, 27, 27);
 }
 
 
@@ -17,8 +18,7 @@ body {
 
 h2 {
     font-family: "Roboto", serif;
-    color: rgb(26, 27, 27);
-
+    color: var(--text-color2); 
 } 
 
 
@@ -79,7 +79,7 @@ table {
 }
 
 .modo-oscuro .card h5 {
-    color: rgb(26, 27, 27) !important;
+    color: var(--text-color2) !important;
 }
 
 .modo-oscuro .list-group-item  {
@@ -95,4 +95,6 @@ table {
     background-color: rgb(28, 68, 50) !important;
 }
 
-
+.modo-oscuro .text-btn-guardado {
+    color: rgb(4, 134, 128) !important;
+}

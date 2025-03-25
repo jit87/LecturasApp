@@ -40,6 +40,7 @@ export class PublicoperfilComponent {
   }; 
   idLogueado: any;
   mostrarBotonAgregar: number = -1; 
+  listaSeguidores: any = []; 
 
 
   constructor(private _authService: AuthService,
@@ -66,6 +67,7 @@ export class PublicoperfilComponent {
       }
     )
     this.compruebaSiEsSeguido(this.idUsuario); 
+    this.getSeguidores(); 
   }
 
 
@@ -99,7 +101,7 @@ export class PublicoperfilComponent {
         let result = resp.includes(idUsuario); 
         if (!result && idUsuario !== this.idLogueado) {
           this.mostrarBotonAgregar = 1;
-        }
+        } 
       },
       (err) => {
         console.log(err); 
@@ -112,12 +114,13 @@ export class PublicoperfilComponent {
     this._lecturasBBDDService.setSeguido(idSeguido).subscribe(
       (resp) => {
         console.log("Añadido", resp);
-        this.cargarDatos(this.idUsuario); 
+        this.cargarDatos(this.idUsuario);
       },
       (err) => {
         console.log(err); 
       }
     )   
+     this.mostrarBotonAgregar = -1;
   }
 
   noseguir(idSeguido: any) {
@@ -130,7 +133,25 @@ export class PublicoperfilComponent {
         console.log(err); 
       }
     )
+     this.mostrarBotonAgregar = 1;
   }
+
+
+  getSeguidores() {
+    this._lecturasBBDDService.getSeguidores().subscribe(
+      (resp) => {
+        console.log(resp);
+      },
+      (err) => {
+        console.log(err); 
+      }
+    )
+
+  }
+          
+        
+        
+    
 
 
 

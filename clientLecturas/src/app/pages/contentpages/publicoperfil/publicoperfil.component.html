@@ -6,6 +6,7 @@
                     <div class="col-md-3 text-center">
                         <img [src]="DatosPerfil.imagen" class="rounded-circle img-fluid"
                             alt="Foto de perfil" height="150" width="150">
+                            <p *ngIf="DatosPerfil._id==idLogueado">Propietario</p>
                         <button class="btn btn-primary btn-sm mt-3" *ngIf="mostrarBotonAgregar === 1" (click)="seguir(DatosPerfil._id)">Seguir usuario</button>
                         <button class="btn btn-danger btn-sm mt-3" *ngIf="mostrarBotonAgregar === -1 && DatosPerfil._id!=idLogueado" (click)="noseguir(DatosPerfil._id)">Dejar de seguir</button>
                     </div>
@@ -26,10 +27,10 @@
                     <div class="col-md-3">
                         <h5 class="mt-4">Lista de Seguidores</h5>
                         <ul class="list-group">
-                            <li *ngFor="let seguido of seguidos" class="list-group-item d-flex align-items-center"
-                                [routerLink]="['/perfilpublico', seguido]">
-                                <img [src]="seguido|| 'default.png'" class="rounded-circle me-2" width="40" height="40">
-                                <span><b>{{ seguido }}</b></span>
+                            <li *ngFor="let seguidor of this.listaSeguidores" class="seguidor-card list-group-item d-flex align-items-center"
+                                [routerLink]="['/perfilpublico', seguidor]">
+                                <img [src]="seguidor.imagen || 'default.png'" class="rounded-circle me-2" width="40" height="40">
+                                <span><b>{{seguidor.nombre}}</b></span>
                             </li>
                         </ul>
                     </div>

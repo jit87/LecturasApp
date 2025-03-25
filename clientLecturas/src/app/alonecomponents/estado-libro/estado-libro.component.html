@@ -10,4 +10,4 @@
     <li><a class="dropdown-item" (click)="guardarEstadoLibro('Pendiente')" style="cursor: pointer;">Para leer</a></li>
     <li><a class="dropdown-item" (click)="guardarEstadoLibro('Leído')"  style="cursor: pointer;">Leído</a></li>
 </ul>
-<p *ngIf="guardado" style="font-size: small;color: lightseagreen;font-weight: 600;">Guardado</p>
+<p class="text-btn-guardado" *ngIf="guardado" style="font-size: small;color: lightseagreen;font-weight: 600;">Guardado</p>
