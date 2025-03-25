@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { agregarSeguido, obtenerSeguidos, obtenerSeguidores, eliminarSeguido } from '../controllers/seguidosController.js';
+import { agregarSeguido, obtenerSeguidos, obtenerSeguidores, eliminarSeguido, obtenerSeguidoresPorId } from '../controllers/seguidosController.js';
 import authenticate  from '../middlewares/authenticate.js'; 
 
 const router = Router();
@@ -18,6 +18,9 @@ router.get('/todos', obtenerSeguidos);
 
 //Ruta para obtener todos los seguidos por el usuario
 router.get('/seguidores', obtenerSeguidores); 
+
+//Ruta para obtener todos los seguidores por usuario distinto al logueado
+router.get('/seguidores/:id', obtenerSeguidoresPorId); 
 
 
 export default router;

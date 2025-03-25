@@ -66,8 +66,9 @@ export class PublicoperfilComponent {
         console.log(err); 
       }
     )
+    console.log(this.idUsuario); 
     this.compruebaSiEsSeguido(this.idUsuario); 
-    this.getSeguidores(); 
+    this.getSeguidoresById(this.idUsuario); 
   }
 
 
@@ -123,6 +124,7 @@ export class PublicoperfilComponent {
      this.mostrarBotonAgregar = -1;
   }
 
+
   noseguir(idSeguido: any) {
     this._lecturasBBDDService.deleteSeguido(idSeguido).subscribe(
       (resp) => {
@@ -137,18 +139,30 @@ export class PublicoperfilComponent {
   }
 
 
-  getSeguidores() {
-    this._lecturasBBDDService.getSeguidores().subscribe(
+          
+
+  getSeguidoresById(id:any) {
+    this.listaSeguidores = []; 
+    this._lecturasBBDDService.getSeguidoresById(id).subscribe(
       (resp) => {
-        console.log(resp);
+        console.log("Resuesta:",resp); 
+       resp.forEach((id:any) => {
+            this._authService.getUserById(id).subscribe(
+              (usuario: any) => {
+                console.log("Usuario:",usuario); 
+                if (usuario != undefined) {
+                  this.listaSeguidores.push(usuario);
+                  console.log("Seguidores:",this.listaSeguidores); 
+                }
+                }
+              )
+          });
       },
       (err) => {
         console.log(err); 
       }
     )
-
   }
-          
         
         
     

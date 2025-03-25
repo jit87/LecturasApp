@@ -89,7 +89,7 @@ export class LecturasBBDDService {
   }
   
   getSeguidoresById(id:string): Observable<any> {
-     return this.http.get(this.url + "/seguidos/seguidores" + id); 
+     return this.http.get(this.url + "/seguidos/seguidores/" + id); 
   }
   
 
