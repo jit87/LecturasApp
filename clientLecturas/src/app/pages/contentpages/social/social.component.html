@@ -28,7 +28,7 @@
         <div class="col-md-3" style="margin-top: 2.5%;">
             <h5>Seguidos</h5>
             <ul class="list-group mt-5">
-                <li *ngFor="let seguido of seguidos" class="list-group-item d-flex align-items-center"  [routerLink]="['/perfilpublico', seguido._id]">
+                <li *ngFor="let seguido of seguidos" class="s-social list-group-item d-flex align-items-center"  [routerLink]="['/perfilpublico', seguido._id]">
                     <img [src]="seguido.imagen || 'default.png'" class="rounded-circle me-2" width="40" height="40">
                     <span><b>{{ seguido.nombre }}</b></span>
                 </li>
@@ -39,7 +39,7 @@
             <br>
             <h5>Seguidores</h5>
             <ul class="list-group mt-5">
-                <li *ngFor="let seguidor of seguidores" class="list-group-item d-flex align-items-center"
+                <li *ngFor="let seguidor of seguidores" class="s-social list-group-item d-flex align-items-center"
                     [routerLink]="['/perfilpublico', seguidor._id]">
                     <img [src]="seguidor.imagen || 'default.png'" class="rounded-circle me-2" width="40" height="40">
                     <span><b>{{ seguidor.nombre }}</b></span>

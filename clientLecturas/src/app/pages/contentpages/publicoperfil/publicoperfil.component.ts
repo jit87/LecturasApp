@@ -66,10 +66,9 @@ export class PublicoperfilComponent {
         console.log(err); 
       }
     )
-    console.log(this.idUsuario); 
-    this.compruebaSiEsSeguido(this.idUsuario); 
-    this.getSeguidoresById(this.idUsuario); 
+     this.compruebaSiEsSeguido(this.idUsuario); 
   }
+  
 
 
 
@@ -84,7 +83,8 @@ export class PublicoperfilComponent {
             this.DatosPerfil._id = resp._id; 
       }, (err) => {
         console.log("Error de obtención de datos", err); 
-      })
+    })
+    this.getSeguidoresById(this.idUsuario);
   }
 
 

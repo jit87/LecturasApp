@@ -70,6 +70,10 @@ table {
     color: var(--text-color1) !important;
 }
 
+.modo-oscuro h4 {
+    color: var(--text-color1) !important;
+}
+
 .modo-oscuro h2 {
     color: var(--text-color1) !important;
 }
@@ -82,8 +86,17 @@ table {
     color: var(--text-color2) !important;
 }
 
-.modo-oscuro .list-group-item  {
+/*.modo-oscuro .list-group-item  {
     background-color: var(--background-color1) !important;
+}*/
+
+.modo-oscuro .s-social {
+    background-color: #e4f7f0 !important;
+}
+
+.modo-oscuro .list-group-item:hover {
+    background-color: aquamarine;
+    cursor: pointer;
 }
 
 .modo-oscuro .home {
@@ -97,4 +110,17 @@ table {
 
 .modo-oscuro .text-btn-guardado {
     color: rgb(4, 134, 128) !important;
+}
+
+.modo-oscuro td {
+      background-color: var(--background-color1) !important; 
+}
+
+.modo-oscuro th {
+    background-color: var(--background-color1) !important;
+}
+
+.modo-oscuro .btn-buscar-mis-libros{
+    color: white; 
+    border-color: white;
 }
