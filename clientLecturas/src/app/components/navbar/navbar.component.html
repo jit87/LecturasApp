@@ -27,7 +27,7 @@
                     <img class="nav-link" src="{{ ImagenPerfil }}" routerLinkActive="perfil-active"  [routerLink]="['/perfilpublico', this.idLogueado]" style="width: 45px;height: 45px;border-radius: 50px;cursor: pointer;" *ngIf="autenticado">
                 </ul>
                 <form class="d-flex" role="search" *ngIf="autenticado">
-                    <input #termino class="form-control me-2" type="search" placeholder="Search" aria-label="Buscar">
+                    <input #termino class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Buscar">
                     <button class="btn btn-outline-primary" type="button" (click)="getInfoLibro(termino.value)">Buscar</button>
                 </form>
                 <br>

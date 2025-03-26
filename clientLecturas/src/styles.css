@@ -57,7 +57,7 @@ h2 {
     box-shadow: 3px 3px 29px -12px rgba(0, 0, 0, 0.75);
 } */
 
-.recomendaciones{
+.recomendaciones {
     border-radius: 5px;
     padding: 5%;
 }
@@ -95,16 +95,16 @@ table {
 }
 
 .modo-oscuro .list-group-item:hover {
-    background-color: aquamarine;
+    background-color: var(--background-color2); 
     cursor: pointer;
 }
 
 .modo-oscuro .home {
-    color: white; 
+    color: var(--text-color1); 
 }
 
 .modo-oscuro .recomendaciones  {
-    color: white;
+    color: var(--text-color1);
     background-color: rgb(28, 68, 50) !important;
 }
 
@@ -121,6 +121,26 @@ table {
 }
 
 .modo-oscuro .btn-buscar-mis-libros{
-    color: white; 
+    color: var(--text-color1);
     border-color: white;
+}
+
+.modo-oscuro .btn-outline-secondary {
+    color: var(--text-color1);
+    border-color: white;
+}
+
+.modo-oscuro, .btn-buscar-mis-libros:hover, .btn-outline-secondary:hover {
+    background-color: var(--text-color2);
+    border-color: white;
+}
+
+
+.badge {
+    background-color: #209268 !important; 
+}
+
+
+[type="search"]::placeholder{
+    color: grey; 
 }

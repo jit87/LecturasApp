@@ -25,3 +25,16 @@
     flex-wrap: wrap;
     width:100%; 
 }
+
+
+.titulo:hover {
+    font-weight: 500;
+}
+
+.badge-todas {
+    background-color: grey !important;
+}
+
+.btn-buscar-mis-libros:focus {
+    background-color: grey !important;
+}

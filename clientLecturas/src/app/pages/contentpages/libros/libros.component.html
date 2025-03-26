@@ -5,8 +5,7 @@
                 <div class="mb-4" class="me-3">
                     <h6 class="ms-1">Libros</h6>
                     <div id="buscadorMisLibros"> 
-                        <input  type="text" 
-                                id="searchInput" 
+                        <input  type="search"
                                 class="form-control" 
                                 placeholder="Buscar libros..." 
                                 #termino  
@@ -18,7 +17,7 @@
                 <div class="mb-4">
                     <h6 class="ms-1">Colecciones</h6>
                     <div id="agregadorMisColecciones">
-                        <input type="text" id="coleccionInput" class="form-control" placeholder="Añadir colección..." #coleccion > 
+                        <input type="search" id="coleccionInput" class="form-control" placeholder="Añadir colección..." #coleccion > 
                         <button id="btnAgregarColeccion" 
                                 class="btn btn btn-success ms-1" 
                                 data-toggle="modal"
@@ -33,7 +32,7 @@
                     *ngFor="let coleccion of colecciones;let i=index" (click)="filtrarPorColeccion(coleccion)">{{ coleccion }}
                     <i class="fa-solid fa-xmark" style="cursor: pointer;" (click)="eliminarColeccion(i, $event)" *ngIf="mostrarBoton==false"></i>
             </div>
-                <span class="badge text-bg-secondary" style="margin-left: 3px;cursor: pointer; padding:5px;"
+                <span class="badge-todas badge text-bg-secondary" style="margin-left: 3px;cursor: pointer; padding:5px;"
                     *ngIf="colecciones.length!=0 && mostrarBoton==true" (click)="mostrarTodasColecciones()"> Mostrar todas
                 </span>  
             </div>
@@ -66,7 +65,7 @@
                     <tr *ngFor="let libro of librosAMostrar; let i = index">
                         <td>{{ (i + this.librosPorPagina * (paginaActual - 1) + 1) }}</td>
                         <td><img src="{{libro.imagen}}" style="width: 50px;height: 70px;"></td>
-                        <td  [routerLink]="['/info', libro.APIid]" style="text-decoration: underline;cursor: pointer;">{{ libro.titulo }}</td>
+                        <td  [routerLink]="['/info', libro.APIid]" style="text-decoration: underline;cursor: pointer;" class="titulo">{{ libro.titulo }}</td>
                         <td>{{ libro.autores }}</td>
                         <td>{{ libro.editor }}</td>
                         <td>{{ libro.fechaPublicacion | date:'d/MM/YY' }}</td>
