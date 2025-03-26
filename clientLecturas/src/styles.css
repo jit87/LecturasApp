@@ -57,6 +57,11 @@ h2 {
     box-shadow: 3px 3px 29px -12px rgba(0, 0, 0, 0.75);
 } */
 
+.modo-oscuro .card-header {
+    color: white; 
+    background-color: lightslategray !important;
+}
+
 .recomendaciones {
     border-radius: 5px;
     padding: 5%;
@@ -130,9 +135,14 @@ table {
     border-color: white;
 }
 
-.modo-oscuro, .btn-buscar-mis-libros:hover, .btn-outline-secondary:hover {
-    background-color: var(--text-color2);
+.modo-oscuro, .btn-buscar-mis-libros:hover, .btn-outline-secondary:hover , .btn-outline-secondary:focus {
+    background-color: black;
     border-color: white;
+}
+
+.btn-buscar-mis-libros {
+    border-color: grey;
+    color: grey; 
 }
 
 

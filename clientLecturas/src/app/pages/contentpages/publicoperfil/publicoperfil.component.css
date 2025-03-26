@@ -1,10 +1,13 @@
-.botonVolver{
-    margin-left:10.8%; 
-    margin-bottom: 2%;
-    position: relative;
+.seguidor-card {
+    background-color: white !important;
 }
 
 
-.seguidor-card {
-    background-color: white !important;
+.btn-seguir {
+    width:100%; 
+}
+
+.info-usuario{
+    position: relative;
+    margin-top:2%; 
 }

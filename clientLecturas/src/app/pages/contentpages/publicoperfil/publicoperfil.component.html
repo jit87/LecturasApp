@@ -1,39 +1,44 @@
 <div class="container mt-5 animate__animated animate__fadeIn" *ngIf="DatosPerfil">
-    <button class="btn btn-outline-secondary mt-3 botonVolver"  (click)="regresar()">Volver</button>
-        <div class="card mx-auto" style="max-width: 1000px;">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-3 text-center">
-                        <img [src]="DatosPerfil.imagen" class="rounded-circle img-fluid"
-                            alt="Foto de perfil" height="150" width="150">
-                            <p *ngIf="DatosPerfil._id==idLogueado"><b>Propietario</b></p>
-                        <button class="btn btn-primary btn-sm mt-3" *ngIf="mostrarBotonAgregar === 1" (click)="seguir(DatosPerfil._id)">Seguir usuario</button>
-                        <button class="btn btn-danger btn-sm mt-3" *ngIf="mostrarBotonAgregar === -1 && DatosPerfil._id!=idLogueado" (click)="noseguir(DatosPerfil._id)">Dejar de seguir</button>
-                    </div>
-                    <div class="col-md-6">
-                        <h3 class="card-title" class="nombre">{{ DatosPerfil.nombre }}</h3>
-                        <p class="text-muted"></p>
-                        <h5 class="mt-4">Seguidores ({{  DatosPerfil.seguidores.length }})</h5>
-                        <h5 class="mt-4">Seguidos ({{  DatosPerfil.seguidos.length }})</h5>
-                        <h5 class="mt-4">Libros Leídos</h5>
-                        <ul class="list-group">
-                            <!-- <li class="list-group-item" *ngFor="let libro of  DatosPerfil.librosLeidos">{{ libro }}</li> -->
-                        </ul>
-                        <h5 class="mt-4">Pendientes por Leer</h5>
-                        <ul class="list-group">
-                            <!-- <li class="list-group-item" *ngFor="let libro of  DatosPerfil.librosPendientes">{{ libro }}</li> -->
-                        </ul>
-                    </div>
-                    <div class="col-md-3">
-                        <h5 class="mt-4">Lista de Seguidores</h5>
-                        <ul class="list-group">
-                            <li *ngFor="let seguidor of this.listaSeguidores" class="s-social list-group-item d-flex align-items-center" [routerLink]="['/perfilpublico', seguidor._id]" style="cursor: pointer;">
-                                <img [src]="seguidor.imagen || 'default.png'" class="rounded-circle me-2" width="40" height="40">
-                                <span><b>{{seguidor.nombre}}</b></span>
-                            </li>
-                        </ul>
+ <div style="position: relative;">
+        <button class="btn btn-outline-secondary mt-3 botonVolver" style="margin-bottom: 2%;"  (click)="regresar()">Volver</button>
+            <div class="card mx-auto">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3 text-center">
+                            <img [src]="DatosPerfil.imagen" class="rounded-circle img-fluid"
+                                alt="Foto de perfil" height="150" width="150">
+                                <p *ngIf="DatosPerfil._id==idLogueado"><b>Propietario</b></p>
+                            <div class="btn-seguir">
+                                <button class="btn btn-primary btn-sm mt-3" *ngIf="mostrarBotonAgregar === 1" (click)="seguir(DatosPerfil._id)">Seguir usuario</button>
+                                <button class="btn btn-danger btn-sm mt-3" *ngIf="mostrarBotonAgregar === -1 && DatosPerfil._id!=idLogueado" (click)="noseguir(DatosPerfil._id)">Dejar de seguir</button>
+                            </div>
+                        </div>
+                        <div class="info-usuario col-md-6">
+                            <h3 class="card-title" class="nombre">{{ DatosPerfil.nombre }}</h3>
+                            <h5 class="mt-4">Bio:</h5>
+                            <p class="text-muted"></p>
+                            <h5 class="mt-4">Seguidores ({{  DatosPerfil.seguidores.length }})</h5>
+                            <h5 class="mt-4">Seguidos ({{  DatosPerfil.seguidos.length }})</h5>
+                            <h5 class="mt-4">Libros leídos</h5>
+                            <ul class="list-group">
+                                <!-- <li class="list-group-item" *ngFor="let libro of  DatosPerfil.librosLeidos">{{ libro }}</li> -->
+                            </ul>
+                            <h5 class="mt-4">Pendientes de leer</h5>
+                            <ul class="list-group">
+                                <!-- <li class="list-group-item" *ngFor="let libro of  DatosPerfil.librosPendientes">{{ libro }}</li> -->
+                            </ul>
+                        </div>
+                        <div class="col-md-3">
+                            <h5 class="mt-4">Lista de Seguidores</h5>
+                            <ul class="list-group">
+                                <li *ngFor="let seguidor of this.listaSeguidores" class="s-social list-group-item d-flex align-items-center" [routerLink]="['/perfilpublico', seguidor._id]" style="cursor: pointer;">
+                                    <img [src]="seguidor.imagen || 'default.png'" class="rounded-circle me-2" width="40" height="40">
+                                    <span><b>{{seguidor.nombre}}</b></span>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </div>  
+    </div>
 </div>
