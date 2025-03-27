@@ -140,8 +140,10 @@ table {
     border-color: white;
 }
 
-.modo-oscuro .s-social:hover {
-    background-color: var(--background-color2) !important;
+.s-social:hover {
+   background-color: var(--background-color2) !important;
+   cursor: pointer !important;
+   animation: animacionFondo 1s alternate !important;
 }
 
 .btn-buscar-mis-libros {
@@ -158,3 +160,5 @@ table {
 [type="search"]::placeholder{
     color: grey; 
 }
+
+

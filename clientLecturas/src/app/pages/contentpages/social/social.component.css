@@ -4,11 +4,6 @@
     text-overflow: ellipsis;
 }
 
-.list-group-item:hover{
-    background-color: aquamarine;
-    cursor: pointer;
-}
-
 .nombre:hover{
     text-decoration: underline;
 }
@@ -24,3 +19,6 @@
     text-align: center;
     font-weight: 600;
 }
+
+
+    

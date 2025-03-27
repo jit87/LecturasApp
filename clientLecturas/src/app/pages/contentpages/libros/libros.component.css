@@ -35,3 +35,26 @@
     background-color: grey !important;
 }
 
+.table {
+    border-radius: 5px !important;
+}
+
+
+
+@media (max-width: 768px) {
+ 
+    .table {
+        width: 100%;
+        table-layout: auto;
+        overflow-x: auto;
+        display: block;
+        white-space: nowrap;
+    }
+
+    .table th,
+    .table td {
+        padding: 10px;
+        word-wrap: break-word;
+    }
+}
+
