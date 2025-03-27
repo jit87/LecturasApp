@@ -176,7 +176,7 @@ export async function obtenerTodosLibros(req, res) {
             .sort({ updatedAt: -1 })
             .limit(8 - librosSeguidos.length); 
 
-        // Unir ambas listas
+        //Unir ambas listas
         const libros = [...librosSeguidos, ...librosResto];
 
         res.json(libros);
@@ -196,5 +196,19 @@ export async function obtenerTodosLibros(req, res) {
 }
 
 
+
+export async function obtenerLibrosLeidos(req, res) {
+    
+    try {
+        const usuarioId = req._idUsuario;
+        const librosLeidos = await Usuario.findById(usuarioId).select("librosLeidos");
+        //const librosLeidos = data ? data.librosLeidos : [];
+        res.json(librosLeidos);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Error al obtener los libros leídos" });
+    }
+
+}
 
 

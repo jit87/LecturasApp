@@ -10,7 +10,8 @@ const userSchema = new mongoose.Schema({
   seguidores: { type: [mongoose.Schema.Types.ObjectId], ref: 'Usuario', default: [] },
   seguidos: { type: [mongoose.Schema.Types.ObjectId], ref: 'Usuario', default: [] },
   bio: { type: String, required: false },
-  apariencia: { type: String, required: false }
+  apariencia: { type: String, required: false },
+  librosLeidos: { type: [String], required: false, default: [] }
 });
 
 userSchema.methods.comparePassword = function(password) {

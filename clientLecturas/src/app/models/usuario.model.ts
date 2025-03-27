@@ -10,6 +10,7 @@ seguidores?: string[];
 seguidos?: string[];
 bio?: string | undefined;
 apariencia?: string | undefined; 
+librosLeidos?: string[];
     
 constructor(){}
 

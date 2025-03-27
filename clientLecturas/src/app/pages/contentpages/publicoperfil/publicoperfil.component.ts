@@ -66,7 +66,8 @@ export class PublicoperfilComponent {
         console.log(err); 
       }
     )
-     this.compruebaSiEsSeguido(this.idUsuario); 
+    this.compruebaSiEsSeguido(this.idUsuario); 
+    this.getLibrosLeidos(this.idUsuario); 
   }
   
 
@@ -141,7 +142,6 @@ export class PublicoperfilComponent {
 
 
           
-
   getSeguidoresById(id:any) {
     this.listaSeguidores = []; 
     this._lecturasBBDDService.getSeguidoresById(id).subscribe(
@@ -164,6 +164,19 @@ export class PublicoperfilComponent {
       }
     )
   }
+
+
+
+  getLibrosLeidos(id:string) {
+    this._lecturasBBDDService.getLibrosLeidos(id).subscribe(
+      (resp) => {
+        console.log(resp); 
+      },
+      (err) => {
+        console.log(err); 
+      }
+   )
+ }
         
         
     

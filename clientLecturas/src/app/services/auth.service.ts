@@ -31,7 +31,8 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-
+  
+  //Gestión de login, registro y todos los datos de usuario (nombre, contraseña, apariencia, imagen, email, bio)
 
   login(email: string, password: string): Observable<any> {
     console.log('Iniciando login...');
