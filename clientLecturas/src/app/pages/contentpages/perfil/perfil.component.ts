@@ -22,6 +22,9 @@ export class PerfilComponent {
   nuevoNombre: string = ""; 
   nombre: string = ""; 
 
+  //Propiedades de bio
+  nuevaBio: string = ""
+
   //Propiedades del email
   nuevoEmail: string = ""; 
 
@@ -30,6 +33,7 @@ export class PerfilComponent {
   mostrarFormularioNom: boolean = false; 
   mostrarFormularioEma: boolean = false; 
   mostrarFormularioImg: boolean = false; 
+  mostrarFormularioBio: boolean = false; 
 
   //Spinner
   loading: boolean = false;
@@ -121,6 +125,38 @@ export class PerfilComponent {
   }
 
 
+
+  
+  /*Bio*/ 
+  cambiarBio() {
+    this.loading = false; 
+    if (this.email) {
+      this._authService.modificarBio(this.email, this.nuevaBio).subscribe(
+        (resp: any) => {
+          if (resp) {
+            console.log("Bio modificada", resp); 
+            this.toastr.success('La bio ha sido modificada', 'Bio modificada');
+            this.cargarDatos();
+          }
+        },
+        (err) => {
+          console.log(err); 
+          this.toastr.error('El usuario no existe', 'Error');
+        }
+      )
+    }
+  }
+
+  abrirFormularioBio() {
+     this.mostrarFormularioBio = true; 
+  }
+
+  cerrarFormularioBio() {
+     this.mostrarFormularioBio = false; 
+  }
+
+
+
   
  /*Password*/
  cambiarPassword() {
@@ -168,6 +204,8 @@ export class PerfilComponent {
   }
     
 
+
+
   /*Nombre*/
   cambiarNombre() {
     this.loading = false; 
@@ -198,6 +236,7 @@ export class PerfilComponent {
   }
 
 
+
   /*Email*/ 
   cambiarEmail() {
     this.loading = false; 
@@ -221,9 +260,10 @@ export class PerfilComponent {
     this.mostrarFormularioEma = true; 
   }
 
-  cerrarFormularioEma() {
+ cerrarFormularioEma() {
     this.mostrarFormularioEma = false; 
   }
+
 
 
   /*Apariencia*/
@@ -253,6 +293,8 @@ export class PerfilComponent {
     }    
   }
 
+
+  /*//////////////*/
 
   eliminarCuenta(id: any) {
     this.cargarDatos(); 

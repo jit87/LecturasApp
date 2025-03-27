@@ -203,6 +203,29 @@ export async function modificarImagen(req, res) {
 };
 
 
+//Función para modificar bio
+export async function modificarBio(req, res) {
+
+    try {
+        const { email, nuevaBio } = req.body;
+
+            //Busca al usuario por email
+            const usuario = await Usuario.findOne({ email });
+            if (!usuario) {
+                return res.status(404).json({ message: 'Usuario no encontrado' });
+            }
+
+            //Actualiza la contraseña
+            usuario.bio = nuevaBio;
+            await usuario.save();
+            console.log("Bio modificada"); 
+            res.json({ nuevaBio: nuevaBio }); 
+    } catch (err) {
+        res.status(500).send(err);
+    }
+};
+
+
 //Función para modificar apariencia
 export async function modificarApariencia(req, res) {
 

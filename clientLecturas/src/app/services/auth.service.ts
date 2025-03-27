@@ -216,6 +216,22 @@ export class AuthService {
     this.perfilImagenSource.next(nuevaImagen); 
   }
 
+  
+  modificarBio(email: string, nuevaBio: string): Observable<any> {
+    return this.http.put<any>(`${this.authUrl}/modificar-bio`, {
+      email,
+      nuevaBio
+    }).pipe(
+      tap(response => {
+        console.log('Bio modificada', response);
+      }),
+      catchError(error => {
+        console.error('Error', error);
+        return throwError(error);
+      })
+    );
+  }
+
 
    modificarApariencia(email: string | null, value: string): Observable<any> {
     return this.http.put<any>(`${this.authUrl}/modificar-apariencia`, {

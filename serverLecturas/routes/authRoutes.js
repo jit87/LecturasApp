@@ -1,6 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import { registro, login, getUserByEmail, getIdByEmail, modificarPassword, modificarNombre, modificarEmail, modificarImagen, modificarApariencia, getUserById, eliminarUsuario } from '../controllers/authController.js';
+import { registro, login, getUserByEmail, getIdByEmail, modificarPassword, modificarNombre, modificarEmail, modificarImagen, modificarApariencia, getUserById, eliminarUsuario, modificarBio } from '../controllers/authController.js';
 
 dotenv.config();
 
@@ -28,6 +28,9 @@ router.put('/modificar-email', modificarEmail);
 
 //Ruta para modificar imagen
 router.put('/modificar-imagen', modificarImagen);
+
+//Ruta para modificar biografía
+router.put('/modificar-bio', modificarBio);
 
 //Ruta para modificar apariencia
 router.put('/modificar-apariencia', modificarApariencia);

@@ -8,7 +8,7 @@ interface DatosPerfil {
   nombre: string;
   usuario: string;
   imagen: string;
-  biografia: string;
+  bio: string;
   librosLeidos: string[];
   librosPendientes: string[];
   seguidores: string[];
@@ -31,7 +31,7 @@ export class PublicoperfilComponent {
     nombre: "",
     usuario: "",
     imagen: "",
-    biografia: "",
+    bio: "",
     librosLeidos: [],
     librosPendientes: [],
     seguidores: [],
@@ -81,6 +81,7 @@ export class PublicoperfilComponent {
             this.DatosPerfil.seguidores = resp.seguidores;
             this.DatosPerfil.seguidos = resp.seguidos; 
             this.DatosPerfil._id = resp._id; 
+            this.DatosPerfil.bio = resp.bio; 
       }, (err) => {
         console.log("Error de obtención de datos", err); 
     })

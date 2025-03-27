@@ -5,6 +5,7 @@
 :root {
     --background-color1:rgb(185, 208, 198);
     --background-color2: aquamarine;
+    --background-color3: black; 
     --text-color1: #ffffff; 
     --text-color2: rgb(26, 27, 27);
 }
