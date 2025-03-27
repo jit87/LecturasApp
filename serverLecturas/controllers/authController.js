@@ -215,7 +215,7 @@ export async function modificarBio(req, res) {
                 return res.status(404).json({ message: 'Usuario no encontrado' });
             }
 
-            //Actualiza la contraseña
+            //Actualiza la bio
             usuario.bio = nuevaBio;
             await usuario.save();
             console.log("Bio modificada"); 

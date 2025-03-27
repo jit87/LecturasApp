@@ -59,7 +59,12 @@ h2 {
 } */
 
 .modo-oscuro .card-header {
-    color: white; 
+    color: white !important; 
+    background-color: lightslategray !important;
+}
+
+.card-header {
+    color: white !important;
     background-color: lightslategray !important;
 }
 
