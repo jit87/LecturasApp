@@ -140,6 +140,10 @@ table {
     border-color: white;
 }
 
+.modo-oscuro .s-social:hover {
+    background-color: var(--background-color2) !important;
+}
+
 .btn-buscar-mis-libros {
     border-color: grey;
     color: grey; 
