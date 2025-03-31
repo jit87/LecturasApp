@@ -27,7 +27,16 @@ export async function agregarLibro(req, res) {
         APIid
   });
   
-  try {
+    try {  
+        //Si el libro ya se ha leído agregamos el libro a la lista de libros leídos del usuario
+        if (nuevoLibro.estado === "Leído") {
+            const usuario = await Usuario.findById(req._idUsuario);
+            if (!usuario) {
+                return res.status(404).json({ message: 'Usuario no encontrado' });
+            }
+            usuario.librosLeidos.push(nuevoLibro._id);
+            await usuario.save();
+        }
     const libroGuardado = await nuevoLibro.save();
     res.status(201).json(libroGuardado);
   } catch (err) {
@@ -72,8 +81,17 @@ export async function actualizarLibro(req, res) {
 
         libro.estado = estado || libro.estado;
         libro.coleccion = coleccion || libro.coleccion;
+        
+         //Si el libro ya se ha leído agregamos el libro a la lista de libros leídos del usuario
+         if (libro.estado === "Leído") {
+            const usuario = await Usuario.findById(req._idUsuario);
+            if (!usuario) {
+                return res.status(404).json({ message: 'Usuario no encontrado' });
+            }
+            usuario.librosLeidos.push(libro._id);
+            await usuario.save();
+          }
        
-
         const libroActualizado = await libro.save();
         res.json(libroActualizado);
 

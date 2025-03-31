@@ -36,7 +36,7 @@ router.get('/APIid/:APIid', obtenerLibroAPIid);
 router.get('/todos', obtenerTodosLibros);
 
 
-//Ruta para obtener todos los libros
+//Ruta para obtener todos los libros leídos por el usuario
 router.get('/leidos/:id', obtenerLibrosLeidos);
 
 

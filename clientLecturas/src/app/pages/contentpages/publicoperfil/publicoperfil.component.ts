@@ -67,7 +67,6 @@ export class PublicoperfilComponent {
       }
     )
     this.compruebaSiEsSeguido(this.idUsuario); 
-    this.getLibrosLeidos(this.idUsuario); 
   }
   
 
@@ -83,6 +82,7 @@ export class PublicoperfilComponent {
             this.DatosPerfil.seguidos = resp.seguidos; 
             this.DatosPerfil._id = resp._id; 
             this.DatosPerfil.bio = resp.bio; 
+            this.DatosPerfil.librosLeidos = resp.librosLeidos; 
       }, (err) => {
         console.log("Error de obtención de datos", err); 
     })
@@ -146,15 +146,12 @@ export class PublicoperfilComponent {
     this.listaSeguidores = []; 
     this._lecturasBBDDService.getSeguidoresById(id).subscribe(
       (resp) => {
-        console.log("Resuesta:",resp); 
        resp.forEach((id:any) => {
             this._authService.getUserById(id).subscribe(
               (usuario: any) => {
-                console.log("Usuario:",usuario); 
                 if (usuario != undefined) {
                   this.listaSeguidores.push(usuario);
-                  console.log("Seguidores:",this.listaSeguidores); 
-                }
+                 }
                 }
               )
           });
@@ -167,7 +164,7 @@ export class PublicoperfilComponent {
 
 
 
-  getLibrosLeidos(id:string) {
+  /*getLibrosLeidos(id:string) {
     this._lecturasBBDDService.getLibrosLeidos(id).subscribe(
       (resp) => {
         console.log(resp); 
@@ -177,7 +174,7 @@ export class PublicoperfilComponent {
       }
    )
  }
-        
+        */
         
     
 

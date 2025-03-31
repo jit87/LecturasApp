@@ -1,14 +1,24 @@
+
+.card {
+    padding-left: 5%;
+}
+
 .seguidor-card {
     background-color: white !important;
 }
 
 
-.btn-seguir {
-    width:100%; 
+.info-usuario{
+    /*position: relative;*/
+    margin-top:2%; 
+    /* padding-left: 10%; */
 }
 
-.info-usuario{
-    position: relative;
-    margin-top:2%; 
+.img-fluid{
+    height: revert-layer;
+}
+
+.btn-seguir {
+    width: max-content;
 }
 

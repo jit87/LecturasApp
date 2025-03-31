@@ -57,7 +57,6 @@ getColecciones(usuarioId: string) {
 
 
 
-//Cambiar el acceso del lS a la BBDD cuando se cree el backend
 guardarCambios(form: NgForm) {  
   if (form.invalid) {
     console.log("Formulario no valido");
