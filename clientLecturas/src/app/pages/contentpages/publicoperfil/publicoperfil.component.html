@@ -27,6 +27,29 @@
                             <h5 class="mt-4">Seguidores ({{  DatosPerfil.seguidores.length }})</h5>
                             <h5 class="mt-4">Seguidos ({{  DatosPerfil.seguidos.length }})</h5>
                             <h5 class="mt-4">Libros leídos ({{ DatosPerfil.librosLeidos.length }})</h5>
+                            <div class="caja-muro mt-4">
+                                <h5 class="mt-4 mb-4">Actividad reciente:</h5>
+                                <div *ngFor="let post of posts; let i = index" class="card mb-3 p-3">
+                                    <div class="card-body">
+                                        <!-- <img class="imagenUsuario" [src]="DatosPerfil.imagen" class="rounded-circle me-3" width="50" height="50"> -->
+                                        <b style="font-size: large;cursor: pointer;" [routerLink]="['/perfilpublico', post._idUsuario]"
+                                            class="nombre">{{DatosPerfil.nombre }}</b>
+                                        &nbsp;ha actualizado su biblioteca con el libro:
+                                        <br>
+                                        <hr />
+                                        <div class="d-flex" style="padding: 2%;">
+                                            <img [src]="post.imagen || 'default.png'" class="rounded me-3" width="124" height="164">
+                                            <div>
+                                                <h5 class="mb-1" [routerLink]="['/info', post.APIid]" routerLinkActive="router-link-active"
+                                                    style="cursor: pointer;" class="titulo">{{ post.titulo }}</h5>
+                                                <p class="text-muted mb-1">De {{ post.autores }}</p>
+                                                <p class="solo-3-lineas mb-2">{{ post.descripcion }}</p>
+                                                <!-- <app-estado-libro [libro]="post"></app-estado-libro> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="info-seguidores col-md-3">
                             <h5 class="mt-4">Lista de Seguidores</h5>

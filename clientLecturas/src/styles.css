@@ -187,4 +187,8 @@ table {
     color: grey; 
 }
 
-
+.solo-3-lineas {
+    max-height: 4.5em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

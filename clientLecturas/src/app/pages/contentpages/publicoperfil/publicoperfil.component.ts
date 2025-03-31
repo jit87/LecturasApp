@@ -26,7 +26,7 @@ interface DatosPerfil {
 export class PublicoperfilComponent {
 
   idUsuario: any = ""; 
-  seguidos: never[] | undefined;
+  seguidos: any[] | undefined;
   DatosPerfil: DatosPerfil = {
     nombre: "",
     usuario: "",
@@ -41,6 +41,7 @@ export class PublicoperfilComponent {
   idLogueado: any;
   mostrarBotonAgregar: number = -1; 
   listaSeguidores: any = []; 
+  posts: any[] = [];
 
 
   constructor(private _authService: AuthService,
@@ -67,6 +68,7 @@ export class PublicoperfilComponent {
       }
     )
     this.compruebaSiEsSeguido(this.idUsuario); 
+    this.getActividad(this.idUsuario); 
   }
   
 
@@ -163,18 +165,35 @@ export class PublicoperfilComponent {
   }
 
 
-
-  /*getLibrosLeidos(id:string) {
-    this._lecturasBBDDService.getLibrosLeidos(id).subscribe(
-      (resp) => {
-        console.log(resp); 
-      },
-      (err) => {
-        console.log(err); 
-      }
-   )
- }
-        */
+  
+    getActividad(idUsuario: string) {
+      this.posts = []; 
+        this._lecturasBBDDService.getListLibrosUsuarios().subscribe(
+          (resp) => { 
+            resp.forEach((libro: any) => {
+              if (idUsuario == libro._idUsuario) {
+                   let post = {
+                      APIid: libro.APIid,
+                      _id: libro._id,
+                      _idUsuario: libro._idUsuario,
+                      nombreUsuario: "", 
+                      imagenUsuario: "",
+                      titulo: libro.titulo,
+                      autores: libro.autores,
+                      editor: libro.editor,
+                      descripcion: libro.descripcion || "",
+                      imagen: libro.imagen || "default.png",
+                     };
+                  this.posts.push(post);
+                }
+              });
+          },
+          (err) => {
+            console.log(err);
+          }
+        );
+        console.log(this.posts); 
+  }
         
     
 
