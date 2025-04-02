@@ -88,6 +88,7 @@ export class HomeComponent {
                 info: resp.items[i].volumeInfo
           };
           this.recomendaciones.push(recomendacionInfo);
+          this.tematicaRecomendaciones = tematica; 
         }
       },
       (err) => {
