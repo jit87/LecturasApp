@@ -65,16 +65,16 @@
                 <div class="card mb-3">
                     <div class="row g-0">
                         <div class="col-md-4">
-                            <img src="{{recomendacion.volumeInfo.imageLinks.thumbnail}}" class="img-fluid rounded-start"
+                            <img src="{{recomendacion.info.imageLinks.thumbnail}}" class="img-fluid rounded-start"
                                 alt="Recomendación {{i}}" style="padding: 20%;">
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
-                                <h5 class="card-title">{{ recomendacion.volumeInfo.title }}</h5>
+                                <h5 class="card-title"[routerLink]="['/info',recomendacion.id]">{{ recomendacion.info.title }}</h5>
                                 <p class="card-text mb-1">
-                                <small style="font-size: small;font-weight: 600;">{{ recomendacion.volumeInfo.authors[0] }}</small></p>
-                                <p class="card-text solo-3-lineas">{{ recomendacion.volumeInfo.description }}</p>
-                                <a href="#" class="btn btn-primary">Añadir a mis lecturas</a>
+                                <small style="font-size: small;font-weight: 600;">{{ recomendacion.info.authors[0] }}</small></p>
+                                <p class="card-text solo-3-lineas">{{ recomendacion.info.description }}</p>
+                                <app-estado-libro [libro]="recomendacion"></app-estado-libro>
                             </div>
                         </div>
                     </div>

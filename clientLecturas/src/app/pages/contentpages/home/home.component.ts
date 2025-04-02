@@ -16,7 +16,7 @@ export class HomeComponent {
   cargados: boolean = false; 
   disponibles: boolean = true; 
   libro: LibroModel = new LibroModel(); 
-  librosGuardados: any[] = []; 
+  librosGuardados: object[] = []; 
   usuarioID: string = ""; 
   recomendaciones: any[] = []; 
   tematicaRecomendaciones: string = "";  
@@ -78,16 +78,23 @@ export class HomeComponent {
     )
   }
 
+
   getRecomendaciones(tematica: string) {
     this._librosService.getLibrosByTematica(tematica).subscribe(
-      (resp) => {
-        this.tematicaRecomendaciones = tematica; 
-        this.recomendaciones = resp.items; 
-      }, 
+       (resp) => {
+        for (let i = 0; i < resp.items.length; i++) {
+           const recomendacionInfo = {
+                id: resp.items[i].id,
+                info: resp.items[i].volumeInfo
+          };
+          this.recomendaciones.push(recomendacionInfo);
+        }
+      },
       (err) => {
-        console.log(err); 
+        console.log("Ha fallado", err); 
       }
-    ); 
+    )
+       
   }
 
 
