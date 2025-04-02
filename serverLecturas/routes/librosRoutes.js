@@ -32,7 +32,7 @@ router.get('/libro/:id', obtenerLibro);
 router.get('/APIid/:APIid', obtenerLibroAPIid); 
 
 
-//Ruta para obtener todos los libros
+//Ruta para obtener todos los libros para la parte social
 router.get('/todos', obtenerTodosLibros);
 
 

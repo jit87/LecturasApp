@@ -36,8 +36,8 @@ export class LibrosService {
   }
 
   //Para las recomendaciones 
-   getLibrosByTematica(tematica: string): Observable<any> {
-    return this.http.get(`${this.url}subject:${tematica}&key=${this.Google_API_KEY}&maxResults=${this.maxRecomendaciones}&orderBy=newest`); 
+  getLibrosByTematica(tematica: string): Observable<any> {
+     return this.http.get(`${this.url}subject:${tematica}&key=${this.Google_API_KEY}&maxResults=${this.maxRecomendaciones}&orderBy=newest`);  
   }
 
 

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { LibrosService } from '../../../services/libros.service';
 import { LibroModel } from '../../../models/libro.model';
 import { LecturasBBDDService } from '../../../services/lecturas-bbdd.service';
+import { AuthService } from '../../../services/auth.service';
 
 
 @Component({
@@ -18,15 +19,19 @@ export class HomeComponent {
   librosGuardados: any[] = []; 
   usuarioID: string = ""; 
   recomendaciones: any[] = []; 
+  tematicaRecomendaciones: string = "";  
 
 
-  constructor(private _librosService: LibrosService, private  _lecturasBBDDService: LecturasBBDDService) {
+  constructor(private _librosService: LibrosService,
+              private _lecturasBBDDService: LecturasBBDDService,
+              private _authService: AuthService)
+  {
     this.getLibrosNuevos(); 
-    this.getInfoUsuario(); 
+    this.getUsuarioID(); 
   }
 
  
-
+  //Obtiene los libros nuevos que haya publicado la API
   getLibrosNuevos() {
     this._librosService.getLibrosNuevos().subscribe(
      (resp: any) => {
@@ -48,7 +53,21 @@ export class HomeComponent {
   }
 
 
-  getInfoUsuario() {
+  getUsuarioID() {
+      const email = localStorage.getItem("email"); 
+      this._authService.getUserByEmail(email).subscribe(
+        (resp: any) => {
+          this.usuarioID = resp._id;
+          this.getInfoUsuario(); 
+        },
+        (err) => {
+          console.log(err); 
+        }
+    ); 
+  }
+
+
+  getInfoUsuario() { 
     this._lecturasBBDDService.getListLibros(this.usuarioID).subscribe(
       (resp) => {
         this.getRecomendaciones(resp[0].categorias); 
@@ -62,14 +81,16 @@ export class HomeComponent {
   getRecomendaciones(tematica: string) {
     this._librosService.getLibrosByTematica(tematica).subscribe(
       (resp) => {
+        this.tematicaRecomendaciones = tematica; 
         this.recomendaciones = resp.items; 
-        console.log(resp); 
       }, 
       (err) => {
         console.log(err); 
       }
     ); 
   }
+
+
 
 
 

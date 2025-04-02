@@ -18,7 +18,7 @@ export class LecturasBBDDService {
 
 
   //LIBROS
-  //Obtenemos las libros guardades en mongoDB
+  //Obtenemos las libros guardados en mongoDB
   getListLibros(_idUsuario: string): Observable<any> {
     return this.http.get(this.url + "/libros/todos/" + _idUsuario);
   }
