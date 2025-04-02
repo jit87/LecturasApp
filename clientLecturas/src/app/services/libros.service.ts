@@ -12,6 +12,7 @@ export class LibrosService {
   url: string = "https://www.googleapis.com/books/v1/volumes?q="
   Google_API_KEY: string = environment.Google_API_KEY;  
   max: number = 10; 
+  maxRecomendaciones: number = 2; 
 
   id: string = ""; 
   titulo: string = "";
@@ -34,7 +35,10 @@ export class LibrosService {
     return this.http.get(`${this.url.slice(0,this.url.length-3)}/${id}?&key=${this.Google_API_KEY}`);
   }
 
-
+  //Para las recomendaciones 
+   getLibrosByTematica(tematica: string): Observable<any> {
+    return this.http.get(`${this.url}subject:${tematica}&key=${this.Google_API_KEY}&maxResults=${this.maxRecomendaciones}&orderBy=newest`); 
+  }
 
 
 

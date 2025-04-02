@@ -51,6 +51,7 @@ h2 {
 
 .dropdown-item:hover {
     background-color: var(--background-color2) !important;
+    transition: 0.8s;
 }
 
 /* .card {
@@ -59,6 +60,8 @@ h2 {
     box-shadow: 3px 3px 29px -12px rgba(0, 0, 0, 0.75);
 } */
 
+
+/*//////Modo oscuro///////*/
 
 .modo-oscuro .card-header {
     color: white !important; 
@@ -148,10 +151,13 @@ table {
     border-color: white;
 }
 
+
+/*////////////Fin modo oscuro///////////*/
+
 .s-social:hover {
    background-color: var(--background-color2) !important;
    cursor: pointer !important;
-   animation: animacionFondo 1s alternate !important;
+   transition: 0.8s;
 }
 
 .btn-buscar-mis-libros {
@@ -192,3 +198,4 @@ table {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+

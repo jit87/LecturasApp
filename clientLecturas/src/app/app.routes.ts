@@ -1,4 +1,3 @@
-
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './pages/contentpages/home/home.component';
 import { PerfilComponent } from './pages/contentpages/perfil/perfil.component';
@@ -7,7 +6,6 @@ import { LoginComponent } from './pages/authpages/login/login.component';
 import { RegistroComponent } from './pages/authpages/registro/registro.component';
 import { BuscadorComponent } from './pages/contentpages/buscador/buscador.component';
 import { InfoComponent } from './pages/contentpages/info/info.component';
-import { EditarLibroComponent } from './pages/contentpages/editar-libro/editar-libro.component';
 import { AuthGuard } from './guards/auth.guard';
 import { SocialComponent } from './pages/contentpages/social/social.component';
 import { PublicoperfilComponent } from './pages/contentpages/publicoperfil/publicoperfil.component';

@@ -17,11 +17,10 @@
         </div>
         <div class="row">
             <div class="col-md-4" *ngFor="let libro of librosNuevos">
-                <div class="card mb-3" style="max-width: 540px;">
+                <div class="caja-libro-home card mb-3" style="max-width: 540px;">
                     <div class="row g-0 align-items-stretch" style="height: 100%;">
                         <div class="col-md-4" style="padding: 20px;">
-                            <img src="{{libro.info.imageLinks.smallThumbnail}}" class="img-fluid rounded-start h-100"
-                                alt="{{ libro.info.title }}" style="object-fit: contain;">
+                            <img src="{{libro.info.imageLinks.smallThumbnail}}"  class="img-fluid rounded-start h-100" alt="{{ libro.info.title }}" style="object-fit: contain;">
                         </div>
                         <div class="col-md-8">
                             <div class="card-body d-flex flex-column justify-content-between" style="height: 100%;">
@@ -62,38 +61,19 @@
     <div class="container">
         <h2 class="text-center mb-4">Recomendaciones personalizadas</h2>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6" *ngFor="let recomendacion of recomendaciones; let i=index">
                 <div class="card mb-3">
                     <div class="row g-0">
                         <div class="col-md-4">
-                            <img src="https://via.placeholder.com/100" class="img-fluid rounded-start"
-                                alt="Recomendación 1">
+                            <img src="{{recomendacion.volumeInfo.imageLinks.thumbnail}}" class="img-fluid rounded-start"
+                                alt="Recomendación {{i}}" style="padding: 20%;">
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
-                                <h5 class="card-title">El Principito</h5>
+                                <h5 class="card-title">{{ recomendacion.volumeInfo.title }}</h5>
                                 <p class="card-text mb-1">
-                                <small style="font-size: small;font-weight: 600;">Antoine Saint-Exupery</small></p>
-                                <p class="card-text">Una encantadora historia sobre la vida y la amistad.</p>
-                                <a href="#" class="btn btn-primary">Añadir a mis lecturas</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="card mb-3">
-                    <div class="row g-0">
-                        <div class="col-md-4">
-                            <img src="https://via.placeholder.com/100" class="img-fluid rounded-start"
-                                alt="Recomendación 2">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">La Odisea</h5>
-                                <p class="card-text mb-1">
-                                <small style="font-size: small;font-weight: 600;">Homero</small></p>
-                                <p class="card-text">Una épica aventura en el mundo antiguo, escrita por Homero.</p>
+                                <small style="font-size: small;font-weight: 600;">{{ recomendacion.volumeInfo.authors[0] }}</small></p>
+                                <p class="card-text solo-3-lineas">{{ recomendacion.volumeInfo.description }}</p>
                                 <a href="#" class="btn btn-primary">Añadir a mis lecturas</a>
                             </div>
                         </div>
@@ -104,3 +84,5 @@
     </div>
 </section>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+

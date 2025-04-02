@@ -16,7 +16,6 @@ import { PublicoperfilComponent } from './contentpages/publicoperfil/publicoperf
 
 
 
-
 @NgModule({
   declarations: [
     LoginComponent,

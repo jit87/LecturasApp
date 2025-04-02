@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { LibrosService } from '../../../services/libros.service';
 import { LibroModel } from '../../../models/libro.model';
+import { LecturasBBDDService } from '../../../services/lecturas-bbdd.service';
 
 
 @Component({
@@ -15,11 +16,13 @@ export class HomeComponent {
   disponibles: boolean = true; 
   libro: LibroModel = new LibroModel(); 
   librosGuardados: any[] = []; 
-  usuarioID: String = ""; 
+  usuarioID: string = ""; 
+  recomendaciones: any[] = []; 
 
 
-  constructor(private _librosService: LibrosService) {
+  constructor(private _librosService: LibrosService, private  _lecturasBBDDService: LecturasBBDDService) {
     this.getLibrosNuevos(); 
+    this.getInfoUsuario(); 
   }
 
  
@@ -42,6 +45,30 @@ export class HomeComponent {
         this.cargados = true;
       }
     )
+  }
+
+
+  getInfoUsuario() {
+    this._lecturasBBDDService.getListLibros(this.usuarioID).subscribe(
+      (resp) => {
+        this.getRecomendaciones(resp[0].categorias); 
+      },
+      (err) => {
+        console.log(err);
+      }
+    )
+  }
+
+  getRecomendaciones(tematica: string) {
+    this._librosService.getLibrosByTematica(tematica).subscribe(
+      (resp) => {
+        this.recomendaciones = resp.items; 
+        console.log(resp); 
+      }, 
+      (err) => {
+        console.log(err); 
+      }
+    ); 
   }
 
 
