@@ -63,7 +63,10 @@ h2 {
 .recomendaciones {
     border-radius: 5px;
     padding: 5%;
-    background-color: rgb(28, 68, 50) !important;
+    background-color: coral;
+    -webkit-box-shadow: 3px 3px 29px -12px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 3px 3px 29px -12px rgba(0, 0, 0, 0.75);
+    box-shadow: 3px 3px 29px -12px rgba(0, 0, 0, 0.75);
 }
 
 .recomendaciones h2 {
@@ -156,6 +159,12 @@ table {
     border-color: white;
 }
 
+.modo-oscuro .caja-libro-home:hover {
+    -webkit-box-shadow: 3px 3px 29px -12px aquamarine;
+    -moz-box-shadow: 3px 3px 29px -12px aquamarine;
+    box-shadow: 3px 3px 29px -12px aquamarine;
+    transition:0.5s; 
+}
 
 /*////////////Fin modo oscuro///////////*/
 
@@ -180,7 +189,7 @@ table {
     border-color: white;
 }
 
- .btn-outline-secondary {
+.btn-outline-secondary {
      color: var(--text-color3);
      border-color:var(--background-color3);
  }
@@ -204,3 +213,13 @@ table {
     text-overflow: ellipsis;
 }
 
+.card-title:hover {
+    text-decoration: underline;
+}
+
+.caja-libro-home:hover {
+    -webkit-box-shadow: 3px 3px 29px -12px rgba(0, 0, 0, 0.35);
+    -moz-box-shadow: 3px 3px 29px -12px rgba(0, 0, 0, 0.35);
+    box-shadow: 3px 3px 29px -12px rgba(0, 0, 0, 0.35);
+    transition: 0.5s;
+}
