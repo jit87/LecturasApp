@@ -30,12 +30,10 @@ h2 {
 
 
 .navbar-container {
-   /* background-color: rgb(175, 230, 248);*/
     background-color: var(--background-color2); 
 }
 
 .navbar {
-    /* background-color: rgb(175, 230, 248) !important; */
     background-color: var(--background-color2) !important;
     margin-left: 16%;
     margin-right: 16%;
@@ -54,11 +52,6 @@ h2 {
     transition: 0.8s;
 }
 
-/* .card {
--webkit-box-shadow: 3px 3px 29px -12px rgba(0, 0, 0, 0.75);
-    -moz-box-shadow: 3px 3px 29px -12px rgba(0, 0, 0, 0.75);
-    box-shadow: 3px 3px 29px -12px rgba(0, 0, 0, 0.75);
-} */
 
 .recomendaciones {
     border-radius: 5px;
@@ -77,16 +70,34 @@ table {
     border-radius: 5px;
 }
 
+
+form {
+    overflow: hidden;
+    min-width: fit-content;
+}
+
+
+/*Boton X de los formularios de perfil y editar-libro*/
+.cerrar-btn {
+    background: none;
+    border: none;
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    color: white;
+}
+
+
 /*//////Modo oscuro///////*/
 
 .modo-oscuro .card-header {
     color: white !important; 
-    background-color: lightslategray !important;
+    background-color: black !important;
 }
 
 .card-header {
     color: white !important;
-    background-color: lightslategray !important;
+    background-color: black !important;
 }
 
 
@@ -94,9 +105,6 @@ table {
     color: var(--text-color1) !important;
 }
 
-.modo-oscuro h4 {
-    color: var(--text-color1) !important;
-}
 
 .modo-oscuro h2 {
     color: var(--text-color1) !important;
@@ -110,9 +118,6 @@ table {
     color: var(--text-color2) !important;
 }
 
-/*.modo-oscuro .list-group-item  {
-    background-color: var(--background-color1) !important;
-}*/
 
 .modo-oscuro .s-social {
     background-color: #e4f7f0 !important;
@@ -166,7 +171,12 @@ table {
     transition:0.5s; 
 }
 
+.modo-oscuro .cuenta-txt {
+    color: white; 
+}
+
 /*////////////Fin modo oscuro///////////*/
+
 
 .s-social:hover {
    background-color: var(--background-color2) !important;
@@ -207,6 +217,7 @@ table {
     color: grey; 
 }
 
+/*Usado en los textos de las tarjetas de los libros*/
 .solo-3-lineas {
     max-height: 4.5em;
     overflow: hidden;
@@ -222,4 +233,43 @@ table {
     -moz-box-shadow: 3px 3px 29px -12px rgba(0, 0, 0, 0.35);
     box-shadow: 3px 3px 29px -12px rgba(0, 0, 0, 0.35);
     transition: 0.5s;
+}
+
+input {
+    box-sizing: border-box;
+}
+
+.select-editar-libro{
+    max-width: fit-content;
+}
+
+
+
+
+/*/////Responsive/////*/
+
+@media only screen and (max-width: 991px) {
+
+  .form-login-registro {
+    width: 50% !important;
+  }
+  
+  /*Div de los libros de la home y de buscador*/
+  .caja-descripcion-libro{
+    width: 50%;
+    margin-left: -15%; 
+  }
+
+  .caja-imagen-libro {
+    padding: 20px !important;
+    width: 50%;
+  }
+
+  /*Imagenes de libros de home y buscador*/
+  .h-100 {
+    width:60%;
+    object-fit: cover;
+  }
+
+
 }

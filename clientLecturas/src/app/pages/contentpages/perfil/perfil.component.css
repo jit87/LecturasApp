@@ -1,7 +1,32 @@
+
+
+.formularios-perfil .container .tarjeta {
+    border-radius: 10px;
+}
+
+.formularios-perfil .cuerpo {
+    background-color: white;
+}
+
+.formularios-perfil .cuerpo h4 {
+    background-color: white;
+}
+
+
 .fa-regular.fa-pen-to-square {
     cursor: pointer;
 }
 
+.cuerpo {
+    padding: 1.5rem;
+}
+
+.tarjeta {
+    background-color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
 
 .backdrop {
     position: fixed;
@@ -25,23 +50,33 @@
 }
 
 
-.btn.btn-close {
-    float: right;
-}
-
-
-
 .cajaPass{
     display: flex;
     flex-wrap: nowrap;
 }
 
 
+.cabecera {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #000;
+}
+
+.cabecera h4 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: white;
+}
 
 
 
 
-/*Toggle button*/
+
+
+/*Toggle btn*/
 .switch {
     position: relative;
     display: inline-block;
@@ -93,7 +128,6 @@ input:checked+.slider:before {
     transform: translateX(26px);
 }
 
-/* Rounded sliders */
 .slider.round {
     border-radius: 34px;
 }

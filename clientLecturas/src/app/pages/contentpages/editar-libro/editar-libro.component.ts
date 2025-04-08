@@ -20,7 +20,7 @@ export class EditarLibroComponent {
 //Evento para notificar al padre (libros) el cierre del formulario
 @Output() cerrarFormulario = new EventEmitter<void>();
   
-//Recibimos el usuario
+//Recibimos el usuario del padre
 @Input() usuarioID!: string;
 
   

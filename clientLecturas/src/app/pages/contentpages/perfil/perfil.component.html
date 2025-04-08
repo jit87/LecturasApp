@@ -71,7 +71,7 @@
 
 
     <!--Formularios-->
-    <section class="animate__animated animate__fadeIn">
+    <section class="formularios-perfil animate__animated animate__fadeIn">
         <div class="container">
             <!-- Fondo oscuro cuando el formulario está abierto -->
             <div *ngIf="mostrarFormularioPass || mostrarFormularioNom || mostrarFormularioEma || mostrarFormularioImg" class="backdrop"
@@ -79,12 +79,12 @@
 
 
             <!-- Subir imagen -->
-            <div class="card shadow-lg modal-form animate__animated animate__fadeIn" *ngIf="mostrarFormularioImg">
-                <div class="card-header text-center">
+            <div class="tarjeta shadow-lg modal-form animate__animated animate__fadeIn" *ngIf="mostrarFormularioImg">
+                <div class="cabecera">
                     <h4 class="mb-0">Subir Imagen</h4>
-                    <button class="btn btn-close" (click)="cerrarFormularioImg()"></button>
+                    <button class="cerrar-btn" (click)="cerrarFormularioImg()">x</button>
                 </div>
-                <div class="card-body">
+                <div class="cuerpo">
                     <form novalidate>
                         <div *ngIf="loading" class="text-center">
                             <i class="fas fa-spinner fa-spin" style="font-size: 24px;"></i>
@@ -111,12 +111,12 @@
             </div>
 
             <!-- Cambiar bio -->
-            <div class="card shadow-lg modal-form animate__animated animate__fadeIn" *ngIf="mostrarFormularioBio">
-                <div class="card-header text-center">
+            <div class="tarjeta shadow-lg modal-form animate__animated animate__fadeIn" *ngIf="mostrarFormularioBio">
+                <div class="cabecera">
                     <h4 class="mb-0">Cambiar Bio</h4>
-                    <button class="btn btn-close" (click)="cerrarFormularioBio()"></button>
+                    <button class="cerrar-btn" (click)="cerrarFormularioBio()">x</button>
                 </div>
-                <div class="card-body">
+                <div class="cuerpo">
                     <form (ngSubmit)="cambiarBio()" novalidate>
                         <div class="mb-3">
                             <label for="nuevaBio" class="form-label">Nueva bio</label>
@@ -131,12 +131,12 @@
 
 
             <!-- Cambiar contraseña -->
-            <div class="card shadow-lg modal-form animate__animated animate__fadeIn" *ngIf="mostrarFormularioPass">
-                <div class="card-header text-center">
+            <div class="tarjeta shadow-lg modal-form animate__animated animate__fadeIn" *ngIf="mostrarFormularioPass">
+                <div class="cabecera">
                     <h4 class="mb-0">Cambiar Contraseña</h4>
-                    <button class="btn btn-close" (click)="cerrarFormularioPass()"></button>
+                    <button class="cerrar-btn" (click)="cerrarFormularioPass()">x</button>
                 </div>
-                <div class="card-body">
+                <div class="cuerpo">
                     <form (ngSubmit)="cambiarPassword()" novalidate>
                         <div *ngIf="loading" class="text-center">
                             <i class="fas fa-spinner fa-spin" style="font-size: 24px;"></i>
@@ -170,12 +170,12 @@
             </div>
 
             <!-- Cambiar nombre -->
-            <div class="card shadow-lg modal-form animate__animated animate__fadeIn" *ngIf="mostrarFormularioNom">
-                <div class="card-header text-center">
+            <div class="tarjeta shadow-lg modal-form animate__animated animate__fadeIn" *ngIf="mostrarFormularioNom">
+                <div class="cabecera">
                     <h4 class="mb-0">Cambiar Nombre</h4>
-                    <button class="btn btn-close" (click)="cerrarFormularioNom()"></button>
+                    <button class="cerrar-btn" (click)="cerrarFormularioNom()">x</button>
                 </div>
-                <div class="card-body">
+                <div class="cuerpo">
                     <form (ngSubmit)="cambiarNombre()" novalidate>
                         <div class="mb-3">
                             <label for="nuevoNombre" class="form-label">Nuevo nombre</label>
@@ -189,12 +189,12 @@
             </div>
 
             <!-- Cambiar email -->
-            <div class="card shadow-lg modal-form animate__animated animate__fadeIn" *ngIf="mostrarFormularioEma">
-                <div class="card-header text-center">
+            <div class="tarjeta shadow-lg modal-form animate__animated animate__fadeIn" *ngIf="mostrarFormularioEma">
+                <div class="cabecera">
                     <h4 class="mb-0">Cambiar Email</h4>
-                    <button class="btn btn-close" (click)="cerrarFormularioEma()"></button>
+                    <button class="cerrar-btn" (click)="cerrarFormularioEma()">x</button>
                 </div>
-                <div class="card-body">
+                <div class="cuerpo">
                     <form (ngSubmit)="cambiarEmail()" novalidate>
                         <div class="mb-3">
                             <label for="nuevoEmail" class="form-label">Nuevo email</label>

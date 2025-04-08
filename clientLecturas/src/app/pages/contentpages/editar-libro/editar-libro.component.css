@@ -7,3 +7,106 @@ option:hover {
     background-color: aquamarine !important;
     color: #000;
 }
+
+
+.editar-libro {
+    animation: fadeIn 0.8s ease;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.contenedor {
+    max-width: 600px;
+    width: 100%;
+}
+
+.tarjeta {
+    background-color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.cabecera {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #000;
+}
+
+.cabecera h4 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: white;
+}
+
+
+.cuerpo {
+    padding: 1.5rem;
+}
+
+.grupo-formulario {
+    margin-bottom: 1.25rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.grupo-formulario label {
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+}
+
+.grupo-formulario small {
+    font-size: 0.75rem;
+    margin-top: -0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+select,
+textarea {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.acciones {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.boton-primario {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 0.6rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.boton-primario:hover {
+    background-color: #0056b3;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
