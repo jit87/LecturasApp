@@ -47,10 +47,6 @@ h2 {
     z-index:-2 !important;
 }
 
-.dropdown-item:hover {
-    background-color: var(--background-color2) !important;
-    transition: 0.8s;
-}
 
 
 .recomendaciones {
@@ -176,6 +172,14 @@ form {
     border-color: white;
 }
 
+.modo-oscuro .caja-libro-home:hover {
+    -webkit-box-shadow: 3px 3px 29px -12px aquamarine;
+    -moz-box-shadow: 3px 3px 29px -12px aquamarine;
+    box-shadow: 3px 3px 29px -12px aquamarine;
+    transition: 0.5s;
+    border-color: white;
+}
+
 /*////////////Fin modo oscuro///////////*/
 
 
@@ -223,17 +227,51 @@ form {
     max-height: 4.5em;
     overflow: hidden;
     text-overflow: ellipsis;
+    font-size: small;
+}
+
+.solo-2-lineas {
+    max-height: 3em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: small;
+}
+
+.solo-2-lineas-sinmas {
+    max-height: 3em;
+    overflow: hidden;
 }
 
 .card-title:hover {
     text-decoration: underline;
 }
 
+.caja-libro-home{
+    position: relative;
+}
+
+.dropdown-menu {
+    z-index:2 !important;
+    position: absolute !important;
+}
+
+.dropdown-item:hover {
+    z-index: 3 !important;
+    background-color: var(--background-color2) !important;
+    transition: 0.8s;
+}
+
+/*Animación de la caja de libro*/
 .caja-libro-home:hover {
     -webkit-box-shadow: 3px 3px 29px -12px rgba(0, 0, 0, 0.35);
     -moz-box-shadow: 3px 3px 29px -12px rgba(0, 0, 0, 0.35);
     box-shadow: 3px 3px 29px -12px rgba(0, 0, 0, 0.35);
     transition: 0.5s;
+    border-color: gray;
+}
+
+.caja-descripcion-libro-recomendaciones {
+    margin-left: -8%;
 }
 
 input {
@@ -243,6 +281,16 @@ input {
 .select-editar-libro{
     max-width: fit-content;
 }
+
+
+ /*Imagenes de libros de home y buscador*/
+.h-100 {
+    border-radius: 8px;
+    object-fit: cover;
+    width: 100px !important;
+    height: 150px !important;
+}
+
 
 
 
@@ -258,19 +306,17 @@ input {
   /*Div de los libros de la home y de buscador*/
   .caja-descripcion-libro{
     width: 50%;
-    margin-left: -15%; 
+    margin-left: -18%; 
+  }
+
+  .caja-descripcion-libro-recomendaciones {
+      width: 50%;
+      margin-left: -15%;
   }
 
   .caja-imagen-libro {
     padding: 20px !important;
     width: 50%;
   }
-
-  /*Imagenes de libros de home y buscador*/
-  .h-100 {
-    width:60%;
-    object-fit: cover;
-  }
-
 
 }

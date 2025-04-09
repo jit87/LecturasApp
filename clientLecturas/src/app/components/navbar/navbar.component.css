@@ -14,9 +14,6 @@
 .router-link-active {
     font-weight: 700 !important;
     color: black !important;
-   /* border: 2px solid black;
-    border-radius: 6px;*/
-    padding: 8px;
     transition: border-color 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
     /*animation: animacionBorder 1s alternate;*/
 }
