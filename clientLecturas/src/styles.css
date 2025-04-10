@@ -248,6 +248,7 @@ form {
 
 .caja-libro-home{
     position: relative;
+    min-height: 220px;
 }
 
 .dropdown-menu {
@@ -289,6 +290,12 @@ input {
     object-fit: cover;
     width: 100px !important;
     height: 150px !important;
+}
+
+
+/*Formulario del componente editar-libro*/
+.editar-libro {
+    min-width: 500px; 
 }
 
 
