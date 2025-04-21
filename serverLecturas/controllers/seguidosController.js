@@ -22,6 +22,7 @@ export async function agregarSeguido(req, res) {
 }
 
 
+//Guarda el id del seguido en el seguidor
 async function agregarSeguidor(seguidor, seguido) {
     try {
             //Busca al usuario seguido
@@ -68,19 +69,43 @@ export async function obtenerSeguidores(req, res) {
 //Función para eliminar seguidos
 export async function eliminarSeguido(req, res) {
     try {
-        const { idSeguido } = req.body;
+            const idSeguido = req.params.id;
+       
             //Busca al usuario logueado 
             const usuario =  await Usuario.findById(req._idUsuario); 
             if (!usuario) {
                 return res.status(404).json({ message: 'Usuario no encontrado' });
             }
-            //Busca la posición del seguido en el seguidor
+             //Busca la posición del seguido
             const posicion = usuario.seguidos.indexOf(idSeguido);
-            usuario.seguidos.pop(posicion);
+            usuario.seguidos.splice(posicion,1);
             await usuario.save();
-
+        
+            //Eliminar el seguidor en el seguido 
+            await eliminarSeguidor(req._idUsuario, idSeguido); 
+           
     } catch (err) {
-        res.status(500).send(err);
+        console.error(err);
+    }
+}
+
+
+
+//Elimina el seguidor en el seguido
+export async function eliminarSeguidor(seguidor, idSeguido) {
+    try {
+            //Busca al usuario seguido
+            const usuarioSeguido = await Usuario.findById(idSeguido);
+            if (!usuarioSeguido) {
+                console.log('Usuario no encontrado');
+            }
+            //Actualizamos el array de seguidores del usuario seguido
+            const posicion = usuarioSeguido.seguidores.indexOf(seguidor);
+            usuarioSeguido.seguidores.splice(posicion, 1);    
+            await usuarioSeguido.save();
+            console.log('Seguidor eliminado');
+    } catch (err) {
+        console.error(err);
     }
 }
 
