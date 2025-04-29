@@ -83,24 +83,18 @@ export class HomeComponent {
 
   getRecomendaciones(tematica: string) {
     this._librosService.getLibrosByTematica(tematica).subscribe(
-       (resp) => {
+      (resp) => {
         for (let i = 0; i < resp.items.length; i++) {
-           const recomendacionInfo = {
-                id: resp.items[i].id,
-                info: resp.items[i].volumeInfo
-          };
-          
-          this.tematicaRecomendaciones = tematica;
-          this.recomendaciones.push(recomendacionInfo); 
-          //Si el libro está ya guardado, no se recomienda en esta sección
-          var j = 0;
-          while(j <= this.librosGuardados.length){
-            {
-              if (resp.items[i].id == this.librosGuardados[j].APIid) {
+          this.recomendaciones.push({
+            id: resp.items[i].id,
+            info: resp.items[i].volumeInfo
+          });
+          this.tematicaRecomendaciones = tematica; 
+          //Si el libro está guardado se elimina de los recomendados
+          for (var j = 0; j < this.librosGuardados.length; j++){
+              if (this.recomendaciones[i].id == this.librosGuardados[j].APIid) {
                 this.recomendaciones.splice(i, 1);
               }
-            }
-            j++; 
           }
         }
       },
@@ -109,6 +103,7 @@ export class HomeComponent {
       }
     )
   }
+
 
 
 
