@@ -16,7 +16,7 @@ export class HomeComponent {
   cargados: boolean = false; 
   disponibles: boolean = true; 
   libro: LibroModel = new LibroModel(); 
-  librosGuardados: object[] = []; 
+  librosGuardados: any[] = []; 
   usuarioID: string = ""; 
   recomendaciones: any[] = []; 
   tematicaRecomendaciones: string = "";  
@@ -67,9 +67,11 @@ export class HomeComponent {
   }
 
 
-  getInfoUsuario() { 
+  getInfoUsuario() {  
     this._lecturasBBDDService.getListLibros(this.usuarioID).subscribe(
       (resp) => {
+        this.librosGuardados = resp;
+        console.log("Libros guardados por el usuario: ",this.librosGuardados); 
         this.getRecomendaciones(resp[0].categorias); 
       },
       (err) => {
@@ -87,16 +89,29 @@ export class HomeComponent {
                 id: resp.items[i].id,
                 info: resp.items[i].volumeInfo
           };
-          this.recomendaciones.push(recomendacionInfo);
-          this.tematicaRecomendaciones = tematica; 
+          
+          this.tematicaRecomendaciones = tematica;
+          this.recomendaciones.push(recomendacionInfo); 
+          //Si el libro está ya guardado, no se recomienda en esta sección
+          var j = 0;
+          while(j <= this.librosGuardados.length){
+            {
+              if (resp.items[i].id == this.librosGuardados[j].APIid) {
+                this.recomendaciones.splice(i, 1);
+              }
+            }
+            j++; 
+          }
         }
       },
       (err) => {
         console.log("Ha fallado", err); 
       }
     )
-       
   }
+
+
+
 
 
 
