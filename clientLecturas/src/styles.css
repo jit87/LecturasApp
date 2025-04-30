@@ -52,14 +52,18 @@ h2 {
 .recomendaciones {
     border-radius: 5px;
     padding: 5%;
-    background-color: coral;
+    background-color: /*coral*/ #ffd3b4;
     -webkit-box-shadow: 3px 3px 29px -12px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 3px 3px 29px -12px rgba(0, 0, 0, 0.75);
     box-shadow: 3px 3px 29px -12px rgba(0, 0, 0, 0.75);
 }
 
 .recomendaciones h2 {
-    color:blanchedalmond; 
+    color:/*blanchedalmond*/ var(--text-color2); 
+}
+
+.tematica{
+    color:#209268; 
 }
 
 table {

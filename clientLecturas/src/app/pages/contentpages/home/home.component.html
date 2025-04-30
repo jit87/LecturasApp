@@ -55,7 +55,7 @@
 <!-- Sección de recomendaciones -->
 <section class="bg-light py-5" class="recomendaciones">
     <div class="container">
-        <h2 class="text-center mb-4" >Recomendaciones personalizadas. <span style="color:aquamarine; " *ngIf="recomendaciones.length!=0">{{ this.tematicaRecomendaciones }}:</span></h2>
+        <h2 class="text-center mb-4" >Recomendaciones personalizadas. <span class="tematica" *ngIf="recomendaciones.length!=0">{{ this.tematicaRecomendaciones }}:</span></h2>
         <div *ngIf="recomendaciones.length==0" style="text-align: center;">No hay más recomendaciones disponibles</div>
         <div class="row">
             <div class="col-md-6" *ngFor="let recomendacion of recomendaciones; let i=index">
