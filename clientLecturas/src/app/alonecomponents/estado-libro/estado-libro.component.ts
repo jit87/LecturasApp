@@ -7,6 +7,7 @@ import { LecturasBBDDService } from '../../services/lecturas-bbdd.service';
 import { AuthService } from '../../services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { LibroModel } from '../../models/libro.model';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 
 @Component({
   selector: 'app-estado-libro',
@@ -36,6 +37,7 @@ guardado: boolean = false;
 
 @Input() libro!: any; 
   
+
 
 constructor(
     private _lecturasBBDDService: LecturasBBDDService,
@@ -109,8 +111,8 @@ async guardarEstadoLibro(estado: string) {
       this.toastr.success('Ha sido añadido!', 'Añadido!');
       this._lecturasBBDDService.addlibro(nuevoLibro).subscribe((resp: any) => {
         console.log("Libro añadido", resp);
-        this.guardado = true; 
-      })
+        this.guardado = true;
+      });
   }
 
 

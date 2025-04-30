@@ -92,9 +92,9 @@ export class HomeComponent {
           this.tematicaRecomendaciones = tematica; 
           //Si el libro está guardado se elimina de los recomendados
           for (var j = 0; j < this.librosGuardados.length; j++){
-              if (this.recomendaciones[i].id == this.librosGuardados[j].APIid) {
+             if (this.recomendaciones[i].id == this.librosGuardados[j].APIid) {
                 this.recomendaciones.splice(i, 1);
-              }
+            }
           }
         }
       },
