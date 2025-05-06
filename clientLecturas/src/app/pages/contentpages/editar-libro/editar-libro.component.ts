@@ -33,6 +33,7 @@ constructor(private _estadoLibroService: EstadoLibroService, private _lecturasBB
   this.libro.titulo = this._estadoLibroService.getTituloLibro();
   this.libro.estado = this._estadoLibroService.getEstadoLibro(); 
   this.libro.coleccion = this._estadoLibroService.getColeccionById(); 
+  this.libro.resena = this._estadoLibroService.getResenaLibro(); 
 }
 
 

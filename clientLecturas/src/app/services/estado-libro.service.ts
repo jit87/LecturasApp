@@ -12,6 +12,7 @@ export class EstadoLibroService {
   private titulo: string = "";
   private estado: string = "";
   private coleccion: string = ""; 
+  private resena: string = ""; 
   resp: any; 
 
   constructor(
@@ -32,6 +33,10 @@ export class EstadoLibroService {
 
   getEstadoLibro(): string {
     return this.estado;
+  }
+
+  getResenaLibro(): string{
+    return this.resena; 
   }
 
   getLibros(usuarioId: string) {
@@ -87,6 +92,9 @@ export class EstadoLibroService {
     this.coleccion = coleccion;
   }
 
+  setResenaLibro(resena: string) {
+    this.resena = resena; 
+  }
   
 
 

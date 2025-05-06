@@ -20,6 +20,7 @@ export class LibroModel {
   coleccion?:           string; 
   categorias?:          string;
   APIid?:               string;
+  resena?:              string;
 
   constructor() {
     this._id = "";
@@ -40,5 +41,6 @@ export class LibroModel {
     this.coleccion = "No clasificado";
     this.categorias = "Sin categoría"; 
     this.APIid = ""; 
+    this.resena = ""; 
    }
 }

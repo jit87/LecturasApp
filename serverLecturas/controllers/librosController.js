@@ -5,7 +5,7 @@ import Usuario from "../models/Usuario.js";
 
 export async function agregarLibro(req, res) {
 
-  const { _idUsuario,titulo,autores,editor,fechaPublicacion,descripcion,pageCount,averageRating,ratingsCount,contentVersion,imagen,lengua,previewLink,estado,coleccion,categorias,APIid } = req.body;
+  const { _idUsuario,titulo,autores,editor,fechaPublicacion,descripcion,pageCount,averageRating,ratingsCount,contentVersion,imagen,lengua,previewLink,estado,coleccion,categorias,APIid,resena } = req.body;
 
   const nuevoLibro = new Libro({
         _idUsuario,
@@ -24,7 +24,8 @@ export async function agregarLibro(req, res) {
         estado,
         coleccion,
         categorias,
-        APIid
+        APIid,
+        resena
   });
   
     try {  
@@ -67,7 +68,7 @@ export async function obtenerLibros(req, res) {
 export async function actualizarLibro(req, res) {
 
      try {
-        const { estado, coleccion } = req.body;
+        const { estado, coleccion, resena } = req.body;
 
         const libro = await Libro.findById(req.params.id);
 
@@ -81,6 +82,7 @@ export async function actualizarLibro(req, res) {
 
         libro.estado = estado || libro.estado;
         libro.coleccion = coleccion || libro.coleccion;
+        libro.resena = resena || libro.resena;
         
          //Si el libro ya se ha leído agregamos el libro a la lista de libros leídos del usuario
          if (libro.estado === "Leído") {
@@ -193,6 +195,7 @@ export async function obtenerTodosLibros(req, res) {
         const librosResto = await Libro.find({ _idUsuario: { $nin: seguidos } })
             .sort({ updatedAt: -1 })
             .limit(8 - librosSeguidos.length); 
+        
 
         //Unir ambas listas
         const libros = [...librosSeguidos, ...librosResto];

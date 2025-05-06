@@ -202,12 +202,13 @@ export class LibrosComponent {
 
   //FORMULARIO
   //Comunicamos los datos del libro de la tabla al componente del formulario
-  mostrarFormulario(id:string, titulo: string, estado:string, coleccion: string) {
+  mostrarFormulario(id:string, titulo: string, estado:string, coleccion: string, resena:string) {
     this.mostrarForm = true; 
     this._estadoLibroService.setIdLibro(id); 
     this._estadoLibroService.setTituloLibro(titulo); 
     this._estadoLibroService.setEstadoLibro(estado); 
     this._estadoLibroService.setColeccionLibro(coleccion);
+    this._estadoLibroService.setResenaLibro(resena); 
     this.mostrarLibros(); 
     this.mostrarColecciones(); 
   }

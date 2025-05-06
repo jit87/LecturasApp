@@ -68,6 +68,10 @@ const libroSchema = new Schema({
   APIid: {
     type: String,
     required: false
+  },
+  resena: {
+    type: String,
+    required: false,
   }
 }, {
   timestamps: true, 
