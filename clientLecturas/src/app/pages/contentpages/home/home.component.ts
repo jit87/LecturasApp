@@ -91,11 +91,9 @@ export class HomeComponent {
           });
           this.tematicaRecomendaciones = tematica; 
           //Si el libro está guardado se elimina de los recomendados
-          for (var j = 0; j < this.librosGuardados.length; j++){
-             if (this.recomendaciones[i].id == this.librosGuardados[j].APIid) {
-                this.recomendaciones.splice(i, 1);
-            }
-          }
+          this.recomendaciones = this.recomendaciones.filter(recomendacion =>
+              !this.librosGuardados.some(libro => libro.APIid === recomendacion.id)
+          );
         }
       },
       (err) => {
