@@ -302,6 +302,17 @@ input {
 }
 
 
+/*Reseñas de la tabla de mis libros guardados*/
+.caja-resena{
+    width: 20%; 
+}
+
+.texto-resena {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
 
 
 

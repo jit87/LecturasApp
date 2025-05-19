@@ -48,9 +48,10 @@
                         <th>Título</th>
                         <th>Autor</th>
                         <th>Editorial</th>
-                        <th>Fecha de Publicación</th>
+                        <!-- <th>Fecha de Publicación</th> -->
                         <th>Estado</th> 
                         <th>Colección</th>
+                        <th>Reseña</th>
                         <th></th>
                         <th></th>
                         <th></th>
@@ -68,9 +69,10 @@
                         <td  [routerLink]="['/info', libro.APIid]" style="text-decoration: underline;cursor: pointer;" class="titulo">{{ libro.titulo }}</td>
                         <td>{{ libro.autores }}</td>
                         <td>{{ libro.editor }}</td>
-                        <td>{{ libro.fechaPublicacion | date:'d/MM/YY' }}</td>
+                        <!-- <td>{{ libro.fechaPublicacion | date:'d/MM/YY' }}</td> -->
                         <td>{{ libro.estado }}</td> 
                         <td>{{ libro.coleccion }}</td>
+                        <td class="caja-resena"><p class="texto-resena">{{ libro.resena }}</p></td>
                         <td></td>
                         <td>
                             <i class="fa-regular fa-pen-to-square"  

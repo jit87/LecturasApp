@@ -3,9 +3,9 @@
         <div class="col-md-6 offset-md-3" style="margin-top: 2%;">
             <h2 class="text-center">Actividad</h2>
             <br>
-            <div class="caja-muro mt-2"> 
-                <div *ngFor="let post of posts; let i = index" class="card mb-3 p-3">
-                    <div class="card-body">
+            <div class="caja-muro mt-2" *ngFor="let post of posts; let i = index" class="card mb-3 p-3"> 
+               
+                    <div class="card-body" *ngIf="post.tipo=='Libro'">
                         <img class="imagenUsuario" [src]="post.imagenUsuario"  class="rounded-circle me-3" width="50" height="50">
                         <b style="font-size: large;cursor: pointer;" [routerLink]="['/perfilpublico', post._idUsuario]" class="nombre">{{ post.nombreUsuario }}</b>
                          &nbsp;ha actualizado su biblioteca con el libro:
@@ -21,7 +21,23 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                    <div class="card-body" *ngIf="post.tipo=='Resena' && post.resena!=''" >
+                        <img class="imagenUsuario" [src]="post.imagenUsuario" class="rounded-circle me-3" width="50" height="50">
+                        <b style="font-size: large;cursor: pointer;" [routerLink]="['/perfilpublico', post._idUsuario]" class="nombre">{{
+                            post.nombreUsuario }}</b>
+                        &nbsp;ha añadido una reseña:
+                        <br>
+                        <hr />
+                        <div class="d-flex" style="padding: 2%;">
+                            <div>
+                                <h5 class="mb-1" [routerLink]="['/info', post.APIid]" routerLinkActive="router-link-active"
+                                    style="cursor: pointer;" class="titulo">{{ post.titulo }}</h5>
+                                <p class="solo-3-lineas mb-2">{{ post.resena }}</p>
+                              
+                            </div>
+                        </div>
+                    </div>
+               
             </div>
         </div>
 

@@ -17,6 +17,7 @@ export class SocialComponent {
   idLogueado: string = ""; 
   emailLogueado: string = ""; 
   mostrarBotonAgregar: number = -1; 
+  resenas: string[] = []; 
 
 
 
@@ -52,7 +53,7 @@ export class SocialComponent {
     this._lecturasBBDDService.getListLibrosUsuarios().subscribe(
       (resp) => { 
         resp.forEach((libro: any) => {
-          let post = {
+          let postLibros = {
             APIid: libro.APIid,
             _id: libro._id,
             _idUsuario: libro._idUsuario,
@@ -63,17 +64,30 @@ export class SocialComponent {
             editor: libro.editor,
             descripcion: libro.descripcion || "",
             imagen: libro.imagen || "default.png",
+            tipo: "Libro"
+          };
+          let postResena = {
+            APIid: libro.APIid,
+            _id: libro._id,
+            _idUsuario: libro._idUsuario,
+            nombreUsuario: "", 
+            imagenUsuario: "",
+            resena: libro.resena || "",
+            tipo: "Resena",
+            titulo: libro.titulo,
           };
           this._authService.getUserById(libro._idUsuario).subscribe(
             (usuario: any) => {
-              post.nombreUsuario = usuario.nombre;  
-              post.imagenUsuario = usuario.imagen;  
+              postLibros.nombreUsuario = usuario.nombre;  
+              postLibros.imagenUsuario = usuario.imagen;  
+              postResena.nombreUsuario = usuario.nombre;  
+              postResena.imagenUsuario = usuario.imagen;  
             },
             (err) => {
               console.log(err);
             }
           );
-          this.posts.push(post);
+            this.posts.push(postLibros,postResena);   
         });
       },
       (err) => {
