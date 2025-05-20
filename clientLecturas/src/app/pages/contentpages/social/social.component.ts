@@ -64,6 +64,7 @@ export class SocialComponent {
             editor: libro.editor,
             descripcion: libro.descripcion || "",
             imagen: libro.imagen || "default.png",
+            resena: libro.resena || "",
             tipo: "Libro"
           };
           let postResena = {
@@ -88,7 +89,12 @@ export class SocialComponent {
               console.log(err);
             }
           );
-          this.posts.push(postLibros, postResena); 
+          //Si el libro no tiene reseña, es que se ha añadido recientemente, luego se muestra la actualización del libro
+          if(postLibros.resena=="")
+              this.posts.push(postLibros); 
+          //Si la propiedad resena no está vacía se pasarán los datos a la parte de reseña (en función del tipo)
+          if (postResena.resena != "")
+              this.posts.push(postResena); 
         });
       },
       (err) => {
