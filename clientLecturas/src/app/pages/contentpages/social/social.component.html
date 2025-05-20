@@ -21,7 +21,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-body" *ngIf="post.tipo=='Resena' && post.resena!=''" >
+                    <div class="card-body" *ngIf="post.tipo=='Resena' && post.resena!='' && post!=null" >
                         <img class="imagenUsuario" [src]="post.imagenUsuario" class="rounded-circle me-3" width="50" height="50">
                         <b style="font-size: large;cursor: pointer;" [routerLink]="['/perfilpublico', post._idUsuario]" class="nombre">{{
                             post.nombreUsuario }}</b>

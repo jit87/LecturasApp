@@ -73,9 +73,10 @@ export class SocialComponent {
             nombreUsuario: "", 
             imagenUsuario: "",
             resena: libro.resena || "",
-            tipo: "Resena",
             titulo: libro.titulo,
+            tipo: "Resena",
           };
+
           this._authService.getUserById(libro._idUsuario).subscribe(
             (usuario: any) => {
               postLibros.nombreUsuario = usuario.nombre;  
@@ -87,14 +88,15 @@ export class SocialComponent {
               console.log(err);
             }
           );
-            this.posts.push(postLibros,postResena);   
+          this.posts.push(postLibros, postResena); 
         });
       },
       (err) => {
         console.log(err);
       }
     );
-    console.log(this.posts); 
+    console.log("Posts: ", this.posts); 
+    return this.posts;  
   }
 
 
