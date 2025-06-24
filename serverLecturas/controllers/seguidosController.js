@@ -110,11 +110,23 @@ export async function eliminarSeguidor(seguidor, idSeguido) {
 }
 
 
-//Función para obtener seguidores por id
+//Función para obtener seguidos por id
 export async function obtenerSeguidoresPorId(req, res) {
     try {
         const usuario = await Usuario.findById({ _id: req.params.id }); 
         res.json(usuario.seguidores); 
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: error.message });
+  }
+  
+}
+
+//Función para obtener seguidores por id
+export async function obtenerSeguidosPorId(req, res) {
+    try {
+        const usuario = await Usuario.findById({ _id: req.params.id }); 
+        res.json(usuario.seguidos); 
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: error.message });

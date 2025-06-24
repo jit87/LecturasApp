@@ -13,6 +13,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EstadoLibroComponent } from "../alonecomponents/estado-libro/estado-libro.component";
 import { SocialComponent } from './contentpages/social/social.component';
 import { PublicoperfilComponent } from './contentpages/publicoperfil/publicoperfil.component';
+import { ReviewComponent } from './contentpages/review/review.component';
 
 
 
@@ -27,7 +28,8 @@ import { PublicoperfilComponent } from './contentpages/publicoperfil/publicoperf
     InfoComponent,
     EditarLibroComponent,
     SocialComponent,
-    PublicoperfilComponent
+    PublicoperfilComponent,
+    ReviewComponent
   ],
   imports: [
     CommonModule,
@@ -46,7 +48,8 @@ import { PublicoperfilComponent } from './contentpages/publicoperfil/publicoperf
     InfoComponent,
     EditarLibroComponent,
     SocialComponent,
-    PublicoperfilComponent
+    PublicoperfilComponent,
+    ReviewComponent
   ]
 })
 export class PagesModule { }

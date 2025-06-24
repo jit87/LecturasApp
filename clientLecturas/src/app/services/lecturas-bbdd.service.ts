@@ -92,6 +92,10 @@ export class LecturasBBDDService {
      return this.http.get(this.url + "/seguidos/seguidores/" + id); 
   }
 
+  getSeguidosById(id:string): Observable<any> {
+    return this.http.get(this.url + "/seguidos/seguidos/" + id); 
+ }
+
   getLibrosLeidos(_idUsuario: string) {
      return this.http.get(this.url + "/libros/leidos/" + _idUsuario);
   }

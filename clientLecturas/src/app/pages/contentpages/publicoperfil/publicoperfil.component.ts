@@ -42,6 +42,7 @@ export class PublicoperfilComponent {
   mostrarBotonAgregar: number = -1; 
   listaSeguidores: any = []; 
   posts: any[] = [];
+  listaSeguidos: any = []; 
 
 
   constructor(private _authService: AuthService,
@@ -89,6 +90,8 @@ export class PublicoperfilComponent {
         console.log("Error de obtención de datos", err); 
     })
     this.getSeguidoresById(this.idUsuario);
+    this.getSeguidosById(this.idUsuario); 
+    this.getActividad(this.idUsuario); 
   }
 
 
@@ -165,35 +168,85 @@ export class PublicoperfilComponent {
   }
 
 
-  
-    getActividad(idUsuario: string) {
-      this.posts = []; 
-        this._lecturasBBDDService.getListLibrosUsuarios().subscribe(
-          (resp) => { 
-            resp.forEach((libro: any) => {
-              if (idUsuario == libro._idUsuario) {
-                   let post = {
-                      APIid: libro.APIid,
-                      _id: libro._id,
-                      _idUsuario: libro._idUsuario,
-                      nombreUsuario: "", 
-                      imagenUsuario: "",
-                      titulo: libro.titulo,
-                      autores: libro.autores,
-                      editor: libro.editor,
-                      descripcion: libro.descripcion || "",
-                      imagen: libro.imagen || "default.png",
-                     };
-                  this.posts.push(post);
+  getSeguidosById(id:any) {
+    this.listaSeguidos = []; 
+    this._lecturasBBDDService.getSeguidosById(id).subscribe(
+      (resp) => {
+       resp.forEach((id:any) => {
+            this._authService.getUserById(id).subscribe(
+              (usuario: any) => {
+                if (usuario != undefined) {
+                  this.listaSeguidos.push(usuario);
+                 }
                 }
-              });
-          },
-          (err) => {
-            console.log(err);
-          }
-        );
-        console.log(this.posts); 
+              )
+          });
+      },
+      (err) => {
+        console.log(err); 
+      }
+    )
   }
+
+  
+  getActividad(idUsuario: string) {
+    this.posts = []; 
+      this._lecturasBBDDService.getListLibrosUsuarios().subscribe(
+      (resp) => { 
+          resp.forEach((libro: any) => {
+            if (libro._idUsuario == idUsuario) {
+              let postLibros = {
+                APIid: libro.APIid,
+                _id: libro._id,
+                _idUsuario: libro._idUsuario,
+                nombreUsuario: "",
+                imagenUsuario: "",
+                titulo: libro.titulo,
+                autores: libro.autores,
+                editor: libro.editor,
+                descripcion: libro.descripcion || "",
+                imagen: libro.imagen || "default.png",
+                resena: libro.resena || "",
+                tipo: "Libro"
+              };
+              let postResena = {
+                APIid: libro.APIid,
+                _id: libro._id,
+                _idUsuario: libro._idUsuario,
+                nombreUsuario: "",
+                imagenUsuario: "",
+                resena: libro.resena || "",
+                titulo: libro.titulo,
+                tipo: "Resena",
+              };
+
+              this._authService.getUserById(libro._idUsuario).subscribe(
+                (usuario: any) => {
+                  postLibros.nombreUsuario = usuario.nombre;
+                  postLibros.imagenUsuario = usuario.imagen;
+                  postResena.nombreUsuario = usuario.nombre;
+                  postResena.imagenUsuario = usuario.imagen;
+                },
+                (err) => {
+                  console.log(err);
+                }
+              );
+              //Si el libro no tiene reseña, es que se ha añadido recientemente, luego se muestra la actualización del libro
+              if (postLibros.resena == "")
+                this.posts.push(postLibros);
+              //Si la propiedad resena no está vacía se pasarán los datos a la parte de reseña (en función del tipo)
+              if (postResena.resena != "")
+                this.posts.push(postResena);
+            }
+          }
+      );
+    },
+    (err) => {
+      console.log(err);
+    }
+  );
+      console.log(this.posts); 
+}
         
     
 
