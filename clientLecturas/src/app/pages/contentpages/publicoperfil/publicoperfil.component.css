@@ -25,3 +25,11 @@
 .caja-muro .card {
     background-color: #f3ede3 !important;
 }
+
+.nombre:hover {
+    text-decoration: underline;
+}
+
+.titulo:hover {
+    text-decoration: underline;
+}

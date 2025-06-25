@@ -9,6 +9,7 @@ import { InfoComponent } from './pages/contentpages/info/info.component';
 import { AuthGuard } from './guards/auth.guard';
 import { SocialComponent } from './pages/contentpages/social/social.component';
 import { PublicoperfilComponent } from './pages/contentpages/publicoperfil/publicoperfil.component';
+import { ReviewComponent } from './pages/contentpages/review/review.component';
 
 
 export const APP_ROUTES: Routes = [
@@ -21,6 +22,7 @@ export const APP_ROUTES: Routes = [
     { path: 'info/:id', component: InfoComponent, canActivate: [AuthGuard] }, 
     { path: 'social', component: SocialComponent, canActivate: [AuthGuard] }, 
     { path: 'perfilpublico/:id', component: PublicoperfilComponent, canActivate: [AuthGuard] },
+    { path: 'review/:id/:idUsuario', component:ReviewComponent, canActivate: [AuthGuard] },
     { path: '**', pathMatch:'full', redirectTo:'home'}
 ];
 

@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { LecturasBBDDService } from '../../../services/lecturas-bbdd.service';
 import { LibroModel } from '../../../models/libro.model';
 import { Location } from '@angular/common';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-review',
@@ -29,18 +30,22 @@ librosGuardados: any[] = [];
 usuarioID: string = ""  
   
 libro: LibroModel = new LibroModel(); 
+  
+usuario: string = ""; 
+imagen: string = ""; 
 
 
 constructor(
-    private _librosService: LibrosService,
     private activatedRoute: ActivatedRoute,
     private location: Location,
     private _lecturasBBDDService: LecturasBBDDService,
+    private _authService: AuthService
 ) {
    this.activatedRoute.params.subscribe(
      (params: any) => {
        this.libro._id = params.id; 
-       this.getInfoLibro(params.id); 
+       this.getInfoLibro(params.id);
+       this.getUsuario(params.idUsuario); 
      },
       (error) => {
         console.log("Error info.component.ts en obetener id", error); 
@@ -55,30 +60,47 @@ constructor(
 
   //Obtiene la info del servicio de API
   getInfoLibro(id: string) {
-    this._librosService.getInfoLibroById(id).subscribe(
-      (resp) => { 
-            console.log(resp); 
-            this.libro.titulo = resp.volumeInfo.title; 
-            this.libro.imagen = resp.volumeInfo.imageLinks.thumbnail; 
-            this.libro.descripcion = resp.volumeInfo.description.replace(/(<([^>]+)>)/ig,""); 
-            this.libro.autores = resp.volumeInfo.authors; 
-            this.libro.editor = resp.volumeInfo.publisher; 
-            this.libro.categorias = resp.volumeInfo.categories.toString(); 
-            this.libro.pageCount= resp.volumeInfo.pageCount.toString(); 
-            this.libro.fechaPublicacion = resp.volumeInfo.publishedDate; 
-            this.cargado = true; 
-          },
-        (error) => {
-            console.log("Error", error); 
-            this.disponibles2 = false;
-            this.cargado = false;
-          }
-      )
-    }
+    this._lecturasBBDDService.getlibroById(id).subscribe(
+      (resp: any) => {
+        console.log(resp); 
+        this.libro.titulo = resp.titulo;
+        this.libro.imagen = resp.imagen;
+        this.libro.autores = resp.autores;
+        this.libro.editor = resp.editor;
+        this.libro.categorias = resp.categorias.toString();
+        /*this.libro.pageCount= resp.pageCount.toString(); */
+        this.libro._idUsuario = resp.idUsuario;
+        this.libro.resena = resp.resena;
+        this.cargado = true; 
+
+        this.usuarioID = resp.idUsuario;
+      },
+      (error) => {
+        console.log("Error", error);
+        this.disponibles2 = false;
+        this.cargado = false;
+      }
+    )
+  }
+
+  
+
+  getUsuario(idUsuario: string) {
+    this._authService.getUserById(idUsuario).subscribe(
+      (resp) => {
+        console.log(resp); 
+        this.usuario = resp.nombre;
+        this.imagen = resp.imagen; 
+      }
+    )
+  }
+  
 
 
   regresar() {
     this.location.back(); 
   }
+
+
 
 }
