@@ -135,9 +135,9 @@ export async function obtenerLibro(req, res) {
 
         if (!libro) return res.status(404).json({ message: 'Libro no encontrado' });
 
-        if (libro._idUsuario.toString() !== req._idUsuario) {
+       /* if (libro._idUsuario.toString() !== req._idUsuario) {
           return res.status(403).json({ message: 'No tienes permiso para acceder a este Libro' });
-        }
+        }*/
 
         res.json(libro);
 

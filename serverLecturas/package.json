@@ -4,13 +4,19 @@
   "description": "LecturasAppServer",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon ."
+    "dev": "nodemon .",
+    "test": "mocha"
   },
   "type": "module",
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "nodemon": "^3.1.7"
+    "chai": "^5.2.0",
+    "chai-http": "^5.1.2",
+    "mocha": "^11.7.1",
+    "nodemon": "^3.1.7",
+    "sinon": "^21.0.0",
+    "supertest": "^7.1.1"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",

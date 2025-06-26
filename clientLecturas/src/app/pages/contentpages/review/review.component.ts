@@ -69,11 +69,9 @@ constructor(
         this.libro.editor = resp.editor;
         this.libro.categorias = resp.categorias.toString();
         /*this.libro.pageCount= resp.pageCount.toString(); */
-        this.libro._idUsuario = resp.idUsuario;
+        //this.libro._idUsuario = resp.idUsuario;
         this.libro.resena = resp.resena;
         this.cargado = true; 
-
-        this.usuarioID = resp.idUsuario;
       },
       (error) => {
         console.log("Error", error);
