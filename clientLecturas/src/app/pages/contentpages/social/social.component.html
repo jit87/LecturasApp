@@ -19,6 +19,19 @@
                             <app-estado-libro [libro]="post"></app-estado-libro>
                         </div>
                     </div>
+                    <div class="mt-2 text-muted" style="font-size: 0.9em;cursor: pointer;float:right;" (click)="abrirCajaComentario(i)">
+                        <i class="fa-solid fa-comment"></i> Comentar
+                    </div>
+                    <div class="mt-3 p-3 rounded" style="background-color: #f0f0f5;" *ngIf="cajaCerrada==true && comentarioActivo == i">
+                        <div *ngFor="let comentario of post.comentarios" class="mb-2">
+                            <b>{{ comentario.usuario }}:</b> {{ comentario.texto }}
+                        </div>
+                        <div class="input-group mt-2">
+                            <input type="text" class="form-control" [(ngModel)]="post.nuevoComentario"
+                                placeholder="Escribe un comentario..." />
+                            <button class="btn btn-outline-primary">Publicar</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-body" *ngIf="post.tipo==='Resena'" >
                     <img class="imagenUsuario" [src]="post.imagenUsuario" class="rounded-circle me-3" width="50" height="50">
@@ -32,6 +45,19 @@
                             <h5 class="mb-1" [routerLink]="['/review', post._id,post._idUsuario]" routerLinkActive="router-link-active"
                                 style="cursor: pointer;" class="titulo">{{ post.titulo }}</h5>
                             <p class="solo-3-lineas mb-2">{{ post.resena }}</p>  
+                        </div>
+                    </div>
+                    <div class="mt-2 text-muted" style="font-size: 0.9em;cursor: pointer;float:right;" (click)="abrirCajaComentario(i)">
+                        <i class="fa-solid fa-comment"></i> Comentar
+                    </div>
+                    <div  class="mt-3 p-3 rounded" style="background-color: #f0f0f5;" *ngIf="cajaCerrada==true && comentarioActivo == i">
+                        <div *ngFor="let comentario of post.comentarios" class="mb-2">
+                            <b>{{ comentario.usuario }}:</b> {{ comentario.texto }}
+                        </div> 
+                        <div class="input-group mt-2">
+                            <input type="text" class="form-control" [(ngModel)]="post.nuevoComentario"
+                                placeholder="Escribe un comentario..." />
+                            <button class="btn btn-outline-primary">Publicar</button>
                         </div>
                     </div>
                 </div>

@@ -18,6 +18,8 @@ export class SocialComponent {
   emailLogueado: string = ""; 
   mostrarBotonAgregar: number = -1; 
   resenas: string[] = []; 
+  comentarioActivo: number = 0;   
+  cajaCerrada: boolean = true; 
 
 
 
@@ -150,7 +152,16 @@ export class SocialComponent {
   }
 
 
-
+  abrirCajaComentario(i: number) {
+    if (this.cajaCerrada == true) {
+      this.comentarioActivo = i;
+      this.cajaCerrada = false;
+    } else if (this.cajaCerrada == false) {
+      this.cajaCerrada = true;
+      this.comentarioActivo = i;
+    } else
+      this.cajaCerrada = true; 
+  }
 
 
 
