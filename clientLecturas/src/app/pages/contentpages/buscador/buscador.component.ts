@@ -19,19 +19,7 @@ export class BuscadorComponent {
   cargando: boolean = false; 
   disponibles: boolean = true; 
   usuarioID: String = ""; 
-  // titulo: string;
-  // autores: string[];
-  // publisher: string;
-  // publishedDate: string;
-  // descripcion: string;
-  // pageCount: number;
-  // averageRating: number;
-  // ratingsCount: number;
-  // contentVersion: string;
-  // imagen: string;
-  // lengua: string;
-  // previewLink: string;
- 
+
 
   constructor(
     private _librosService: LibrosService,

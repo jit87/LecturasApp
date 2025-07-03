@@ -4,6 +4,7 @@ import authRoutes from './routes/authRoutes.js';
 import librosRoutes from './routes/librosRoutes.js'; 
 import coleccionesRoutes from './routes/coleccionesRoutes.js';
 import seguidosRoutes from './routes/seguidosRoutes.js';
+import comentariosRoutes from './routes/comentariosRoutes.js';
 
 //Crear servidor
 const app = express();
@@ -32,5 +33,8 @@ app.use('/colecciones', coleccionesRoutes);
 
 //Registra la ruta de gestión de seguidos
 app.use('/seguidos', seguidosRoutes);
+
+//Registra la ruta de gestión de comentarios
+app.use('/comentarios', comentariosRoutes);
 
 export default app; 

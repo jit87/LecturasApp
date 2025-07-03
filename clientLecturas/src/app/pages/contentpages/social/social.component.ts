@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { LecturasBBDDService } from '../../../services/lecturas-bbdd.service';
 import { AuthService } from '../../../services/auth.service';
-import { UsuarioModel } from '../../../models/usuario.model';
-import e from 'cors';
+import { Form, NgForm } from '@angular/forms';
+import { ComentarioModel } from '../../../models/comentario.model';
+
 
 @Component({
   selector: 'app-social',
@@ -20,7 +21,7 @@ export class SocialComponent {
   resenas: string[] = []; 
   comentarioActivo: number = 0;   
   cajaCerrada: boolean = true; 
-
+  comentario: string = ""; 
 
 
   constructor(private _lecturasBBDDService: LecturasBBDDService,
@@ -152,16 +153,27 @@ export class SocialComponent {
   }
 
 
-  abrirCajaComentario(i: number) {
-    if (this.cajaCerrada == true) {
-      this.comentarioActivo = i;
-      this.cajaCerrada = false;
-    } else if (this.cajaCerrada == false) {
-      this.cajaCerrada = true;
-      this.comentarioActivo = i;
-    } else
-      this.cajaCerrada = true; 
+  guardarComentario(formulario: NgForm, tipo: string) {
+    console.log(formulario.form.value); 
+    console.log(tipo); 
+
+    var nuevoComentario = new ComentarioModel(); 
+    
+    nuevoComentario = {
+      _idUsuario: this.idLogueado,
+      _idLibro:   "",
+      texto:      formulario.value,
+      fecha:      new Date(),
+      tipo:       tipo
+    }
+
+
+         
+    
+
   }
+
+
 
 
 

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { catchError, Observable, tap, throwError } from 'rxjs';
 import { LibroModel } from '../models/libro.model';
 import { AuthService } from './auth.service';
+import { ComentarioModel } from '../models/comentario.model';
 
 @Injectable({
   providedIn: 'root'
@@ -98,6 +99,10 @@ export class LecturasBBDDService {
 
   getLibrosLeidos(_idUsuario: string) {
      return this.http.get(this.url + "/libros/leidos/" + _idUsuario);
+  }
+
+  addComentario(nuevoComentario: ComentarioModel): Observable<any> {
+    return this.http.post(this.url + '/comentarios', nuevoComentario); 
   }
 
   

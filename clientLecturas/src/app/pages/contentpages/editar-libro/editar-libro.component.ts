@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { LibrosService } from '../../../services/libros.service';
 import { NgForm } from '@angular/forms';
 import { LibroModel } from '../../../models/libro.model';
 import { EstadoLibroService } from '../../../services/estado-libro.service';
