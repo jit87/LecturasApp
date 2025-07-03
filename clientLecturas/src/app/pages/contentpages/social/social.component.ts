@@ -166,8 +166,15 @@ export class SocialComponent {
       fecha:      new Date(),
       tipo:       tipo
     }
-
-
+    
+    this._lecturasBBDDService.addComentario(nuevoComentario).subscribe(
+      (resp) => {
+        console.log("Comentario añadido", resp); 
+      },
+      (err) => {
+        console.log(err); 
+      }
+    )
          
     
 
