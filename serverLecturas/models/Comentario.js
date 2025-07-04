@@ -4,12 +4,10 @@ const comentarioSchema = new Schema({
   _idUsuario: {
     type: String,
     required: true,
-    unique: true
   },
   _idLibro: {
     type: String,
     required: true,
-    unique: true
   },
   texto: {
     type: String,

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { LecturasBBDDService } from '../../../services/lecturas-bbdd.service';
 import { AuthService } from '../../../services/auth.service';
-import { Form, NgForm } from '@angular/forms';
+import { Form, NgForm, NgModel } from '@angular/forms';
 import { ComentarioModel } from '../../../models/comentario.model';
 
 
@@ -21,7 +21,7 @@ export class SocialComponent {
   resenas: string[] = []; 
   comentarioActivo: number = 0;   
   cajaCerrada: boolean = true; 
-  comentario: string = ""; 
+  comentarioTexto: NgModel | any; 
 
 
   constructor(private _lecturasBBDDService: LecturasBBDDService,
@@ -153,18 +153,15 @@ export class SocialComponent {
   }
 
 
-  guardarComentario(formulario: NgForm, tipo: string) {
-    console.log(formulario.form.value); 
-    console.log(tipo); 
-
+  guardarComentario(formulario: NgForm, tipo: string, _id: string) {
     var nuevoComentario = new ComentarioModel(); 
     
     nuevoComentario = {
       _idUsuario: this.idLogueado,
-      _idLibro:   "",
-      texto:      formulario.value,
-      fecha:      new Date(),
-      tipo:       tipo
+      _idLibro: _id,
+      texto: formulario.value.comentarioTexto,
+      fecha: new Date(),
+      tipo: tipo
     }
     
     this._lecturasBBDDService.addComentario(nuevoComentario).subscribe(
