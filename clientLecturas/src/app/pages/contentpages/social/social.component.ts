@@ -21,7 +21,8 @@ export class SocialComponent {
   resenas: string[] = []; 
   comentarioActivo: number = 0;   
   cajaCerrada: boolean = true; 
-  comentarioTexto: NgModel | any; 
+  comentarioTexto: NgModel | any;
+  comentariosGuardados: any[] = []; 
 
 
   constructor(private _lecturasBBDDService: LecturasBBDDService,
@@ -80,7 +81,6 @@ export class SocialComponent {
             titulo: libro.titulo,
             tipo: "Resena",
           };
-
           this._authService.getUserById(libro._idUsuario).subscribe(
             (usuario: any) => {
               postLibros.nombreUsuario = usuario.nombre;  
@@ -93,11 +93,17 @@ export class SocialComponent {
             }
           );
           //Si el libro no tiene reseña, es que se ha añadido recientemente, luego se muestra la actualización del libro
-          if(postLibros.resena=="")
-              this.posts.push(postLibros); 
+          if (postLibros.resena == "") {
+            this.posts.push(postLibros); 
+            this.getComentariosGuardados(postLibros._id); 
+          }
+             
           //Si la propiedad resena no está vacía se pasarán los datos a la parte de reseña (en función del tipo)
-          if (postResena.resena != "")
-              this.posts.push(postResena); 
+          if (postResena.resena != "") {
+            this.posts.push(postResena);
+            this.getComentariosGuardados(postResena._id); 
+          }
+               
         });
       },
       (err) => {
@@ -172,9 +178,19 @@ export class SocialComponent {
         console.log(err); 
       }
     )
-         
-    
+  }
 
+
+  getComentariosGuardados(_idLibro: string) {
+    this._lecturasBBDDService.getComentarios(_idLibro).subscribe(
+      (resp:any) => {
+        this.comentariosGuardados = resp; 
+        console.log("Comentarios:",this.comentariosGuardados); 
+      },
+      (err) => {
+        console.log(err); 
+      }
+    ); 
   }
 
 

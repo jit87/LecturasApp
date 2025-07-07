@@ -88,7 +88,7 @@ form {
 }
 
 
-/*//////Modo oscuro///////*/
+/* Modo oscuro */
 
 .modo-oscuro .card-header {
     color: white !important; 
@@ -184,7 +184,7 @@ form {
     border-color: white;
 }
 
-/*////////////Fin modo oscuro///////////*/
+/*  Fin modo oscuro */
 
 
 .s-social:hover {
@@ -318,7 +318,7 @@ input {
 
 
 
-/*/////Responsive/////*/
+/* Responsive */
 
 @media only screen and (max-width: 991px) {
 

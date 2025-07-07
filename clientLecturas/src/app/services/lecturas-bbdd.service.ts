@@ -27,8 +27,8 @@ export class LecturasBBDDService {
 
   //Añadimos la libro al vector de libros y luego a la BBDD de mongoDB. 
   addlibro(libro: LibroModel): Observable<any> {
-     this.listLibros.push(libro);
-     return this.http.post(this.url + '/libros', libro); 
+    this.listLibros.push(libro);
+    return this.http.post(this.url + '/libros', libro); 
   }
 
 
@@ -60,7 +60,7 @@ export class LecturasBBDDService {
   }
 
   getListColecciones(_idUsuario: string): Observable<any> {
-     return this.http.get(this.url + "/colecciones/todas/" + _idUsuario);
+    return this.http.get(this.url + "/colecciones/todas/" + _idUsuario);
   }
 
   deleteColeccion(coleccionId: number): Observable<any> {
@@ -82,27 +82,31 @@ export class LecturasBBDDService {
   }
 
   getSeguidos(): Observable<any> {
-      return this.http.get(this.url + "/seguidos/todos"); 
+    return this.http.get(this.url + "/seguidos/todos"); 
   }
 
   getSeguidores(): Observable<any> {
-      return this.http.get(this.url + "/seguidos/seguidores"); 
+    return this.http.get(this.url + "/seguidos/seguidores"); 
   }
   
   getSeguidoresById(id:string): Observable<any> {
-     return this.http.get(this.url + "/seguidos/seguidores/" + id); 
+    return this.http.get(this.url + "/seguidos/seguidores/" + id); 
   }
 
   getSeguidosById(id:string): Observable<any> {
     return this.http.get(this.url + "/seguidos/seguidos/" + id); 
- }
+  }
 
   getLibrosLeidos(_idUsuario: string) {
-     return this.http.get(this.url + "/libros/leidos/" + _idUsuario);
+    return this.http.get(this.url + "/libros/leidos/" + _idUsuario);
   }
 
   addComentario(nuevoComentario: ComentarioModel): Observable<any> {
     return this.http.post(this.url + '/comentarios', nuevoComentario); 
+  }
+
+  getComentarios(_idLibro: string) {
+    return this.http.get(this.url + "/comentarios/todos/" + _idLibro);
   }
 
   
