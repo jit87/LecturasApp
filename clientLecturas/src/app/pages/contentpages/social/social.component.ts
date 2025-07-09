@@ -201,6 +201,7 @@ export class SocialComponent {
         console.log(err); 
       }
     )
+    this.getActividad(); 
   }
 
 

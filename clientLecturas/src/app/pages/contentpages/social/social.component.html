@@ -28,10 +28,16 @@
                     </div>
                     <div class="mt-2 text-muted" style="font-size: 0.9em;cursor: pointer;float:right;">
                     </div>
-                    <div class="mt-5 p-3 rounded caja-comentarios" style="background-color: #f0f0f5;">
+                    <div class="mt-5 p-3 rounded caja-comentarios" style="background-color: #f0f0f5;border:1px lightgrey solid;">
                         <div *ngFor="let comentario of post.comentarios" class="mb-2">
-                            <span><img [src]="comentario.imagenUsuario" class="rounded-circle me-2" width="35" height="35"></span><b>{{ comentario.nombre }}:</b> {{ comentario.texto }}
-                            <span style="font-size:x-small;float: right;color: grey;">{{comentario.fecha | date:'d-MM-yyyy \'a las\' HH:mm'}}</span>
+                            <div>
+                                    <img [src]="comentario.imagenUsuario" class="rounded-circle me-2" width="35" height="35" style="float: left;">
+                                    <span><b style="float: left;">{{ comentario.nombre }}</b>
+                                        <br>
+                                        <div style="margin-left:8%;">{{ comentario.texto }}</div>
+                                    </span>
+                                    <!-- <span style="font-size:x-small;color: grey;float: right;">{{ comentario.fecha | date:'d/MM/yyyy \' \'HH:mm'}}</span> -->
+                            </div>
                         </div>
                         <form (ngSubmit)="guardarComentario(formulario,'libro', post._id)" #formulario="ngForm">
                             <div class="input-group mt-2">
@@ -66,12 +72,16 @@
                             <p class="solo-3-lineas mb-2">{{ post.resena }}</p>
                         </div>
                     </div>
-                    <div class="mt-2 text-muted caja-comentarios" style="font-size: 0.9em;cursor: pointer;float:right;">
+                    <div class="mt-2 text-muted caja-comentarios" style="font-size: 0.9em;cursor: pointer;float:right;border:1px lightgrey solid;">
                     </div>
                     <div class="mt-5 p-3 rounded" style="background-color: #f0f0f5;">
                         <div *ngFor="let comentario of post.comentarios" class="mb-2">
-                            <span><img [src]="comentario.imagenUsuario" class="rounded-circle me-2" width="35" height="35"></span><b>{{ comentario.nombre }}:</b> {{ comentario.texto }}
-                            <span style="font-size:x-small;float:right;color:grey;">{{comentario.fecha | date:'d-MM-yyyy \'a las\' HH:mm'}}</span>
+                            <div>
+                                <img [src]="comentario.imagenUsuario" class="rounded-circle me-2" width="35" height="35" style="float: left;">
+                                <span><b style="float: left;">{{ comentario.nombre }}</b>
+                                <br><div style="margin-left:8%;">{{ comentario.texto }}</div> </span>
+                                <!-- <span style="font-size:x-small;color: grey;float: right;">{{ comentario.fecha | date:'d/MM/yyyy \' \'HH:mm'}}</span> -->
+                            </div>
                         </div>
                         <form (ngSubmit)="guardarComentario(formulario,'resena', post._id)" #formulario="ngForm">
                             <div class="input-group mt-2">
