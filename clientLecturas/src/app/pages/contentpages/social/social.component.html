@@ -4,7 +4,7 @@
             <h2 class="text-center">Actividad</h2>
             <br>
             <div class="caja-muro mt-2" *ngFor="let post of posts; let i = index" class="card mb-3 p-3">
-                <div class="card-body" *ngIf="post.tipo==='Libro' && post.resena==''">
+                <div class="card-body" *ngIf="post.tipo==='libro' && post.resena==''">
                     <img class="imagenUsuario" [src]="post.imagenUsuario" class="rounded-circle me-3" width="50"
                         height="50">
                     <b style="font-size: large;cursor: pointer;" [routerLink]="['/perfilpublico', post._idUsuario]"
@@ -15,8 +15,12 @@
                     <div class="d-flex" style="padding: 2%;">
                         <img [src]="post.imagen || 'default.png'" class="rounded me-3" width="124" height="164">
                         <div>
-                            <h5 class="mb-1" [routerLink]="['/info', post.APIid]" routerLinkActive="router-link-active"
-                                style="cursor: pointer;" class="titulo">{{ post.titulo }}</h5>
+                            <h5 class="mb-1" 
+                                [routerLink]="['/info', post.APIid]" 
+                                routerLinkActive="router-link-active"
+                                style="cursor: pointer;" 
+                                class="titulo">{{ post.titulo }}
+                            </h5>
                             <p class="text-muted mb-1">De {{ post.autores }}</p>
                             <p class="solo-3-lineas mb-2">{{ post.descripcion }}</p>
                             <app-estado-libro [libro]="post"></app-estado-libro>
@@ -26,7 +30,8 @@
                     </div>
                     <div class="mt-5 p-3 rounded caja-comentarios" style="background-color: #f0f0f5;">
                         <div *ngFor="let comentario of post.comentarios" class="mb-2">
-                            <b>{{ comentario.usuario }}:</b> {{ comentario.texto }}
+                            <span><img [src]="comentario.imagenUsuario" class="rounded-circle me-2" width="35" height="35"></span><b>{{ comentario.nombre }}:</b> {{ comentario.texto }}
+                            <span style="font-size:x-small;float: right;color: grey;">{{comentario.fecha | date:'d-MM-yyyy \'a las\' HH:mm'}}</span>
                         </div>
                         <form (ngSubmit)="guardarComentario(formulario,'libro', post._id)" #formulario="ngForm">
                             <div class="input-group mt-2">
@@ -41,7 +46,7 @@
                         </form>
                     </div>
                 </div>
-                <div class="card-body" *ngIf="post.tipo==='Resena'">
+                <div class="card-body" *ngIf="post.tipo==='resena'">
                     <img class="imagenUsuario" [src]="post.imagenUsuario" class="rounded-circle me-3" width="50"
                         height="50">
                     <b style="font-size: large;cursor: pointer;" [routerLink]="['/perfilpublico', post._idUsuario]"
@@ -52,9 +57,12 @@
                     <hr />
                     <div class="d-flex" style="padding: 2%;">
                         <div>
-                            <h5 class="mb-1" [routerLink]="['/review', post._id,post._idUsuario]"
-                                routerLinkActive="router-link-active" style="cursor: pointer;" class="titulo">{{
-                                post.titulo }}</h5>
+                            <h5 class="mb-1" 
+                                [routerLink]="['/review', post._id,post._idUsuario]"
+                                routerLinkActive="router-link-active" 
+                                style="cursor: pointer;" 
+                                class="titulo">{{post.titulo }}
+                            </h5>
                             <p class="solo-3-lineas mb-2">{{ post.resena }}</p>
                         </div>
                     </div>
@@ -62,9 +70,10 @@
                     </div>
                     <div class="mt-5 p-3 rounded" style="background-color: #f0f0f5;">
                         <div *ngFor="let comentario of post.comentarios" class="mb-2">
-                            <b>{{ comentario.usuario }}:</b> {{ comentario.texto }}
+                            <span><img [src]="comentario.imagenUsuario" class="rounded-circle me-2" width="35" height="35"></span><b>{{ comentario.nombre }}:</b> {{ comentario.texto }}
+                            <span style="font-size:x-small;float:right;color:grey;">{{comentario.fecha | date:'d-MM-yyyy \'a las\' HH:mm'}}</span>
                         </div>
-                        <form (ngSubmit)="guardarComentario(formulario,'review', post._id)" #formulario="ngForm">
+                        <form (ngSubmit)="guardarComentario(formulario,'resena', post._id)" #formulario="ngForm">
                             <div class="input-group mt-2">
                             <input      type="text" 
                                         class="form-control" 

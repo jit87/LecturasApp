@@ -102,11 +102,11 @@ export class LecturasBBDDService {
   }
 
   addComentario(nuevoComentario: ComentarioModel): Observable<any> {
-    return this.http.post(this.url + '/comentarios', nuevoComentario); 
+    return this.http.post(this.url + "/comentarios", nuevoComentario); 
   }
 
-  getComentarios(_idLibro: string) {
-    return this.http.get(this.url + "/comentarios/todos/" + _idLibro);
+  getComentarios(_idLibro: string, tipo:string) {
+    return this.http.get(this.url + "/comentarios/todos/" + _idLibro + "/" + tipo);
   }
 
   

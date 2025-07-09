@@ -5,7 +5,7 @@ import Usuario from "../models/Usuario.js";
 
 export async function agregarComentario(req, res) {
 
-  const { _idUsuario,_idLibro,texto,fecha,tipo } = req.body;
+  const { _idUsuario,_idLibro,texto,fecha,tipo,nombre,imagenUsuario } = req.body;
 
   const nuevoComentario = new Comentario({
       _idUsuario,
@@ -13,18 +13,20 @@ export async function agregarComentario(req, res) {
       texto,
       fecha,
       tipo,
+      nombre,
+      imagenUsuario
   });
     
-    try {  
-        const usuario = await Usuario.findById(req._idUsuario);
-        if (!usuario) {
-           return res.status(404).json({ message: 'Usuario no encontrado' });
-        } 
-        const comentarioGuardado = await nuevoComentario.save();
-        res.status(201).json(comentarioGuardado);
-    } catch (err) {
-        res.status(400).json({ message: err.message });
-    }
+  try {  
+      const usuario = await Usuario.findById(req._idUsuario);
+      if (!usuario) {
+          return res.status(404).json({ message: 'Usuario no encontrado' });
+      } 
+      const comentarioGuardado = await nuevoComentario.save();
+      res.status(201).json(comentarioGuardado);
+  } catch (err) {
+      res.status(400).json({ message: err.message });
+  }
     
 }
 
@@ -39,8 +41,14 @@ export async function eliminarComentario(req, res) {
         res.json({ message: 'Libro eliminada' });
       
         if (req.params._id === undefined) {
-            comentario = await Comentario.find({ _idUsuario: req._idUsuario, _idLibro: req.params._idLibro });
-            await Comentario.deleteMany({ _idUsuario: req._idUsuario, _idLibro: req.params._idLibro });
+          comentario = await Comentario.find({
+            _idUsuario: req._idUsuario,
+            _idLibro: req.params._idLibro
+          });
+          await Comentario.deleteMany({
+            _idUsuario: req._idUsuario,
+            _idLibro: req.params._idLibro
+          });
             return res.json({ message: 'Comentarios eliminados' });
         }
       
@@ -56,7 +64,10 @@ export async function eliminarComentario(req, res) {
 export async function obtenerComentarios(req, res) {
 
     try {
-        const comentarios = await Comentario.find({ _idLibro: req.params._idLibro });
+        const comentarios = await Comentario.find({
+          _idLibro: req.params.idLibro,
+          tipo: req.params.tipo
+        });
 
         if (!comentarios) return res.status(404).json({ message: 'Libro no encontrado' });
 

@@ -12,7 +12,7 @@ router.use(authenticate);
 router.post('/', agregarComentario); 
 
 //Ruta para obtener los comentarios por ID de libro
-router.post('/todos/:id', obtenerComentarios); 
+router.get('/todos/:idLibro/:tipo', obtenerComentarios); 
 
 
-export default router;
+export default router; 

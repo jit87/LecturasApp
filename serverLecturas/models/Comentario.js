@@ -22,8 +22,16 @@ const comentarioSchema = new Schema({
     type: String,
     required: true,
     default: 'libro'
+  },
+  nombre: {
+    type: String,
+    default: 'anon'
+  },
+  imagenUsuario: {
+    type: String
   }
+
 });
 
 
-export default model('Comentario',  comentarioSchema);
+export default model('Comentario', comentarioSchema);

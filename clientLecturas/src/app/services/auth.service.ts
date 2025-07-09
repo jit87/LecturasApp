@@ -213,7 +213,7 @@ export class AuthService {
 
 
   //Para que el navbar actualice su imagen
-   actualizarImagenPerfil(nuevaImagen: string) {
+  actualizarImagenPerfil(nuevaImagen: string) {
     this.perfilImagenSource.next(nuevaImagen); 
   }
 
