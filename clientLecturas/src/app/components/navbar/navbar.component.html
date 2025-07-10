@@ -22,7 +22,7 @@
                         <a class="nav-link" [routerLink]="['/libros']" routerLinkActive="router-link-active">Mis libros</a>
                     </li>
                     <li class="nav-item" *ngIf="autenticado">
-                        <a class="nav-link" [routerLink]="['/perfil']" routerLinkActive="router-link-active">Perfil</a>
+                        <a class="nav-link" [routerLink]="['/perfil']" routerLinkActive="router-link-active">Configuración</a>
                     </li> 
                     <img class="img-nav nav-link" src="{{ ImagenPerfil }}" routerLinkActive="perfil-active"  [routerLink]="['/perfilpublico', this.idLogueado]" style="width: 45px;height: 45px;border-radius: 50px;cursor: pointer;" *ngIf="autenticado">
                 </ul>

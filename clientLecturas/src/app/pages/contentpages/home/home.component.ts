@@ -102,11 +102,10 @@ export class HomeComponent {
     )
   }
 
-
-
-
-
-
+  //Actualizamos al guardar una recomendación
+  eliminarRecomendacion(libroId: string) {
+    this.recomendaciones = this.recomendaciones.filter(libro => libro.id !== libroId);
+  }
 
 
 

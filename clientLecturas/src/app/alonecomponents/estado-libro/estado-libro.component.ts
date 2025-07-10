@@ -1,13 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
-import { LibrosService } from '../../services/libros.service';
-import { ActivatedRoute } from '@angular/router';
+import { Component,Input,Output,EventEmitter } from '@angular/core';
 import { EstadoLibroService } from '../../services/estado-libro.service';
 import { LecturasBBDDService } from '../../services/lecturas-bbdd.service';
 import { AuthService } from '../../services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { LibroModel } from '../../models/libro.model';
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+
 
 @Component({
   selector: 'app-estado-libro',
@@ -35,7 +33,9 @@ librosGuardados: any[] = [];
 usuarioID: string = ""
 guardado: boolean = false;   
 
-@Input() libro!: any; 
+@Input() libro!: any;  
+@Output() libroGuardado = new EventEmitter<string>();
+
   
 
 
@@ -112,6 +112,7 @@ async guardarEstadoLibro(estado: string) {
       this._lecturasBBDDService.addlibro(nuevoLibro).subscribe((resp: any) => {
         console.log("Libro añadido", resp);
         this.guardado = true;
+        this.libroGuardado.emit(nuevoLibro.APIid);
       });
   }
 

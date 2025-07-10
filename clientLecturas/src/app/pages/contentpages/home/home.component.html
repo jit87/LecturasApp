@@ -71,7 +71,7 @@
                                 <p class="card-text mb-1">
                                 <small style="font-size: small;font-weight: 600;">{{ recomendacion.info.authors[0] }}</small></p>
                                 <p class="card-text solo-2-lineas">{{ recomendacion.info.description }}</p>
-                                <app-estado-libro [libro]="recomendacion"></app-estado-libro>
+                                <app-estado-libro [libro]="recomendacion" (libroGuardado)="eliminarRecomendacion($event)"></app-estado-libro>
                             </div>
                         </div>
                     </div>
