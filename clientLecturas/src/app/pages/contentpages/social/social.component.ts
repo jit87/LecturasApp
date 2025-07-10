@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { LecturasBBDDService } from '../../../services/lecturas-bbdd.service';
 import { AuthService } from '../../../services/auth.service';
-import { Form, NgForm, NgModel } from '@angular/forms';
+import { NgForm, NgModel } from '@angular/forms';
 import { ComentarioModel } from '../../../models/comentario.model';
 
 
