@@ -25,6 +25,7 @@ export class SocialComponent {
   comentariosGuardados: any[] = []; 
   nombreUsuario: string = "";
   imagenUsuario: string = ""; 
+  conjuntoID: string[] = [];
 
 
   constructor(private _lecturasBBDDService: LecturasBBDDService,
@@ -103,7 +104,8 @@ export class SocialComponent {
             this._lecturasBBDDService.getComentarios(postLibros._id, postLibros.tipo).subscribe(
               (resp: any) => {
                 if (resp != "") { 
-                  postLibros.comentarios = resp;  
+                    this.conjuntoID.push(postLibros._id);
+                    postLibros.comentarios = resp;  
                 }
               },
               (err) => {
@@ -118,6 +120,7 @@ export class SocialComponent {
             this._lecturasBBDDService.getComentarios(postResena._id, postResena.tipo).subscribe(
               (resp: any) => {
                 if (resp != "") { 
+                  this.conjuntoID.push(postResena._id);
                   postResena.comentarios = resp;  
                 }
               },
@@ -133,7 +136,7 @@ export class SocialComponent {
         console.log(err);
       }
     );
-    console.log("Posts: ", this.posts); 
+    console.log("Conjunto:", this.conjuntoID); 
     return this.posts;  
   }
 
@@ -189,9 +192,7 @@ export class SocialComponent {
       _idLibro: _id,
       texto: formulario.value.comentarioTexto,
       fecha: new Date(),
-      tipo: tipo,
-      nombre: this.nombreUsuario,
-      imagenUsuario: this.imagenUsuario
+      tipo: tipo
     }
     this._lecturasBBDDService.addComentario(nuevoComentario).subscribe(
       (resp) => {
@@ -218,6 +219,8 @@ export class SocialComponent {
     )
   }
   
+
+
 
 
 

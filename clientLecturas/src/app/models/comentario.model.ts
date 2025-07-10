@@ -5,8 +5,6 @@ export class ComentarioModel {
     texto:        string; 
     fecha:        Date;
     tipo:         string; 
-    nombre:       string; 
-    imagenUsuario: string;
     
     constructor() {
         this._idUsuario = ""; 
@@ -14,8 +12,6 @@ export class ComentarioModel {
         this.texto = ""; 
         this.fecha = new Date(); 
         this.tipo = "libro"; 
-        this.nombre = ""; 
-        this.imagenUsuario = ""; 
     }
     
 }

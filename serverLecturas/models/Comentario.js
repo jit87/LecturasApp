@@ -22,13 +22,6 @@ const comentarioSchema = new Schema({
     type: String,
     required: true,
     default: 'libro'
-  },
-  nombre: {
-    type: String,
-    default: 'anon'
-  },
-  imagenUsuario: {
-    type: String
   }
 
 });

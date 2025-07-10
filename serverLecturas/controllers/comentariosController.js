@@ -5,16 +5,14 @@ import Usuario from "../models/Usuario.js";
 
 export async function agregarComentario(req, res) {
 
-  const { _idUsuario,_idLibro,texto,fecha,tipo,nombre,imagenUsuario } = req.body;
+  const { _idUsuario,_idLibro,texto,fecha,tipo } = req.body;
 
   const nuevoComentario = new Comentario({
       _idUsuario,
       _idLibro,
       texto,
       fecha,
-      tipo,
-      nombre,
-      imagenUsuario
+      tipo
   });
     
   try {  
