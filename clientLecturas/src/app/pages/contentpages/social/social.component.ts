@@ -25,7 +25,6 @@ export class SocialComponent {
   comentariosGuardados: any[] = []; 
   nombreUsuario: string = "";
   imagenUsuario: string = ""; 
-  conjuntoID: string[] = [];
 
 
   constructor(private _lecturasBBDDService: LecturasBBDDService,
@@ -74,7 +73,13 @@ export class SocialComponent {
             imagen: libro.imagen || "default.png",
             resena: libro.resena || "",
             tipo: "libro",
-            comentarios: []
+            comentarios: [] as {
+              _idUsuario: string;
+              nombreUsuario: string;
+              imagenUsuario: string;
+              texto: string;
+              fecha: Date;
+            }[]
           };
           let postResena = {
             APIid: libro.APIid,
@@ -85,7 +90,13 @@ export class SocialComponent {
             resena: libro.resena || "",
             titulo: libro.titulo,
             tipo: "resena",
-            comentarios: []
+            comentarios: [] as {
+              _idUsuario: string;
+              nombreUsuario: string;
+              imagenUsuario: string;
+              texto: string;
+              fecha: Date;
+            }[]
           };
           this._authService.getUserById(libro._idUsuario).subscribe(
             (usuario: any) => {
@@ -104,8 +115,16 @@ export class SocialComponent {
             this._lecturasBBDDService.getComentarios(postLibros._id, postLibros.tipo).subscribe(
               (resp: any) => {
                 if (resp != "") { 
-                    this.conjuntoID.push(postLibros._id);
-                    postLibros.comentarios = resp;  
+                  postLibros.comentarios = resp;  
+                  postLibros.comentarios.forEach((comentario, index) => {
+                    this._authService.getUserById(comentario._idUsuario).subscribe({
+                      next: (usuario) => {
+                        postLibros.comentarios[index].nombreUsuario = usuario.nombre;
+                        postLibros.comentarios[index].imagenUsuario = usuario.imagen;
+                      },
+                      error: (err) => console.log(err)
+                    });
+                  });
                 }
               },
               (err) => {
@@ -120,8 +139,16 @@ export class SocialComponent {
             this._lecturasBBDDService.getComentarios(postResena._id, postResena.tipo).subscribe(
               (resp: any) => {
                 if (resp != "") { 
-                  this.conjuntoID.push(postResena._id);
-                  postResena.comentarios = resp;  
+                    postResena.comentarios = resp;  
+                    postResena.comentarios.forEach((comentario, index) => {
+                    this._authService.getUserById(comentario._idUsuario).subscribe({
+                      next: (usuario) => {
+                        postResena.comentarios[index].nombreUsuario = usuario.nombre;
+                        postResena.comentarios[index].imagenUsuario = usuario.imagen;
+                      },
+                      error: (err) => console.log(err)
+                    });
+                  });
                 }
               },
               (err) => {
@@ -129,14 +156,14 @@ export class SocialComponent {
               }
             ); 
             this.posts.push(postResena); 
-          }       
+          }     
         });
       },
       (err) => {
         console.log(err);
       }
     );
-    console.log("Conjunto:", this.conjuntoID); 
+    console.log("Posts:",this.posts); 
     return this.posts;  
   }
 
@@ -219,12 +246,7 @@ export class SocialComponent {
     )
   }
   
-
-
-
-
-
-
+ 
 
 
 

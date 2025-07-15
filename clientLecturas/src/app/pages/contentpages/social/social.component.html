@@ -32,7 +32,7 @@
                         <div *ngFor="let comentario of post.comentarios" class="mb-2">
                             <div>
                                     <img [src]="comentario.imagenUsuario" class="rounded-circle me-2" width="35" height="35" style="float: left;">
-                                    <span><b style="float: left;">{{ comentario._idUsuario }}</b>
+                                    <span><b style="float: left;">{{ comentario.nombreUsuario }}</b>
                                         <br>
                                         <div style="margin-left:8%;">{{ comentario.texto }}</div>
                                     </span>
@@ -79,7 +79,7 @@
                         <div *ngFor="let comentario of post.comentarios" class="mb-2">
                             <div>
                                 <img [src]="comentario.imagenUsuario" class="rounded-circle me-2" width="35" height="35" style="float: left;">
-                                <span><b style="float: left;">{{ comentario._idUsuario }}</b>
+                                <span><b style="float: left;">{{ comentario.nombreUsuario }}</b>
                                 <br><div style="margin-left:8%;">{{ comentario.texto }}</div> </span>
                                 <span style="font-size:x-small;color: grey;float:left;margin-left:8.2%;">{{ comentario.fecha | date:'d/MM/yyyy \' \'HH:mm'}}</span>
                                 <br>
