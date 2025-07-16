@@ -14,6 +14,7 @@ import { EstadoLibroComponent } from "../alonecomponents/estado-libro/estado-lib
 import { SocialComponent } from './contentpages/social/social.component';
 import { PublicoperfilComponent } from './contentpages/publicoperfil/publicoperfil.component';
 import { ReviewComponent } from './contentpages/review/review.component';
+import { ChatComponent } from '../alonecomponents/chat/chat.component';
 
 
 
@@ -36,7 +37,8 @@ import { ReviewComponent } from './contentpages/review/review.component';
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-    EstadoLibroComponent
+    EstadoLibroComponent,
+    ChatComponent
 ],
   exports: [
     LoginComponent,

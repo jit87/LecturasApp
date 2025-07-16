@@ -1,12 +1,32 @@
 <div class="container mt-4 animate__animated animate__fadeIn">
     <div class="row">
-        <div class="col-md-6 offset-md-3" style="margin-top: 2%;">
+        <div class="col-md-3" style="margin-top: 7.5%; margin-bottom: 0%;">
+                <div class="card-body" style="overflow-y: auto; flex-grow: 1; background-color: #f9f9f9;" id="chat-scroll">
+                    <div  class="mb-2">
+                        <div class="d-flex">
+                            <ul class="list-group">
+                                <li *ngFor="let seguido of seguidos" class="d-flex list-group-item" (click)="seleccionarSeguido(seguido)">
+                                    {{ seguido.nombre }}
+                                    &nbsp;<i class="fa-solid fa-message"></i>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <app-chat *ngIf="seguidoSeleccionado && chatCerrado==false" [seguido]="seguidoSeleccionado" (chatCerrado)="$event"></app-chat>
+                </div>
+        </div>
+        <div class="col-md-6" style="margin-top: 2%;">
             <h2 class="text-center">Actividad</h2>
             <br>
             <div class="caja-muro mt-2" *ngFor="let post of posts; let i = index" class="card mb-3 p-3">
+                <div class="spinner-border m-5" role="status" *ngIf="cargados==false">
+                </div>
                 <div class="card-body" *ngIf="post.tipo==='libro' && post.resena==''">
-                    <img class="imagenUsuario" [src]="post.imagenUsuario" class="rounded-circle me-3" width="50"
-                        height="50">
+                    <img class="imagenUsuario" 
+                         [src]="post.imagenUsuario" 
+                         class="rounded-circle me-3" 
+                         width="50"
+                         height="50">
                     <b style="font-size: large;cursor: pointer;" [routerLink]="['/perfilpublico', post._idUsuario]"
                         class="nombre">{{ post.nombreUsuario }}</b>
                     &nbsp;ha actualizado su biblioteca con el libro:
@@ -124,7 +144,5 @@
             </ul>
             <p class="infoSeguidores" *ngIf="seguidores.length==0" style="padding: 2%;">No hay seguidores</p>
         </div>
-
-
     </div>
 </div>

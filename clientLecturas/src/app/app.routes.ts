@@ -22,7 +22,7 @@ export const APP_ROUTES: Routes = [
     { path: 'info/:id', component: InfoComponent, canActivate: [AuthGuard] }, 
     { path: 'social', component: SocialComponent, canActivate: [AuthGuard] }, 
     { path: 'perfilpublico/:id', component: PublicoperfilComponent, canActivate: [AuthGuard] },
-    { path: 'review/:id/:idUsuario', component:ReviewComponent, canActivate: [AuthGuard] },
+    { path: 'review/:id/:idUsuario', component: ReviewComponent, canActivate: [AuthGuard] },
     { path: '**', pathMatch:'full', redirectTo:'home'}
 ];
 

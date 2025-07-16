@@ -25,6 +25,9 @@ export class SocialComponent {
   comentariosGuardados: any[] = []; 
   nombreUsuario: string = "";
   imagenUsuario: string = ""; 
+  cargados: boolean = false; 
+  seguidoSeleccionado: any = ""; 
+  chatCerrado: boolean = false; 
 
 
   constructor(private _lecturasBBDDService: LecturasBBDDService,
@@ -50,11 +53,12 @@ export class SocialComponent {
         console.log(err); 
       }
     ) 
-    this.getSeguidores();  
+    this.getSeguidores(); 
   }
 
 
 
+  //MURO
   getActividad() {
     this.posts = []; 
     this._lecturasBBDDService.getListLibrosUsuarios().subscribe(
@@ -163,11 +167,11 @@ export class SocialComponent {
         console.log(err);
       }
     );
-    console.log("Posts:",this.posts); 
+    this.cargados = true; 
     return this.posts;  
   }
 
-
+  //SEGUIDOS Y SEGUIDORES
   getSeguidos() {
     this.seguidos = []; 
     this._lecturasBBDDService.getSeguidos().subscribe(
@@ -244,6 +248,17 @@ export class SocialComponent {
         console.log(err); 
       }
     )
+  }
+
+
+  //CHAT
+  seleccionarSeguido(seguido:any) {
+     this.seguidoSeleccionado = seguido;
+  }
+
+  deseleccionarSeguido(chatCerrado: boolean) {
+    if(chatCerrado)
+      this.chatCerrado = true; 
   }
   
  
