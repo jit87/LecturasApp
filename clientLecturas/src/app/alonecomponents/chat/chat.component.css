@@ -1,0 +1,15 @@
+.list-group {
+    width: -webkit-fill-available !important;
+}
+
+.list-group-item{
+    padding: 10px;
+}
+
+.list-group-item:active{
+    background-color: aquamarine;
+}
+
+.activa {
+    background-color: blue;
+}

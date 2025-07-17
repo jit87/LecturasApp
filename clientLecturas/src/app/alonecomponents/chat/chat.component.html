@@ -1,15 +1,19 @@
 
 <div style="margin-top: 7.5%; margin-bottom: 0%;">
     <h5 class="chat-title">Chat</h5>
-    <div class="card-body" style="flex-grow: 1; background-color: #f9f9f9;margin-top: 15%;" id="chat-scroll">
+    <div class="card-body" style="flex-grow: 1; background-color: #f9f9f9;margin-top: 15%; border-radius: 5%;" id="chat-scroll">
         <div class="mb-2">
             <div class="d-flex">
                 <ul class="list-group">
-                    <li *ngFor="let seguido of seguidos" class="d-flex list-group-item"
-                        (click)="seleccionarSeguido(seguido)">
-                        <img [src]="seguido.imagen || 'default.png'" class="rounded-circle me-2" width="30" height="30">
-                        {{ seguido.nombre }}
-                        &nbsp;<i class="fa-solid fa-message"></i>
+                    <li *ngFor="let seguido of seguidos" 
+                        class="s-social d-flex list-group-item"
+                        (click)="seleccionarSeguido(seguido)" [ngClass]="'inactiva'">
+                        <img [src]="seguido.imagen || 'default.png'" 
+                             class="rounded-circle me-2" 
+                             width="30" 
+                             height="30">
+                        <span style="font-weight: bold;">{{ seguido.nombre }}</span>
+                        &nbsp;<i class="fa-solid fa-message contact-icon" style="margin-left:auto;margin-top: 2%;"></i>
                     </li>
                 </ul>
             </div>
@@ -38,8 +42,8 @@
 
     <div class="card-footer p-2">
         <form class="d-flex">
-            <input type="text" class="form-control me-2" placeholder="Escribe un mensaje..." disabled>
-            <button class="btn btn-primary" type="submit" disabled>Enviar</button>
+            <input type="text" class="form-control me-2" placeholder="Escribe un mensaje...">
+            <button class="btn btn-primary" type="submit">Enviar</button>
         </form>
     </div>
 </div>
