@@ -26,9 +26,7 @@ export class SocialComponent {
   nombreUsuario: string = "";
   imagenUsuario: string = ""; 
   cargados: boolean = false; 
-  seguidoSeleccionado: any = ""; 
-  chatCerrado: boolean = false; 
-
+  
 
   constructor(private _lecturasBBDDService: LecturasBBDDService,
               private _authService: AuthService
@@ -251,17 +249,8 @@ export class SocialComponent {
   }
 
 
-  //CHAT
-  seleccionarSeguido(seguido:any) {
-     this.seguidoSeleccionado = seguido;
-  }
 
-  deseleccionarSeguido(chatCerrado: boolean) {
-    if(chatCerrado)
-      this.chatCerrado = true; 
-  }
-  
- 
+
 
 
 

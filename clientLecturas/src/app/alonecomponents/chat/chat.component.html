@@ -1,8 +1,26 @@
-<div class="card mt-4" style="height: 400px; display: flex; flex-direction: column;">
+
+<div style="margin-top: 7.5%; margin-bottom: 0%;">
+    <h5 class="chat-title">Chat</h5>
+    <div class="card-body" style="flex-grow: 1; background-color: #f9f9f9;margin-top: 15%;" id="chat-scroll">
+        <div class="mb-2">
+            <div class="d-flex">
+                <ul class="list-group">
+                    <li *ngFor="let seguido of seguidos" class="d-flex list-group-item"
+                        (click)="seleccionarSeguido(seguido)">
+                        <img [src]="seguido.imagen || 'default.png'" class="rounded-circle me-2" width="30" height="30">
+                        {{ seguido.nombre }}
+                        &nbsp;<i class="fa-solid fa-message"></i>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card mt-4" style="height: 400px; display: flex; flex-direction: column;" *ngIf="cerrado==false && seguidoSeleccionado">
     <div class="card-header bg-secondary text-white d-flex justify-content-between align-items-center">
         <div>
-            <img [src]="'default.png'" class="rounded-circle me-2" width="30" height="30">
-            <b></b>
+            <img [src]="seguidoSeleccionado.imagen || 'default.png'" class="rounded-circle me-2" width="30" height="30">
+            <b>{{ seguidoSeleccionado.nombre }}</b>
         </div>
         <button class="btn btn-sm btn-light" (click)="cerrarChat()">✖</button>
     </div>

@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
+import { LecturasBBDDService } from '../../services/lecturas-bbdd.service';
 
 @Component({
   selector: 'app-chat',
@@ -10,19 +12,48 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class ChatComponent {
 
-  @Input() seguido!: any;  
-  @Output() chatCerrado = new EventEmitter<boolean>();
-  
+  seguidos: any[] = []; 
+  seguidoSeleccionado: any = ""; 
+  cerrado: boolean = true; 
 
-  constructor() {
-
+  constructor( private _authService: AuthService,
+               private _lecturasBBDDService: LecturasBBDDService){
+    this.getSeguidos(); 
   }
 
 
 
   cerrarChat() {
-    this.chatCerrado.emit(true); 
+    this.cerrado = true; 
   }
+
+
+  getSeguidos() {
+    this.seguidos = []; 
+    this._lecturasBBDDService.getSeguidos().subscribe(
+      (resp) => {
+        resp.forEach((id:any) => {
+           this._authService.getUserById(id).subscribe(
+             (usuario: any) => {
+               if (usuario != undefined) {
+                this.seguidos.push(usuario);
+               }
+              }
+            )
+        });
+      },
+      (err) => {
+        console.log(err); 
+      }
+    )
+  }
+
+
+  seleccionarSeguido(seguido:any) {
+    this.seguidoSeleccionado = seguido; 
+    this.cerrado = false; 
+  }
+
 
 
 }

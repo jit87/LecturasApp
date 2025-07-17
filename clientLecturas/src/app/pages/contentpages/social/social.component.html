@@ -1,20 +1,6 @@
 <div class="container mt-4 animate__animated animate__fadeIn">
     <div class="row">
-        <div class="col-md-3" style="margin-top: 7.5%; margin-bottom: 0%;">
-                <div class="card-body" style="overflow-y: auto; flex-grow: 1; background-color: #f9f9f9;" id="chat-scroll">
-                    <div  class="mb-2">
-                        <div class="d-flex">
-                            <ul class="list-group">
-                                <li *ngFor="let seguido of seguidos" class="d-flex list-group-item" (click)="seleccionarSeguido(seguido)">
-                                    {{ seguido.nombre }}
-                                    &nbsp;<i class="fa-solid fa-message"></i>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <app-chat *ngIf="seguidoSeleccionado && chatCerrado==false" [seguido]="seguidoSeleccionado" (chatCerrado)="$event"></app-chat>
-                </div>
-        </div>
+        <app-chat class="col-md-3"></app-chat>
         <div class="col-md-6" style="margin-top: 2%;">
             <h2 class="text-center">Actividad</h2>
             <br>
