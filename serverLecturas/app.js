@@ -1,10 +1,12 @@
-import express from 'express'; 
+import express from 'express';
 import cors from 'cors';
-import authRoutes from './routes/authRoutes.js'; 
-import librosRoutes from './routes/librosRoutes.js'; 
+import authRoutes from './routes/authRoutes.js';
+import librosRoutes from './routes/librosRoutes.js';
 import coleccionesRoutes from './routes/coleccionesRoutes.js';
 import seguidosRoutes from './routes/seguidosRoutes.js';
 import comentariosRoutes from './routes/comentariosRoutes.js';
+import chatsRoutes from './routes/chatsRoutes.js';
+import mensajesRoutes from './routes/mensajesRoutes.js';
 
 //Crear servidor
 const app = express();
@@ -36,5 +38,11 @@ app.use('/seguidos', seguidosRoutes);
 
 //Registra la ruta de gestión de comentarios
 app.use('/comentarios', comentariosRoutes);
+
+//Registra la ruta de gestión de chats
+app.use('/chats', chatsRoutes);
+
+//Registra la ruta de gestión de mensajes
+app.use('/mensajes', mensajesRoutes);
 
 export default app; 
