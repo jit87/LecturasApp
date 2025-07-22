@@ -16,12 +16,12 @@ const authenticate = (req, res, next) => {
     if (err) {
       return res.status(401).json({ message: 'Token inválido' });
     }
-    
+
     //Revisar bien que _idUsuario esté con el mismo nombre en otras partes si no puede fallar
     req._idUsuario = decoded._id;
     next();
   });
-  
+
 };
 
 export default authenticate; 

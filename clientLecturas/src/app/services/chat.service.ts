@@ -21,4 +21,12 @@ export class ChatService {
     return this.http.post(this.url + "/mensajes", mensaje);
   }
 
+  getChats(_idUsuario: string): Observable<any> {
+    return this.http.get(this.url + "/chats/todos/" + _idUsuario);
+  }
+
+  getMensajes(_idChat: string): Observable<any> {
+    return this.http.get(this.url + "/mensajes/todos/" + _idChat);
+  }
+
 }

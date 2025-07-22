@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import authenticate from '../middlewares/authenticate.js';
-import { crearChat } from '../controllers/chatsController.js';
+import { crearChat, obtenerChats } from '../controllers/chatsController.js';
 
 const router = Router();
 
@@ -9,5 +9,8 @@ router.use(authenticate);
 
 //Crea un chat
 router.post('/', crearChat);
+
+//Obtiene los chats en función de id logueado
+router.get('/todos/:id', obtenerChats);
 
 export default router; 

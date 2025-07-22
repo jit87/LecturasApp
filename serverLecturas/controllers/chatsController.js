@@ -24,3 +24,15 @@ export async function crearChat(req, res) {
 }
 
 
+export async function obtenerChats(req, res) {
+
+    try {
+        const chats = await Chat.find({ participantes: { $in: req._idUsuario } })
+        res.json(chats);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+
+}
+
+

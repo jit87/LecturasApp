@@ -2,8 +2,7 @@ import mongoose from 'mongoose';
 
 const MensajeSchema = new mongoose.Schema({
     _idChat: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Chat',
+        type: String,
         required: true
     },
     _idUsuario: {

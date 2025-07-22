@@ -40,7 +40,6 @@ export class ChatComponent {
     this.usuarioID = "";
     this.formulario = "";
     this.crearFormulario();
-    this.cargarDatosAlFormulario();
     this.chat = {
       participantes: [],
       ultimoMensaje: "",
@@ -89,17 +88,12 @@ export class ChatComponent {
     this.seguidoSeleccionado = seguido;
     this.cerrado = false;
     console.log(this.chat);
+    this.getChats(this.usuarioID);
   }
 
 
   crearFormulario() {
     this.formulario = this.fb.group({
-      mensaje: ['']
-    })
-  }
-
-  cargarDatosAlFormulario() {
-    this.formulario.setValue({
       mensaje: ['']
     })
   }
@@ -135,6 +129,29 @@ export class ChatComponent {
         console.log(err);
       }
     )
+  }
+
+
+  getChats(_idUsuario: string) {
+    this._chatService.getChats(_idUsuario).subscribe(
+      (resp: any) => {
+        console.log("Chats:", resp);
+        resp.forEach((element: any) => {
+          this.getMensajes(element._id);
+        });
+      },
+      (error) => {
+        console.log(error)
+      }
+    )
+  }
+
+
+  getMensajes(_idChat: string) {
+    this._chatService.getMensajes(_idChat).subscribe({
+      next: (resp) => { console.log("Mensajes:", resp) },
+      error: (error) => { console.log(error) }
+    })
   }
 
 
