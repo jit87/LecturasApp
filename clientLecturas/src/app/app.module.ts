@@ -14,10 +14,12 @@ import { CommonModule } from '@angular/common';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { LibrosData } from './abstracts/libros-data';
+import { LibrosService } from './services/libros.service';
 
 
 @NgModule({
-  declarations: [ 
+  declarations: [
     AppComponent
   ],
   imports: [
@@ -36,6 +38,10 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
+    },
+    {
+      provide: LibrosData,
+      useClass: LibrosService
     }
   ],
   bootstrap: [AppComponent]

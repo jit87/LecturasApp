@@ -2,40 +2,46 @@
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
             <div>
-                <img  src="https://icons.iconarchive.com/icons/george-ui/ancient-legend/48/Green-Books-Library-icon.png" width="40" height="40" style="margin-right: 10px;"> 
+                <img src="https://icons.iconarchive.com/icons/george-ui/ancient-legend/48/Green-Books-Library-icon.png"
+                    width="40" height="40" style="margin-right: 10px;">
                 <a class="navbar-brand" href="#">LecturasApp</a>
             </div>
-            
-            <button *ngIf="autenticado" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+
+            <button *ngIf="autenticado" class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item pulse" *ngIf="autenticado">
-                        <a class="nav-link" [routerLink]="['/home']"  routerLinkActive="router-link-active">Home</a>
+                        <a class="nav-link" [routerLink]="['/home']" routerLinkActive="router-link-active">Home</a>
                     </li>
                     <li class="nav-item" *ngIf="autenticado">
                         <a class="nav-link" [routerLink]="['/social']" routerLinkActive="router-link-active">Social</a>
                     </li>
                     <li class="nav-item" *ngIf="autenticado">
-                        <a class="nav-link" [routerLink]="['/libros']" routerLinkActive="router-link-active">Mis libros</a>
+                        <a class="nav-link" [routerLink]="['/libros']" routerLinkActive="router-link-active">Mis
+                            libros</a>
                     </li>
                     <li class="nav-item" *ngIf="autenticado">
-                        <a class="nav-link" [routerLink]="['/perfil']" routerLinkActive="router-link-active">Configuración</a>
-                    </li> 
-                    <img class="img-nav nav-link" src="{{ ImagenPerfil }}" routerLinkActive="perfil-active"  [routerLink]="['/perfilpublico', this.idLogueado]" style="width: 45px;height: 45px;border-radius: 50px;cursor: pointer;" *ngIf="autenticado">
+                        <a class="nav-link" [routerLink]="['/perfil']"
+                            routerLinkActive="router-link-active">Configuración</a>
+                    </li>
+                    <img class="img-nav nav-link" src="{{ ImagenPerfil }}" routerLinkActive="perfil-active"
+                        [routerLink]="['/perfilpublico', this.idLogueado]"
+                        style="width: 45px;height: 45px;border-radius: 50px;cursor: pointer;" *ngIf="autenticado">
                 </ul>
                 <form class="d-flex" role="search" *ngIf="autenticado">
                     <input #termino class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Buscar">
-                    <button class="btn btn-outline-primary" type="button" (click)="getInfoLibro(termino.value)">Buscar</button>
+                    <button class="btn btn-outline-primary" type="button"
+                        (click)="getInfoLibro(termino.value)">Buscar</button>
                 </form>
                 <br>
-                    <i class="fa-solid fa-power-off" style="margin-left: 2%;cursor: pointer;" [routerLink]="['/login']" *ngIf="autenticado" (click)="logout()"></i>
+                <i class="fa-solid fa-power-off" style="margin-left: 2%;cursor: pointer;" [routerLink]="['/login']"
+                    *ngIf="autenticado" (click)="logout()"></i>
                 <br>
             </div>
         </div>
     </nav>
 </div>
-
-
