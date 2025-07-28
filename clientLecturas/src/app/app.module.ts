@@ -14,7 +14,7 @@ import { CommonModule } from '@angular/common';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
-import { LibrosData } from './abstracts/libros-data';
+import { AbstractLibrosService } from './abstracts/AbstractLibrosService';
 import { LibrosService } from './services/libros.service';
 
 
@@ -40,7 +40,7 @@ import { LibrosService } from './services/libros.service';
       multi: true
     },
     {
-      provide: LibrosData,
+      provide: AbstractLibrosService,
       useClass: LibrosService
     }
   ],

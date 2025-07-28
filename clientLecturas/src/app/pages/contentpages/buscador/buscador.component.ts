@@ -5,7 +5,7 @@ import { Location } from '@angular/common';
 import { LecturasBBDDService } from '../../../services/lecturas-bbdd.service';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../../services/auth.service';
-import { LibrosData } from '../../../abstracts/libros-data';
+import { AbstractLibrosService } from '../../../abstracts/AbstractLibrosService';
 
 @Component({
   selector: 'app-buscador',
@@ -23,7 +23,7 @@ export class BuscadorComponent {
 
 
   constructor(
-    private _librosService: LibrosData,
+    private _librosService: AbstractLibrosService,
     private activatedRoute: ActivatedRoute,
     private location: Location,
     private _lecturasBBDDService: LecturasBBDDService,

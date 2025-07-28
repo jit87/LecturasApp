@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { LecturasBBDDService } from '../../../services/lecturas-bbdd.service';
 import { LibroModel } from '../../../models/libro.model';
-import { LibrosData } from '../../../abstracts/libros-data';
+import { AbstractLibrosService } from '../../../abstracts/AbstractLibrosService';
 
 @Component({
   selector: 'app-info',
@@ -32,10 +31,9 @@ export class InfoComponent {
 
 
   constructor(
-    private _librosService: LibrosData,
+    private _librosService: AbstractLibrosService,
     private activatedRoute: ActivatedRoute,
-    private location: Location,
-    private _lecturasBBDDService: LecturasBBDDService,
+    private location: Location
   ) {
     this.activatedRoute.params.subscribe(
       (params: any) => {

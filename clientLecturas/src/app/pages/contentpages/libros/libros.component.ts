@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { EstadoLibroService } from '../../../services/estado-libro.service';
 import { AuthService } from '../../../services/auth.service';
 import { LecturasBBDDService } from '../../../services/lecturas-bbdd.service';

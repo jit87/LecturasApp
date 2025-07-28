@@ -2,13 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../environments/environment'
-import { LibrosData } from '../abstracts/libros-data';
+import { AbstractLibrosService } from '../abstracts/AbstractLibrosService';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class LibrosService extends LibrosData {
+export class LibrosService extends AbstractLibrosService {
 
   url: string = "https://www.googleapis.com/books/v1/volumes?q="
   Google_API_KEY: string = environment.Google_API_KEY;

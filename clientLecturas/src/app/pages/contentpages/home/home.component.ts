@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { LibrosService } from '../../../services/libros.service';
 import { LibroModel } from '../../../models/libro.model';
 import { LecturasBBDDService } from '../../../services/lecturas-bbdd.service';
 import { AuthService } from '../../../services/auth.service';
-import { LibrosData } from '../../../abstracts/libros-data';
+import { AbstractLibrosService } from '../../../abstracts/AbstractLibrosService';
 
 
 @Component({
@@ -24,7 +23,7 @@ export class HomeComponent {
 
 
   constructor(
-    private _librosService: LibrosData,
+    private _librosService: AbstractLibrosService,
     private _lecturasBBDDService: LecturasBBDDService,
     private _authService: AuthService
   ) {

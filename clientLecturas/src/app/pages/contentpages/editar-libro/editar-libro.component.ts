@@ -13,76 +13,79 @@ import { ToastrService } from 'ngx-toastr';
 export class EditarLibroComponent {
 
 
-//Comunicamos al padre (libros) que se ha editado el libro
-@Output() libroEditado = new EventEmitter<boolean>();
+  //Comunicamos al padre (libros) que se ha editado el libro
+  @Output() libroEditado = new EventEmitter<boolean>();
 
-//Evento para notificar al padre (libros) el cierre del formulario
-@Output() cerrarFormulario = new EventEmitter<void>();
-  
-//Recibimos el usuario del padre
-@Input() usuarioID!: string;
+  //Evento para notificar al padre (libros) el cierre del formulario
+  @Output() cerrarFormulario = new EventEmitter<void>();
 
-  
-libro: LibroModel = new LibroModel();   
-colecciones: any[] = []; 
+  //Recibimos el usuario del padre
+  @Input() usuarioID!: string;
 
 
-constructor(private _estadoLibroService: EstadoLibroService, private _lecturasBBDDService: LecturasBBDDService, public _toastr: ToastrService ) {
-  this.libro._id = this._estadoLibroService.getIdLibro(); 
-  this.libro.titulo = this._estadoLibroService.getTituloLibro();
-  this.libro.estado = this._estadoLibroService.getEstadoLibro(); 
-  this.libro.coleccion = this._estadoLibroService.getColeccionById(); 
-  this.libro.resena = this._estadoLibroService.getResenaLibro(); 
-}
+  libro: LibroModel = new LibroModel();
+  colecciones: any[] = [];
 
 
-  
-ngOnInit() {
-  this.getColecciones(this.usuarioID); 
-}
-  
-
-//Colecciones a mostrar en el selector del formulario
-getColecciones(usuarioId: string) {
-  this._lecturasBBDDService.getListColecciones(usuarioId).subscribe(
-    (resp) => {
-      console.log("Colecciones obtenidas", resp);
-      this.colecciones = resp; 
-    },
-    (error) => {
-      console.log("Error al obtener colecciones", error); 
-    }
-  )
-}
-
-
-
-guardarCambios(form: NgForm) {  
-  if (form.invalid) {
-    console.log("Formulario no valido");
-    return;
+  constructor(
+    private _estadoLibroService: EstadoLibroService,
+    private _lecturasBBDDService: LecturasBBDDService,
+    public _toastr: ToastrService) {
+    this.libro._id = this._estadoLibroService.getIdLibro();
+    this.libro.titulo = this._estadoLibroService.getTituloLibro();
+    this.libro.estado = this._estadoLibroService.getEstadoLibro();
+    this.libro.coleccion = this._estadoLibroService.getColeccionById();
+    this.libro.resena = this._estadoLibroService.getResenaLibro();
   }
-  this._lecturasBBDDService.updatelibro(this.libro, this.libro._id).subscribe(
-    (resp) => {
-      console.log("Libro actualizado", resp);
-      this._toastr.info("Libro actualizado"); 
-    },
-    (error) => {
-      console.log(error); 
+
+
+
+  ngOnInit() {
+    this.getColecciones(this.usuarioID);
+  }
+
+
+  //Colecciones a mostrar en el selector del formulario
+  getColecciones(usuarioId: string) {
+    this._lecturasBBDDService.getListColecciones(usuarioId).subscribe(
+      (resp) => {
+        console.log("Colecciones obtenidas", resp);
+        this.colecciones = resp;
+      },
+      (error) => {
+        console.log("Error al obtener colecciones", error);
+      }
+    )
+  }
+
+
+
+  guardarCambios(form: NgForm) {
+    if (form.invalid) {
+      console.log("Formulario no valido");
+      return;
     }
-  )
- 
-  //Actualizamos el libro y lo notificamos al padre
-  this.libroEditado.emit(true); 
-  this.cerrar(); 
-}
-  
+    this._lecturasBBDDService.updatelibro(this.libro, this.libro._id).subscribe(
+      (resp) => {
+        console.log("Libro actualizado", resp);
+        this._toastr.info("Libro actualizado");
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
+
+    //Actualizamos el libro y lo notificamos al padre
+    this.libroEditado.emit(true);
+    this.cerrar();
+  }
 
 
-cerrar() {
-  this.cerrarFormulario.emit();
-}
-  
+
+  cerrar() {
+    this.cerrarFormulario.emit();
+  }
+
 
 
 
