@@ -1,13 +1,18 @@
 .nav-item a {
     font-weight: 500;
-    color: #032518 !important; 
+    color: #032518 !important;
+}
+
+.nav-item a:hover {
+    transform: scale(1.1, 1.1);
+    transition: all 300ms;
 }
 
 .img-nav:focus {
     /*background-color: darkgrey;*/
     display: inline-block;
     width: fit-content;
-    border: 2px solid black; 
+    border: 2px solid black;
     animation: animacionBorder 1s alternate;
 }
 
@@ -41,5 +46,3 @@
     }
 
 }*/
-
-
