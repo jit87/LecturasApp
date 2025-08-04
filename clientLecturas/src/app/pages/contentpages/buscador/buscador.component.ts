@@ -1,11 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { LibrosService } from '../../../services/libros.service';
 import { Location } from '@angular/common';
-import { LecturasBBDDService } from '../../../services/lecturas-bbdd.service';
-import { ToastrService } from 'ngx-toastr';
-import { AuthService } from '../../../services/auth.service';
 import { AbstractLibrosService } from '../../../abstracts/AbstractLibrosService';
+import { AbstractAuthService } from '../../../abstracts/AbstractAuthService';
 
 @Component({
   selector: 'app-buscador',
@@ -26,9 +23,7 @@ export class BuscadorComponent {
     private _librosService: AbstractLibrosService,
     private activatedRoute: ActivatedRoute,
     private location: Location,
-    private _lecturasBBDDService: LecturasBBDDService,
-    private toastr: ToastrService,
-    private _authService: AuthService) {
+    private _authService: AbstractAuthService) {
 
   }
 

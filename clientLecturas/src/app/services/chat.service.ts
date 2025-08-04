@@ -3,15 +3,18 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { MensajeModel } from '../models/mensaje.model';
 import { ChatModel } from '../models/chat.model';
+import { AbstractChatService } from '../abstracts/AbstractChatService';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ChatService {
+export class ChatService extends AbstractChatService {
 
   url: string = "http://localhost:4000";
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    super();
+  }
 
   crearChat(chat: ChatModel): Observable<any> {
     return this.http.post(this.url + "/chats", chat);

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { AbstractAuthService } from '../../abstracts/AbstractAuthService';
 
 @Component({
   selector: 'app-navbar',
@@ -12,18 +13,18 @@ export class NavbarComponent {
   autenticado: boolean | any = false;
   isAuthenticated: boolean = false;
 
-  ImagenPerfil: string | undefined | any; 
-  email: string | null = "";  
-  idLogueado: string = ""; 
+  ImagenPerfil: string | undefined | any;
+  email: string | null = "";
+  idLogueado: string = "";
 
   constructor(private router: Router,
-              private _authService: AuthService
+    private _authService: AbstractAuthService
   ) {
-     if(this._authService.isAuthenticated()) {
+    if (this._authService.isAuthenticated()) {
       this.autenticado = true;
     }
     this.checkAuthentication();
-    this.cargarImagen(); 
+    this.cargarImagen();
   }
 
 
@@ -35,26 +36,26 @@ export class NavbarComponent {
       }
     )
   }
-  
+
 
   cargarImagen() {
-    this.email = localStorage.getItem("email"); 
+    this.email = localStorage.getItem("email");
     this._authService.getUserByEmail(this.email).subscribe(
       (resp: any) => {
-        this.ImagenPerfil = "";  
-        this.ImagenPerfil = resp.imagen; 
-        this.idLogueado = resp._id; 
+        this.ImagenPerfil = "";
+        this.ImagenPerfil = resp.imagen;
+        this.idLogueado = resp._id;
         if (!resp.imagen) {
-          this.ImagenPerfil = "http://i38.photobucket.com/albums/e149/eloginko/profile_male_large_zpseedb2954.jpg"; 
+          this.ImagenPerfil = "http://i38.photobucket.com/albums/e149/eloginko/profile_male_large_zpseedb2954.jpg";
         }
       }, (err) => {
-        console.log("Error de obtención de datos", err); 
+        console.log("Error de obtención de datos", err);
       })
   }
 
 
 
-  
+
   //Buscador de libros
   getInfoLibro(termino: string) {
     this.router.navigate(['/buscador', termino]);
@@ -66,24 +67,24 @@ export class NavbarComponent {
     this.checkAuthentication();
   }
 
-  
+
   checkAuthentication() {
     const token = localStorage.getItem('auth-token');
-    this.isAuthenticated = !!token; 
+    this.isAuthenticated = !!token;
     if (this.isAuthenticated) {
-      this.autenticado = true; 
+      this.autenticado = true;
     }
   }
 
-  
+
   logout() {
-    this._authService.logout(); 
-    this.autenticado = false; 
+    this._authService.logout();
+    this.autenticado = false;
     //Eliminamos los datos guardados en el navegador
     localStorage.removeItem("email");
     localStorage.removeItem("auth-token");
   }
-  
+
 
 
 

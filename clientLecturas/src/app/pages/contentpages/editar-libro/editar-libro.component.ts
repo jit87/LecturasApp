@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { LibroModel } from '../../../models/libro.model';
-import { EstadoLibroService } from '../../../services/estado-libro.service';
-import { LecturasBBDDService } from '../../../services/lecturas-bbdd.service';
 import { ToastrService } from 'ngx-toastr';
+import { AbstractLecturasBBDDService } from '../../../abstracts/AbstractLecturasBBDDService';
+import { AbstractEstadoLibroService } from '../../../abstracts/AbstractEstadoLibroService';
 
 @Component({
   selector: 'app-editar-libro',
@@ -28,8 +28,8 @@ export class EditarLibroComponent {
 
 
   constructor(
-    private _estadoLibroService: EstadoLibroService,
-    private _lecturasBBDDService: LecturasBBDDService,
+    private _estadoLibroService: AbstractEstadoLibroService,
+    private _lecturasBBDDService: AbstractLecturasBBDDService,
     public _toastr: ToastrService) {
     this.libro._id = this._estadoLibroService.getIdLibro();
     this.libro.titulo = this._estadoLibroService.getTituloLibro();

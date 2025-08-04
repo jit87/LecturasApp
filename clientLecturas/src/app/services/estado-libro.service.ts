@@ -1,26 +1,20 @@
 import { Injectable } from '@angular/core';
-import { LecturasBBDDService } from './lecturas-bbdd.service';
-import { AuthService } from './auth.service';
-import { Observable } from 'rxjs';
+import { AbstractEstadoLibroService } from '../abstracts/AbstractEstadoLibroService';
+import { AbstractLecturasBBDDService } from '../abstracts/AbstractLecturasBBDDService';
 
 @Injectable({
   providedIn: 'root'
 })
-export class EstadoLibroService {
+export class EstadoLibroService extends AbstractEstadoLibroService {
 
   private id: string = "";
   private titulo: string = "";
   private estado: string = "";
-  private coleccion: string = ""; 
-  private resena: string = ""; 
-  resp: any; 
+  private coleccion: string = "";
+  private resena: string = "";
+  resp: any;
 
-  constructor(
-    private _lecturasBBDDService: LecturasBBDDService,
-  ) {
-      
-
-   }
+  constructor(private _lecturasBBDDService: AbstractLecturasBBDDService) { super(); }
 
   //GETTERS
   getIdLibro(): string {
@@ -35,45 +29,45 @@ export class EstadoLibroService {
     return this.estado;
   }
 
-  getResenaLibro(): string{
-    return this.resena; 
+  getResenaLibro(): string {
+    return this.resena;
   }
 
   getLibros(usuarioId: string) {
     this._lecturasBBDDService.getListLibros(usuarioId).subscribe(
       (resp) => {
-        console.log(resp); 
-        this.resp = resp; 
+        console.log(resp);
+        this.resp = resp;
       },
       (err) => {
-        console.log(err); 
+        console.log(err);
       }
-    ); 
-     return this.resp; 
+    );
+    return this.resp;
   }
 
 
   estaGuardado(APIid: string) {
-    var result = false; 
+    var result = false;
     this._lecturasBBDDService.getlibroByAPIid(APIid).subscribe(
       (resp) => {
-        console.log("Está guardado", resp); 
-        result = true; 
+        console.log("Está guardado", resp);
+        result = true;
       },
       (err) => {
-        console.log("No se ha encontrado", err); 
-        result = false; 
+        console.log("No se ha encontrado", err);
+        result = false;
       }
-    ) 
-    return result; 
+    )
+    return result;
   }
 
 
   getColeccionById() {
-    return  this.coleccion; 
+    return this.coleccion;
   }
 
-  
+
 
   //SETTERS
   setIdLibro(id: string): void {
@@ -93,9 +87,9 @@ export class EstadoLibroService {
   }
 
   setResenaLibro(resena: string) {
-    this.resena = resena; 
+    this.resena = resena;
   }
-  
+
 
 
 

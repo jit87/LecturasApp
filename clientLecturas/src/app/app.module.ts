@@ -16,6 +16,14 @@ import { ToastrModule } from 'ngx-toastr';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { AbstractLibrosService } from './abstracts/AbstractLibrosService';
 import { LibrosService } from './services/libros.service';
+import { AbstractLecturasBBDDService } from './abstracts/AbstractLecturasBBDDService';
+import { LecturasBBDDService } from './services/lecturas-bbdd.service';
+import { EstadoLibroService } from './services/estado-libro.service';
+import { AbstractEstadoLibroService } from './abstracts/AbstractEstadoLibroService';
+import { AbstractChatService } from './abstracts/AbstractChatService';
+import { ChatService } from './services/chat.service';
+import { AbstractAuthService } from './abstracts/AbstractAuthService';
+import { AuthService } from './services/auth.service';
 
 
 @NgModule({
@@ -42,6 +50,22 @@ import { LibrosService } from './services/libros.service';
     {
       provide: AbstractLibrosService,
       useClass: LibrosService
+    },
+    {
+      provide: AbstractLecturasBBDDService,
+      useClass: LecturasBBDDService
+    },
+    {
+      provide: AbstractEstadoLibroService,
+      useClass: EstadoLibroService
+    },
+    {
+      provide: AbstractChatService,
+      useClass: ChatService
+    },
+    {
+      provide: AbstractAuthService,
+      useClass: AuthService
     }
   ],
   bootstrap: [AppComponent]

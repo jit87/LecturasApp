@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { LecturasBBDDService } from '../../../services/lecturas-bbdd.service';
 import { AuthService } from '../../../services/auth.service';
 import { NgForm, NgModel } from '@angular/forms';
 import { ComentarioModel } from '../../../models/comentario.model';
+import { AbstractLecturasBBDDService } from '../../../abstracts/AbstractLecturasBBDDService';
+import { AbstractAuthService } from '../../../abstracts/AbstractAuthService';
 
 
 @Component({
@@ -13,60 +14,61 @@ import { ComentarioModel } from '../../../models/comentario.model';
 export class SocialComponent {
 
   posts: any[] = [];
-  seguidos: any[] = []; 
+  seguidos: any[] = [];
   seguidores: any[] = [];
-  idLogueado: string = ""; 
-  emailLogueado: string = ""; 
-  mostrarBotonAgregar: number = -1; 
-  resenas: string[] = []; 
-  comentarioActivo: number = 0;   
-  cajaCerrada: boolean = true; 
+  idLogueado: string = "";
+  emailLogueado: string = "";
+  mostrarBotonAgregar: number = -1;
+  resenas: string[] = [];
+  comentarioActivo: number = 0;
+  cajaCerrada: boolean = true;
   comentarioTexto: NgModel | any;
-  comentariosGuardados: any[] = []; 
+  comentariosGuardados: any[] = [];
   nombreUsuario: string = "";
-  imagenUsuario: string = ""; 
-  cargados: boolean = false; 
-  
+  imagenUsuario: string = "";
+  cargados: boolean = false;
 
-  constructor(private _lecturasBBDDService: LecturasBBDDService,
-              private _authService: AuthService
+
+  constructor(
+    private _lecturasBBDDService: AbstractLecturasBBDDService,
+    private _authService: AbstractAuthService
   ) {
   }
 
 
 
   ngOnInit() {
-    this.getSeguidos(); 
-    this.getActividad(); 
+    this.getSeguidos();
+    this.getActividad();
     //Obtenemos el id logueado para ocultar el boton de seguir si coincide consigo mismo
     const email = localStorage.getItem("email");
     this._authService.getIdByEmail(email).subscribe(
       (resp) => {
-        this.idLogueado = resp; 
+        this.idLogueado = resp;
         this.getNombreUsuario(this.idLogueado);
-        if(email)
-          this.emailLogueado = email; 
+        if (email)
+          this.emailLogueado = email;
       },
       (err) => {
-        console.log(err); 
+        console.log(err);
       }
-    ) 
-    this.getSeguidores(); 
+    )
+    this.getSeguidores();
   }
 
 
 
   //MURO
   getActividad() {
-    this.posts = []; 
+    this.posts = [];
     this._lecturasBBDDService.getListLibrosUsuarios().subscribe(
-      (resp) => { 
+      (resp) => {
         resp.forEach((libro: any) => {
           let postLibros = {
             APIid: libro.APIid,
             _id: libro._id,
             _idUsuario: libro._idUsuario,
-            nombreUsuario: "", 
+            nombreUsuario: "",
             imagenUsuario: "",
             titulo: libro.titulo,
             autores: libro.autores,
@@ -87,7 +89,7 @@ export class SocialComponent {
             APIid: libro.APIid,
             _id: libro._id,
             _idUsuario: libro._idUsuario,
-            nombreUsuario: "", 
+            nombreUsuario: "",
             imagenUsuario: "",
             resena: libro.resena || "",
             titulo: libro.titulo,
@@ -102,10 +104,10 @@ export class SocialComponent {
           };
           this._authService.getUserById(libro._idUsuario).subscribe(
             (usuario: any) => {
-              postLibros.nombreUsuario = usuario.nombre;  
-              postLibros.imagenUsuario = usuario.imagen;  
-              postResena.nombreUsuario = usuario.nombre;  
-              postResena.imagenUsuario = usuario.imagen;  
+              postLibros.nombreUsuario = usuario.nombre;
+              postLibros.imagenUsuario = usuario.imagen;
+              postResena.nombreUsuario = usuario.nombre;
+              postResena.imagenUsuario = usuario.imagen;
             },
             (err) => {
               console.log(err);
@@ -116,8 +118,8 @@ export class SocialComponent {
           if (postLibros.resena == "") {
             this._lecturasBBDDService.getComentarios(postLibros._id, postLibros.tipo).subscribe(
               (resp: any) => {
-                if (resp != "") { 
-                  postLibros.comentarios = resp;  
+                if (resp != "") {
+                  postLibros.comentarios = resp;
                   postLibros.comentarios.forEach((comentario, index) => {
                     this._authService.getUserById(comentario._idUsuario).subscribe({
                       next: (usuario) => {
@@ -130,19 +132,19 @@ export class SocialComponent {
                 }
               },
               (err) => {
-                console.log(err); 
+                console.log(err);
               }
-            ); 
-            this.posts.push(postLibros); 
-          }   
+            );
+            this.posts.push(postLibros);
+          }
           //Si la propiedad resena no está vacía se pasarán los datos a la parte de reseña (en función del tipo)
           //Además obtenemos los comentarios asociados a la reseña
           if (postResena.resena != "") {
             this._lecturasBBDDService.getComentarios(postResena._id, postResena.tipo).subscribe(
               (resp: any) => {
-                if (resp != "") { 
-                    postResena.comentarios = resp;  
-                    postResena.comentarios.forEach((comentario, index) => {
+                if (resp != "") {
+                  postResena.comentarios = resp;
+                  postResena.comentarios.forEach((comentario, index) => {
                     this._authService.getUserById(comentario._idUsuario).subscribe({
                       next: (usuario) => {
                         postResena.comentarios[index].nombreUsuario = usuario.nombre;
@@ -154,68 +156,68 @@ export class SocialComponent {
                 }
               },
               (err) => {
-                console.log(err); 
+                console.log(err);
               }
-            ); 
-            this.posts.push(postResena); 
-          }     
+            );
+            this.posts.push(postResena);
+          }
         });
       },
       (err) => {
         console.log(err);
       }
     );
-    this.cargados = true; 
-    return this.posts;  
+    this.cargados = true;
+    return this.posts;
   }
 
   //SEGUIDOS Y SEGUIDORES
   getSeguidos() {
-    this.seguidos = []; 
+    this.seguidos = [];
     this._lecturasBBDDService.getSeguidos().subscribe(
       (resp) => {
-        resp.forEach((id:any) => {
-           this._authService.getUserById(id).subscribe(
-             (usuario: any) => {
-               if (usuario != undefined) {
+        resp.forEach((id: any) => {
+          this._authService.getUserById(id).subscribe(
+            (usuario: any) => {
+              if (usuario != undefined) {
                 this.seguidos.push(usuario);
-               }
               }
-            )
+            }
+          )
         });
       },
       (err) => {
-        console.log(err); 
+        console.log(err);
       }
     )
   }
 
 
   getSeguidores() {
-    this.seguidores = []; 
+    this.seguidores = [];
     this._lecturasBBDDService.getSeguidores().subscribe(
       (resp) => {
-        resp.forEach((id:any) => {
-           this._authService.getUserById(id).subscribe(
-             (usuario: any) => {
-               console.log("Usuario:",usuario); 
-               if (usuario != undefined) {
-                 this.seguidores.push(usuario);
-                 console.log("Seguidores:",this.seguidores); 
-               }
+        resp.forEach((id: any) => {
+          this._authService.getUserById(id).subscribe(
+            (usuario: any) => {
+              console.log("Usuario:", usuario);
+              if (usuario != undefined) {
+                this.seguidores.push(usuario);
+                console.log("Seguidores:", this.seguidores);
               }
-            )
+            }
+          )
         });
       },
       (err) => {
-        console.log(err); 
+        console.log(err);
       }
     )
   }
 
 
   guardarComentario(formulario: NgForm, tipo: string, _id: string) {
-    var nuevoComentario = new ComentarioModel(); 
+    var nuevoComentario = new ComentarioModel();
     nuevoComentario = {
       _idUsuario: this.idLogueado,
       _idLibro: _id,
@@ -225,25 +227,25 @@ export class SocialComponent {
     }
     this._lecturasBBDDService.addComentario(nuevoComentario).subscribe(
       (resp) => {
-        console.log("Comentario añadido", resp); 
+        console.log("Comentario añadido", resp);
       },
       (err) => {
-        console.log(err); 
+        console.log(err);
       }
     )
-    this.getActividad(); 
+    this.getActividad();
   }
 
 
   getNombreUsuario(_idUsuario: string) {
     this._authService.getUserById(_idUsuario).subscribe(
       (resp) => {
-        console.log("Nombre encontrado:",resp); 
+        console.log("Nombre encontrado:", resp);
         this.nombreUsuario = resp.nombre;
-        this.imagenUsuario = resp.imagen; 
+        this.imagenUsuario = resp.imagen;
       },
       (err) => {
-        console.log(err); 
+        console.log(err);
       }
     )
   }

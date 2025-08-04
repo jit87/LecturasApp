@@ -1,6 +1,6 @@
-import { ChangeDetectorRef, Component, EventEmitter, Output, signal } from '@angular/core';
-import { AuthService } from '../../../services/auth.service';
+import { Component } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { AbstractAuthService } from '../../../abstracts/AbstractAuthService';
 
 @Component({
   selector: 'app-perfil',
@@ -9,66 +9,66 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class PerfilComponent {
 
-  DatosPerfil: any = []; 
-  email: string | null = ""; 
+  DatosPerfil: any = [];
+  email: string | null = "";
 
   //Propiedades de la contraseña
   actualPassword: string = "";
-  nuevaPassword: string = ""; 
-  password: string = ""; 
+  nuevaPassword: string = "";
+  password: string = "";
   show: boolean = false;
 
   //Propiedades del nombre
-  nuevoNombre: string = ""; 
-  nombre: string = ""; 
+  nuevoNombre: string = "";
+  nombre: string = "";
 
   //Propiedades de bio
   nuevaBio: string = ""
 
   //Propiedades del email
-  nuevoEmail: string = ""; 
+  nuevoEmail: string = "";
 
   //Prodiedades de formularios
-  mostrarFormularioPass: boolean = false; 
-  mostrarFormularioNom: boolean = false; 
-  mostrarFormularioEma: boolean = false; 
-  mostrarFormularioImg: boolean = false; 
-  mostrarFormularioBio: boolean = false; 
+  mostrarFormularioPass: boolean = false;
+  mostrarFormularioNom: boolean = false;
+  mostrarFormularioEma: boolean = false;
+  mostrarFormularioImg: boolean = false;
+  mostrarFormularioBio: boolean = false;
 
   //Spinner
   loading: boolean = false;
-  
+
   //Propiedades de imagen
-  imagePreview: string | ArrayBuffer | null = null; 
-  file: File | null = null; 
+  imagePreview: string | ArrayBuffer | null = null;
+  file: File | null = null;
 
   //Propiedad del toggle button
   isChecked: boolean = false;
 
 
-  constructor(private _authService: AuthService,
-              private toastr: ToastrService,
+  constructor(private _authService: AbstractAuthService,
+    private toastr: ToastrService,
   ) {
-    this.cargarDatos(); 
+    this.cargarDatos();
   }
 
   ngOnInit() {
     const estado = localStorage.getItem('toggleState');
     if (estado == 'true') {
-        this.isChecked = true; 
+      this.isChecked = true;
     } else {
-        this.isChecked = false; 
+      this.isChecked = false;
     }
   }
 
 
   cargarDatos() {
-    this.email = localStorage.getItem("email"); 
+    this.email = localStorage.getItem("email");
     this._authService.getUserByEmail(this.email).subscribe(
       (resp: any) => {
-        this.DatosPerfil = resp;  
+        this.DatosPerfil = resp;
       }, (err) => {
-        console.log("Error de obtención de datos", err); 
+        console.log("Error de obtención de datos", err);
       })
   }
 
@@ -84,63 +84,63 @@ export class PerfilComponent {
 
       const reader = new FileReader();
       reader.onload = () => {
-        this.imagePreview = reader.result; 
+        this.imagePreview = reader.result;
       };
       //Leer el archivo como una URL de datos
-      reader.readAsDataURL(this.file); 
+      reader.readAsDataURL(this.file);
     }
   }
 
 
   async onUpload(): Promise<void> {
-      //Hay que convertirlo a string antes de subir la imagen
-      if (this.file && this.email) {
-        const reader = new FileReader();
-        reader.readAsDataURL(this.file);
-        reader.onload = () => {
-          if(this.email)
-            this._authService.saveImage(this.email, reader.result as string).subscribe(
-              (resp) => {
-                this.toastr.success('Imagen subida');
-                this.cargarDatos();
-                //Avisamos al servicio que indica al navbar que cambie la imagen de perfil
-                this._authService.actualizarImagenPerfil(reader.result as string);
-              },
-              (err) => console.log("Error al subir la imagen:", err)
-            );
-            this.imagePreview = null;
-            this.file = null;
-        } ;
-      }
+    //Hay que convertirlo a string antes de subir la imagen
+    if (this.file && this.email) {
+      const reader = new FileReader();
+      reader.readAsDataURL(this.file);
+      reader.onload = () => {
+        if (this.email)
+          this._authService.saveImage(this.email, reader.result as string).subscribe(
+            (resp) => {
+              this.toastr.success('Imagen subida');
+              this.cargarDatos();
+              //Avisamos al servicio que indica al navbar que cambie la imagen de perfil
+              this._authService.actualizarImagenPerfil(reader.result as string);
+            },
+            (err) => console.log("Error al subir la imagen:", err)
+          );
+        this.imagePreview = null;
+        this.file = null;
+      };
+    }
   }
 
 
   abrirFormularioImg() {
-    this.mostrarFormularioImg = true; 
+    this.mostrarFormularioImg = true;
   }
 
 
   cerrarFormularioImg() {
-    this.mostrarFormularioImg = false; 
+    this.mostrarFormularioImg = false;
   }
 
 
 
-  
-  /*Bio*/ 
+
+  /*Bio*/
   cambiarBio() {
-    this.loading = false; 
+    this.loading = false;
     if (this.email) {
       this._authService.modificarBio(this.email, this.nuevaBio).subscribe(
         (resp: any) => {
           if (resp) {
-            console.log("Bio modificada", resp); 
+            console.log("Bio modificada", resp);
             this.toastr.success('La bio ha sido modificada', 'Bio modificada');
             this.cargarDatos();
           }
         },
         (err) => {
-          console.log(err); 
+          console.log(err);
           this.toastr.error('El usuario no existe', 'Error');
         }
       )
@@ -148,30 +148,30 @@ export class PerfilComponent {
   }
 
   abrirFormularioBio() {
-     this.mostrarFormularioBio = true; 
+    this.mostrarFormularioBio = true;
   }
 
   cerrarFormularioBio() {
-     this.mostrarFormularioBio = false; 
+    this.mostrarFormularioBio = false;
   }
 
 
 
-  
- /*Password*/
- cambiarPassword() {
-   this.loading = false; 
-    if(this.email)
+
+  /*Password*/
+  cambiarPassword() {
+    this.loading = false;
+    if (this.email)
       this._authService.modificarPassword(this.email, this.actualPassword, this.nuevaPassword).subscribe(
         (resp: any) => {
           if (resp) {
-            console.log("Contraseña cambiada", resp); 
+            console.log("Contraseña cambiada", resp);
             this.toastr.success('La contraseña ha sido cambiada', 'Contraseña cambiada');
-            this.cargarDatos(); 
+            this.cargarDatos();
           }
         },
         (err) => {
-          console.log(err); 
+          console.log(err);
           this.toastr.error(err);
         }
       )
@@ -179,12 +179,12 @@ export class PerfilComponent {
 
 
   cerrarFormularioPass() {
-    this.mostrarFormularioPass = false; 
+    this.mostrarFormularioPass = false;
   }
- 
+
 
   abrirFormularioPass() {
-    this.mostrarFormularioPass = true; 
+    this.mostrarFormularioPass = true;
   }
 
 
@@ -202,25 +202,25 @@ export class PerfilComponent {
       input.type = input.type === 'text' ? 'password' : 'text';
     }
   }
-    
+
 
 
 
   /*Nombre*/
   cambiarNombre() {
-    this.loading = false; 
+    this.loading = false;
     if (this.email) {
-      console.log(this.email); 
+      console.log(this.email);
       this._authService.modificarNombre(this.email, this.nuevoNombre).subscribe(
         (resp: any) => {
           if (resp) {
-            console.log("Nombre modificado", resp); 
+            console.log("Nombre modificado", resp);
             this.toastr.success('El nombre ha sido modificado', 'Nombre modificado');
             this.cargarDatos();
           }
         },
         (err) => {
-          console.log(err); 
+          console.log(err);
           this.toastr.error('El usuario no existe', 'Error');
         }
       )
@@ -228,92 +228,92 @@ export class PerfilComponent {
   }
 
   abrirFormularioNom() {
-    this.mostrarFormularioNom = true; 
+    this.mostrarFormularioNom = true;
   }
 
   cerrarFormularioNom() {
-    this.mostrarFormularioNom = false; 
+    this.mostrarFormularioNom = false;
   }
 
 
 
-  /*Email*/ 
+  /*Email*/
   cambiarEmail() {
-    this.loading = false; 
-    if(this.email)
+    this.loading = false;
+    if (this.email)
       this._authService.modificarEmail(this.email, this.nuevoEmail).subscribe(
         (resp: any) => {
           if (resp) {
-            console.log("Email modificado", resp); 
+            console.log("Email modificado", resp);
             this.toastr.success('El email ha sido modificado', 'Email modificado');
             this.cargarDatos();
           }
         },
         (err) => {
-          console.log(err); 
+          console.log(err);
           this.toastr.error('El usuario no existe', 'Error');
         }
       )
   }
 
   abrirFormularioEma() {
-    this.mostrarFormularioEma = true; 
+    this.mostrarFormularioEma = true;
   }
 
- cerrarFormularioEma() {
-    this.mostrarFormularioEma = false; 
+  cerrarFormularioEma() {
+    this.mostrarFormularioEma = false;
   }
 
 
 
   /*Apariencia*/
   cambiarApariencia() {
-    var aparienciaValue = ""; 
-    
+    var aparienciaValue = "";
+
     if (this.DatosPerfil.apariencia == "oscura") {
-       aparienciaValue = "clara"; 
-       this.isChecked = false;
-       localStorage.setItem('toggleState', this.isChecked.toString());
+      aparienciaValue = "clara";
+      this.isChecked = false;
+      localStorage.setItem('toggleState', this.isChecked.toString());
     }
     else if (this.DatosPerfil.apariencia == "clara" || this.DatosPerfil.apariencia == "") {
-       aparienciaValue = "oscura";
-       this.isChecked = true;
-       localStorage.setItem('toggleState', this.isChecked.toString());
+      aparienciaValue = "oscura";
+      this.isChecked = true;
+      localStorage.setItem('toggleState', this.isChecked.toString());
     }
     if (this.email) {
-        this._authService.modificarApariencia(this.email, aparienciaValue).subscribe(
-          (resp) => {
-            console.log(resp); 
-            this.cargarDatos(); 
-          },
-          (err) => {
-            console.log(err); 
+      this._authService.modificarApariencia(this.email, aparienciaValue).subscribe(
+        (resp) => {
+          console.log(resp);
+          this.cargarDatos();
+        },
+        (err) => {
+          console.log(err);
         }
       )
-    }    
+    }
   }
 
 
   /*//////////////*/
 
   eliminarCuenta(id: any) {
-    this.cargarDatos(); 
-    console.log(id); 
-    if(this.email)
+    this.cargarDatos();
+    console.log(id);
+    if (this.email)
       this._authService.eliminarUsuario(id).subscribe(
         (resp) => {
-          console.log("Usuario eliminado: ", resp); 
+          console.log("Usuario eliminado: ", resp);
         },
         (err) => {
-          console.log(err); 
+          console.log(err);
         }
-      ); 
+      );
   }
 
-  
-  
-  
-  
+
+
+
+
 
 
 }

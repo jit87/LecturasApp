@@ -1,20 +1,21 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, tap, throwError } from 'rxjs';
+import { Observable } from 'rxjs';
 import { LibroModel } from '../models/libro.model';
-import { AuthService } from './auth.service';
 import { ComentarioModel } from '../models/comentario.model';
+import { AbstractLecturasBBDDService } from '../abstracts/AbstractLecturasBBDDService';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LecturasBBDDService {
+export class LecturasBBDDService extends AbstractLecturasBBDDService {
 
-  url: string = "http://localhost:4000"; 
-  listLibros: LibroModel[] = []; 
-  
+  url: string = "http://localhost:4000";
+  listLibros: LibroModel[] = [];
 
-  constructor(private http: HttpClient, private _authService: AuthService) {
+
+  constructor(private http: HttpClient) {
+    super();
   }
 
 
@@ -28,26 +29,26 @@ export class LecturasBBDDService {
   //Añadimos la libro al vector de libros y luego a la BBDD de mongoDB. 
   addlibro(libro: LibroModel): Observable<any> {
     this.listLibros.push(libro);
-    return this.http.post(this.url + '/libros', libro); 
+    return this.http.post(this.url + '/libros', libro);
   }
 
 
   //Quitamos la libro del vector de libros 
   deletelibro(libroId: string): Observable<any> {
-    return this.http.delete(this.url + "/libros/" +  libroId); 
+    return this.http.delete(this.url + "/libros/" + libroId);
   }
 
-  
+
   getlibroById(libroId: string) {
-    return this.http.get(this.url + "/libros/libro/" + libroId); 
+    return this.http.get(this.url + "/libros/libro/" + libroId);
   }
 
 
   getlibroByAPIid(APIid: string) {
-    return this.http.get(this.url + "/libros/APIid/" + APIid); 
+    return this.http.get(this.url + "/libros/APIid/" + APIid);
   }
 
-  
+
   updatelibro(libro: LibroModel, libroId: String | undefined): Observable<any> {
     return this.http.put(this.url + "/libros/" + libroId, libro);
   }
@@ -56,7 +57,7 @@ export class LecturasBBDDService {
 
   //COLECCIONES
   addColeccion(coleccion: string) {
-    return this.http.post(this.url + '/colecciones', { coleccion }); 
+    return this.http.post(this.url + '/colecciones', { coleccion });
   }
 
   getListColecciones(_idUsuario: string): Observable<any> {
@@ -64,7 +65,7 @@ export class LecturasBBDDService {
   }
 
   deleteColeccion(coleccionId: number): Observable<any> {
-    return this.http.delete(this.url +  "/colecciones/" +  coleccionId); 
+    return this.http.delete(this.url + "/colecciones/" + coleccionId);
   }
 
 
@@ -74,27 +75,27 @@ export class LecturasBBDDService {
   }
 
   setSeguido(idSeguido: string): Observable<any> {
-    return this.http.post(this.url + "/seguidos", { idSeguido }); 
+    return this.http.post(this.url + "/seguidos", { idSeguido });
   }
 
   deleteSeguido(idSeguido: string): Observable<any> {
-    return this.http.delete(this.url + "/seguidos/" + idSeguido); 
+    return this.http.delete(this.url + "/seguidos/" + idSeguido);
   }
 
   getSeguidos(): Observable<any> {
-    return this.http.get(this.url + "/seguidos/todos"); 
+    return this.http.get(this.url + "/seguidos/todos");
   }
 
   getSeguidores(): Observable<any> {
-    return this.http.get(this.url + "/seguidos/seguidores"); 
-  }
-  
-  getSeguidoresById(id:string): Observable<any> {
-    return this.http.get(this.url + "/seguidos/seguidores/" + id); 
+    return this.http.get(this.url + "/seguidos/seguidores");
   }
 
-  getSeguidosById(id:string): Observable<any> {
-    return this.http.get(this.url + "/seguidos/seguidos/" + id); 
+  getSeguidoresById(id: string): Observable<any> {
+    return this.http.get(this.url + "/seguidos/seguidores/" + id);
+  }
+
+  getSeguidosById(id: string): Observable<any> {
+    return this.http.get(this.url + "/seguidos/seguidos/" + id);
   }
 
   getLibrosLeidos(_idUsuario: string) {
@@ -102,14 +103,14 @@ export class LecturasBBDDService {
   }
 
   addComentario(nuevoComentario: ComentarioModel): Observable<any> {
-    return this.http.post(this.url + "/comentarios", nuevoComentario); 
+    return this.http.post(this.url + "/comentarios", nuevoComentario);
   }
 
-  getComentarios(_idLibro: string, tipo:string) {
+  getComentarios(_idLibro: string, tipo: string) {
     return this.http.get(this.url + "/comentarios/todos/" + _idLibro + "/" + tipo);
   }
 
-  
-  
+
+
 
 }

@@ -1,27 +1,26 @@
-
 @import 'ngx-toastr/toastr';
 
 /*Variables*/
 :root {
-    --background-color1:rgb(185, 208, 198);
-    --background-color2: aquamarine;
-    --background-color3: black; 
-    --text-color1: #ffffff; 
-    --text-color2: rgb(26, 27, 27);
-    --text-color3: black; 
+    --background-verde-suave: rgb(185, 208, 198);
+    --background-aguamarina: aquamarine;
+    --background-negro: black;
+    --text-blanco: #ffffff;
+    --text-gris-oscuro: rgb(26, 27, 27);
+    --text-negro: black;
 }
 
 
 body {
     position: relative;
     min-height: 100vh;
-    background-color:rgb(236, 238, 239);
+    background-color: rgb(236, 238, 239);
 }
 
 h2 {
     font-family: "Roboto", serif;
-    color: var(--text-color2); 
-} 
+    color: var(--text-gris-oscuro);
+}
 
 
 .container {
@@ -30,11 +29,11 @@ h2 {
 
 
 .navbar-container {
-    background-color: var(--background-color2); 
+    background-color: var(--background-aguamarina);
 }
 
 .navbar {
-    background-color: var(--background-color2) !important;
+    background-color: var(--background-aguamarina) !important;
     margin-left: 16%;
     margin-right: 16%;
 }
@@ -44,7 +43,7 @@ h2 {
     bottom: 0;
     width: 100%;
     height: 2.5rem;
-    z-index:-2 !important;
+    z-index: -2 !important;
 }
 
 
@@ -52,18 +51,22 @@ h2 {
 .recomendaciones {
     border-radius: 5px;
     padding: 5%;
-    background-color: /*coral*/ #ffd3b4;
+    background-color:
+        /*coral*/
+        #ffd3b4;
     -webkit-box-shadow: 3px 3px 29px -12px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 3px 3px 29px -12px rgba(0, 0, 0, 0.75);
     box-shadow: 3px 3px 29px -12px rgba(0, 0, 0, 0.75);
 }
 
 .recomendaciones h2 {
-    color:/*blanchedalmond*/ var(--text-color2); 
+    color:
+        /*blanchedalmond*/
+        var(--text-gris-oscuro);
 }
 
-.tematica{
-    color:#209268; 
+.tematica {
+    color: #209268;
 }
 
 table {
@@ -91,7 +94,7 @@ form {
 /* Modo oscuro */
 
 .modo-oscuro .card-header {
-    color: white !important; 
+    color: white !important;
     background-color: black !important;
 }
 
@@ -102,20 +105,20 @@ form {
 
 
 .modo-oscuro h5 {
-    color: var(--text-color1) !important;
+    color: var(--text-blanco) !important;
 }
 
 
 .modo-oscuro h2 {
-    color: var(--text-color1) !important;
+    color: var(--text-blanco) !important;
 }
 
 .modo-oscuro .card {
-    background-color: var(--background-color1) !important;
+    background-color: var(--background-verde-suave) !important;
 }
 
 .modo-oscuro .card h5 {
-    color: var(--text-color2) !important;
+    color: var(--text-gris-oscuro) !important;
 }
 
 
@@ -124,16 +127,16 @@ form {
 }
 
 .modo-oscuro .list-group-item:hover {
-    background-color: var(--background-color2); 
+    background-color: var(--background-aguamarina);
     cursor: pointer;
 }
 
 .modo-oscuro .home {
-    color: var(--text-color1); 
+    color: var(--text-blanco);
 }
 
-.modo-oscuro .recomendaciones  {
-    color: var(--text-color1);
+.modo-oscuro .recomendaciones {
+    color: var(--text-blanco);
     background-color: rgb(28, 68, 50) !important;
 }
 
@@ -142,20 +145,23 @@ form {
 }
 
 .modo-oscuro td {
-      background-color: var(--background-color1) !important; 
+    background-color: var(--background-verde-suave) !important;
 }
 
 .modo-oscuro th {
-    background-color: var(--background-color1) !important;
+    background-color: var(--background-verde-suave) !important;
 }
 
-.modo-oscuro .btn-buscar-mis-libros{
-    color: var(--text-color1);
+.modo-oscuro .btn-buscar-mis-libros {
+    color: var(--text-blanco);
     border-color: white;
 }
 
-.modo-oscuro, .btn-buscar-mis-libros:hover, .btn-outline-secondary:hover , .btn-outline-secondary:focus {
-    background-color: var(--background-color3);
+.modo-oscuro,
+.btn-buscar-mis-libros:hover,
+.btn-outline-secondary:hover,
+.btn-outline-secondary:focus {
+    background-color: var(--background-negro);
     border-color: white;
 }
 
@@ -163,16 +169,16 @@ form {
     -webkit-box-shadow: 3px 3px 29px -12px aquamarine;
     -moz-box-shadow: 3px 3px 29px -12px aquamarine;
     box-shadow: 3px 3px 29px -12px aquamarine;
-    transition:0.5s; 
+    transition: 0.5s;
 }
 
 .modo-oscuro .cuenta-txt {
-    color: white; 
+    color: white;
 }
 
 
 .modo-oscuro .btn-volver {
-    color: white; 
+    color: white;
     border-color: white;
 }
 
@@ -188,42 +194,42 @@ form {
 
 
 .s-social:hover {
-   background-color: var(--background-color2) !important;
-   cursor: pointer !important;
-   transition: 0.8s;
+    background-color: var(--background-aguamarina) !important;
+    cursor: pointer !important;
+    transition: 0.8s;
 }
 
 .btn-buscar-mis-libros {
     border-color: grey;
-    color: grey; 
+    color: grey;
 }
 
 .btn-outline-primary {
-    border-color: var(--background-color3);
-    color: var(--text-color3); 
+    border-color: var(--background-negro);
+    color: var(--text-negro);
 }
 
 .btn-outline-primary:hover {
-    background-color: var(--background-color3);
+    background-color: var(--background-negro);
     border-color: white;
 }
 
 .btn-outline-secondary {
-     color: var(--text-color3);
-     border-color:var(--background-color3);
- }
+    color: var(--text-negro);
+    border-color: var(--background-negro);
+}
 
-.fa-power-off i{
-    color: var(--background-color3); 
+.fa-power-off i {
+    color: var(--background-negro);
 }
 
 .badge {
-    background-color: #209268 !important; 
+    background-color: #209268 !important;
 }
 
 
-[type="search"]::placeholder{
-    color: grey; 
+[type="search"]::placeholder {
+    color: grey;
 }
 
 /*Usado en los textos de las tarjetas de los libros*/
@@ -250,19 +256,19 @@ form {
     text-decoration: underline;
 }
 
-.caja-libro-home{
+.caja-libro-home {
     position: relative;
     min-height: 220px;
 }
 
 .dropdown-menu {
-    z-index:2 !important;
+    z-index: 2 !important;
     position: absolute !important;
 }
 
 .dropdown-item:hover {
     z-index: 3 !important;
-    background-color: var(--background-color2) !important;
+    background-color: var(--background-aguamarina) !important;
     transition: 0.8s;
 }
 
@@ -282,12 +288,12 @@ input {
     box-sizing: border-box;
 }
 
-.select-editar-libro{
+.select-editar-libro {
     max-width: fit-content;
 }
 
 
- /*Imagenes de libros de home y buscador*/
+/*Imagenes de libros de home y buscador*/
 .h-100 {
     border-radius: 8px;
     object-fit: cover;
@@ -298,13 +304,13 @@ input {
 
 /*Formulario del componente editar-libro*/
 .editar-libro {
-    min-width: 500px; 
+    min-width: 500px;
 }
 
 
 /*Reseñas de la tabla de mis libros guardados*/
-.caja-resena{
-    width: 20%; 
+.caja-resena {
+    width: 20%;
 }
 
 .texto-resena {
@@ -322,24 +328,24 @@ input {
 
 @media only screen and (max-width: 991px) {
 
-  .form-login-registro {
-    width: 50% !important;
-  }
-  
-  /*Div de los libros de la home y de buscador*/
-  .caja-descripcion-libro{
-    width: 50%;
-    margin-left: -18%; 
-  }
+    .form-login-registro {
+        width: 50% !important;
+    }
 
-  .caja-descripcion-libro-recomendaciones {
-      width: 50%;
-      margin-left: -15%;
-  }
+    /*Div de los libros de la home y de buscador*/
+    .caja-descripcion-libro {
+        width: 50%;
+        margin-left: -18%;
+    }
 
-  .caja-imagen-libro {
-    padding: 20px !important;
-    width: 50%;
-  }
+    .caja-descripcion-libro-recomendaciones {
+        width: 50%;
+        margin-left: -15%;
+    }
+
+    .caja-imagen-libro {
+        padding: 20px !important;
+        width: 50%;
+    }
 
 }

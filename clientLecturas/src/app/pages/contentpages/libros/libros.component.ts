@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { EstadoLibroService } from '../../../services/estado-libro.service';
-import { AuthService } from '../../../services/auth.service';
-import { LecturasBBDDService } from '../../../services/lecturas-bbdd.service';
 import { ToastrService } from 'ngx-toastr';
+import { AbstractLecturasBBDDService } from '../../../abstracts/AbstractLecturasBBDDService';
+import { AbstractEstadoLibroService } from '../../../abstracts/AbstractEstadoLibroService';
+import { AbstractAuthService } from '../../../abstracts/AbstractAuthService';
 
 
 @Component({
@@ -27,9 +27,9 @@ export class LibrosComponent {
 
 
   constructor(
-    private _estadoLibroService: EstadoLibroService,
-    private _authService: AuthService,
-    private _lecturasBBDDService: LecturasBBDDService,
+    private _estadoLibroService: AbstractEstadoLibroService,
+    private _authService: AbstractAuthService,
+    private _lecturasBBDDService: AbstractLecturasBBDDService,
     private toastr: ToastrService
   ) {
     this.getUsuarioID();

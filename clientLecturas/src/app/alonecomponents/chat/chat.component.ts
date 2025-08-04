@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { FormGroup, FormsModule, FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { AuthService } from '../../services/auth.service';
-import { LecturasBBDDService } from '../../services/lecturas-bbdd.service';
 import { ChatModel } from '../../models/chat.model';
 import { MensajeModel } from '../../models/mensaje.model';
-import { ChatService } from '../../services/chat.service';
+import { AbstractChatService } from '../../abstracts/AbstractChatService';
+import { AbstractLecturasBBDDService } from '../../abstracts/AbstractLecturasBBDDService';
+import { AbstractAuthService } from '../../abstracts/AbstractAuthService';
+
 
 @Component({
   selector: 'app-chat',
@@ -31,10 +32,10 @@ export class ChatComponent {
   @Input() usuarioID;
 
   constructor(
-    private _authService: AuthService,
-    private _lecturasBBDDService: LecturasBBDDService,
+    private _authService: AbstractAuthService,
+    private _lecturasBBDDService: AbstractLecturasBBDDService,
     private fb: FormBuilder,
-    private _chatService: ChatService
+    private _chatService: AbstractChatService
   ) {
     this.getSeguidos();
     this.usuarioID = "";

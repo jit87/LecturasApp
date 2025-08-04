@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { LibroModel } from '../../../models/libro.model';
-import { LecturasBBDDService } from '../../../services/lecturas-bbdd.service';
-import { AuthService } from '../../../services/auth.service';
 import { AbstractLibrosService } from '../../../abstracts/AbstractLibrosService';
+import { AbstractLecturasBBDDService } from '../../../abstracts/AbstractLecturasBBDDService';
+import { AbstractAuthService } from '../../../abstracts/AbstractAuthService';
 
 
 @Component({
@@ -24,8 +24,8 @@ export class HomeComponent {
 
   constructor(
     private _librosService: AbstractLibrosService,
-    private _lecturasBBDDService: LecturasBBDDService,
-    private _authService: AuthService
+    private _lecturasBBDDService: AbstractLecturasBBDDService,
+    private _authService: AbstractAuthService
   ) {
     this.getLibrosNuevos();
     this.getUsuarioID();

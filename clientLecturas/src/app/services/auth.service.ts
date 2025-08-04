@@ -4,14 +4,15 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { catchError, tap } from 'rxjs/operators';
+import { AbstractAuthService } from '../abstracts/AbstractAuthService';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthService extends AbstractAuthService {
   public authUrl = 'http://localhost:4000'; //Esta URL tiene que coincidir con la que tenemos configurada en el backend en index.js: en la función app.listen(4000, () => {})
   private tokenKey = 'auth-token';
-  
+
   private userSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
   user$: Observable<any> = this.userSubject.asObservable();
 
@@ -25,13 +26,17 @@ export class AuthService {
   perfilImagen$ = this.perfilImagenSource.asObservable();
 
   private perfilApariencia = new BehaviorSubject<string>('');
-  perfilApariencia$ = this.perfilApariencia.asObservable(); 
+  perfilApariencia$ = this.perfilApariencia.asObservable();
 
 
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(
+    private http: HttpClient,
+    private router: Router) {
+    super();
+  }
 
-  
+
   //Gestión de login, registro y todos los datos de usuario (nombre, contraseña, apariencia, imagen, email, bio)
 
   login(email: string, password: string): Observable<any> {
@@ -52,13 +57,13 @@ export class AuthService {
           console.error('Navegacion error:', err);
         });
       }),
-     
+
       catchError(error => {
         console.error('Error durante login', error);
         return throwError(error);
       })
     );
-   
+
   }
 
   registro(nombre: string, email: string, password: string): Observable<any> {
@@ -108,7 +113,7 @@ export class AuthService {
   getUserByEmail(email: string | null): Observable<any> {
     return this.http.get<any>(`${this.authUrl}/usuario/${email}`);
   }
-  
+
 
 
   getIdByEmail(email: string | null) {
@@ -145,7 +150,7 @@ export class AuthService {
       );
     }
   }
-  
+
 
   modificarNombre(email: string, nuevoNombre: string): Observable<any> {
     return this.http.put<any>(`${this.authUrl}/modificar-nombre`, {
@@ -161,7 +166,7 @@ export class AuthService {
       })
     );
   }
-  
+
   modificarEmail(email: string, nuevoEmail: string): Observable<any> {
     return this.http.put<any>(`${this.authUrl}/modificar-email`, {
       email,
@@ -214,10 +219,10 @@ export class AuthService {
 
   //Para que el navbar actualice su imagen
   actualizarImagenPerfil(nuevaImagen: string) {
-    this.perfilImagenSource.next(nuevaImagen); 
+    this.perfilImagenSource.next(nuevaImagen);
   }
 
-  
+
   modificarBio(email: string, nuevaBio: string): Observable<any> {
     return this.http.put<any>(`${this.authUrl}/modificar-bio`, {
       email,
@@ -234,14 +239,14 @@ export class AuthService {
   }
 
 
-   modificarApariencia(email: string | null, value: string): Observable<any> {
+  modificarApariencia(email: string | null, value: string): Observable<any> {
     return this.http.put<any>(`${this.authUrl}/modificar-apariencia`, {
       email,
       value
     }).pipe(
       tap(response => {
         console.log('Apariencia cambiada', response);
-        this.perfilApariencia.next(response); 
+        this.perfilApariencia.next(response);
       }),
       catchError(error => {
         console.error('Error', error);
@@ -252,7 +257,7 @@ export class AuthService {
 
 
   eliminarUsuario(id: string) {
-     return this.http.delete<any>(`${this.authUrl}/eliminar-usuario/${id}`).pipe(
+    return this.http.delete<any>(`${this.authUrl}/eliminar-usuario/${id}`).pipe(
       tap(response => {
         console.log('Usuario eliminado', response);
       }),
