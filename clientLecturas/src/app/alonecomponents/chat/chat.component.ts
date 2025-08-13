@@ -27,6 +27,7 @@ export class ChatComponent {
   formulario: FormGroup | any;
   chat: ChatModel;
   mensaje: MensajeModel;
+  mensajesGuardados: any[] = [];
 
   //Usuario logueado
   @Input() usuarioID;
@@ -53,7 +54,6 @@ export class ChatComponent {
       texto: "",
       fecha: new Date
     }
-
   }
 
 
@@ -88,8 +88,7 @@ export class ChatComponent {
   seleccionarSeguido(seguido: any) {
     this.seguidoSeleccionado = seguido;
     this.cerrado = false;
-    console.log(this.chat);
-    this.getChats(this.usuarioID);
+    this.getChats(this.usuarioID, seguido);
   }
 
 
@@ -133,12 +132,21 @@ export class ChatComponent {
   }
 
 
-  getChats(_idUsuario: string) {
+  getChats(_idUsuario: string, seguido: any) {
+    var chats: any = [];
+    var participantes: any = [];
     this._chatService.getChats(_idUsuario).subscribe(
-      (resp: any) => {
-        console.log("Chats:", resp);
-        resp.forEach((element: any) => {
-          this.getMensajes(element._id);
+      (resp) => {
+        chats.push(resp);
+        chats.forEach((chat: any) => {
+          chat.forEach((element: any) => {
+            participantes.push(element.participantes);
+            element.participantes.forEach((participante: any) => {
+              if (participante == seguido._id) {
+                this.getMensajes(element._id);
+              }
+            });
+          })
         });
       },
       (error) => {
@@ -150,7 +158,9 @@ export class ChatComponent {
 
   getMensajes(_idChat: string) {
     this._chatService.getMensajes(_idChat).subscribe({
-      next: (resp) => { console.log("Mensajes:", resp) },
+      next: (resp) => {
+        this.mensajesGuardados = resp;
+      },
       error: (error) => { console.log(error) }
     })
   }

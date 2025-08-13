@@ -28,12 +28,10 @@
 
     <div class="card-body" style="overflow-y: auto; flex-grow: 1; background-color: #f9f9f9;">
         <!-- Mensajes simulados -->
-        <div class="mb-2 d-flex">
+        <div class="mb-2 d-flex" *ngFor="let mensaje of mensajesGuardados">
             <img class="rounded-circle me-2" width="30" height="30">
-            <div class="p-2 rounded bg-light">¡Hola!</div>
-        </div>
-        <div class="mb-2 d-flex justify-content-end">
-            <div class="p-2 rounded bg-primary text-white">¡Hola! ¿Qué tal?</div>
+            <p>{{mensaje.nombre}}</p>
+            <div class="p-2 rounded bg-light">{{mensaje.texto}}</div>
         </div>
     </div>
 
