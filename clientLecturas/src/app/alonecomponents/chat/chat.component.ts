@@ -6,6 +6,7 @@ import { MensajeModel } from '../../models/mensaje.model';
 import { AbstractChatService } from '../../abstracts/AbstractChatService';
 import { AbstractLecturasBBDDService } from '../../abstracts/AbstractLecturasBBDDService';
 import { AbstractAuthService } from '../../abstracts/AbstractAuthService';
+import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
 
 
 @Component({
@@ -55,8 +56,6 @@ export class ChatComponent {
       fecha: new Date
     }
   }
-
-
 
 
   cerrarChat() {
@@ -129,6 +128,7 @@ export class ChatComponent {
         console.log(err);
       }
     )
+    this.getChats(usuarioLogueado, seguido);
   }
 
 
@@ -159,10 +159,30 @@ export class ChatComponent {
   getMensajes(_idChat: string) {
     this._chatService.getMensajes(_idChat).subscribe({
       next: (resp) => {
-        this.mensajesGuardados = resp;
+        console.log(resp);
+        for (var i = 0; i <= resp.length - 1; i++) {
+          console.log(resp[i]._idUsuario);
+          this.obtenerDatosPorId(resp);
+        }
       },
-      error: (error) => { console.log(error) }
-    })
+      error: (err) => { console.log(err) }
+    });
+  }
+
+
+  obtenerDatosPorId(mensajes: any) {
+    mensajes.forEach((element: any) => {
+      this._authService.getUserById(element._idUsuario).subscribe({
+        next: (resp) => {
+          element.nombre = resp.nombre;
+          element.imagen = resp.imagen;
+        },
+        error: (err) => {
+          console.log(err)
+        }
+      });
+    });
+    this.mensajesGuardados = mensajes;
   }
 
 

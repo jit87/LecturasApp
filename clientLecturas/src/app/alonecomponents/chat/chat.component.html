@@ -27,11 +27,16 @@
     </div>
 
     <div class="card-body" style="overflow-y: auto; flex-grow: 1; background-color: #f9f9f9;">
-        <!-- Mensajes simulados -->
-        <div class="mb-2 d-flex" *ngFor="let mensaje of mensajesGuardados">
-            <img class="rounded-circle me-2" width="30" height="30">
-            <p>{{mensaje.nombre}}</p>
-            <div class="p-2 rounded bg-light">{{mensaje.texto}}</div>
+        <div *ngFor="let mensaje of mensajesGuardados">
+            <div><img *ngIf="mensaje._idUsuario!=usuarioID" class="rounded-circle me-2" width="30" height="30"
+                    [src]="mensaje.imagen" style="border-radius: black solid 1px;margin-bottom: 2px;">
+                <b *ngIf="mensaje._idUsuario!=usuarioID">{{
+                    mensaje.nombre }}</b>
+            </div>
+            <div style="width: max-content;" [ngClass]="mensaje._idUsuario!=usuarioID ? 'seguido' : 'yo'">{{
+                mensaje.texto }}</div>
+            <br>
+            <br>
         </div>
     </div>
 

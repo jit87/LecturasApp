@@ -2,14 +2,29 @@
     width: -webkit-fill-available !important;
 }
 
-.list-group-item{
+.list-group-item {
     padding: 10px;
 }
 
-.list-group-item:active{
+.list-group-item:active {
     background-color: aquamarine;
 }
 
 .activa {
     background-color: blue;
+}
+
+.seguido {
+    background-color: lightgrey;
+    float: left;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.yo {
+    float: right;
+    background-color: rgb(28, 169, 141);
+    padding: 5px;
+    border-radius: 5px;
+    color: white;
 }
