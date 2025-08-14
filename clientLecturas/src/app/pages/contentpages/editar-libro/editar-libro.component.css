@@ -1,4 +1,4 @@
-.card-body{
+.card-body {
     width: 800px;
 }
 
@@ -34,13 +34,14 @@ option:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #000;
+    background-color: white;
+    color: black;
 }
 
 .cabecera h4 {
     margin: 0;
     font-size: 1.25rem;
-    color: white;
+    color: black;
 }
 
 

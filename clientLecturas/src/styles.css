@@ -79,6 +79,11 @@ form {
     min-width: fit-content;
 }
 
+.card-header {
+    color: black !important;
+    background-color: white !important;
+}
+
 
 /*Boton X de los formularios de perfil y editar-libro*/
 .cerrar-btn {
@@ -87,22 +92,20 @@ form {
     font-size: 1.25rem;
     cursor: pointer;
     transition: color 0.3s ease;
-    color: white;
+    color: black;
 }
 
 
 /* Modo oscuro */
 
+/*
 .modo-oscuro .card-header {
-    color: white !important;
-    background-color: black !important;
+    /*color: white !important;
 }
-
-.card-header {
-    color: white !important;
-    background-color: black !important;
+*/
+.modo-oscuro .card-header-config {
+    background-color: var(--background-verde-suave) !important;
 }
-
 
 .modo-oscuro h5 {
     color: var(--text-blanco) !important;

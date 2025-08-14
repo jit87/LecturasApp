@@ -294,7 +294,6 @@ export class PerfilComponent {
   }
 
 
-  /*//////////////*/
 
   eliminarCuenta(id: any) {
     this.cargarDatos();

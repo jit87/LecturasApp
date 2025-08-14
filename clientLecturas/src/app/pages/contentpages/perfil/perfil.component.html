@@ -1,81 +1,81 @@
-
-
-
-    <div class="container mt-5 animate__animated animate__fadeIn">
-        <!-- Tarjeta del perfil de usuario -->
-        <div class="card shadow">
-            <div class="card-header bg-primary text-white text-center">
-                <h3>Datos de Usuario</h3>
-            </div>
-            <div class="card-body">
-                <br>
-                <div class="row mb-3">
-                    <div class="col-4 text-end fw-bold">Imagen de perfil:</div>
-                    <div class="col-3" *ngIf="DatosPerfil.imagen"><img style="width: 50px;height: 50px;" src="{{DatosPerfil.imagen}}"></div>
-                    <div class="col-3" *ngIf="!DatosPerfil.imagen"><img style="width: 50px;height: 50px;" src="http://i38.photobucket.com/albums/e149/eloginko/profile_male_large_zpseedb2954.jpg"></div>
-                    <div class="col-2">
+<div class="container mt-5 animate__animated animate__fadeIn">
+    <!-- Tarjeta del perfil de usuario -->
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white text-center card-header-config">
+            <h3>Datos de Usuario</h3>
+        </div>
+        <div class="card-body">
+            <br>
+            <div class="row mb-3">
+                <div class="col-4 text-end fw-bold">Imagen de perfil:</div>
+                <div class="col-3" *ngIf="DatosPerfil.imagen"><img style="width: 50px;height: 50px;"
+                        src="{{DatosPerfil.imagen}}"></div>
+                <div class="col-3" *ngIf="!DatosPerfil.imagen"><img style="width: 50px;height: 50px;"
+                        src="http://i38.photobucket.com/albums/e149/eloginko/profile_male_large_zpseedb2954.jpg"></div>
+                <div class="col-2">
                     <i class="fa-regular fa-pen-to-square" (click)="abrirFormularioImg()"></i>
-                    </div>
                 </div>
-                <div class="row mb-3">
-                    <div class="col-4 text-end fw-bold">Bio:</div>
-                    <div class="col-3">{{ DatosPerfil.bio }}</div>
-                    <div class="col-2">
-                        <i class="fa-regular fa-pen-to-square" (click)="abrirFormularioBio()"></i>
-                    </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-4 text-end fw-bold">Bio:</div>
+                <div class="col-3">{{ DatosPerfil.bio }}</div>
+                <div class="col-2">
+                    <i class="fa-regular fa-pen-to-square" (click)="abrirFormularioBio()"></i>
                 </div>
-                <div class="row mb-3">
-                    <div class="col-4 text-end fw-bold">Nombre:</div>
-                    <div class="col-3">{{ DatosPerfil.nombre }}</div>
-                    <div class="col-2">
-                        <i class="fa-regular fa-pen-to-square" (click)="abrirFormularioNom()"></i>
-                    </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-4 text-end fw-bold">Nombre:</div>
+                <div class="col-3">{{ DatosPerfil.nombre }}</div>
+                <div class="col-2">
+                    <i class="fa-regular fa-pen-to-square" (click)="abrirFormularioNom()"></i>
                 </div>
-                <div class="row mb-3">
-                    <div class="col-4 text-end fw-bold">Email:</div>
-                    <div class="col-3">{{ DatosPerfil.email }}</div>
-                    <div class="col-2">
-                        <i class="fa-regular fa-pen-to-square"  (click)="abrirFormularioEma()"></i>
-                    </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-4 text-end fw-bold">Email:</div>
+                <div class="col-3">{{ DatosPerfil.email }}</div>
+                <div class="col-2">
+                    <i class="fa-regular fa-pen-to-square" (click)="abrirFormularioEma()"></i>
                 </div>
-                    <div class="row mb-3">
-                        <div class="col-4 text-end fw-bold">Contraseña:</div>
-                        <div class="col-3">********</div>
-                        <div class="col-2">
-                            <i class="fa-regular fa-pen-to-square" (click)="abrirFormularioPass()"></i>
-                        </div>
-                    </div>
-                <div class="row mb-3">
-                    <div class="col-4 text-end fw-bold">ID de Usuario:</div>
-                    <div class="col-8">{{ DatosPerfil._id }}</div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-4 text-end fw-bold">Contraseña:</div>
+                <div class="col-3">********</div>
+                <div class="col-2">
+                    <i class="fa-regular fa-pen-to-square" (click)="abrirFormularioPass()"></i>
                 </div>
-                <div class="row mb-3">
-                    <div class="col-4 text-end fw-bold">Apariencia:</div>
-                        <div class="col-8" style="font-size:xx-large">
-                        <label class="switch">
-                            <input type="checkbox" [checked]="isChecked" (click)="cambiarApariencia()">    
-                            <span class="slider round"></span>
-                        </label>
-                    </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-4 text-end fw-bold">ID de Usuario:</div>
+                <div class="col-8">{{ DatosPerfil._id }}</div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-4 text-end fw-bold">Apariencia:</div>
+                <div class="col-8" style="font-size:xx-large">
+                    <label class="switch">
+                        <input type="checkbox" [checked]="isChecked" (click)="cambiarApariencia()">
+                        <span class="slider round"></span>
+                    </label>
                 </div>
-                <!-- Sección opcional: Información adicional -->
-                <div class="row mt-4">
-                    <div class="col-12 text-center">
-                        <!-- <button class="btn btn-warning btn-sm  me-3" (click)="abrirFormularioEma()">Editar perfil</button> -->
-                        <button class="btn btn-danger btn-sm" (click)="eliminarCuenta(DatosPerfil._id)">Eliminar cuenta</button>
-                    </div>
+            </div>
+            <!-- Sección opcional: Información adicional -->
+            <div class="row mt-4">
+                <div class="col-12 text-center">
+                    <!-- <button class="btn btn-warning btn-sm  me-3" (click)="abrirFormularioEma()">Editar perfil</button> -->
+                    <button class="btn btn-danger btn-sm" (click)="eliminarCuenta(DatosPerfil._id)">Eliminar
+                        cuenta</button>
                 </div>
             </div>
         </div>
-    
+    </div>
+
 
 
     <!--Formularios-->
     <section class="formularios-perfil animate__animated animate__fadeIn">
         <div class="container">
             <!-- Fondo oscuro cuando el formulario está abierto -->
-            <div *ngIf="mostrarFormularioPass || mostrarFormularioNom || mostrarFormularioEma || mostrarFormularioImg" class="backdrop"
-                (click)="$event.stopPropagation()"></div>
+            <div *ngIf="mostrarFormularioPass || mostrarFormularioNom || mostrarFormularioEma || mostrarFormularioImg || mostrarFormularioBio"
+                class="backdrop" (click)="$event.stopPropagation()"></div>
 
 
             <!-- Subir imagen -->
@@ -90,21 +90,23 @@
                             <i class="fas fa-spinner fa-spin" style="font-size: 24px;"></i>
                             <p>Subiendo imagen, por favor espera...</p>
                         </div>
-            
+
                         <label for="imagen" class="form-label">Selecciona una imagen</label>
                         <div class="mb-3">
-                            <input type="file" id="imagen" (change)="onFileSelected($event)" class="form-control" required>
+                            <input type="file" id="imagen" (change)="onFileSelected($event)" class="form-control"
+                                required>
                         </div>
-            
+
                         <!-- Previsualización de la imagen -->
                         <div *ngIf="imagePreview" class="text-center mt-3">
                             <p>Vista previa:</p>
                             <img [src]="imagePreview" alt="Imagen seleccionada" class="img-thumbnail" width="200">
                         </div>
-                        
+
                         <br>
                         <div class="text-center">
-                            <button class="btn btn-outline-primary" (click)="onUpload()" [disabled]="!file">Subir</button>
+                            <button class="btn btn-outline-primary" (click)="onUpload()"
+                                [disabled]="!file">Subir</button>
                         </div>
                     </form>
                 </div>
@@ -120,7 +122,8 @@
                     <form (ngSubmit)="cambiarBio()" novalidate>
                         <div class="mb-3">
                             <label for="nuevaBio" class="form-label">Nueva bio</label>
-                            <textarea type="textarea" id="nuevoNombre" [(ngModel)]="nuevaBio" class="form-control" required></textarea>
+                            <textarea type="textarea" id="nuevoNombre" [(ngModel)]="nuevaBio" class="form-control"
+                                required></textarea>
                         </div>
                         <div class="text-center">
                             <button class="btn btn-outline-primary" type="submit">Cambiar bio</button>
@@ -141,25 +144,28 @@
                         <div *ngIf="loading" class="text-center">
                             <i class="fas fa-spinner fa-spin" style="font-size: 24px;"></i>
                             <p>Modificando la contraseña, por favor espera...</p>
-                        </div> 
+                        </div>
                         <label for="actualPassword" class="form-label">Contraseña actual</label>
                         <div class="mb-3" class="cajaPass">
-                            <input type="password" id="actualPassword" [(ngModel)]="actualPassword" class="form-control" required>
+                            <input type="password" id="actualPassword" [(ngModel)]="actualPassword" class="form-control"
+                                required>
                             &nbsp;
-                            <button type="button" (click)="visualizarPasswordActual()" class="btn btn-outline-secondary">
+                            <button type="button" (click)="visualizarPasswordActual()"
+                                class="btn btn-outline-secondary">
                                 <i class="fa fa-eye" aria-hidden="true" *ngIf="!show"></i>
                                 <i class="fa fa-eye-slash" aria-hidden="true" *ngIf="show"></i>
                             </button>
                         </div>
-                        <br>   
+                        <br>
                         <label for="nuevaPassword" class="form-label">Nueva contraseña</label>
                         <div class="mb-3" class="cajaPass">
-                            <input type="password" id="nuevaPassword" [(ngModel)]="nuevaPassword" class="form-control" required>
+                            <input type="password" id="nuevaPassword" [(ngModel)]="nuevaPassword" class="form-control"
+                                required>
                             &nbsp;
                             <button type="button" (click)="visualizarPasswordNueva()" class="btn btn-outline-secondary">
                                 <i class="fa fa-eye" aria-hidden="true" *ngIf="!show"></i>
                                 <i class="fa fa-eye-slash" aria-hidden="true" *ngIf="show"></i>
-                            </button>    
+                            </button>
                         </div>
                         <br>
                         <div class="text-center">
