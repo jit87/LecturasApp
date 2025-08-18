@@ -1,41 +1,40 @@
 <section class="animate__animated animate__fadeIn">
     <div class="container mt-5">
         <h2 class="text-center mb-4">Mis libros guardados</h2>
-            <div id="librosYcolecciones">
-                <div class="mb-4" class="me-3">
-                    <h6 class="ms-1">Libros</h6>
-                    <div id="buscadorMisLibros"> 
-                        <input  type="search"
-                                class="form-control" 
-                                placeholder="Buscar libros..." 
-                                #termino  
-                                (keyup)="limpiarBuscador(termino.value)">
-                        <button class="btn-buscar-mis-libros btn btn-outline-primary ms-1" type="button" (click)="buscarLibrosGuardados(termino.value)">Buscar</button>  
-                    </div>  
-                </div>
-                <br>
-                <div class="mb-4">
-                    <h6 class="ms-1">Colecciones</h6>
-                    <div id="agregadorMisColecciones">
-                        <input type="search" id="coleccionInput" class="form-control" placeholder="Añadir colección..." #coleccion > 
-                        <button id="btnAgregarColeccion" 
-                                class="btn btn btn-success ms-1" 
-                                data-toggle="modal"
-                                data-target="#modalAgregarColeccion" 
-                                (click)="crearColeccion(coleccion.value)"><i class="fa-solid fa-plus"></i>
-                        </button>
-                    </div>
+        <div id="librosYcolecciones">
+            <div class="mb-4" class="me-3">
+                <h6 class="ms-1" class="search-libros-titulo">Libros</h6>
+                <div id="buscadorMisLibros">
+                    <input type="search" class="form-control" placeholder="Buscar libros..." #termino
+                        (keyup)="limpiarBuscador(termino.value)">
+                    <button class="btn-buscar-mis-libros btn btn-outline-primary ms-1" type="button"
+                        (click)="buscarLibrosGuardados(termino.value)">Buscar</button>
                 </div>
             </div>
-            <div id="seccionEtiquetasCol mt-3">
-                 <div class="badge text-bg-primary" style="margin-left: 3px;cursor: pointer;"
-                    *ngFor="let coleccion of colecciones;let i=index" (click)="filtrarPorColeccion(coleccion)">{{ coleccion }}
-                    <i class="fa-solid fa-xmark" style="cursor: pointer;" (click)="eliminarColeccion(i, $event)" *ngIf="mostrarBoton==false"></i>
+            <br>
+            <div class="mb-4">
+                <h6 class="ms-1" class="search-col-titulo">Colecciones</h6>
+                <div id="agregadorMisColecciones">
+                    <input type="search" id="coleccionInput" class="form-control" placeholder="Añadir colección..."
+                        #coleccion>
+                    <button id="btnAgregarColeccion" class="btn btn btn-success ms-1" data-toggle="modal"
+                        data-target="#modalAgregarColeccion" (click)="crearColeccion(coleccion.value)"><i
+                            class="fa-solid fa-plus"></i>
+                    </button>
+                </div>
             </div>
-                <span class="badge-todas badge text-bg-secondary" style="margin-left: 3px;cursor: pointer; padding:5px;"
-                    *ngIf="colecciones.length!=0 && mostrarBoton==true" (click)="mostrarTodasColecciones()"> Mostrar todas
-                </span>  
+        </div>
+        <div id="seccionEtiquetasCol mt-3">
+            <div class="badge text-bg-primary" style="margin-left: 3px;cursor: pointer;"
+                *ngFor="let coleccion of colecciones;let i=index" (click)="filtrarPorColeccion(coleccion)">{{ coleccion
+                }}
+                <i class="fa-solid fa-xmark" style="cursor: pointer;" (click)="eliminarColeccion(i, $event)"
+                    *ngIf="mostrarBoton==false"></i>
             </div>
+            <span class="badge-todas badge text-bg-secondary" style="margin-left: 3px;cursor: pointer; padding:5px;"
+                *ngIf="colecciones.length!=0 && mostrarBoton==true" (click)="mostrarTodasColecciones()"> Mostrar todas
+            </span>
+        </div>
         <br>
         <div id="misLibros">
             <!-- Tabla para los libros guardados -->
@@ -49,7 +48,7 @@
                         <th>Autor</th>
                         <th>Editorial</th>
                         <!-- <th>Fecha de Publicación</th> -->
-                        <th>Estado</th> 
+                        <th>Estado</th>
                         <th>Colección</th>
                         <th>Reseña</th>
                         <th></th>
@@ -66,22 +65,24 @@
                     <tr *ngFor="let libro of librosAMostrar; let i = index">
                         <td>{{ (i + this.librosPorPagina * (paginaActual - 1) + 1) }}</td>
                         <td><img src="{{libro.imagen}}" style="width: 50px;height: 70px;"></td>
-                        <td  [routerLink]="['/info', libro.APIid]" style="text-decoration: underline;cursor: pointer;" class="titulo">{{ libro.titulo }}</td>
+                        <td [routerLink]="['/info', libro.APIid]" style="text-decoration: underline;cursor: pointer;"
+                            class="titulo">{{ libro.titulo }}</td>
                         <td>{{ libro.autores }}</td>
                         <td>{{ libro.editor }}</td>
                         <!-- <td>{{ libro.fechaPublicacion | date:'d/MM/YY' }}</td> -->
-                        <td>{{ libro.estado }}</td> 
+                        <td>{{ libro.estado }}</td>
                         <td>{{ libro.coleccion }}</td>
-                        <td class="caja-resena"><p class="texto-resena">{{ libro.resena }}</p></td>
+                        <td class="caja-resena">
+                            <p class="texto-resena">{{ libro.resena }}</p>
+                        </td>
                         <td></td>
                         <td>
-                            <i class="fa-regular fa-pen-to-square"  
-                               style="cursor: pointer;"
-                               (click)="mostrarFormulario(libro._id,libro.titulo,libro.estado, libro.coleccion, libro.resena)"></i> 
+                            <i class="fa-regular fa-pen-to-square" style="cursor: pointer;"
+                                (click)="mostrarFormulario(libro._id,libro.titulo,libro.estado, libro.coleccion, libro.resena)"></i>
                         </td>
                         <td>
-                            <i class="fa-solid fa-trash"
-                               style="cursor: pointer;" (click)="eliminarLibro(libro._id)"></i>
+                            <i class="fa-solid fa-trash" style="cursor: pointer;"
+                                (click)="eliminarLibro(libro._id)"></i>
                         </td>
                         <!-- <i class="fa-solid fa-plus"></i> -->
                     </tr>
@@ -90,25 +91,30 @@
             <nav aria-label="Paginación de libros">
                 <ul class="pagination justify-content-center">
                     <li class="page-item" [class.disabled]="paginaActual === 1">
-                        <button class="page-link" (click)="volverAlInicio()"><i class="fa-solid fa-angles-left"></i></button>
+                        <button class="page-link" (click)="volverAlInicio()"><i
+                                class="fa-solid fa-angles-left"></i></button>
                     </li>
                     <li class="page-item" [class.disabled]="paginaActual === 1">
-                        <button class="page-link" (click)="paginaAnterior()"><i class="fa-solid fa-angle-left"></i></button>
+                        <button class="page-link" (click)="paginaAnterior()"><i
+                                class="fa-solid fa-angle-left"></i></button>
                     </li>
                     <li class="page-item disabled">
                         <span class="page-link">Página {{ paginaActual }} de {{ totalPaginas }}</span>
                     </li>
                     <li class="page-item" [class.disabled]="paginaActual === totalPaginas">
-                        <button class="page-link" (click)="paginaSiguiente()"><i class="fa-solid fa-angle-right"></i></button>
+                        <button class="page-link" (click)="paginaSiguiente()"><i
+                                class="fa-solid fa-angle-right"></i></button>
                     </li>
                     <li class="page-item" [class.disabled]="paginaActual === totalPaginas">
-                        <button class="page-link" (click)="irAlfinal()"><i class="fa-solid fa-angles-right"></i></button>
+                        <button class="page-link" (click)="irAlfinal()"><i
+                                class="fa-solid fa-angles-right"></i></button>
                     </li>
                 </ul>
             </nav>
             <div *ngIf="mostrarForm"
                 style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.7); z-index: 10; display: flex; justify-content: center; align-items: center;">
-                <app-editar-libro *ngIf="mostrarForm==true" (cerrarFormulario)="cerrarFormulario()" (libroEditado)="recibirConfEditado($event)" [usuarioID]="usuarioID"></app-editar-libro>
+                <app-editar-libro *ngIf="mostrarForm==true" (cerrarFormulario)="cerrarFormulario()"
+                    (libroEditado)="recibirConfEditado($event)" [usuarioID]="usuarioID"></app-editar-libro>
             </div>
         </div>
     </div>

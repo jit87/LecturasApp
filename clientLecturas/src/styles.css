@@ -5,6 +5,7 @@
     --background-verde-suave: rgb(185, 208, 198);
     --background-aguamarina: aquamarine;
     --background-negro: black;
+    --background-verde-oscuro: #102A2D;
     --text-blanco: #ffffff;
     --text-gris-oscuro: rgb(26, 27, 27);
     --text-negro: black;
@@ -60,9 +61,7 @@ h2 {
 }
 
 .recomendaciones h2 {
-    color:
-        /*blanchedalmond*/
-        var(--text-gris-oscuro);
+    color: var(--text-gris-oscuro);
 }
 
 .tematica {
@@ -98,11 +97,11 @@ form {
 
 /* Modo oscuro */
 
-/*
-.modo-oscuro .card-header {
-    /*color: white !important;
+.modo-oscuro {
+    background-color: var(--background-verde-oscuro) !important;
 }
-*/
+
+
 .modo-oscuro .card-header-config {
     background-color: var(--background-verde-suave) !important;
 }
@@ -191,6 +190,14 @@ form {
     box-shadow: 3px 3px 29px -12px aquamarine;
     transition: 0.5s;
     border-color: white;
+}
+
+.modo-oscuro .search-libros-titulo {
+    color: white;
+}
+
+.modo-oscuro .search-col-titulo {
+    color: white;
 }
 
 /*  Fin modo oscuro */

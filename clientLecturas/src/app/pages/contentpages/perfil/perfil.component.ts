@@ -46,7 +46,8 @@ export class PerfilComponent {
   isChecked: boolean = false;
 
 
-  constructor(private _authService: AbstractAuthService,
+  constructor(
+    private _authService: AbstractAuthService,
     private toastr: ToastrService,
   ) {
     this.cargarDatos();

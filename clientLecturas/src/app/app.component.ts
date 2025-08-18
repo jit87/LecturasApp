@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { AuthService } from './services/auth.service';
+import { AbstractAuthService } from './abstracts/AbstractAuthService';
 
 @Component({
   selector: 'app-root',
@@ -9,50 +8,47 @@ import { AuthService } from './services/auth.service';
 })
 export class AppComponent {
   title = 'clientLecturas';
-  email: string | null = ""; 
-  datos: any; 
-  
+  email: string | null = "";
+  datos: any;
 
-  constructor(private _authService: AuthService) {
-    this.cargarDatos(); 
+
+  constructor(private _authService: AbstractAuthService) {
+    this.cargarDatos();
   }
 
   ngOnInit() {
-    this.cargarDatos();
-    this._authService.perfilApariencia$.subscribe((resp: any) => {
-      if (resp.nuevaApariencia=="clara") {
-        document.body.style.backgroundColor = "rgb(236, 238, 239)"; 
+    this._authService.perfilApariencia$.subscribe((response: string) => {
+      console.log("Apariencia test: ", response);
+      if (response === "clara") {
         document.body.classList.remove("modo-oscuro");
       }
-      if (resp.nuevaApariencia=="oscura") {
-        document.body.style.backgroundColor = "#102A2D"; 
-        document.body.classList.add("modo-oscuro"); 
+      if (response === "oscura") {
+        document.body.classList.add("modo-oscuro");
       }
     })
   }
 
 
   cargarDatos() {
-    this.email = localStorage.getItem("email"); 
+    this.email = localStorage.getItem("email");
     this._authService.getUserByEmail(this.email).subscribe(
       (resp: any) => {
-       this.datos = resp; 
-        this.cargarApariencia(); 
+        this.datos = resp;
+        this.cargarApariencia();
       }, (err) => {
-        console.log("Error de obtención de datos", err); 
+        console.log("Error de obtención de datos", err);
       })
   }
 
-  
-  cargarApariencia() { 
-    if (this.datos.apariencia == "clara"){
-      document.body.style.backgroundColor = "rgb(236, 238, 239);"; 
+
+  cargarApariencia() {
+    if (this.datos.apariencia == "clara") {
       document.body.classList.remove("modo-oscuro");
     }
-    if(this.datos.apariencia == "oscura"){
-      document.body.style.backgroundColor = "#102A2D"; 
-      document.body.classList.add("modo-oscuro"); 
+    if (this.datos.apariencia == "oscura") {
+      document.body.classList.add("modo-oscuro");
     }
+    this.cargarDatos();
   }
 
 
