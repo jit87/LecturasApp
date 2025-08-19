@@ -97,6 +97,7 @@ export class ChatComponent {
   seleccionarSeguido(seguido: any) {
     this.seguidoSeleccionado = seguido;
     this.cerrado = false;
+    this.idConMensajesNuevos = this.idConMensajesNuevos.filter((elem) => elem != seguido._id); //Una vez seleccionado quitamos el puntito rojo, controlado por this.idConMensajesNuevos
     this.getChats(this.usuarioID, seguido);
   }
 
