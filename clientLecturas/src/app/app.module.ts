@@ -24,6 +24,7 @@ import { AbstractChatService } from './abstracts/AbstractChatService';
 import { ChatService } from './services/chat.service';
 import { AbstractAuthService } from './abstracts/AbstractAuthService';
 import { AuthService } from './services/auth.service';
+import { WebsocketService } from './services/websocket.service';
 
 
 @NgModule({

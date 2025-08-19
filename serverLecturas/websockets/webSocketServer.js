@@ -1,4 +1,4 @@
-import { Server as SocketIOServer } from 'socket.io';
+import { Server } from 'socket.io';
 import dotenv from 'dotenv';
 
 
@@ -6,7 +6,7 @@ dotenv.config();
 let io;
 
 export function configurarWebSocket(server) {
-    io = new SocketIOServer(server, {
+    io = new Server(server, {
         cors: {
             origin: '*',
             methods: ['GET', 'POST']
