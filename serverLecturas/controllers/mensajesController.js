@@ -1,7 +1,5 @@
-import Usuario from "../models/Usuario.js";
 import Mensaje from "../models/Mensaje.js";
-import Chat from "../models/Chat.js";
-
+import { getIO } from "../websockets/webSocketServer.js";
 
 export async function crearMensaje(req, res) {
 
@@ -16,7 +14,25 @@ export async function crearMensaje(req, res) {
     })
 
     try {
+        //Guardamos el mensaje
         await nuevoMensaje.save();
+
+        //Emitimos la notificación al websocket
+        const io = getIO();
+        console.log("⚡Mensaje nuevo:", {
+            _idChat,
+            _idUsuario,
+            nombre,
+            texto,
+            fecha,
+        });
+        io.emit("nuevoMensaje", {
+            _idChat,
+            _idUsuario,
+            nombre,
+            texto,
+            fecha,
+        });
 
     } catch (error) {
         res.status(400).json({ message: error.message });

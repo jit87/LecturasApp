@@ -6,7 +6,7 @@ import { MensajeModel } from '../../models/mensaje.model';
 import { AbstractChatService } from '../../abstracts/AbstractChatService';
 import { AbstractLecturasBBDDService } from '../../abstracts/AbstractLecturasBBDDService';
 import { AbstractAuthService } from '../../abstracts/AbstractAuthService';
-import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
+import { WebsocketService } from '../../services/websocket.service';
 
 
 @Component({
@@ -29,6 +29,8 @@ export class ChatComponent {
   chat: ChatModel;
   mensaje: MensajeModel;
   mensajesGuardados: any[] = [];
+  idConMensajesNuevos: string[] = [];
+  //elemento: any;
 
   //Usuario logueado
   @Input() usuarioID;
@@ -37,7 +39,8 @@ export class ChatComponent {
     private _authService: AbstractAuthService,
     private _lecturasBBDDService: AbstractLecturasBBDDService,
     private fb: FormBuilder,
-    private _chatService: AbstractChatService
+    private _chatService: AbstractChatService,
+    private _websocketService: WebsocketService
   ) {
     this.getSeguidos();
     this.usuarioID = "";
@@ -55,6 +58,13 @@ export class ChatComponent {
       texto: "",
       fecha: new Date
     }
+    this._websocketService.getMensajes().subscribe({
+      next: (resp: any) => {
+        console.log(resp);
+        this.idConMensajesNuevos.push(resp._idUsuario);
+      },
+      error: (err) => { console.log(err); }
+    })
   }
 
 
@@ -176,6 +186,9 @@ export class ChatComponent {
         next: (resp) => {
           element.nombre = resp.nombre;
           element.imagen = resp.imagen;
+          /*setTimeout(() => {
+            this.elemento.scrollTop = this.elemento.scrollHeight;
+          }, 20)*/
         },
         error: (err) => {
           console.log(err)

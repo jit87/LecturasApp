@@ -25,6 +25,9 @@
     "dotenv": "^16.4.5",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.9.0",
-    "mongoose": "^8.7.0"
+    "mongoose": "^8.7.0",
+    "socket.io": "^4.8.1",
+    "wa": "^0.1.3",
+    "ws": "^8.18.3"
   }
 }

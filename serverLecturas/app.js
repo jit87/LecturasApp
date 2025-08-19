@@ -8,10 +8,10 @@ import comentariosRoutes from './routes/comentariosRoutes.js';
 import chatsRoutes from './routes/chatsRoutes.js';
 import mensajesRoutes from './routes/mensajesRoutes.js';
 
-//Crear servidor
+//Crea el servidor de Express
 const app = express();
 
-//Habilitar middleware para parsear JSON
+//Habilita middleware para parsear JSON
 app.use(express.json());
 
 //Configuración de CORS

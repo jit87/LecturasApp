@@ -41,3 +41,16 @@
     border-right: 10px solid transparent;
     border-bottom: 10px solid lightgrey;
 }
+
+
+.punto-notificacion {
+    content: "";
+    position: absolute;
+    top: 10px;
+    right: 2px;
+    width: 8px;
+    height: 8px;
+    background: red;
+    border-radius: 50%;
+    border: 2px solid white;
+}

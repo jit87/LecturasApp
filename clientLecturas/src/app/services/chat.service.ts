@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { MensajeModel } from '../models/mensaje.model';
 import { ChatModel } from '../models/chat.model';
 import { AbstractChatService } from '../abstracts/AbstractChatService';
