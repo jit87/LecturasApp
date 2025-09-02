@@ -11,7 +11,7 @@
                         <span style="font-weight: bold;">{{ seguido.nombre }}</span>
                         &nbsp;<i class="fa-solid fa-message contact-icon" style="margin-left:auto;margin-top: 2%;"></i>
                         <div *ngFor="let id of idConMensajesNuevos">
-                            <span class="punto-notificacion" *ngIf="seguido._id == id"></span>
+                            <span class="punto-notificacion" *ngIf="seguido._id == id && (cerrado==true)"></span>
                         </div>
                     </li>
                 </ul>
@@ -29,7 +29,8 @@
         <button class="btn btn-sm btn-light" (click)="cerrarChat()">✖</button>
     </div>
 
-    <div class="card-body" style="overflow-y: auto; flex-grow: 1; background-color: #f9f9f9;">
+    <div class="card-body" style="max-height:300px;overflow-y: auto; flex-grow: 1; background-color: #f9f9f9;"
+        #chatScroll>
         <div *ngFor="let mensaje of mensajesGuardados">
             <div><img *ngIf="mensaje._idUsuario!=usuarioID" class="rounded-circle me-2" width="30" height="30"
                     [src]="mensaje.imagen" style="border-radius: black solid 1px;margin-bottom: 6px;">
@@ -39,7 +40,6 @@
             <div style="width: max-content;" [ngClass]="mensaje._idUsuario!=usuarioID ? 'seguido' : 'yo'">
                 <span style="position: relative;">{{ mensaje.texto }}</span>
             </div>
-
             <br>
             <br>
         </div>

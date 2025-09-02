@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { FormGroup, FormsModule, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { ChatModel } from '../../models/chat.model';
 import { MensajeModel } from '../../models/mensaje.model';
@@ -31,10 +31,13 @@ export class ChatComponent {
   mensaje: MensajeModel;
   mensajesGuardados: any[] = [];
   idConMensajesNuevos: string[] = [];
-  //elemento: any;
 
   //Usuario logueado
   @Input() usuarioID;
+
+  //Acceso al scroll del chat
+  @ViewChild('chatScroll') private chatScroll!: ElementRef;
+
 
   constructor(
     private _authService: AbstractAuthService,
@@ -66,6 +69,7 @@ export class ChatComponent {
       },
       error: (err) => { console.log(err); }
     })
+
   }
 
 
@@ -179,6 +183,7 @@ export class ChatComponent {
       },
       error: (err) => { console.log(err) }
     });
+    this.scrollAbajo();
   }
 
 
@@ -198,6 +203,22 @@ export class ChatComponent {
       });
     });
     this.mensajesGuardados = mensajes;
+  }
+
+
+  //Para el scroll
+  ngAfterViewChecked() {
+    this.scrollAbajo();
+  }
+
+
+  scrollAbajo(): void {
+    //Sin el try se rompe
+    try {
+      this.chatScroll.nativeElement.scrollTop = this.chatScroll.nativeElement.scrollHeight;
+    } catch (err) {
+      console.log(err);
+    }
   }
 
 
