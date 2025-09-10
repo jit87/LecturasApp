@@ -19,11 +19,13 @@
     float: left;
     padding: 5px;
     border-radius: 5px;
+    margin-top: 5px;
 }
 
 .seguido span {
-    margin-left: -15px;
+    margin-left: -20px;
 }
+
 
 .yo {
     float: right;
@@ -31,7 +33,10 @@
     padding: 5px;
     border-radius: 5px;
     color: white;
+    margin-bottom: 10px;
 }
+
+
 
 .seguido:before {
     content: "";
@@ -53,4 +58,9 @@
     background: red;
     border-radius: 50%;
     border: 2px solid white;
+}
+
+.mensaje {
+    width: max-content;
+    display: flex;
 }

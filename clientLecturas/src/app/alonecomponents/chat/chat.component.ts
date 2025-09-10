@@ -31,6 +31,7 @@ export class ChatComponent {
   mensaje: MensajeModel;
   mensajesGuardados: any[] = [];
   idConMensajesNuevos: string[] = [];
+  cargados: boolean = false;
 
   //Usuario logueado
   @Input() usuarioID;
@@ -202,6 +203,7 @@ export class ChatComponent {
         }
       });
     });
+    this.cargados = true;
     this.mensajesGuardados = mensajes;
   }
 

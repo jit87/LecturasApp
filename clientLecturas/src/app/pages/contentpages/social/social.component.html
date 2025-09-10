@@ -10,8 +10,8 @@
                 <div class="card-body" *ngIf="post.tipo==='libro' && post.resena==''">
                     <img class="imagenUsuario" [src]="post.imagenUsuario" class="rounded-circle me-3" width="50"
                         height="50">
-                    <b style="font-size: large;cursor: pointer;" [routerLink]="['/perfilpublico', post._idUsuario]"
-                        class="nombre">{{ post.nombreUsuario }}</b>
+                    <b *ngIf="post._idUsuario" style="font-size: large;cursor: pointer;"
+                        [routerLink]="['/perfilpublico', post._idUsuario]" class="nombre">{{ post.nombreUsuario }}</b>
                     &nbsp;ha actualizado su biblioteca con el libro:
                     <br>
                     <hr />
@@ -55,8 +55,8 @@
                 <div class="card-body" *ngIf="post.tipo==='resena'">
                     <img class="imagenUsuario" [src]="post.imagenUsuario" class="rounded-circle me-3" width="50"
                         height="50">
-                    <b style="font-size: large;cursor: pointer;" [routerLink]="['/perfilpublico', post._idUsuario]"
-                        class="nombre">{{
+                    <b *ngIf="post._idUsuario" style="font-size: large;cursor: pointer;"
+                        [routerLink]="['/perfilpublico', post._idUsuario]" class="nombre">{{
                         post.nombreUsuario }}</b>
                     &nbsp;ha añadido una reseña:
                     <br>
