@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
 import { environment } from '../environments/environment'
 import { AbstractLibrosService } from '../abstracts/AbstractLibrosService';
 
@@ -12,7 +12,7 @@ export class LibrosService extends AbstractLibrosService {
 
   url: string = "https://www.googleapis.com/books/v1/volumes?q="
   Google_API_KEY: string = environment.Google_API_KEY;
-  max: number = 10;
+  max: number = 9;
   maxRecomendaciones: number = 2;
 
   id: string = "";
@@ -27,9 +27,17 @@ export class LibrosService extends AbstractLibrosService {
     return this.http.get(`${this.url}${term}&key=${this.Google_API_KEY}&maxResults=${this.max}`);
   }
 
-  //Devuelve novedades de libros de ficción
+  //Devuelve novedades de libros 
   getLibrosNuevos(): Observable<any> {
-    return this.http.get(`${this.url}subject:fiction&key=${this.Google_API_KEY}&maxResults=${this.max}&orderBy=newest`);
+    //return this.http.get(`${this.url}subject:fiction&key=${this.Google_API_KEY}&maxResults=${this.max}&orderBy=newest`);
+    return this.http.get(`${this.url}a&printType=books&orderBy=newest&maxResults=${this.max}&key=${this.Google_API_KEY}`).pipe(
+      map((res: any) => {
+        //Si hay libros devolvemos un vector de libros con el tamaño determinado por max o los que haya devuelto la API
+        const items = res.items?.slice(0, this.max) || [];
+        //Sustituimos items por el vector de libros limitado por max 
+        return { ...res, items };
+      })
+    );
   }
 
   getInfoLibroById(id: string): Observable<any> {
