@@ -167,13 +167,6 @@ form {
     border-color: white;
 }
 
-.modo-oscuro .caja-libro-home:hover {
-    -webkit-box-shadow: 3px 3px 29px -12px aquamarine;
-    -moz-box-shadow: 3px 3px 29px -12px aquamarine;
-    box-shadow: 3px 3px 29px -12px aquamarine;
-    transition: 0.5s;
-}
-
 .modo-oscuro .cuenta-txt {
     color: white;
 }
@@ -185,11 +178,12 @@ form {
 }
 
 .modo-oscuro .caja-libro-home:hover {
-    -webkit-box-shadow: 3px 3px 29px -12px aquamarine;
-    -moz-box-shadow: 3px 3px 29px -12px aquamarine;
-    box-shadow: 3px 3px 29px -12px aquamarine;
+    -webkit-box-shadow: 3px 3px 29px -12px var(--background-aguamarina);
+    -moz-box-shadow: 3px 3px 29px -12px var(--background-aguamarina);
+    box-shadow: 3px 3px 29px -12px var(--background-aguamarina);
+
     transition: 0.5s;
-    border-color: white;
+    border-color: var(--background-aguamarina);
 }
 
 .modo-oscuro .search-libros-titulo {
