@@ -63,14 +63,7 @@ export class ChatComponent {
       texto: "",
       fecha: new Date
     }
-    this._websocketService.getMensajes().subscribe({
-      next: (resp: any) => {
-        console.log(resp);
-        this.idConMensajesNuevos.push(resp._idUsuario);
-      },
-      error: (err) => { console.log(err); }
-    })
-
+    this.obtenerMensajesDeWebSocket();
   }
 
 
@@ -116,7 +109,7 @@ export class ChatComponent {
 
 
   guardar(usuarioLogueado: string, seguido: any) {
-    console.log(this.formulario);
+    console.log("USUARIO LOGUEADO", usuarioLogueado);
     this.chat = {
       participantes: [usuarioLogueado, seguido._id],
       ultimoMensaje: "",
@@ -146,6 +139,7 @@ export class ChatComponent {
       }
     )
     this.getChats(usuarioLogueado, seguido);
+    this.scrollAbajo();
   }
 
 
@@ -176,15 +170,14 @@ export class ChatComponent {
   getMensajes(_idChat: string) {
     this._chatService.getMensajes(_idChat).subscribe({
       next: (resp) => {
-        console.log(resp);
-        for (var i = 0; i <= resp.length - 1; i++) {
-          console.log(resp[i]._idUsuario);
-          this.obtenerDatosPorId(resp);
-        }
+        /* for (var i = 0; i <= resp.length - 1; i++) {
+           console.log(resp[i]._idUsuario);
+           this.obtenerDatosPorId(resp);
+         }*/
+        this.obtenerDatosPorId(resp);
       },
       error: (err) => { console.log(err) }
     });
-    this.scrollAbajo();
   }
 
 
@@ -205,11 +198,6 @@ export class ChatComponent {
     });
     this.cargados = true;
     this.mensajesGuardados = mensajes;
-  }
-
-
-  //Para el scroll
-  ngAfterViewChecked() {
     this.scrollAbajo();
   }
 
@@ -223,6 +211,16 @@ export class ChatComponent {
     }
   }
 
+
+  obtenerMensajesDeWebSocket() {
+    this._websocketService.getMensajes().subscribe({
+      next: (resp: any) => {
+        this.idConMensajesNuevos.push(resp._idUsuario);
+        this.mensajesGuardados.push(resp);
+      },
+      error: (err) => { console.log(err); }
+    })
+  }
 
 
 

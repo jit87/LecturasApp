@@ -1,96 +1,107 @@
 <div class="container mt-5 animate__animated animate__fadeIn" *ngIf="DatosPerfil">
- <div class="caja-info" style="position: relative;">
-        <button class="btn-volver  btn btn-outline-secondary mt-3" style="margin-bottom: 2%;"  (click)="regresar()">Volver</button>
-            <div class="card mx-auto">
-                <div class="card-body mt-4">
-                    <div class="row">
-                        <div class="info-usuario col-md-8">
-                            <div class="bloque-img col-md-6">
-                                <div class="img mt-3 mb-3">
-                                    <img [src]="DatosPerfil.imagen" class="rounded-circle img-fluid" alt="Foto de perfil" height="110" width="110">
-                                </div>
-                                <div class="btn-seguir mt-3 mb-3">
-                                    <button class="btn btn-primary btn-sm mt-3" *ngIf="mostrarBotonAgregar === 1"
-                                        (click)="seguir(DatosPerfil._id)">Seguir usuario</button>
-                                    <button class="btn btn-danger btn-sm mt-3" *ngIf="mostrarBotonAgregar === -1 && DatosPerfil._id!=idLogueado"
-                                        (click)="noseguir(DatosPerfil._id)">Dejar de seguir</button>
+    <div class="caja-info" style="position: relative;">
+        <button class="btn-volver  btn btn-outline-secondary mt-3" style="margin-bottom: 2%;"
+            (click)="regresar()">Volver</button>
+        <div class="card mx-auto">
+            <div class="card-body mt-4">
+                <div class="row">
+                    <div class="info-usuario col-md-8">
+                        <div class="bloque-img col-md-6">
+                            <div class="img mt-3 mb-3">
+                                <img [src]="DatosPerfil.imagen" class="rounded-circle img-fluid" alt="Foto de perfil"
+                                    height="110" width="110">
+                            </div>
+                            <div class="btn-seguir mt-3 mb-3">
+                                <button class="btn btn-primary btn-sm mt-3" *ngIf="mostrarBotonAgregar === 1"
+                                    (click)="seguir(DatosPerfil._id)">Seguir usuario</button>
+                                <button class="btn btn-danger btn-sm mt-3"
+                                    *ngIf="mostrarBotonAgregar === -1 && DatosPerfil._id!=idLogueado"
+                                    (click)="noseguir(DatosPerfil._id)">Dejar de seguir</button>
+                            </div>
+                        </div>
+                        <div style="display: flex; flex-wrap: nowrap;">
+                            <h3 class="card-title" class="nombre">{{ DatosPerfil.nombre }}</h3>
+                            <div style="margin-left: 2%;">
+                                <div class="badge" *ngIf="DatosPerfil._id==idLogueado"
+                                    style="margin-left: 2%;vertical-align: -webkit-baseline-middle;"><b>Propietario</b>
                                 </div>
                             </div>
-                            <div style="display: flex; flex-wrap: nowrap;">
-                                <h3 class="card-title" class="nombre">{{ DatosPerfil.nombre }}</h3>
-                                <div style="margin-left: 2%;">
-                                  <div class="badge" *ngIf="DatosPerfil._id==idLogueado" style="margin-left: 2%;vertical-align: -webkit-baseline-middle;"><b>Propietario</b></div>  
-                                </div>
-                            </div>
-                            <h5 class="mt-4">Bio</h5><p class="bio" *ngIf="DatosPerfil.bio">{{ DatosPerfil.bio }}</p>
-                            <p class="text-muted"></p>
-                            <h5 class="mt-4">Seguidores: {{  DatosPerfil.seguidores.length }}</h5>
-                            <h5 class="mt-4">Seguidos: {{  DatosPerfil.seguidos.length }}</h5>
-                            <h5 class="mt-4">Libros leídos: {{ DatosPerfil.librosLeidos.length }}</h5>
-                            <div class="caja-muro mt-4">
-                                <h5 class="mt-4 mb-4">Actividad reciente:</h5>
-                                <div class="caja-muro mt-2" *ngFor="let post of posts; let i = index" class="card mb-3 p-3">
-                                    <div class="card-body" *ngIf="post.tipo==='Libro' && post.resena==''">
-                                        <img class="imagenUsuario" [src]="post.imagenUsuario" class="rounded-circle me-3" width="50" height="50">
-                                        <b style="font-size: large;cursor: pointer;" [routerLink]="['/perfilpublico', post._idUsuario]"
-                                            class="nombre">{{ post.nombreUsuario }}</b>
-                                        &nbsp;ha actualizado su biblioteca con el libro:
-                                        <br>
-                                        <hr />
-                                        <div class="d-flex" style="padding: 2%;">
-                                            <img [src]="post.imagen || 'default.png'" class="rounded me-3" width="124" height="164">
-                                            <div>
-                                                <h5 class="mb-1" [routerLink]="['/info', post.APIid]" routerLinkActive="router-link-active"
-                                                    style="cursor: pointer;" class="titulo">{{ post.titulo }}</h5>
-                                                <p class="text-muted mb-1">De {{ post.autores }}</p>
-                                                <p class="solo-3-lineas mb-2">{{ post.descripcion }}</p>
-                                                <app-estado-libro [libro]="post"></app-estado-libro>
-                                            </div>
+                        </div>
+                        <h5 class="mt-4">Bio</h5>
+                        <p class="bio" *ngIf="DatosPerfil.bio">{{ DatosPerfil.bio }}</p>
+                        <p class="text-muted"></p>
+                        <h5 class="mt-4">Seguidores: {{ DatosPerfil.seguidores.length }}</h5>
+                        <h5 class="mt-4">Seguidos: {{ DatosPerfil.seguidos.length }}</h5>
+                        <h5 class="mt-4">Libros leídos: {{ DatosPerfil.librosLeidos.length }}</h5>
+                        <div class="caja-muro mt-4">
+                            <div class="caja-muro mt-2" *ngFor="let post of posts; let i = index" class="card mb-3 p-3">
+                                <div class="card-body" *ngIf="post.tipo==='Libro' && post.resena==''">
+                                    <img class="imagenUsuario" [src]="post.imagenUsuario" class="rounded-circle me-3"
+                                        width="50" height="50">
+                                    <b style="font-size: large;cursor: pointer;"
+                                        [routerLink]="['/perfilpublico', post._idUsuario]" class="nombre">{{
+                                        post.nombreUsuario }}</b>
+                                    &nbsp;ha actualizado su biblioteca con el libro:
+                                    <br>
+                                    <hr />
+                                    <div class="d-flex" style="padding: 2%;">
+                                        <img [src]="post.imagen || 'default.png'" class="rounded me-3" width="124"
+                                            height="164">
+                                        <div>
+                                            <h5 class="mb-1" [routerLink]="['/info', post.APIid]"
+                                                routerLinkActive="router-link-active" style="cursor: pointer;"
+                                                class="titulo">{{ post.titulo }}</h5>
+                                            <p class="text-muted mb-1">De {{ post.autores }}</p>
+                                            <p class="solo-3-lineas mb-2">{{ post.descripcion }}</p>
+                                            <app-estado-libro [libro]="post"></app-estado-libro>
                                         </div>
                                     </div>
-                                    <div class="card-body" *ngIf="post.tipo==='Resena'">
-                                        <img class="imagenUsuario" [src]="post.imagenUsuario" class="rounded-circle me-3" width="50" height="50">
-                                        <b style="font-size: large;cursor: pointer;" [routerLink]="['/perfilpublico', post._idUsuario]"
-                                            class="nombre">{{
-                                            post.nombreUsuario }}</b>
-                                        &nbsp;ha añadido una reseña:
-                                        <br>
-                                        <hr />
-                                        <div class="d-flex" style="padding: 2%;">
-                                            <div>
-                                                <h5 class="mb-1" [routerLink]="['/review', post._id,post._idUsuario]" routerLinkActive="router-link-active"
-                                                    style="cursor: pointer;" class="titulo">{{ post.titulo }}</h5>
-                                                <p class="solo-3-lineas mb-2">{{ post.resena }}</p>
-                                            </div>
+                                </div>
+                                <div class="card-body" *ngIf="post.tipo==='Resena'">
+                                    <img class="imagenUsuario" [src]="post.imagenUsuario" class="rounded-circle me-3"
+                                        width="50" height="50">
+                                    <b style="font-size: large;cursor: pointer;"
+                                        [routerLink]="['/perfilpublico', post._idUsuario]" class="nombre">{{
+                                        post.nombreUsuario }}</b>
+                                    &nbsp;ha añadido una reseña:
+                                    <br>
+                                    <hr />
+                                    <div class="d-flex" style="padding: 2%;">
+                                        <div>
+                                            <h5 class="mb-1" [routerLink]="['/review', post._id,post._idUsuario]"
+                                                routerLinkActive="router-link-active" style="cursor: pointer;"
+                                                class="titulo">{{ post.titulo }}</h5>
+                                            <p class="solo-3-lineas mb-2">{{ post.resena }}</p>
                                         </div>
-                                    </div>              </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="info-seguidores col-md-3">
-                            <h5 class="mt-4">Lista de Seguidores</h5>
-                            <ul class="list-group">
-                                <li *ngFor="let seguidor of this.listaSeguidores" 
-                                    class="s-social list-group-item d-flex align-items-center"
-                                    [routerLink]="['/perfilpublico', seguidor._id]" 
-                                    style="cursor: pointer;">
-                                    <img [src]="seguidor.imagen || 'default.png'" 
-                                         class="rounded-circle me-2" 
-                                         width="40" 
-                                         height="40">
-                                    <span><b>{{seguidor.nombre}}</b></span>
-                                </li>
-                            </ul>
-                            <h5 class="mt-4">Lista de Seguidos</h5>
-                            <ul class="list-group">
-                                <li *ngFor="let seguido of this.listaSeguidos" class="s-social list-group-item d-flex align-items-center"
-                                    [routerLink]="['/perfilpublico', seguido._id]" style="cursor: pointer;">
-                                    <img [src]="seguido.imagen || 'default.png'" class="rounded-circle me-2" width="40" height="40">
-                                    <span><b>{{seguido.nombre}}</b></span>
-                                </li>
-                            </ul>
-                        </div>
+                    </div>
+                    <div class="info-seguidores col-md-3">
+                        <h5 class="mt-4">Lista de Seguidores</h5>
+                        <ul class="list-group">
+                            <li *ngFor="let seguidor of this.listaSeguidores"
+                                class="s-social list-group-item d-flex align-items-center"
+                                [routerLink]="['/perfilpublico', seguidor._id]" style="cursor: pointer;">
+                                <img [src]="seguidor.imagen || 'default.png'" class="rounded-circle me-2" width="40"
+                                    height="40">
+                                <span><b>{{seguidor.nombre}}</b></span>
+                            </li>
+                        </ul>
+                        <h5 class="mt-4">Lista de Seguidos</h5>
+                        <ul class="list-group">
+                            <li *ngFor="let seguido of this.listaSeguidos"
+                                class="s-social list-group-item d-flex align-items-center"
+                                [routerLink]="['/perfilpublico', seguido._id]" style="cursor: pointer;">
+                                <img [src]="seguido.imagen || 'default.png'" class="rounded-circle me-2" width="40"
+                                    height="40">
+                                <span><b>{{seguido.nombre}}</b></span>
+                            </li>
+                        </ul>
                     </div>
                 </div>
-            </div>  
+            </div>
+        </div>
     </div>
 </div>

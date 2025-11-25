@@ -265,6 +265,22 @@ form {
     min-height: 220px;
 }
 
+.titulo-libro-home {
+    display: -webkit-box;
+    line-clamp: 2;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.titulo-libro-buscador {
+    display: -webkit-box;
+    line-clamp: 2;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
 .dropdown-menu {
     z-index: 2 !important;
     position: absolute !important;
