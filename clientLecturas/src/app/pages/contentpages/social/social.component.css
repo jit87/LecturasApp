@@ -1,6 +1,4 @@
-
-
-.nombre:hover{
+.nombre:hover {
     text-decoration: underline;
 }
 
@@ -8,7 +6,7 @@
     text-decoration: underline;
 }
 
-.infoSeguidores{
+.infoSeguidores {
     background-color: rgb(242, 234, 230);
     border-radius: 5px;
     border: 1px solid rebeccapurple;
@@ -17,4 +15,6 @@
 }
 
 
-    
+.caja-spinner-muro {
+    text-align: center;
+}

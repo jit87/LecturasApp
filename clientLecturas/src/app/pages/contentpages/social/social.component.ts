@@ -69,6 +69,9 @@ export class SocialComponent {
     private _authService: AbstractAuthService
   ) {
     this.getActividad();
+    setTimeout(() => {
+      this.cargados = true;
+    }, 1000);
   }
 
 
@@ -100,8 +103,6 @@ export class SocialComponent {
     this.posts = [];
     this._lecturasBBDDService.getListLibrosUsuarios().subscribe(
       (resp) => {
-        //let total = resp.length;
-        // let procesados = 0;
         resp.forEach((libro: any) => {
           const postLibros: PostLibro = {
             APIid: libro.APIid,
@@ -142,10 +143,6 @@ export class SocialComponent {
             }
           );
           this.getComentarios(postLibros, postResena);
-          this.cargados = true;
-          /* if (procesados == total) {
-             this.cargados = true;
-           }*/
         });
       },
       (err) => {

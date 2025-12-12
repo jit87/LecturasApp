@@ -194,6 +194,11 @@ form {
     color: white;
 }
 
+.modo-oscuro .spinner-muro-social {
+    color: white;
+    text-align: center;
+}
+
 /*  Fin modo oscuro */
 
 
