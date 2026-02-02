@@ -34,8 +34,15 @@ export class HomeComponent {
 
   //Obtiene los libros nuevos que haya publicado la API
   getLibrosNuevos() {
+    this.librosNuevos = [];
     this._librosService.getLibrosNuevos().subscribe(
       (resp: any) => {
+        if (!resp.items || resp.items.length === 0) {
+          console.warn('Sin items en libros nuevos', resp);
+          this.disponibles = false;
+          this.cargados = true;
+          return;
+        }
         for (let i = 0; i < resp.items.length; i++) {
           const libroInfo = {
             id: resp.items[i].id,

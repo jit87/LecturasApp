@@ -29,8 +29,7 @@ export class LibrosService extends AbstractLibrosService {
 
   //Devuelve novedades de libros 
   getLibrosNuevos(): Observable<any> {
-    //return this.http.get(`${this.url}subject:fiction&key=${this.Google_API_KEY}&maxResults=${this.max}&orderBy=newest`);
-    return this.http.get(`${this.url}a&printType=books&orderBy=newest&maxResults=${this.max}&key=${this.Google_API_KEY}`).pipe(
+    return this.http.get(`${this.url}subject:fiction&printType=books&orderBy=newest&maxResults=${this.max}&key=${this.Google_API_KEY}`).pipe(
       map((res: any) => {
         //Si hay libros devolvemos un vector de libros con el tamaño determinado por max o los que haya devuelto la API
         const items = res.items?.slice(0, this.max) || [];
