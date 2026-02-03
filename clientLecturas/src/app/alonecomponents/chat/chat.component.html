@@ -34,8 +34,10 @@
         <div *ngIf="cargados==false" class="spinner-border m-5" role="status">
         </div>
         <div *ngFor="let mensaje of mensajesGuardados">
-            <div><img *ngIf="mensaje._idUsuario!=usuarioID" class="rounded-circle me-2" width="30" height="30"
-                    [src]="mensaje.imagen" style="border-radius: black solid 1px;margin-bottom: 6px;">
+            <div>
+                <img *ngIf="mensaje._idUsuario!=usuarioID" class="rounded-circle me-2" width="30" height="30"
+                    [src]="mensaje.imagen" style="border-radius: black solid 1px;margin-bottom: 6px;"
+                    (load)="scrollAbajo()">
                 <!-- <b *ngIf="mensaje._idUsuario!=usuarioID">{{
                     mensaje.nombre }}</b> -->
             </div>

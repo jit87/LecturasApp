@@ -143,6 +143,7 @@ export class ChatComponent {
   }
 
 
+
   getChats(_idUsuario: string, seguido: any) {
     var chats: any = [];
     var participantes: any = [];
@@ -170,10 +171,6 @@ export class ChatComponent {
   getMensajes(_idChat: string) {
     this._chatService.getMensajes(_idChat).subscribe({
       next: (resp) => {
-        /* for (var i = 0; i <= resp.length - 1; i++) {
-           console.log(resp[i]._idUsuario);
-           this.obtenerDatosPorId(resp);
-         }*/
         this.obtenerDatosPorId(resp);
       },
       error: (err) => { console.log(err) }
@@ -181,24 +178,10 @@ export class ChatComponent {
   }
 
 
+
   obtenerDatosPorId(mensajes: any) {
-    mensajes.forEach((element: any) => {
-      this._authService.getUserById(element._idUsuario).subscribe({
-        next: (resp) => {
-          element.nombre = resp.nombre;
-          element.imagen = resp.imagen;
-          /*setTimeout(() => {
-            this.elemento.scrollTop = this.elemento.scrollHeight;
-          }, 20)*/
-        },
-        error: (err) => {
-          console.log(err)
-        }
-      });
-    });
-    this.cargados = true;
-    this.mensajesGuardados = mensajes;
-    this.scrollAbajo();
+    this.mensajesGuardados = [...mensajes];
+    mensajes.forEach((m: any) => this.rellenarDatosUsuario(m));
   }
 
 
@@ -215,12 +198,22 @@ export class ChatComponent {
   obtenerMensajesDeWebSocket() {
     this._websocketService.getMensajes().subscribe({
       next: (resp: any) => {
-        this.idConMensajesNuevos.push(resp._idUsuario);
         this.mensajesGuardados.push(resp);
+        this.rellenarDatosUsuario(resp);
       },
-      error: (err) => { console.log(err); }
-    })
+      error: err => console.log(err)
+    });
   }
+
+
+  //Función auxiliar para completar datos en tiempo real
+  rellenarDatosUsuario(mensaje: any) {
+    this._authService.getUserById(mensaje._idUsuario).subscribe(user => {
+      mensaje.nombre = user.nombre;
+      mensaje.imagen = user.imagen;
+    });
+  }
+
 
 
 
