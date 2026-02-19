@@ -1,26 +1,22 @@
+.logo {
+    font-family: Comic Sans MS;
+    font-weight: bold;
+}
+
 .nav-item a {
     font-weight: 500;
     color: #032518 !important;
 }
 
-.nav-item a:hover {
+.nav-item a:hover:not(.no-hover) {
     transform: scale(1.1, 1.1);
     transition: all 300ms;
 }
 
-.img-nav:focus {
-    /*background-color: darkgrey;*/
-    display: inline-block;
-    width: fit-content;
-    border: 2px solid black;
-    animation: animacionBorder 1s alternate;
-}
-
-.router-link-active {
+.router-link-active:not(.no-hover) {
     font-weight: 700 !important;
     color: black !important;
     transition: border-color 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
-    /*animation: animacionBorder 1s alternate;*/
 }
 
 
@@ -35,14 +31,3 @@
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     }
 }
-
-/*
-@media (max-width: 768px) {
-
-    .img-nav:focus {
-        border: none !important;
-        padding: 6px 10px;
-        font-size: 14px;
-    }
-
-}*/
