@@ -35,6 +35,7 @@ export class LibrosComponent {
 
   ngOnInit() {
     this.getUsuarioID();
+    this.actualizarPagina();
   }
 
 
