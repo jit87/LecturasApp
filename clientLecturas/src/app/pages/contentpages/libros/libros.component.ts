@@ -35,7 +35,6 @@ export class LibrosComponent {
 
   ngOnInit() {
     this.getUsuarioID();
-    this.actualizarPagina();
   }
 
 
@@ -57,7 +56,7 @@ export class LibrosComponent {
   mostrarLibros() {
     this._lecturasBBDDService.getListLibros(this.usuarioID).subscribe(
       (resp: any) => {
-        this.librosGuardados = resp;
+        this.librosGuardados = [...resp];
         this.librosAMostrar = this.librosGuardados;
         this.totalPaginas = Math.ceil(this.librosAMostrar.length / this.librosPorPagina);
         this.actualizarPagina();

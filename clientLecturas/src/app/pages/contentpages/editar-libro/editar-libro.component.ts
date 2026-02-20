@@ -38,12 +38,9 @@ export class EditarLibroComponent {
     this.libro.resena = this._estadoLibroService.getResenaLibro();
   }
 
-
-
   ngOnInit() {
     this.getColecciones(this.usuarioID);
   }
-
 
   //Colecciones a mostrar en el selector del formulario
   getColecciones(usuarioId: string) {
@@ -58,8 +55,6 @@ export class EditarLibroComponent {
     )
   }
 
-
-
   guardarCambios(form: NgForm) {
     if (form.invalid) {
       console.log("Formulario no valido");
@@ -69,26 +64,19 @@ export class EditarLibroComponent {
       (resp) => {
         console.log("Libro actualizado", resp);
         this._toastr.info("Libro actualizado");
+        //Actualizamos el libro y lo notificamos al padre
+        this.libroEditado.emit(true);
+        this.cerrar();
       },
       (error) => {
         console.log(error);
       }
     )
-
-    //Actualizamos el libro y lo notificamos al padre
-    this.libroEditado.emit(true);
-    this.cerrar();
   }
-
-
 
   cerrar() {
     this.cerrarFormulario.emit();
   }
-
-
-
-
 
 
 }
