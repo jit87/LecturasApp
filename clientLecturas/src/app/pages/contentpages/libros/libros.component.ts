@@ -31,7 +31,9 @@ export class LibrosComponent {
     private _authService: AbstractAuthService,
     private _lecturasBBDDService: AbstractLecturasBBDDService,
     private toastr: ToastrService
-  ) {
+  ) { }
+
+  ngOnInit() {
     this.getUsuarioID();
   }
 
@@ -54,7 +56,7 @@ export class LibrosComponent {
   mostrarLibros() {
     this._lecturasBBDDService.getListLibros(this.usuarioID).subscribe(
       (resp: any) => {
-        this.librosGuardados = resp;
+        this.librosGuardados = [...resp];
         this.librosAMostrar = this.librosGuardados;
         this.totalPaginas = Math.ceil(this.librosAMostrar.length / this.librosPorPagina);
         this.actualizarPagina();
@@ -227,7 +229,7 @@ export class LibrosComponent {
 
 
 
-  //PAGINACION
+  //PAGINACION DE LA TABLA
   actualizarPagina() {
     this.totalPaginas = Math.ceil(this.librosGuardados.length / this.librosPorPagina);
     if (this.paginaActual > this.totalPaginas) {

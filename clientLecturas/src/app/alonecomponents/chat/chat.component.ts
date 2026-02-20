@@ -63,6 +63,9 @@ export class ChatComponent {
       texto: "",
       fecha: new Date
     }
+  }
+
+  ngOnInit() {
     this.obtenerMensajesDeWebSocket();
   }
 
@@ -200,6 +203,8 @@ export class ChatComponent {
       next: (resp: any) => {
         this.mensajesGuardados.push(resp);
         this.rellenarDatosUsuario(resp);
+        //Para notificar con punto rojo el mensaje entrante
+        this.idConMensajesNuevos.push(resp._idUsuario);
       },
       error: err => console.log(err)
     });

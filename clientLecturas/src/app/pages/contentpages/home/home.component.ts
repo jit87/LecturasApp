@@ -27,10 +27,12 @@ export class HomeComponent {
     private _lecturasBBDDService: AbstractLecturasBBDDService,
     private _authService: AbstractAuthService
   ) {
+  }
+
+  ngOnInit() {
     this.getLibrosNuevos();
     this.getUsuarioID();
   }
-
 
   //Obtiene los libros nuevos que haya publicado la API
   getLibrosNuevos() {

@@ -246,56 +246,38 @@ export class SocialComponent {
 
   //Obtiene los comentarios asociados a cada post
   getComentarios(postLibros: PostLibro, postResena: PostResena) {
-    //Si el libro no tiene reseña, es que se ha añadido recientemente, luego se muestra la actualización del libro
-    //Además obtenemos los comentarios asociados al libro
-    if (postLibros.resena == "") {
-      this._lecturasBBDDService.getComentarios(postLibros._id, postLibros.tipo).subscribe(
-        (resp: any) => {
-          if (resp != "") {
-            postLibros.comentarios = resp;
-            postLibros.comentarios.forEach((comentario, index) => {
-              this._authService.getUserById(comentario._idUsuario).subscribe({
-                next: (usuario) => {
-                  postLibros.comentarios[index].nombreUsuario = usuario.nombre;
-                  postLibros.comentarios[index].imagenUsuario = usuario.imagen;
-                },
-                error: (err) => console.log(err)
-              });
-            });
-          }
-        },
-        (err) => {
-          console.log(err);
-        }
-      );
-      this.posts.push(postLibros);
+    if (postLibros.resena === "") {
+      this.cargarComentarios(postLibros);
     }
-    //Si la propiedad resena no está vacía se pasarán los datos a la parte de reseña (en función del tipo)
-    //Además obtenemos los comentarios asociados a la reseña
-    if (postResena.resena != "") {
-      this._lecturasBBDDService.getComentarios(postResena._id, postResena.tipo).subscribe(
-        (resp: any) => {
-          if (resp != "") {
-            postResena.comentarios = resp;
-            postResena.comentarios.forEach((comentario, index) => {
-              this._authService.getUserById(comentario._idUsuario).subscribe({
-                next: (usuario) => {
-                  postResena.comentarios[index].nombreUsuario = usuario.nombre;
-                  postResena.comentarios[index].imagenUsuario = usuario.imagen;
-                },
-                error: (err) => console.log(err)
-              });
-            });
-          }
-        },
-        (err) => {
-          console.log(err);
-        }
-      );
-      this.posts.push(postResena);
+    if (postResena.resena !== "") {
+      this.cargarComentarios(postResena);
     }
   }
 
+
+  //Función auxiliar para cargar los comentarios en función del tipo que se trate
+  cargarComentarios(post: any) {
+    this._lecturasBBDDService.getComentarios(post._id, post.tipo).subscribe(
+      (resp: any) => {
+        if (resp != "") {
+          post.comentarios = resp;
+          post.comentarios.forEach((comentario: { _idUsuario: string; }, index: string | number) => {
+            this._authService.getUserById(comentario._idUsuario).subscribe({
+              next: (usuario) => {
+                post.comentarios[index].nombreUsuario = usuario.nombre;
+                post.comentarios[index].imagenUsuario = usuario.imagen;
+              },
+              error: (err) => console.log(err)
+            });
+          });
+        }
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+    this.posts.push(post);
+  }
 
 
 

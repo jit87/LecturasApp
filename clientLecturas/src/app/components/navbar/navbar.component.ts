@@ -17,9 +17,7 @@ export class NavbarComponent {
   email: string | null = "";
   idLogueado: string = "";
 
-  constructor(private router: Router,
-    private _authService: AbstractAuthService
-  ) {
+  constructor(private router: Router, private _authService: AbstractAuthService) {
     if (this._authService.isAuthenticated()) {
       this.autenticado = true;
     }
