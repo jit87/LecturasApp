@@ -44,9 +44,10 @@
                                         <div style="margin-left:8%;">{{ comentario.texto }}</div>
                                     </span>
                                     <span style="font-size:x-small;color: grey;float:left;margin-left:8.2%;">{{
-                                        comentario.fecha | date:'d/MM/yyyy \' \'HH:mm'}} <i _ngcontent-ng-c881097003=""
-                                            class="fa-solid fa-trash" style="cursor: pointer;"
-                                            *ngIf="comentario._idUsuario==idLogueado"></i></span>
+                                        comentario.fecha | date:'d/MM/yyyy \' \'HH:mm'}}
+                                        <i _ngcontent-ng-c881097003="" class="fa-solid fa-trash"
+                                            style="cursor: pointer;" *ngIf="comentario._idUsuario==idLogueado"
+                                            (click)="eliminarComentario(comentario._id, post, comentario._idLibro)"></i></span>
                                     <br>
                                 </div>
                             </div>
@@ -93,8 +94,8 @@
                                     <span style="font-size:x-small;color: grey;float:left;margin-left:8.2%;">{{
                                         comentario.fecha | date:'d/MM/yyyy \' \'HH:mm'}}
                                         <i _ngcontent-ng-c881097003="" class="fa-solid fa-trash"
-                                            style="cursor: pointer;"
-                                            *ngIf="comentario._idUsuario==idLogueado"></i></span>
+                                            style="cursor: pointer;" *ngIf="comentario._idUsuario==idLogueado"
+                                            (click)="eliminarComentario(comentario._id, post, comentario._idLibro)"></i></span>
                                     <br>
                                 </div>
                             </div>

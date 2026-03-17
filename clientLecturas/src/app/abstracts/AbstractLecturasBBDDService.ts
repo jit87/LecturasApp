@@ -31,5 +31,6 @@ export abstract class AbstractLecturasBBDDService {
     //Comentarios
     abstract addComentario(nuevoComentario: ComentarioModel): Observable<any>;
     abstract getComentarios(_idLibro: string, tipo: string): Observable<any>;
+    abstract deleteComentario(idComentario: string): Observable<any>;
 
 }
