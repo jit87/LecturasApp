@@ -110,6 +110,9 @@ export class LecturasBBDDService extends AbstractLecturasBBDDService {
     return this.http.get(this.url + "/comentarios/todos/" + _idLibro + "/" + tipo);
   }
 
+  deleteComentario(idComentario: string) {
+    return this.http.delete(this.url + "/comentarios/" + idComentario);
+  }
 
 
 

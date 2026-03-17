@@ -4,6 +4,7 @@ import { NgForm, NgModel } from '@angular/forms';
 import { ComentarioModel } from '../../../models/comentario.model';
 import { AbstractLecturasBBDDService } from '../../../abstracts/AbstractLecturasBBDDService';
 import { AbstractAuthService } from '../../../abstracts/AbstractAuthService';
+import { ToastrService } from 'ngx-toastr';
 
 
 interface ComentarioVista extends ComentarioModel {
@@ -66,7 +67,8 @@ export class SocialComponent {
 
   constructor(
     private _lecturasBBDDService: AbstractLecturasBBDDService,
-    private _authService: AbstractAuthService
+    private _authService: AbstractAuthService,
+    private toastr: ToastrService
   ) {
     this.getActividad();
     setTimeout(() => {
@@ -222,6 +224,19 @@ export class SocialComponent {
         };
         post.comentarios.push(comentarioAmpliado);
         post.comentarios = [...post.comentarios];
+      },
+      (err) => {
+        console.log(err);
+      }
+    )
+  }
+
+  eliminarComentario(idComentario: string, post: any, _idLibro: string) {
+    this._lecturasBBDDService.deleteComentario(idComentario).subscribe(
+      (resp) => {
+        console.log("Comentario eliminado", resp);
+        post.comentarios = [...post.comentarios.filter((elem: any) => elem._id != idComentario)];
+        this.toastr.success('Comentario borrado!', 'Eliminado!');
       },
       (err) => {
         console.log(err);
