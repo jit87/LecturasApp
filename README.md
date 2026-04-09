@@ -125,33 +125,55 @@ La aplicación estará disponible en `http://localhost:4200`
 ## 📡 API Endpoints
 
 ### Autenticación
-- `POST /register` - Registro de nuevos usuarios
+- `POST /registro` - Registro de nuevos usuarios
 - `POST /login` - Inicio de sesión
+- `GET /usuario/:email` - Obtener usuario por email
+- `GET /usuarioId/:email` - Obtener ID de usuario por email
+- `GET /usuarioPorId/:id` - Obtener usuario por ID
+- `PUT /modificar-pass` - Modificar contraseña
+- `PUT /modificar-nombre` - Modificar nombre
+- `PUT /modificar-email` - Modificar email
+- `PUT /modificar-imagen` - Modificar imagen de perfil
+- `PUT /modificar-bio` - Modificar biografía
+- `PUT /modificar-apariencia` - Modificar preferencias de apariencia
+- `DELETE /eliminar-usuario/:id` - Eliminar cuenta de usuario
 
-### Libros
-- `GET /libros` - Obtener todos los libros del usuario
+### Libros (requiere autenticación)
 - `POST /libros` - Añadir un nuevo libro
+- `GET /libros/todos/:id` - Obtener todos los libros del usuario
+- `GET /libros/todos` - Obtener todos los libros (para sección social)
+- `GET /libros/libro/:id` - Obtener un libro específico por ID
+- `GET /libros/APIid/:APIid` - Obtener libro por ID de API externa
+- `GET /libros/leidos/:id` - Obtener libros leídos por el usuario
 - `PUT /libros/:id` - Actualizar información de un libro
 - `DELETE /libros/:id` - Eliminar un libro
 
-### Colecciones
-- `GET /colecciones` - Obtener colecciones del usuario
+### Colecciones (requiere autenticación)
 - `POST /colecciones` - Crear nueva colección
+- `GET /colecciones/todas/:id` - Obtener todas las colecciones del usuario
+- `DELETE /colecciones/:id` - Eliminar una colección
 
-### Social
-- `GET /seguidos` - Obtener lista de usuarios seguidos
+### Seguidos (requiere autenticación)
 - `POST /seguidos` - Seguir a un usuario
-- `DELETE /seguidos/:id` - Dejar de seguir
+- `GET /seguidos/todos` - Obtener lista de usuarios seguidos
+- `GET /seguidos/seguidores` - Obtener lista de seguidores
+- `GET /seguidos/seguidores/:id` - Obtener seguidores de un usuario específico
+- `GET /seguidos/seguidos/:id` - Obtener seguidos de un usuario específico
+- `DELETE /seguidos/:id` - Dejar de seguir a un usuario
 
-### Comentarios
-- `GET /comentarios/:libroId` - Obtener comentarios de un libro
+### Comentarios (requiere autenticación)
 - `POST /comentarios` - Añadir comentario
+- `GET /comentarios/todos/:idLibro/:tipo` - Obtener comentarios de un libro por tipo
+- `DELETE /comentarios/:id` - Eliminar comentario
 
-### Chat
-- `GET /chats` - Obtener chats del usuario
+### Chats (requiere autenticación)
 - `POST /chats` - Crear nuevo chat
-- `GET /mensajes/:chatId` - Obtener mensajes de un chat
+- `GET /chats/todos/:id` - Obtener chats del usuario
+
+### Mensajes (requiere autenticación)
 - `POST /mensajes` - Enviar mensaje
+- `GET /mensajes/todos/:id` - Obtener mensajes de un chat
+
 
 ## 🔒 Seguridad
 
