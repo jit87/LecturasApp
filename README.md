@@ -227,8 +227,6 @@ Este proyecto está bajo la Licencia ISC.
 ## 🙏 Agradecimientos
 
 - Google Books API (por la integración de búsqueda de libros)
-- La comunidad de Angular y Node.js
-- Todos los contribuidores del proyecto
 
 ---
 
