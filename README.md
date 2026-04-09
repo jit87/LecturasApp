@@ -164,24 +164,56 @@ La aplicación estará disponible en `http://localhost:4200`
 ## 📝 Modelos de Datos
 
 ### Usuario
-- Información personal
-- Lista de seguidos/seguidores
-- Biblioteca de libros
+  nombre: String (requerido),
+  email: String (requerido, único),
+  password: String (requerido, hasheado),
+  colecciones: [String] (array de nombres de colecciones),
+  imagen: String (URL de imagen de perfil),
+  seguidores: [ObjectId] (referencias a otros usuarios),
+  seguidos: [ObjectId] (referencias a otros usuarios),
+  bio: String (biografía del usuario),
+  apariencia: String (preferencias de tema/apariencia),
+  librosLeidos: [String] (array de IDs de libros leídos)
 
 ### Libro
-- Información bibliográfica completa
-- Estado de lectura
-- Colección asignada
-- Reseña personal
-- Integración con API de libros (APIid)
+  _idUsuario: String (requerido),
+  titulo: String (requerido),
+  autores: [String] (requerido),
+  editor: String,
+  fechaPublicacion: String,
+  descripcion: String,
+  pageCount: Number,
+  averageRating: Number,
+  ratingsCount: Number,
+  contentVersion: String,
+  imagen: String (URL de portada),
+  lengua: String,
+  previewLink: String,
+  estado: String (default: "Pendiente"),
+  coleccion: String (default: "No clasificado"),
+  categorias: String,
+  APIid: String (ID de API externa de libros),
+  resena: String (reseña personal del usuario),
+  timestamps: true (createdAt, updatedAt)
 
-### Chat y Mensajes
-- Sistema de mensajería en tiempo real
-- Historial de conversaciones
+### Chat
+  participantes: Array (IDs de usuarios participantes, requerido),
+  ultimoMensaje: String,
+  fecha: Date (default: Date.now)
 
-### Comentarios
-- Sistema de comentarios en libros
-- Asociados a usuarios
+### Mensaje
+  _idChat: String (requerido),
+  _idUsuario: String (requerido),
+  nombre: String (nombre del usuario que envía, requerido),
+  texto: String (contenido del mensaje, requerido),
+  fecha: Date (default: Date.now)
+
+### Comentario
+  _idUsuario: String (requerido),
+  _idLibro: String (requerido),
+  texto: String (requerido),
+  fecha: Date (default: Date.now),
+  tipo: String (default: 'libro', requerido)
 
 ## 📄 Licencia
 
