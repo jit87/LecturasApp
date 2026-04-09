@@ -167,13 +167,13 @@ La aplicación estará disponible en `http://localhost:4200`
 - **nombre**: String (requerido)
 - **email**: String (requerido, único)
 - **password**: String (requerido, hasheado)
-- **colecciones**: [String] (array de nombres de colecciones)
+- **colecciones**: [String] 
 - **imagen**: String (URL de imagen de perfil)
-- **seguidores**: [ObjectId] (referencias a otros usuarios)
-- **seguidos**: [ObjectId] (referencias a otros usuarios)
-- **bio**: String (biografía del usuario)
+- **seguidores**: [ObjectId] 
+- **seguidos**: [ObjectId] 
+- **bio**: String 
 - **apariencia**: String (preferencias de tema/apariencia)
-- **librosLeidos**: [String] (array de IDs de libros leídos)
+- **librosLeidos**: [String] 
 
 ### Libro
 - **_idUsuario**: String (requerido)
@@ -193,26 +193,26 @@ La aplicación estará disponible en `http://localhost:4200`
 - **coleccion**: String (default: "No clasificado")
 - **categorias**: String
 - **APIid**: String (ID de API externa de libros)
-- **resena**: String (reseña personal del usuario)
-- **timestamps**: true (createdAt, updatedAt)
+- **resena**: String 
+- **timestamps**: true 
 
 ### Chat
-- **participantes**: Array (IDs de usuarios participantes, requerido)
+- **participantes**: Array 
 - **ultimoMensaje**: String
-- **fecha**: Date (default: Date.now)
+- **fecha**: Date 
 
 ### Mensaje
 - **_idChat**: String (requerido)
 - **_idUsuario**: String (requerido)
-- **nombre**: String (nombre del usuario que envía, requerido)
-- **texto**: String (contenido del mensaje, requerido)
-- **fecha**: Date (default: Date.now)
+- **nombre**: String 
+- **texto**: String 
+- **fecha**: Date 
 
 ### Comentario
 - **_idUsuario**: String (requerido)
 - **_idLibro**: String (requerido)
 - **texto**: String (requerido)
-- **fecha**: Date (default: Date.now)
+- **fecha**: Date 
 - **tipo**: String (default: 'libro', requerido)
 
 
