@@ -7,7 +7,7 @@ Aplicación para gestionar y hacer seguimiento de lecturas personales, donde los
 ### Gestión de Biblioteca Personal
 - Añadir libros a tu biblioteca personal
 - Organizar libros por colecciones personalizadas
-- Estados de lectura: Pendiente, Leído
+- Estados de lectura: Pendiente, leído
 - Crear y editar reseñas personales
 - Buscador de libros integrado
 - Información detallada de cada libro (autor, editor, fecha de publicación, páginas, valoraciones, etc.)
