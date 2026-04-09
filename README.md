@@ -5,25 +5,25 @@ Una aplicación web fullstack para gestionar y compartir tu biblioteca personal 
 ## 🌟 Características
 
 ### Gestión de Biblioteca Personal
-- ✅ Añadir libros a tu biblioteca personal
-- 📊 Organizar libros por colecciones personalizadas
-- 🏷️ Estados de lectura: Pendiente, Leyendo, Leído
-- ✏️ Crear y editar reseñas personales
-- 🔍 Buscador de libros integrado
-- 📖 Información detallada de cada libro (autor, editor, fecha de publicación, páginas, valoraciones, etc.)
+- Añadir libros a tu biblioteca personal
+- Organizar libros por colecciones personalizadas
+- Estados de lectura: Pendiente, Leyendo, Leído
+- Crear y editar reseñas personales
+- Buscador de libros integrado
+- Información detallada de cada libro (autor, editor, fecha de publicación, páginas, valoraciones, etc.)
 
 ### Características Sociales
-- 👥 Sistema de seguimiento entre usuarios
-- 💬 Chat en tiempo real con otros lectores
-- 📝 Comentarios en libros
-- 👤 Perfiles públicos de usuarios
-- 🌐 Feed social para descubrir lecturas de otros usuarios
+- Sistema de seguimiento entre usuarios
+- Chat en tiempo real con otros lectores
+- Comentarios en libros
+- Perfiles públicos de usuarios
+- Feed social para descubrir lecturas de otros usuarios
 
 ### Tecnología
-- 🔐 Autenticación segura con JWT
-- ⚡ Comunicación en tiempo real mediante WebSockets (Socket.IO)
-- 🎨 Interfaz moderna y responsive
-- 📱 Notificaciones en tiempo real
+- Autenticación segura con JWT
+- Comunicación en tiempo real mediante WebSockets (Socket.IO)
+- Interfaz moderna y responsive
+- Notificaciones en tiempo real
 
 ## 🛠️ Stack Tecnológico
 
