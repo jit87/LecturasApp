@@ -1,6 +1,6 @@
 # 📚 LecturasApp
 
-Una aplicación web fullstack para gestionar y compartir tu biblioteca personal de libros, con funcionalidades sociales y chat en tiempo real.
+Aplicación para gestionar y hacer seguimiento de lecturas personales, donde los usuarios pueden buscar y guardar libros, organizar su lectura (marcar como leído o pendiente), crear colecciones temáticas, seguir a otros usuarios,  y escribir reseñas sobre los libros que han leído.
 
 ## 🌟 Características
 
