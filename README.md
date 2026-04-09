@@ -124,7 +124,7 @@ La aplicación estará disponible en `http://localhost:4200`
 
 ## 📡 API Endpoints
 
-### Autenticación
+### Autenticación, registro y config. de usuario
 - `POST /registro` - Registro de nuevos usuarios
 - `POST /login` - Inicio de sesión
 - `GET /usuario/:email` - Obtener usuario por email
