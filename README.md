@@ -1,8 +1,8 @@
-# 📚 LecturasApp
+# LecturasApp
 
 Aplicación para gestionar y hacer seguimiento de lecturas personales, donde los usuarios pueden buscar y guardar libros, organizar su lectura (marcar como leído o pendiente), crear colecciones temáticas, seguir a otros usuarios,  y escribir reseñas sobre los libros que han leído.
 
-## 🌟 Características
+## Características
 
 ### Gestión de Biblioteca Personal
 - Añadir libros a tu biblioteca personal
