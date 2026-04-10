@@ -19,7 +19,7 @@ Aplicación para gestionar y hacer seguimiento de lecturas personales, donde los
 - Perfiles públicos de usuarios
 - Feed social para descubrir lecturas de otros usuarios
 
-## 🛠️ Stack Tecnológico
+## Stack Tecnológico
 
 ### Frontend
 - **Framework**: Angular 18.2
@@ -38,7 +38,7 @@ Aplicación para gestionar y hacer seguimiento de lecturas personales, donde los
 - **WebSockets**: Socket.IO
 - **Seguridad**: CORS configurado
 
-## 📁 Estructura del Proyecto
+## Estructura del Proyecto
 
 ```
 LecturasApp/
@@ -71,7 +71,7 @@ LecturasApp/
     └── package.json
 ```
 
-## 🚀 Instalación y Configuración
+## Instalación y Configuración
 
 ### Prerrequisitos
 - Node.js (v16 o superior)
@@ -175,7 +175,7 @@ La aplicación estará disponible en `http://localhost:4200`
 - `GET /mensajes/todos/:id` - Obtener mensajes de un chat
 
 
-## 🔒 Seguridad
+## Seguridad
 
 - Autenticación mediante JWT
 - Contraseñas hasheadas con bcrypt
@@ -183,7 +183,7 @@ La aplicación estará disponible en `http://localhost:4200`
 - CORS configurado para permitir solo orígenes autorizados
 - Validación de datos en backend
 
-## 📝 Modelos de Datos
+## Modelos de Datos
 
 ### Usuario
 - **nombre**: String (requerido)
@@ -238,16 +238,16 @@ La aplicación estará disponible en `http://localhost:4200`
 - **tipo**: String (default: 'libro', requerido)
 
 
-## 📄 Licencia
+## Licencia
 
 Este proyecto está bajo la Licencia ISC.
 
-## 👤 Autor
+## Autor
 
 **jit87**
 - GitHub: [@jit87](https://github.com/jit87)
 
-## 🙏 Agradecimientos
+## Agradecimientos
 
 - Google Books API (por la integración de búsqueda de libros)
 
