@@ -122,7 +122,7 @@ npm start
 
 La aplicación estará disponible en `http://localhost:4200`
 
-## 📡 API Endpoints
+## API Endpoints
 
 ### Autenticación, registro y config. de usuario
 - `POST /registro` - Registro de nuevos usuarios
