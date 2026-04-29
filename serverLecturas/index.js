@@ -4,7 +4,8 @@ import { createServer } from "http";
 import { configurarWebSocket } from './websockets/webSocketServer.js';
 
 //URI de conexión
-const uri = "mongodb://localhost:27017/LecturasApp";
+const uri = process.env.MONGODB_URI || "mongodb://localhost:27017/LecturasApp";
+const PORT = process.env.PORT || 4000;
 
 async function main() {
     try {
@@ -22,7 +23,7 @@ async function main() {
         configurarWebSocket(servidorHTTP);
 
         //Inicia el servidor en el puerto 4000
-        servidorHTTP.listen(4000, () => {
+        servidorHTTP.listen(PORT, '0.0.0.0', () => {
             console.log("El servidor está corriendo correctamente en el puerto 4000");
         });
 
