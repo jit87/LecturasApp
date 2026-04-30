@@ -4,7 +4,7 @@ import { createServer } from "http";
 import { configurarWebSocket } from './websockets/webSocketServer.js';
 
 //URI de conexión
-const uri = process.env.MONGODB_URI || "mongodb://localhost:27017/LecturasApp";
+const uri = process.env.MONGO_URI || "mongodb://localhost:27017/LecturasApp";
 const PORT = process.env.PORT || 4000;
 
 async function main() {
