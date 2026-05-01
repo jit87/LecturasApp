@@ -4,13 +4,15 @@ import { Observable } from 'rxjs';
 import { LibroModel } from '../models/libro.model';
 import { ComentarioModel } from '../models/comentario.model';
 import { AbstractLecturasBBDDService } from '../abstracts/AbstractLecturasBBDDService';
+import { environment } from '../environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class LecturasBBDDService extends AbstractLecturasBBDDService {
 
-  url: string = "http://localhost:4000";
+  url: string = environment.apiUrl;
   listLibros: LibroModel[] = [];
 
 

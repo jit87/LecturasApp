@@ -4,13 +4,14 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { MensajeModel } from '../models/mensaje.model';
 import { ChatModel } from '../models/chat.model';
 import { AbstractChatService } from '../abstracts/AbstractChatService';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChatService extends AbstractChatService {
 
-  url: string = "http://localhost:4000";
+  url: string = environment.apiUrl;
 
   constructor(private http: HttpClient) {
     super();

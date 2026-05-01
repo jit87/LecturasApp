@@ -5,12 +5,13 @@ import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { catchError, tap } from 'rxjs/operators';
 import { AbstractAuthService } from '../abstracts/AbstractAuthService';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService extends AbstractAuthService {
-  public authUrl = 'http://localhost:4000'; //Esta URL tiene que coincidir con la que tenemos configurada en el backend en index.js: en la función app.listen(4000, () => {})
+  public authUrl = environment.apiUrl; //Esta URL tiene que coincidir con la que tenemos configurada en el backend en index.js: en la función app.listen(4000, () => {})
   private tokenKey = 'auth-token';
 
   private userSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { io } from 'socket.io-client';
+import { environment } from '../environments/environment';
+
 
 
 @Injectable({
@@ -9,7 +11,7 @@ import { io } from 'socket.io-client';
 export class WebsocketService {
 
   private socket: any;
-  private url: string = 'http://localhost:4000';
+  private url: string = environment.apiUrl;
 
   constructor() {
 
