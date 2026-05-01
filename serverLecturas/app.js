@@ -69,7 +69,7 @@ if (enProduccion) {
   app.use(express.static(frontendPath));
 
   //Para cualquier ruta no manejada por la API, enviar index.html (Angular)
-  app.get('/*', (req, res) => {
+  app.get((req, res) => {
     res.sendFile(path.join(frontendPath, 'index.html'));
   });
 }
