@@ -63,7 +63,7 @@ app.use('/mensajes', mensajesRoutes);
 
 if (enProduccion) {
   //Ruta al frontend compilado 
-  const frontendPath = path.join(dirname, '..', 'clientLecturas', 'dist', 'lecturas-app');
+  const frontendPath = path.join(dirname, '..', 'clientLecturas', 'dist', 'lecturas-app', 'browser');
   console.log(`Sirviendo frontend desde: ${frontendPath}`);
 
   app.use(express.static(frontendPath));
