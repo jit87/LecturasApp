@@ -1,5 +1,7 @@
 import express from 'express';
 import cors from 'cors';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import authRoutes from './routes/authRoutes.js';
 import librosRoutes from './routes/librosRoutes.js';
 import coleccionesRoutes from './routes/coleccionesRoutes.js';
@@ -8,20 +10,33 @@ import comentariosRoutes from './routes/comentariosRoutes.js';
 import chatsRoutes from './routes/chatsRoutes.js';
 import mensajesRoutes from './routes/mensajesRoutes.js';
 
+
+
 //Inicializa la aplicación de Express
 const app = express();
+const filename = fileURLToPath(import.meta.url);
+const dirname = path.dirname(filename);
 
 //Habilita middleware para parsear JSON
 app.use(express.json());
 
-//Configuración de CORS
-const corsOptions = {
-  origin: 'http://localhost:4200',
-  methods: 'GET,POST,PUT,DELETE',
-  allowedHeaders: 'Content-Type,Authorization',
-  credentials: true,
-};
-app.use(cors(corsOptions));
+//Modo en producción
+const enProduccion = process.env.NODE_ENV === 'production';
+
+if (enProduccion) {
+  console.log('Ejecutando en PRODUCCIÓN');
+} else {
+  console.log('Ejecutando en DESARROLLO');
+  //Configuración de CORS
+  const corsOptions = {
+    origin: 'http://localhost:4200',
+    methods: 'GET,POST,PUT,DELETE',
+    allowedHeaders: 'Content-Type,Authorization',
+    credentials: true,
+  };
+  app.use(cors(corsOptions));
+}
+
 
 //Rutas
 //Registra el enrutador para la ruta de autenticación 
@@ -44,5 +59,19 @@ app.use('/chats', chatsRoutes);
 
 //Registra la ruta de gestión de mensajes
 app.use('/mensajes', mensajesRoutes);
+
+
+if (enProduccion) {
+  //Ruta al frontend compilado 
+  const frontendPath = path.join(dirname, '..', 'clientLecturas', 'dist', 'lecturas-app');
+  console.log(`Sirviendo frontend desde: ${frontendPath}`);
+
+  app.use(express.static(frontendPath));
+
+  // ara cualquier ruta no manejada por la API, enviar index.html (Angular)
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(frontendPath, 'index.html'));
+  });
+}
 
 export default app; 
