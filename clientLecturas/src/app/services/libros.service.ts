@@ -20,6 +20,7 @@ export class LibrosService extends AbstractLibrosService {
   estado: string = "";
 
   private librosNuevos$?: Observable<any>;
+  private recomendacionesCache = new Map<string, Observable<any>>();
 
 
   constructor(private http: HttpClient) { super(); }
@@ -58,7 +59,29 @@ export class LibrosService extends AbstractLibrosService {
 
   //Para las recomendaciones 
   getLibrosByTematica(tematica: string): Observable<any> {
-    return this.http.get(`${this.url}subject:${tematica}&key=${this.Google_API_KEY}&maxResults=${this.maxRecomendaciones}&orderBy=newest`);
+    if (!tematica || tematica === 'Sin categoría') {
+      return of({ items: [] });
+    }
+
+    const key = tematica.toLowerCase();
+    if (this.recomendacionesCache.has(key)) {
+      return this.recomendacionesCache.get(key)!;
+    }
+
+    const req$ = this.http.get(
+      `${this.url}subject:${tematica}&key=${this.Google_API_KEY}&maxResults=${this.maxRecomendaciones}&orderBy=newest`
+    ).pipe(
+      shareReplay(1),
+      catchError(error => {
+        console.error("Error en recomendaciones", error);
+        this.recomendacionesCache.delete(key);
+        return of({ items: [] });
+      })
+    );
+
+    this.recomendacionesCache.set(key, req$);
+
+    return req$;
   }
 
 
