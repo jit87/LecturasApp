@@ -44,7 +44,7 @@ export async function login(req, res) {
 
     try {
         //Verifica si el usuario existe
-        const user = await Usuario.findOne({ email });
+        const user = await Usuario.findOne({ email }).select('+password');
         if (!user) {
             return res.status(400).send('Email o contraseña incorrectos.');
         }
@@ -127,8 +127,7 @@ export async function modificarPassword(req, res) {
         //Actualiza la contraseña
         usuario.password = hashedPassword;
         await usuario.save();
-        console.log("Contraseña modificada");
-        res.json({ nuevaPassword: nuevaPassword });
+        res.json("Modificada la contraseña");
     } catch (err) {
         res.status(500).send(err);
     }
