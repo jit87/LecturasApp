@@ -69,6 +69,7 @@ export async function getUserByEmail(req, res) {
 
     try {
         const email = req.params.email;
+        //Excluimos el password por seguridad
         const user = await Usuario.findOne({ email: email }).select('-password');
 
         if (!user) {
@@ -253,7 +254,7 @@ export async function modificarApariencia(req, res) {
 export async function getUserById(req, res) {
 
     try {
-
+        //Evitamos exponer el password
         const user = await Usuario.findById(req.params.id).select('-password');
 
         if (!user) {
@@ -273,21 +274,13 @@ export async function getUserById(req, res) {
 export async function eliminarUsuario(req, res) {
 
     try {
-        const usuario = await Usuario.findOne({ _id: req.params.id });
+        const usuario = await Usuario.findById(req._idUsuario);
 
         if (!usuario) {
             return res.status(404).json({ message: 'Usuario no encontrado' });
         }
 
-        Usuario.findByIdAndDelete(req.params.id, function (err, docs) {
-            if (err) {
-                console.log(err)
-            }
-            else {
-                console.log("Eliminado usuario : ", docs);
-            }
-        });
-
+        await Usuario.findByIdAndDelete(req._idUsuario);
         res.json({ resultado: "Eliminado usuario" });
 
     } catch (err) {
