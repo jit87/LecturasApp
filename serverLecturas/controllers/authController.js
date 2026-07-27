@@ -109,7 +109,7 @@ export async function modificarPassword(req, res) {
         const { actualPassword, nuevaPassword } = req.body;
 
         //Busca al usuario por email
-        const usuario = await Usuario.findById(req._idUsuario);
+        const usuario = await Usuario.findById(req._idUsuario).select('+password');
         if (!usuario) {
             return res.status(404).json({ message: 'Usuario no encontrado' });
         }

@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 const userSchema = new mongoose.Schema({
   nombre: { type: String, required: true },
   email: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
+  password: { type: String, required: true, select: false },
   colecciones: { type: [String], required: false, default: [] },
   imagen: { type: String, required: false, default: '' },
   seguidores: { type: [mongoose.Schema.Types.ObjectId], ref: 'Usuario', default: [] },
@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema({
   librosLeidos: { type: [String], required: false, default: [] }
 });
 
-userSchema.methods.comparePassword = function(password) {
+userSchema.methods.comparePassword = function (password) {
   return bcrypt.compareSync(password, this.password);
 };
 
