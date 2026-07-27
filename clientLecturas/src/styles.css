@@ -177,6 +177,11 @@ form {
     border-color: white;
 }
 
+.modo-oscuro .boton-recargar {
+    color: white;
+    border-color: white;
+}
+
 .modo-oscuro .caja-libro-home:hover {
     -webkit-box-shadow: 3px 3px 29px -12px var(--background-aguamarina);
     -moz-box-shadow: 3px 3px 29px -12px var(--background-aguamarina);

@@ -7,8 +7,8 @@
             </div>
         </div>
         <div *ngIf="cargados && !disponibles" class="text-center my-5">
-            <p>No se han podido cargar las novedades.</p>
-            <button class="btn btn-outline-primary" (click)="recargar()">Recargar</button>
+            <p>No se han podido cargar las novedades. <br>Demasiadas peticiones seguidas.</p>
+            <button class="btn btn-outline-primary boton-recargar mt-2" (click)="recargar()">Recargar</button>
         </div>
         <div class="row">
             <div class="col-md-4" *ngFor="let libro of librosNuevos">
