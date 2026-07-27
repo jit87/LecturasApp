@@ -85,6 +85,10 @@ export class LibrosService extends AbstractLibrosService {
   }
 
 
+  resetCache() {
+    this.librosNuevos$ = undefined;
+  }
+
 
 
 

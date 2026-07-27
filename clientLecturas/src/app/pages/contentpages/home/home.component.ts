@@ -63,6 +63,14 @@ export class HomeComponent {
   }
 
 
+  recargar() {
+    this.cargados = false;
+    this.disponibles = true;
+    this._librosService.resetCache();
+    this.getLibrosNuevos();
+  }
+
+
   getUsuarioID() {
     const email = localStorage.getItem("email");
     this._authService.getUserByEmail(email).subscribe(

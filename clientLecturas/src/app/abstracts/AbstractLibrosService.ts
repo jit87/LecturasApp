@@ -6,4 +6,5 @@ export abstract class AbstractLibrosService {
     abstract getLibrosNuevos(): Observable<any>;
     abstract getInfoLibroById(id: string): Observable<any>;
     abstract getLibrosByTematica(tematica: string): Observable<any>;
+    abstract resetCache(): void;
 }
