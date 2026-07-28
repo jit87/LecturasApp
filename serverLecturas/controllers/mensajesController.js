@@ -19,20 +19,16 @@ export async function crearMensaje(req, res) {
 
         //Emitimos la notificación al websocket
         const io = getIO();
-        console.log("⚡Mensaje nuevo:", {
+        //Sólo a los usuarios de la misma room del chat
+        io.to(_idChat).emit("nuevoMensaje", {
             _idChat,
             _idUsuario,
             nombre,
             texto,
             fecha,
         });
-        io.emit("nuevoMensaje", {
-            _idChat,
-            _idUsuario,
-            nombre,
-            texto,
-            fecha,
-        });
+
+        res.status(201).json(nuevoMensaje);
 
     } catch (error) {
         res.status(400).json({ message: error.message });

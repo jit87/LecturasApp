@@ -17,22 +17,23 @@ export class WebsocketService {
 
     //Obtiene el token JWT y el ID del usuario
     const token = localStorage.getItem('auth-token');
-    const email = localStorage.getItem('email');
 
 
     //Conecta con el WebSocket e incluir el token y el ID del usuario
     this.socket = io(this.url, {
       transports: ['websocket'],
-      auth: {
-        token: token,
-        email: email
-      }
+      auth: { token: token }
     });
 
     //Manejamos la conexión exitosa
     this.socket.on('connect', () => {
       console.log('Conectado al WebSocket');
     });
+    this.socket.on('connect_error', (err: any) => console.error('Error WebSocket:', err.message));
+  }
+
+  joinChat(idChat: string) {
+    this.socket.emit('joinChat', idChat);
   }
 
 
