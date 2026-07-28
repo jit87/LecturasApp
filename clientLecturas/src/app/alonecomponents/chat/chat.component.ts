@@ -32,6 +32,7 @@ export class ChatComponent {
   mensajesGuardados: any[] = [];
   idConMensajesNuevos: string[] = [];
   cargados: boolean = false;
+  idChatActual: string = "";
 
   //Usuario logueado
   @Input() usuarioID;
@@ -111,37 +112,19 @@ export class ChatComponent {
   }
 
 
-  guardar(usuarioLogueado: string, seguido: any) {
-    console.log("USUARIO LOGUEADO", usuarioLogueado);
-    this.chat = {
-      participantes: [usuarioLogueado, seguido._id],
-      ultimoMensaje: "",
+  guardar(usuarioLogueado: string) {
+    this.mensaje = {
+      _idChat: this.idChatActual,
+      _idUsuario: usuarioLogueado,
+      nombre: usuarioLogueado,
+      texto: this.formulario.value.mensaje,
       fecha: new Date
     }
-    this._chatService.crearChat(this.chat).subscribe(
-      (resp) => {
-        console.log("Respuesta chat:", resp);
-        this.mensaje = {
-          _idChat: resp._id,
-          _idUsuario: usuarioLogueado,
-          nombre: usuarioLogueado,
-          texto: this.formulario.value.mensaje,
-          fecha: new Date
-        }
-        this._chatService.crearMensaje(this.mensaje).subscribe(
-          (resp) => {
-            console.log(resp);
-          },
-          (err) => {
-            console.log(err);
-          }
-        )
-      },
-      (err) => {
-        console.log(err);
-      }
-    )
-    this.getChats(usuarioLogueado, seguido);
+    this._chatService.crearMensaje(this.mensaje).subscribe(
+      (resp) => { console.log(resp); },
+      (err) => { console.log(err); }
+    );
+    this.formulario.reset();
     this.scrollAbajo();
   }
 
@@ -149,29 +132,44 @@ export class ChatComponent {
 
   getChats(_idUsuario: string, seguido: any) {
     var chats: any = [];
-    var participantes: any = [];
     this._chatService.getChats(_idUsuario).subscribe(
       (resp) => {
         chats.push(resp);
+        let chatEncontrado = false;
+
         chats.forEach((chat: any) => {
           chat.forEach((element: any) => {
-            participantes.push(element.participantes);
             element.participantes.forEach((participante: any) => {
               if (participante == seguido._id) {
+                chatEncontrado = true;
                 this.getMensajes(element._id);
               }
             });
-          })
+          });
         });
+
+        // Si no existe el chat, lo creamos ahora
+        if (!chatEncontrado) {
+          const nuevoChat = {
+            participantes: [_idUsuario, seguido._id],
+            ultimoMensaje: "",
+            fecha: new Date
+          };
+          this._chatService.crearChat(nuevoChat).subscribe(
+            (resp) => {
+              this.getMensajes(resp._id);
+            },
+            (err) => console.log(err)
+          );
+        }
       },
-      (error) => {
-        console.log(error)
-      }
-    )
+      (error) => console.log(error)
+    );
   }
 
 
   getMensajes(_idChat: string) {
+    this.idChatActual = _idChat;
     this._websocketService.joinChat(_idChat);
     this._chatService.getMensajes(_idChat).subscribe({
       next: (resp) => {
