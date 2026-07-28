@@ -172,6 +172,7 @@ export class ChatComponent {
 
 
   getMensajes(_idChat: string) {
+    this._websocketService.joinChat(_idChat);
     this._chatService.getMensajes(_idChat).subscribe({
       next: (resp) => {
         this.obtenerDatosPorId(resp);
