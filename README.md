@@ -5,6 +5,7 @@ Aplicación para gestionar y hacer seguimiento de lecturas personales, donde los
 ## Características
 
 ### Gestión de Biblioteca Personal
+
 - Añadir libros a tu biblioteca personal
 - Organizar libros por colecciones personalizadas
 - Estados de lectura: Pendiente, leído
@@ -13,6 +14,7 @@ Aplicación para gestionar y hacer seguimiento de lecturas personales, donde los
 - Información detallada de cada libro (autor, editor, fecha de publicación, páginas, valoraciones, etc.)
 
 ### Características Sociales
+
 - Sistema de seguimiento entre usuarios
 - Chat en tiempo real con otros lectores
 - Comentarios sobre los libros
@@ -22,8 +24,9 @@ Aplicación para gestionar y hacer seguimiento de lecturas personales, donde los
 ## Stack Tecnológico
 
 ### Frontend
+
 - **Framework**: Angular 18.2
-- **UI/UX**: 
+- **UI/UX**:
   - Angular CDK
   - FontAwesome icons
   - Animate.css
@@ -32,6 +35,7 @@ Aplicación para gestionar y hacer seguimiento de lecturas personales, donde los
 - **Lenguaje**: TypeScript 5.5
 
 ### Backend
+
 - **Runtime**: Node.js con Express
 - **Base de datos**: MongoDB con Mongoose ODM
 - **Autenticación**: JWT (jsonwebtoken) + bcrypt
@@ -74,11 +78,13 @@ LecturasApp/
 ## Instalación y Configuración
 
 ### Prerrequisitos
+
 - Node.js (v16 o superior)
 - MongoDB instalado y ejecutándose
 - Angular CLI (`npm install -g @angular/cli`)
 
 ### 1. Clonar el repositorio
+
 ```bash
 git clone https://github.com/jit87/LecturasApp.git
 cd LecturasApp
@@ -94,12 +100,13 @@ npm install
 Crear un archivo `.env` en la carpeta `serverLecturas` con las siguientes variables:
 
 ```env
-PORT=3000
-MONGODB_URI=mongodb://localhost:27017/lecturasapp
-JWT_SECRET=tu_clave_secreta_aqui
+PORT=4000
+MONGO_URI=tu_url_de_mongodb
+TOKEN_SECRET=tu_clave_secreta_aqui
 ```
 
 Iniciar el servidor:
+
 ```bash
 # Desarrollo con nodemon
 npm run dev
@@ -116,6 +123,7 @@ npm install
 ```
 
 Iniciar la aplicación Angular:
+
 ```bash
 npm start
 ```
@@ -125,6 +133,7 @@ La aplicación estará disponible en `http://localhost:4200`
 ## API Endpoints
 
 ### Autenticación, registro y config. de usuario
+
 - `POST /registro` - Registro de nuevos usuarios
 - `POST /login` - Inicio de sesión
 - `GET /usuario/:email` - Obtener usuario por email
@@ -139,6 +148,7 @@ La aplicación estará disponible en `http://localhost:4200`
 - `DELETE /eliminar-usuario/:id` - Eliminar cuenta de usuario
 
 ### Libros (requiere autenticación)
+
 - `POST /libros` - Añadir un nuevo libro
 - `GET /libros/todos/:id` - Obtener todos los libros del usuario
 - `GET /libros/todos` - Obtener todos los libros (para sección social)
@@ -149,11 +159,13 @@ La aplicación estará disponible en `http://localhost:4200`
 - `DELETE /libros/:id` - Eliminar un libro
 
 ### Colecciones (requiere autenticación)
+
 - `POST /colecciones` - Crear nueva colección
 - `GET /colecciones/todas/:id` - Obtener todas las colecciones del usuario
 - `DELETE /colecciones/:id` - Eliminar una colección
 
 ### Seguidos (requiere autenticación)
+
 - `POST /seguidos` - Seguir a un usuario
 - `GET /seguidos/todos` - Obtener lista de usuarios seguidos
 - `GET /seguidos/seguidores` - Obtener lista de seguidores
@@ -162,18 +174,20 @@ La aplicación estará disponible en `http://localhost:4200`
 - `DELETE /seguidos/:id` - Dejar de seguir a un usuario
 
 ### Comentarios (requiere autenticación)
+
 - `POST /comentarios` - Añadir comentario
 - `GET /comentarios/todos/:idLibro/:tipo` - Obtener comentarios de un libro por tipo
 - `DELETE /comentarios/:id` - Eliminar comentario
 
 ### Chats (requiere autenticación)
+
 - `POST /chats` - Crear nuevo chat
 - `GET /chats/todos/:id` - Obtener chats del usuario
 
 ### Mensajes (requiere autenticación)
+
 - `POST /mensajes` - Enviar mensaje
 - `GET /mensajes/todos/:id` - Obtener mensajes de un chat
-
 
 ## Seguridad
 
@@ -186,18 +200,20 @@ La aplicación estará disponible en `http://localhost:4200`
 ## Modelos de Datos
 
 ### Usuario
+
 - **nombre**: String (requerido)
 - **email**: String (requerido, único)
 - **password**: String (requerido, hasheado)
-- **colecciones**: [String] 
+- **colecciones**: [String]
 - **imagen**: String (URL de imagen de perfil)
-- **seguidores**: [ObjectId] 
-- **seguidos**: [ObjectId] 
-- **bio**: String 
+- **seguidores**: [ObjectId]
+- **seguidos**: [ObjectId]
+- **bio**: String
 - **apariencia**: String (preferencias de tema/apariencia)
-- **librosLeidos**: [String] 
+- **librosLeidos**: [String]
 
 ### Libro
+
 - **_idUsuario**: String (requerido)
 - **titulo**: String (requerido)
 - **autores**: [String] (requerido)
@@ -215,28 +231,30 @@ La aplicación estará disponible en `http://localhost:4200`
 - **coleccion**: String (default: "No clasificado")
 - **categorias**: String
 - **APIid**: String (ID de API externa de libros)
-- **resena**: String 
-- **timestamps**: true 
+- **resena**: String
+- **timestamps**: true
 
 ### Chat
-- **participantes**: Array 
+
+- **participantes**: Array
 - **ultimoMensaje**: String
-- **fecha**: Date 
+- **fecha**: Date
 
 ### Mensaje
+
 - **_idChat**: String (requerido)
 - **_idUsuario**: String (requerido)
-- **nombre**: String 
-- **texto**: String 
-- **fecha**: Date 
+- **nombre**: String
+- **texto**: String
+- **fecha**: Date
 
 ### Comentario
+
 - **_idUsuario**: String (requerido)
 - **_idLibro**: String (requerido)
 - **texto**: String (requerido)
-- **fecha**: Date 
+- **fecha**: Date
 - **tipo**: String (default: 'libro', requerido)
-
 
 ## Licencia
 
@@ -245,9 +263,9 @@ Este proyecto está bajo la Licencia ISC.
 ## Autor
 
 **jit87**
+
 - GitHub: [@jit87](https://github.com/jit87)
 
 ## Agradecimientos
 
 - Google Books API (por la integración de búsqueda de libros)
-

@@ -1,9 +1,6 @@
 import { Server } from 'socket.io';
-import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
 
-
-dotenv.config();
 let io;
 
 export function configurarWebSocket(server) {
