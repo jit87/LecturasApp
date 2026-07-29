@@ -56,14 +56,14 @@ export class InfoComponent {
     this._librosService.getInfoLibroById(id).subscribe(
       (resp) => {
         console.log(resp);
-        this.libro.titulo = resp.volumeInfo.title;
-        this.libro.imagen = resp.volumeInfo.imageLinks.thumbnail;
-        this.libro.descripcion = resp.volumeInfo.description.replace(/(<([^>]+)>)/ig, "");
-        this.libro.autores = resp.volumeInfo.authors;
-        this.libro.editor = resp.volumeInfo.publisher;
-        this.libro.categorias = resp.volumeInfo.categories.toString();
-        this.libro.pageCount = resp.volumeInfo.pageCount.toString();
-        this.libro.fechaPublicacion = resp.volumeInfo.publishedDate;
+        this.libro.titulo = resp.volumeInfo?.title;
+        this.libro.imagen = resp.volumeInfo.imageLinks?.thumbnail;
+        this.libro.descripcion = resp.volumeInfo.description?.replace(/(<([^>]+)>)/ig, "");
+        this.libro.autores = resp.volumeInfo?.authors;
+        this.libro.editor = resp.volumeInfo?.publisher;
+        this.libro.categorias = resp.volumeInfo.categories?.toString();
+        this.libro.pageCount = resp.volumeInfo.pageCount?.toString();
+        this.libro.fechaPublicacion = resp.volumeInfo?.publishedDate;
         this.cargado = true;
       },
       (error) => {

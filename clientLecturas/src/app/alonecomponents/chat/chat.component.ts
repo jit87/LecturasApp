@@ -148,7 +148,7 @@ export class ChatComponent {
           });
         });
 
-        // Si no existe el chat, lo creamos ahora
+        //Si no existe el chat, lo creamos ahora
         if (!chatEncontrado) {
           const nuevoChat = {
             participantes: [_idUsuario, seguido._id],
