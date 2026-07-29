@@ -48,7 +48,6 @@ export class AppComponent {
     if (this.datos.apariencia == "oscura") {
       document.body.classList.add("modo-oscuro");
     }
-    this.cargarDatos();
   }
 
 
