@@ -39,6 +39,10 @@ export function configurarWebSocket(server) {
 }
 
 export function getIO() {
-    if (!io) throw new Error("Socket.io no ha sido inicializado");
+    if (!io) {
+        return {
+            to: () => ({ emit: () => { } })
+        };
+    }
     return io;
 }

@@ -2,11 +2,13 @@ import { Schema, model } from 'mongoose';
 
 const comentarioSchema = new Schema({
   _idUsuario: {
-    type: String,
+    type: Schema.Types.ObjectId,
+    ref: 'Usuario',
     required: true,
   },
   _idLibro: {
-    type: String,
+    type: Schema.Types.ObjectId,
+    ref: 'Libro',
     required: true,
   },
   texto: {
@@ -23,8 +25,6 @@ const comentarioSchema = new Schema({
     required: true,
     default: 'libro'
   }
-
 });
-
 
 export default model('Comentario', comentarioSchema);
