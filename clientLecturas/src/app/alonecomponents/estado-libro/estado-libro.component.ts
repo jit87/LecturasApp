@@ -99,7 +99,7 @@ export class EstadoLibroComponent {
       averageRating: 0,
       ratingsCount: 0,
       contentVersion: "",
-      imagen: this.libro?.imagen || this.libro.info?.imageLinks.thumbnail,
+      imagen: this.libro?.imagen || this.libro.info?.imageLinks?.thumbnail,
       lengua: "",
       previewLink: "",
       estado: estado === 'Leído' ? 'Leído' : 'Pendiente',
