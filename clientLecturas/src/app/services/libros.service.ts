@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable, of, shareReplay } from 'rxjs';
+import { catchError, map, Observable, of, shareReplay, tap } from 'rxjs';
 import { environment } from '../environments/environment'
 import { AbstractLibrosService } from '../abstracts/AbstractLibrosService';
 
@@ -21,6 +21,8 @@ export class LibrosService extends AbstractLibrosService {
 
   private librosNuevos$?: Observable<any>;
   private recomendacionesCache = new Map<string, Observable<any>>();
+  private readonly CACHE_KEY = 'librosNuevos_cache';
+  private readonly CACHE_TIME = 60 * 60 * 1000;
 
 
   constructor(private http: HttpClient) { super(); }
@@ -33,6 +35,14 @@ export class LibrosService extends AbstractLibrosService {
 
   //Devuelve novedades de libros 
   getLibrosNuevos(): Observable<any> {
+    //Comprobamos si hay caché válida en localStorage
+    const cacheBruto = localStorage.getItem(this.CACHE_KEY);
+    if (cacheBruto) {
+      const cache = JSON.parse(cacheBruto);
+      if (Date.now() - cache.timestamp < this.CACHE_TIME) {
+        return of(cache.data);
+      }
+    }
     if (!this.librosNuevos$) {
       this.librosNuevos$ = this.http.get(`${this.url}subject:fiction&printType=books&orderBy=newest&maxResults=${this.max}&key=${this.Google_API_KEY}`).pipe(
         map((res: any) => {
@@ -40,6 +50,13 @@ export class LibrosService extends AbstractLibrosService {
           const items = res.items?.slice(0, this.max) || [];
           //Sustituimos items por el vector de libros limitado por max 
           return { ...res, items };
+        }),
+        tap((data) => {
+          // Guardamos en localStorage con timestamp
+          localStorage.setItem(this.CACHE_KEY, JSON.stringify({
+            timestamp: Date.now(),
+            data
+          }));
         }),
         shareReplay(1),
         catchError(error => {
@@ -62,12 +79,10 @@ export class LibrosService extends AbstractLibrosService {
     if (!tematica || tematica === 'Sin categoría') {
       return of({ items: [] });
     }
-
     const key = tematica.toLowerCase();
     if (this.recomendacionesCache.has(key)) {
       return this.recomendacionesCache.get(key)!;
     }
-
     const req$ = this.http.get(
       `${this.url}subject:${tematica}&key=${this.Google_API_KEY}&maxResults=${this.maxRecomendaciones}&orderBy=newest`
     ).pipe(
@@ -78,15 +93,14 @@ export class LibrosService extends AbstractLibrosService {
         return of({ items: [] });
       })
     );
-
     this.recomendacionesCache.set(key, req$);
-
     return req$;
   }
 
 
   resetCache() {
     this.librosNuevos$ = undefined;
+    localStorage.removeItem(this.CACHE_KEY);
   }
 
 
