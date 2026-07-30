@@ -93,18 +93,18 @@ export class EstadoLibroComponent {
       titulo: this.libro.titulo || this.libro.info?.title || "Sin título",
       autores: this.libro.autores || this.libro.info?.authors[0],
       editor: this.libro.editor || this.libro.info?.publisher,
-      fechaPublicacion: this.libro.fechaPublicacion || this.libro.info?.publisherDate,
-      descripcion: this.libro.descripcion || this.libro.info?.description,
-      pageCount: this.libro.pageCount || this.libro.info?.pageCount.toString(),
+      fechaPublicacion: this.libro?.fechaPublicacion || this.libro.info?.publisherDate,
+      descripcion: this.libro?.descripcion || this.libro.info?.description,
+      pageCount: this.libro?.pageCount || this.libro.info?.pageCount.toString(),
       averageRating: 0,
       ratingsCount: 0,
       contentVersion: "",
-      imagen: this.libro.imagen || this.libro.info?.imageLinks.thumbnail,
+      imagen: this.libro?.imagen || this.libro.info?.imageLinks.thumbnail,
       lengua: "",
       previewLink: "",
       estado: estado === 'Leído' ? 'Leído' : 'Pendiente',
-      categorias: this.libro.categorias || this.libro.info?.categories?.join(', ') || "Sin categoría",
-      APIid: this.libro.APIid || this.libro.id
+      categorias: this.libro?.categorias || this.libro.info?.categories?.join(', ') || "Sin categoría",
+      APIid: this.libro?.APIid || this.libro?.id
     };
 
     this.toastr.success('Ha sido añadido!', 'Añadido!');
