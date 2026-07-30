@@ -70,7 +70,6 @@ export class SocialComponent {
     private _authService: AbstractAuthService,
     private toastr: ToastrService
   ) {
-    this.getActividad();
     setTimeout(() => {
       this.cargados = true;
     }, 1000);
