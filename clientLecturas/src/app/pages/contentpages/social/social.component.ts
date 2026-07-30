@@ -10,6 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 interface ComentarioVista extends ComentarioModel {
   nombreUsuario: string;
   imagenUsuario: string;
+  _id: string;
 }
 
 interface PostLibro {
@@ -218,6 +219,7 @@ export class SocialComponent {
         //luego se mostrará de manera reactiva el comentario con la imagen y nombre correspondientes
         const comentarioAmpliado: ComentarioVista = {
           ...nuevoComentarioBase,
+          _id: resp.id,
           nombreUsuario: this.nombreUsuario,
           imagenUsuario: this.imagenUsuario
         };
