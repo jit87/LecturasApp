@@ -1,20 +1,8 @@
 import { expect } from 'chai';
 import request from 'supertest';
 import app from '../app.js';
-import mongoose from 'mongoose';
-import dotenv from 'dotenv';
 
-dotenv.config();
 let token = '';
-
-before(async () => {
-    await mongoose.connect(process.env.MONGO_URI_TEST || 'mongodb://localhost:27017/lecturasapp_test');
-});
-
-after(async () => {
-    await mongoose.connection.dropDatabase();
-    await mongoose.connection.close();
-});
 
 describe('Auth - Registro', () => {
     it('debe registrar un usuario nuevo', async () => {

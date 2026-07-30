@@ -2,7 +2,8 @@ import { Schema, model } from 'mongoose';
 
 const libroSchema = new Schema({
   _idUsuario: {
-    type: String,
+    type: Schema.Types.ObjectId,
+    ref: 'Usuario',
     required: true,
   },
   titulo: {
@@ -74,7 +75,7 @@ const libroSchema = new Schema({
     required: false,
   }
 }, {
-  timestamps: true, 
+  timestamps: true,
 });
 
 export default model('Libro', libroSchema);
