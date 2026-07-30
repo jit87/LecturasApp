@@ -2,11 +2,13 @@ import mongoose from 'mongoose';
 
 const MensajeSchema = new mongoose.Schema({
     _idChat: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Chat',
         required: true
     },
     _idUsuario: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Usuario',
         required: true
     },
     nombre: {
