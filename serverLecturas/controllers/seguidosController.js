@@ -12,9 +12,8 @@ export async function agregarSeguido(req, res) {
         }
         //Guarda el id del seguido en el seguidor
         usuario.seguidos.push(idSeguido);
-        await usuario.save();
-        //Guarda el id del seguidor en el seguido
-        await agregarSeguidor(req._idUsuario, idSeguido);
+        //Guarda el seguidor en el usuario logueado y el seguido en el usuario seguido a la vez
+        await Promise.all([usuario.save(), agregarSeguidor(req._idUsuario, idSeguido)]);
         res.json(usuario);
     } catch (err) {
         res.status(500).send(err);
@@ -78,10 +77,9 @@ export async function eliminarSeguido(req, res) {
         //Busca la posición del seguido
         const posicion = usuario.seguidos.indexOf(idSeguido);
         usuario.seguidos.splice(posicion, 1);
-        await usuario.save();
 
-        //Eliminar el seguidor en el seguido 
-        await eliminarSeguidor(req._idUsuario, idSeguido);
+        //Elimina el seguido en el usuario logueado y el seguidor en el usuario seguido a la vez
+        await Promise.all([usuario.save(), eliminarSeguidor(req._idUsuario, idSeguido)]);
         res.json({ message: 'Seguido eliminado' });
     } catch (err) {
         console.error(err);
