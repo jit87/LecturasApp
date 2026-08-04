@@ -23,21 +23,16 @@ h2 {
     color: var(--text-gris-oscuro);
 }
 
+.navbar-container {
+    background-color: aquamarine;
+    height: 56px;
+}
+
 
 .container {
     margin-bottom: 5%;
 }
 
-
-.navbar-container {
-    background-color: var(--background-aguamarina);
-}
-
-.navbar {
-    background-color: var(--background-aguamarina) !important;
-    margin-left: 16%;
-    margin-right: 16%;
-}
 
 .footer {
     position: absolute;

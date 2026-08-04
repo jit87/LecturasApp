@@ -1,33 +1,106 @@
+.navbar-fija {
+    position: fixed;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    height: 56px;
+    background-color: aquamarine;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.navbar-izquierda {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
 .logo {
-    font-family: Comic Sans MS;
+    font-family: 'Comic Sans MS', cursive;
     font-weight: bold;
+    font-size: 1.2rem;
+    text-decoration: none;
+    margin-right: 8px;
 }
 
-.nav-item a {
+.nav-link {
     font-weight: 500;
-    color: #032518 !important;
+    text-decoration: none;
+    font-size: 0.95rem;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
 }
 
-.nav-item a:hover:not(.no-hover) {
-    transform: scale(1.1, 1.1);
-    transition: all 300ms;
+.nav-link:hover {
+    background-color: rgba(0, 0, 0, 0.08);
 }
 
-.router-link-active:not(.no-hover) {
-    font-weight: 700 !important;
-    color: black !important;
-    transition: border-color 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
+.activo {
+    font-weight: 700;
+    border-bottom: 2px solid #382110;
 }
 
+.navbar-centro {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    max-width: 480px;
+    margin: 0 24px;
+}
 
-@keyframes animacionBorder {
-    from {
-        border-color: aquamarine;
-        box-shadow: 0 0 10px rgba(223, 214, 193, 0.5);
-    }
+.buscador-input {
+    flex: 1;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px 0 0 4px;
+    outline: none;
+    font-size: 0.9rem;
+}
 
-    to {
-        border-color: black;
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-    }
+.buscador-input:focus {
+    border-color: #382110;
+}
+
+.buscador-btn {
+    padding: 6px 16px;
+    color: black;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    font-size: 0.9rem;
+    border: 1px solid black;
+    background-color: transparent;
+}
+
+.buscador-btn:hover {
+    background-color: black;
+    color: white;
+}
+
+.navbar-derecha {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.img-perfil {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    object-fit: cover;
+}
+
+.icono-logout {
+    cursor: pointer;
+    color: #382110;
+    font-size: 1.1rem;
+}
+
+.icono-logout:hover {
+    color: #e74c3c;
 }

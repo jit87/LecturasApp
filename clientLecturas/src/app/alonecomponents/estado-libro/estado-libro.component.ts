@@ -48,12 +48,9 @@ export class EstadoLibroComponent {
 
   //Conviene usar OnInit para obtener el valor de @Input
   ngOnInit() {
-    console.log("Datos del libro en EstadoLibroComponent:", this.libro);
-    if (this.libro && this.libro.id) {
-      this.esGuardado(this.libro.id);
-    }
-    if (this.libro && this.libro.APIid) {
-      this.esGuardado(this.libro.APIid);
+    const apiId = this.libro?.APIid || this.libro?.id;
+    if (apiId) {
+      this.esGuardado(apiId);
     }
   }
 

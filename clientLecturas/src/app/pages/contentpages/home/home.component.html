@@ -15,7 +15,7 @@
                 <div class="caja-libro-home card mb-3" style="max-width: 540px;">
                     <div class="row g-0 align-items-stretch" style="height: 100%;">
                         <div class="caja-imagen-libro col-md-4" style="padding: 20px;">
-                            <img src="{{libro.info.imageLinks?.smallThumbnail || 'assets/no-cover.png'}}"
+                            <img src="{{libro.info.imageLinks?.smallThumbnail || 'https://placehold.co/128x192?text=Sin+portada'}}"
                                 class="img-fluid rounded-start h-100" alt="{{ libro.info?.title }}">
                         </div>
                         <div class="caja-descripcion-libro col-md-8">
@@ -28,7 +28,7 @@
                                         </a>
                                     </h5>
                                     <p class="card-text mb-1">
-                                        <small style="font-size: small;font-weight: 600;">De {{ libro.info?.authors[0]
+                                        <small style="font-size: small;font-weight: 600;">De {{ libro.info?.authors?.[0]
                                             }}
                                         </small>
                                     </p>
