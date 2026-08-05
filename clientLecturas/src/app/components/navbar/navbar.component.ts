@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { AbstractAuthService } from '../../abstracts/AbstractAuthService';
+import { createIcons, icons } from 'lucide';
 
 @Component({
   selector: 'app-navbar',
@@ -35,6 +36,10 @@ export class NavbarComponent {
     )
   }
 
+  //Para dar estilo a los iconos
+  ngAfterViewInit() {
+    createIcons({ icons });
+  }
 
   cargarImagen() {
     this.email = localStorage.getItem("email");

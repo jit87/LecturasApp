@@ -347,9 +347,13 @@ input {
 
 
 
-
-
 /* Responsive */
+
+@media (max-width: 768px) {
+    body {
+        padding-bottom: 70px;
+    }
+}
 
 @media only screen and (max-width: 991px) {
 

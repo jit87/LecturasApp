@@ -1,65 +1,31 @@
-<!--<div class="navbar-container">
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-            <button *ngIf="autenticado" class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item no-hover">
-                        <a class="nav-link no-hover logo" [routerLink]="['/home']">
-                            LecturasApp
-                        </a>
-                    </li>
-                    <li class="nav-item pulse" *ngIf="autenticado">
-                        <a class="nav-link" [routerLink]="['/home']" routerLinkActive="router-link-active">Home</a>
-                    </li>
-                    <li class="nav-item" *ngIf="autenticado">
-                        <a class="nav-link" [routerLink]="['/social']" routerLinkActive="router-link-active">Social</a>
-                    </li>
-                    <li class="nav-item" *ngIf="autenticado">
-                        <a class="nav-link" [routerLink]="['/libros']" routerLinkActive="router-link-active">Mis
-                            libros</a>
-                    </li>
-                    <li class="nav-item" *ngIf="autenticado">
-                        <a class="nav-link" [routerLink]="['/perfil']"
-                            routerLinkActive="router-link-active">Configuración</a>
-                    </li>
-                    <img class="img-nav nav-link" src="{{ ImagenPerfil }}" routerLinkActive="perfil-active"
-                        [routerLink]="['/perfilpublico', this.idLogueado]"
-                        style="width: 45px;height: 45px;border-radius: 50px;cursor: pointer;" *ngIf="autenticado">
-                </ul>
-                <form class="d-flex" role="search" *ngIf="autenticado">
-                    <input #termino class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Buscar">
-                    <button class="btn btn-outline-primary" type="button"
-                        (click)="getInfoLibro(termino.value)">Buscar</button>
-                </form>
-                <br>
-                <i class="fa-solid fa-power-off" style="margin-left: 2%;cursor: pointer;" [routerLink]="['/login']"
-                    *ngIf="autenticado" (click)="logout()"></i>
-                <br>
-            </div>
-        </div>
-    </nav>
-</div>-->
 <div class="navbar-container">
     <nav class="navbar-fija" *ngIf="autenticado">
         <div class="navbar-izquierda">
             <a class="logo" [routerLink]="['/home']">LecturasApp</a>
-            <a class="nav-link" [routerLink]="['/home']" routerLinkActive="activo">Home</a>
-            <a class="nav-link" [routerLink]="['/social']" routerLinkActive="activo">Social</a>
-            <a class="nav-link" [routerLink]="['/libros']" routerLinkActive="activo">Mis libros</a>
-            <a class="nav-link" [routerLink]="['/perfil']" routerLinkActive="activo">Configuración</a>
+            <div class="links-desktop">
+                <a class="nav-link" [routerLink]="['/home']" routerLinkActive="activo">Home</a>
+                <a class="nav-link" [routerLink]="['/social']" routerLinkActive="activo">Social</a>
+                <a class="nav-link" [routerLink]="['/libros']" routerLinkActive="activo">Mis libros</a>
+                <a class="nav-link" [routerLink]="['/perfil']" routerLinkActive="activo">Configuración</a>
+            </div>
         </div>
         <div class="navbar-centro">
             <input #termino class="buscador-input" type="search" placeholder="Buscar libros...">
             <button class="buscador-btn" (click)="getInfoLibro(termino.value)">Buscar</button>
         </div>
         <div class="navbar-derecha">
-            <img class="img-perfil" src="{{ ImagenPerfil }}" [routerLink]="['/perfilpublico', idLogueado]">
+            <img height="30" width="30" class="img-perfil" [src]="ImagenPerfil"
+                [routerLink]="['/perfilpublico', idLogueado]">
             <i class="fa-solid fa-power-off icono-logout" (click)="logout()" [routerLink]="['/login']"></i>
         </div>
     </nav>
 </div>
+
+<!-- SOLO MÓVIL -->
+<nav class="movil-nav" *ngIf="autenticado">
+    <a [routerLink]="['/home']" routerLinkActive="activo"><i data-lucide="home"></i></a>
+    <a [routerLink]="['/social']" routerLinkActive="activo"><i data-lucide="users"></i></a>
+    <a [routerLink]="['/libros']" routerLinkActive="activo"><i data-lucide="book-open"></i></a>
+    <a [routerLink]="['/perfil']" routerLinkActive="activo"><i data-lucide="settings"></i></a>
+    <a [routerLink]="['/perfilpublico', idLogueado]"><img [src]="ImagenPerfil" height="30" width="30"></a>
+</nav>
