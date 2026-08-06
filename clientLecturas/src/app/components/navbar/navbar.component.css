@@ -168,7 +168,7 @@ a {
         align-items: center;
         background: rgba(129, 241, 204, 0.829);
         border-top: 1px solid #ddd;
-        z-index: 1000;
+        z-index: 9999;
         border-radius: 20px;
     }
 
