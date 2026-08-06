@@ -9,28 +9,22 @@
     --text-blanco: #ffffff;
     --text-gris-oscuro: rgb(26, 27, 27);
     --text-negro: black;
+    --color-azul-claro: #2734f181;
 }
 
 
+/*Estilos generales*/
 body {
     position: relative;
     min-height: 100vh;
     background-color: rgb(236, 238, 239);
+    padding-top: 56px;
+    padding-bottom: 90px;
 }
 
 h2 {
     font-family: "Roboto", serif;
     color: var(--text-gris-oscuro);
-}
-
-.navbar-container {
-    background-color: aquamarine;
-    height: 56px;
-}
-
-
-.container {
-    margin-bottom: 5%;
 }
 
 
@@ -40,9 +34,9 @@ h2 {
     width: 100%;
     height: 2.5rem;
     z-index: -2 !important;
+    flex-wrap: wrap;
+    margin-top: 60px;
 }
-
-
 
 .recomendaciones {
     border-radius: 5px;
@@ -57,6 +51,7 @@ h2 {
 
 .recomendaciones h2 {
     color: var(--text-gris-oscuro);
+    ;
 }
 
 .tematica {
@@ -181,7 +176,6 @@ form {
     -webkit-box-shadow: 3px 3px 29px -12px var(--background-aguamarina);
     -moz-box-shadow: 3px 3px 29px -12px var(--background-aguamarina);
     box-shadow: 3px 3px 29px -12px var(--background-aguamarina);
-
     transition: 0.5s;
     border-color: var(--background-aguamarina);
 }
@@ -345,6 +339,23 @@ input {
     overflow: hidden;
 }
 
+/*Hover de botones e iconos*/
+
+.btn-volver:hover,
+.btn-outline-primary:hover,
+.boton-recargar:hover {
+    background-color: var(--color-azul-claro);
+}
+
+.fa-pen-to-square:hover,
+.fa-trash:hover {
+    color: var(--color-azul-claro);
+}
+
+/*Spinner*/
+.spinner-border {
+    color: var(--color-azul-claro);
+}
 
 
 /* Responsive */
@@ -352,7 +363,9 @@ input {
 @media (max-width: 768px) {
     body {
         padding-bottom: 70px;
+        padding-top: 112px;
     }
+
 }
 
 @media only screen and (max-width: 991px) {

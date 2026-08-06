@@ -7,14 +7,16 @@
     top: 0;
     width: 100%;
     z-index: 100;
-    position: relative;
+    background-color: aquamarine;
+    height: 56px;
 }
 
 .navbar-fija {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1200px;
+    max-width: 1265px;
+    width: 100%;
 }
 
 
@@ -43,14 +45,14 @@
 
 .buscador-input {
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 5px 0px 0px 5px;
     padding: 5px;
     width: 100%;
 }
 
 .buscador-btn {
     border: 1px solid black;
-    border-radius: 5px;
+    border-radius: 0px 5px 5px 0px;
     padding: 5px;
     display: flex;
     background-color: transparent;
@@ -67,18 +69,89 @@
     align-items: center;
 }
 
-.logo {
+.logo-text {
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: -0.5px;
+    color: #111;
+}
+
+.logo-text span {
+    font-weight: 400;
+    opacity: 0.7;
+}
+
+a {
     text-decoration: none;
 }
 
-a.logo {
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    font-weight: 400;
-    line-height: 1.6;
+.buscador-btn:hover {
+    background-color: var(--color-azul-claro);
+    border-color: white;
+    color: white;
+    transition: 200ms;
 }
+
+.nav-link:hover {
+    border-bottom: 2px solid var(--color-azul-claro);
+}
+
+.activo {
+    border-bottom: 2px solid var(--color-azul-claro);
+}
+
+.icono-logout:hover {
+    color: var(--color-azul-claro);
+}
+
+
 
 /* Responsive */
 @media (max-width: 768px) {
+
+    .navbar-container {
+        height: 112px;
+    }
+
+    .navbar-fija {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 0 10px;
+    }
+
+    .navbar-izquierda {
+        flex: 1;
+    }
+
+    .logo {
+        margin-top: 15px;
+        margin-left: 15px;
+    }
+
+    .navbar-derecha {
+        display: flex;
+        gap: 10px;
+    }
+
+    .icono-logout {
+        margin-top: 15px;
+        margin-right: 15px;
+    }
+
+    .navbar-centro {
+        width: 100%;
+        order: 3;
+        margin-left: 0;
+        margin-top: -5px;
+        padding: 18px 15px;
+    }
+
+
+    .buscador-input {
+        flex: 1;
+        min-width: 0;
+    }
 
     .buscador-input {
         width: 100%;
@@ -99,42 +172,17 @@ a.logo {
         border-radius: 20px;
     }
 
-    .navbar-container {
-        position: fixed;
-    }
-
-    .navbar-fija {
-        display: flex;
-        flex-direction: row;
-        padding: 10px;
-        justify-content: space-between;
-        align-items: center;
-        gap: 20px;
-        position: fixed;
-    }
-
 
     .links-desktop {
         display: none;
     }
 
 
-    .navbar-centro {
-        width: 100%;
-        flex: 1;
-    }
-
-    .navbar-derecha {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-
     .img-perfil {
         display: none;
     }
 
-    a i {
+    .btn-movil-nav {
         color: black;
     }
 

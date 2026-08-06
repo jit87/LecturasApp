@@ -1,7 +1,7 @@
 <div class="navbar-container">
     <nav class="navbar-fija" *ngIf="autenticado">
         <div class="navbar-izquierda">
-            <a class="logo" [routerLink]="['/home']">LecturasApp</a>
+            <a class="logo" [routerLink]="['/home']"><a class="logo-text">Lecturas<span>App</span></a></a>
             <div class="links-desktop">
                 <a class="nav-link" [routerLink]="['/home']" routerLinkActive="activo">Home</a>
                 <a class="nav-link" [routerLink]="['/social']" routerLinkActive="activo">Social</a>
@@ -23,9 +23,10 @@
 
 <!-- SOLO MÓVIL -->
 <nav class="movil-nav" *ngIf="autenticado">
-    <a [routerLink]="['/home']" routerLinkActive="activo"><i data-lucide="home"></i></a>
-    <a [routerLink]="['/social']" routerLinkActive="activo"><i data-lucide="users"></i></a>
-    <a [routerLink]="['/libros']" routerLinkActive="activo"><i data-lucide="book-open"></i></a>
-    <a [routerLink]="['/perfil']" routerLinkActive="activo"><i data-lucide="settings"></i></a>
-    <a [routerLink]="['/perfilpublico', idLogueado]"><img [src]="ImagenPerfil" height="30" width="30"></a>
+    <a class="btn-movil-nav" [routerLink]="['/home']" routerLinkActive="activo"><i data-lucide="home"></i></a>
+    <a class="btn-movil-nav" [routerLink]="['/social']" routerLinkActive="activo"><i data-lucide="users"></i></a>
+    <a class="btn-movil-nav" [routerLink]="['/libros']" routerLinkActive="activo"><i data-lucide="book-open"></i></a>
+    <a class="btn-movil-nav" [routerLink]="['/perfil']" routerLinkActive="activo"><i data-lucide="settings"></i></a>
+    <a class="btn-movil-nav" [routerLink]="['/perfilpublico', idLogueado]"><img [src]="ImagenPerfil" height="30"
+            width="30"></a>
 </nav>

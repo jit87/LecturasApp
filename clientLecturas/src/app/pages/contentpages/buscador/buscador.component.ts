@@ -58,6 +58,9 @@ export class BuscadorComponent {
 
 
   getLibros(termino: string) {
+    if (termino == '') {
+      this.regresar();
+    }
     this.cargando = true;
     //Limpiamos la búsqueda anterior antes de realizar nueva búsqueda
     this.libros = [];
