@@ -1,19 +1,19 @@
 <div class="navbar-container">
-    <nav class="navbar-fija" *ngIf="autenticado">
+    <nav class="navbar-fija">
         <div class="navbar-izquierda">
             <a class="logo" [routerLink]="['/home']"><a class="logo-text">Lecturas<span>App</span></a></a>
-            <div class="links-desktop">
+            <div class="links-desktop" *ngIf="autenticado">
                 <a class="nav-link" [routerLink]="['/home']" routerLinkActive="activo">Home</a>
                 <a class="nav-link" [routerLink]="['/social']" routerLinkActive="activo">Social</a>
                 <a class="nav-link" [routerLink]="['/libros']" routerLinkActive="activo">Mis libros</a>
                 <a class="nav-link" [routerLink]="['/perfil']" routerLinkActive="activo">Configuración</a>
             </div>
         </div>
-        <div class="navbar-centro">
+        <div class="navbar-centro" *ngIf="autenticado">
             <input #termino class="buscador-input" type="search" placeholder="Buscar libros...">
             <button class="buscador-btn" (click)="getInfoLibro(termino.value)">Buscar</button>
         </div>
-        <div class="navbar-derecha">
+        <div class="navbar-derecha" *ngIf="autenticado">
             <img height="30" width="30" class="img-perfil" [src]="ImagenPerfil"
                 [routerLink]="['/perfilpublico', idLogueado]">
             <i class="fa-solid fa-power-off icono-logout" (click)="logout()" [routerLink]="['/login']"></i>
