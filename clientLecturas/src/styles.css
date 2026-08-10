@@ -239,6 +239,7 @@ form {
     color: grey;
 }
 
+
 /*Usado en los textos de las tarjetas de los libros*/
 .solo-3-lineas {
     max-height: 4.5em;
@@ -266,6 +267,10 @@ form {
 .caja-libro-home {
     position: relative;
     min-height: 220px;
+}
+
+.caja-imagen-libro {
+    padding: 20px;
 }
 
 .titulo-libro-home {
@@ -303,9 +308,6 @@ form {
     box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
 }
 
-.caja-descripcion-libro-recomendaciones {
-    margin-left: -8%;
-}
 
 input {
     box-sizing: border-box;
@@ -316,12 +318,23 @@ input {
 }
 
 
+
 /*Imagenes de libros de home y buscador*/
 .h-100 {
     border-radius: 8px;
     object-fit: cover;
     width: 100px !important;
     height: 150px !important;
+}
+
+.caja-imagen-libro-recomendaciones {
+    width: 20%;
+    margin-left: 25px;
+    margin-top: 10px;
+}
+
+.caja-descripcion-libro-recomendaciones {
+    width: 70%;
 }
 
 
@@ -374,24 +387,41 @@ input {
 
 @media only screen and (max-width: 991px) {
 
-    .form-login-registro {
-        width: 50% !important;
+    .container {
+        padding-left: 8px;
+        padding-right: 8px;
     }
 
-    /*Div de los libros de la home y de buscador*/
-    .caja-descripcion-libro {
-        width: 50%;
-        margin-left: -18%;
-    }
-
-    .caja-descripcion-libro-recomendaciones {
-        width: 50%;
-        margin-left: -15%;
+    .registro-wrapper {
+        max-width: 100%;
+        padding: 0 16px;
     }
 
     .caja-imagen-libro {
-        padding: 20px !important;
-        width: 50%;
+        width: 35%;
     }
 
+    .caja-descripcion-libro {
+        width: 65%;
+        margin-left: 0;
+    }
+
+    .caja-imagen-libro-recomendaciones {
+        width: 30%;
+        margin-left: 25px;
+        margin-top: 10px;
+    }
+
+    .caja-descripcion-libro-recomendaciones {
+        width: 60%;
+        margin-left: 5px;
+    }
+
+    .h-100 {
+        object-fit: cover;
+    }
+
+    .caja-libro-home .row {
+        flex-wrap: nowrap;
+    }
 }
