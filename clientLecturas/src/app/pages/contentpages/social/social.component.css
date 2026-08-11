@@ -1,9 +1,17 @@
+.seccion-social {
+    margin-top: 20px;
+}
+
 .nombre:hover {
     text-decoration: underline;
 }
 
 .titulo:hover {
     text-decoration: underline;
+}
+
+.seccion-seguidores {
+    margin-top: 40px; 
 }
 
 .infoSeguidores {
@@ -14,7 +22,68 @@
     font-weight: 600;
 }
 
-
 .caja-spinner-muro {
     text-align: center;
+}
+
+.lineas-titulo {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.lineas-texto {
+     display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.lineas-autor {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden; 
+}
+
+.img-post-libro {
+        width: 50% !important;
+        height: 170px !important;
+}
+
+
+/* Móviles */
+@media only screen and (max-width: 991px) {
+
+    .img-post-libro {
+        width: 50% !important;
+        height: 140px !important;
+    }
+
+    .seccion-actividad {
+        margin-top: 8%;
+    }
+
+    .lineas-titulo {
+        -webkit-line-clamp: 1;
+    }
+
+    .lineas-texto {
+        -webkit-line-clamp: 2;
+    }
+
+}
+
+/* Desktop */
+@media only screen and (min-width: 992px) {
+
+     .seccion-actividad {
+        margin-top: 0;
+    }
+
+    .col-md-3, .seccion-actividad {
+        padding-top: 24px;
+    }
+
 }

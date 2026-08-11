@@ -78,6 +78,7 @@ form {
 }
 
 
+
 /*Boton X de los formularios de perfil y editar-libro*/
 .cerrar-btn {
     background: none;
@@ -266,7 +267,7 @@ form {
 
 .caja-libro-home {
     position: relative;
-    min-height: 220px;
+    min-height: -webkit-fill-available;
 }
 
 .caja-imagen-libro {
