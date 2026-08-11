@@ -104,6 +104,9 @@ a {
     color: var(--color-azul-claro);
 }
 
+.img-perfil {
+    cursor: pointer; 
+}
 
 
 /* Responsive */

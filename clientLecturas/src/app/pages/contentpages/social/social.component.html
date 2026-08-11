@@ -1,8 +1,8 @@
 <div class="container mt-4 animate__animated animate__fadeIn">
-    <div class="row">
+    <div class="row seccion-social">
         <app-chat class="col-md-3" [usuarioID]="idLogueado"></app-chat>
-        <div class="col-md-6" style="margin-top: 2%;">
-            <h2 class="text-center">Actividad</h2>
+        <div class="col-md-6 seccion-actividad">
+            <h2 class="text-center titulo-social">Actividad</h2>
             <br>
             <div class="caja-spinner-muro" role="status" *ngIf="cargados==false">
                 <div class="spinner-border m-5 spinner-muro-social" role="status">
@@ -20,14 +20,14 @@
                         <br>
                         <hr />
                         <div class="d-flex" style="padding: 2%;">
-                            <img [src]="post.imagen || 'default.png'" class="rounded me-3" width="124" height="164">
+                            <img [src]="post.imagen || 'default.png'" class="rounded me-3 img-post-libro">
                             <div>
-                                <h5 class="mb-1" [routerLink]="['/info', post.APIid]"
-                                    routerLinkActive="router-link-active" style="cursor: pointer;" class="titulo">{{
+                                <h5 class="mb-1 lineas-titulo" [routerLink]="['/info', post.APIid]"
+                                    routerLinkActive="router-link-active" style="cursor: pointer;">{{
                                     post.titulo }}
                                 </h5>
-                                <p class="text-muted mb-1">De {{ post.autores }}</p>
-                                <p class="solo-3-lineas mb-2">{{ post.descripcion }}</p>
+                                <p class="text-muted mb-1 lineas-autor">De {{ post.autores }}</p>
+                                <p class="lineas-texto mb-2">{{ post.descripcion }}</p>
                                 <app-estado-libro [libro]="post"></app-estado-libro>
                             </div>
                         </div>
@@ -72,11 +72,11 @@
                         <hr />
                         <div class="d-flex" style="padding: 2%;">
                             <div>
-                                <h5 class="mb-1" [routerLink]="['/review', post._id,post._idUsuario]"
-                                    routerLinkActive="router-link-active" style="cursor: pointer;" class="titulo">{{
+                                <h5 class="mb-1 lineas-titulo" [routerLink]="['/review', post._id,post._idUsuario]"
+                                    routerLinkActive="router-link-active" style="cursor: pointer;">{{
                                     post.titulo }}
                                 </h5>
-                                <p class="solo-3-lineas mb-2">{{ post.resena }}</p>
+                                <p class="solo-2-lineas mb-2">{{ post.resena }}</p>
                             </div>
                         </div>
                         <div class="mt-2 text-muted caja-comentarios"
@@ -114,9 +114,9 @@
 
         </div>
 
-        <div class="col-md-3" style="margin-top: 2.5%;">
+        <div class="col-md-3 seccion-seguidores">
             <h5>Seguidos</h5>
-            <ul class="list-group mt-5">
+            <ul class="list-group">
                 <li *ngFor="let seguido of seguidos" class="s-social list-group-item d-flex align-items-center"
                     [routerLink]="['/perfilpublico', seguido._id]">
                     <img [src]="seguido.imagen || 'default.png'" class="rounded-circle me-2" width="40" height="40">
@@ -128,7 +128,7 @@
             <br>
             <br>
             <h5>Seguidores</h5>
-            <ul class="list-group mt-5">
+            <ul class="list-group">
                 <li *ngFor="let seguidor of seguidores" class="s-social list-group-item d-flex align-items-center"
                     [routerLink]="['/perfilpublico', seguidor._id]">
                     <img [src]="seguidor.imagen || 'default.png'" class="rounded-circle me-2" width="40" height="40">
