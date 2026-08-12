@@ -68,7 +68,11 @@
                         <td>{{ libro.estado }}</td>
                         <td>{{ libro.coleccion }}</td>
                         <td class="caja-resena">
-                            <p class="texto-resena">{{ libro.resena }}</p>
+                            <div>
+                                <p class="texto-resena" [routerLink]="['/review', libro._id, usuarioID]"
+                                    routerLinkActive="router-link-active" style="cursor: pointer;">{{ libro.resena }}
+                                </p>
+                            </div>
                         </td>
                         <td></td>
                         <td>

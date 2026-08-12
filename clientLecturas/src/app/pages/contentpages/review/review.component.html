@@ -1,33 +1,27 @@
-
-<div class="container" class="home py-5 animate__animated animate__fadeIn">
+<div class="container home py-5 animate__animated animate__fadeIn">
     <button class="btn-volver btn btn-outline-secondary mt-3" (click)="regresar()">Volver</button>
     <p *ngIf="disponibles1==false && disponibles2 == false" class="error">No hay información disponible</p>
+
     <div class="mt-4" *ngIf="cargado==false" style="text-align: center;">
         <div class="spinner-border m-5" role="status">
             <span class="visually-hidden">Cargando...</span>
         </div>
     </div>
-    <br>
-    <br>
-    <div>
-        <div class="libro.titulo">
-            <h2>Reseña de: {{ libro.titulo }}</h2>
-            <span><img [src]="imagen || 'default.png'" class="rounded-circle me-2" width="40" height="40"> <span style="font-size: x-large;">{{ usuario }}</span></span>
+    <div class="review-wrapper mt-4">
+        <div class="review-header">
+            <img src="{{libro.imagen}}" alt="Portada del libro" class="image">
+            <div class="review-info">
+                <h2 class="review-titulo">{{ libro.titulo }}</h2>
+                <p class="review-autor-libro">{{ libro.autores }}</p>
+            </div>
         </div>
-        <br>
-        <img src="{{libro.imagen}}" alt="Portada del libro" class="image">
-        <br>
-        <br>
-        <!-- <div class="publisher"><strong>Editorial:</strong> {{ libro.editor }}</div>
-        <div class="categories"><strong>Categorías:</strong> {{ libro.categorias }}</div> -->
-
-        <div class="description">
-            {{ libro.resena }}
+        <hr>
+        <div class="review-usuario mb-3">
+            <img [src]="imagen || 'default.png'" class="rounded-circle" width="35" height="35">
+            <span>{{ usuario }}</span>
         </div>
-        <!-- <div class="pages">
-            <strong>Número de páginas:</strong>
-            {{ libro.pageCount }}
-        </div> -->
-        <br>
-
+        <div class="description-review">
+            <p>{{ libro.resena }}</p>
+        </div>
     </div>
+</div>

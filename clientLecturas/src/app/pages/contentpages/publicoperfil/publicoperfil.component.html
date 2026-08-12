@@ -45,14 +45,14 @@
                                     <br>
                                     <hr />
                                     <div class="d-flex" style="padding: 2%;">
-                                        <img [src]="post.imagen || 'default.png'" class="rounded me-3" width="124"
-                                            height="164">
+                                        <img [src]="post.imagen || 'default.png'" class="rounded me-3 img-post-libro"
+                                            width="124" height="164">
                                         <div>
                                             <h5 class="mb-1" [routerLink]="['/info', post.APIid]"
                                                 routerLinkActive="router-link-active" style="cursor: pointer;"
                                                 class="titulo">{{ post.titulo }}</h5>
-                                            <p class="text-muted mb-1">De {{ post.autores }}</p>
-                                            <p class="solo-3-lineas mb-2">{{ post.descripcion }}</p>
+                                            <p class="text-muted mb-1 texto-autor">De {{ post.autores }}</p>
+                                            <p class="mb-2 texto-post">{{ post.descripcion }}</p>
                                             <app-estado-libro [libro]="post"></app-estado-libro>
                                         </div>
                                     </div>

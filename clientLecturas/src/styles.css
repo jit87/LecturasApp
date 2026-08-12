@@ -198,6 +198,18 @@ form {
     text-align: center;
 }
 
+.modo-oscuro .description-review p {
+    color: white !important;
+}
+
+.modo-oscuro .description-review p:first-child::first-letter {
+    color: white !important;
+}
+
+.modo-oscuro .review-usuario {
+    color: white !important;
+}
+
 /*  Fin modo oscuro */
 
 

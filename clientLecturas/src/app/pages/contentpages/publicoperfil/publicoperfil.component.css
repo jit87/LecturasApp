@@ -1,4 +1,3 @@
-
 .card {
     padding-left: 5%;
 }
@@ -8,13 +7,13 @@
 }
 
 
-.info-usuario{
+.info-usuario {
     /*position: relative;*/
-    margin-top:2%; 
+    margin-top: 2%;
     /* padding-left: 10%; */
 }
 
-.img-fluid{
+.img-fluid {
     height: revert-layer;
 }
 
@@ -32,4 +31,43 @@
 
 .titulo:hover {
     text-decoration: underline;
+}
+
+.texto-post {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-size: small;
+}
+
+/* Móviles */
+@media only screen and (max-width: 991px) {
+
+    .img-post-libro {
+        width: 45% !important;
+        height: 145px !important;
+    }
+
+    .titulo {
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .texto-autor {
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .texto-post {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
 }

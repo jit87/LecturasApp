@@ -1,0 +1,60 @@
+.review-wrapper {
+    max-width: 680px;
+    margin: 0 auto;
+}
+
+.review-header {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+    margin-bottom: 24px;
+}
+
+.image {
+    width: 130px;
+    min-width: 130px;
+    border-radius: 8px;
+    object-fit: cover;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.review-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.review-titulo {
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.review-autor-libro {
+    color: #666;
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+.review-usuario {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+    color: #555;
+}
+
+.description-review p {
+    line-height: 1.9;
+    font-size: 1rem;
+    color: #333;
+    text-align: justify;
+}
+
+.description-review p:first-child::first-letter {
+    float: left;
+    font-size: 3.5em;
+    line-height: 0.8;
+    margin-right: 0.1em;
+    font-family: serif;
+    color: #333;
+}

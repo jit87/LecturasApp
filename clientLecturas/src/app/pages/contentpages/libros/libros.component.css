@@ -39,6 +39,29 @@
     border-radius: 5px !important;
 }
 
+.texto-resena:hover {
+    text-decoration: underline;
+}
+
+.tooltip {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    background-color: #333;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+
+    white-space: nowrap;
+
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease;
+}
+
 
 
 @media (max-width: 768px) {
