@@ -43,6 +43,22 @@
     text-decoration: underline;
 }
 
+.infoLibros {
+    background-color: rgb(242, 234, 230);
+    border-radius: 5px;
+    border: 1px solid rebeccapurple;
+    text-align: center;
+    font-weight: 600;
+}
+
+.caja-info {
+    display: flex;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 500px;
+    box-sizing: border-box;
+}
+
 
 
 @media (max-width: 768px) {
@@ -59,6 +75,10 @@
     .table td {
         padding: 10px;
         word-wrap: break-word;
+    }
+
+    .caja-info {
+        display: block;
     }
 }
 

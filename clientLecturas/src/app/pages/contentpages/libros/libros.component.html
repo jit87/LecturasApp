@@ -37,8 +37,12 @@
         </div>
         <br>
         <div id="misLibros">
+            <div class="caja-info" style="margin-top: 20px; width: 100%; box-sizing: border-box;">
+                <p class="infoLibros" *ngIf="librosAMostrar.length == 0" style="padding: 5%;">
+                    No hay libros guardados
+                </p>
+            </div>
             <!-- Tabla para los libros guardados -->
-            <p class="error" *ngIf="!librosAMostrar">No hay libros guardados</p>
             <table class="table table-striped" *ngIf="librosAMostrar">
                 <thead>
                     <tr>
