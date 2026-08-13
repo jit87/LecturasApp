@@ -1,3 +1,73 @@
 .container {
     margin-top: 20px;
 }
+
+.libro-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.libro-header {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.libro-header .image {
+    width: 140px;
+    min-width: 130px;
+    border-radius: 8px;
+    object-fit: cover;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.nombre-autores {
+    margin-top: -10px;
+}
+
+
+h2,
+h4 {
+    font-size: 1.5rem;
+}
+
+.libro-info>div {
+    margin-bottom: 6px;
+}
+
+.description p {
+    line-height: 1.7;
+    margin-top: 8px;
+}
+
+
+@media only screen and (min-width: 992px) {
+    .datos-libro-movil {
+        display: none;
+    }
+}
+
+
+@media only screen and (max-width: 768px) {
+
+
+    .libro-header .image {
+        width: 120px;
+        min-width: 120px;
+        height: 175px;
+    }
+
+    .libro-header h2 {
+        font-size: 1.3rem;
+    }
+
+    .libro-header h2 {
+        -webkit-line-clamp: 1;
+        font-size: 1.3rem;
+    }
+
+    .datos-libro-desktop {
+        display: none;
+    }
+
+}

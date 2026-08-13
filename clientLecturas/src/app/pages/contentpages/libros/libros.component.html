@@ -70,7 +70,10 @@
                         <td class="caja-resena">
                             <div>
                                 <p class="texto-resena" [routerLink]="['/review', libro._id, usuarioID]"
-                                    routerLinkActive="router-link-active" style="cursor: pointer;">{{ libro.resena }}
+                                    routerLinkActive="router-link-active" style="cursor: pointer;">
+                                    <i *ngIf="libro.resena" class="fa-solid fa-link"
+                                        style="font-size: x-small; color: grey;"></i>
+                                    {{ libro.resena }}
                                 </p>
                             </div>
                         </td>

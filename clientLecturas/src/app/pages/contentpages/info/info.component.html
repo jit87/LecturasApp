@@ -1,35 +1,43 @@
-<div class="container"  class="home py-5 animate__animated animate__fadeIn">
+<div class="container home py-5 animate__animated animate__fadeIn">
     <button class="btn-volver btn btn-outline-secondary mt-3" (click)="regresar()">Volver</button>
     <p *ngIf="disponibles1==false && disponibles2 == false" class="error">No hay información disponible</p>
+
     <div class="mt-4" *ngIf="cargado==false" style="text-align: center;">
         <div class="spinner-border m-5" role="status">
             <span class="visually-hidden">Cargando...</span>
         </div>
     </div>
-    <br>
-    <br>
-    <div>
-    <div class="libro.titulo"><h2>{{ libro.titulo }}</h2>
-    <h4 style="font-weight:350;">{{ libro.autores }}</h4> 
-    </div>
-    <br>
-    <img src="{{libro.imagen}}" alt="Portada del libro" class="image">
-    <br>
-    <br>
-    <div class="publisher"><strong>Editorial:</strong> {{ libro.editor }}</div>
-    <div class="date"><strong>Fecha de publicación:</strong> {{ libro.fechaPublicacion }}</div>
-    <div class="categories"><strong>Categorías:</strong> {{ libro.categorias }}</div>
 
-    <div class="description">
-        <strong>Descripción:</strong>
-            {{ libro.descripcion }}
-    </div>
-    <div class="pages">
-        <strong>Número de páginas:</strong>
-        {{ libro.pageCount }}
-    </div>
-    <br>
-        <app-estado-libro [libro]="libro"></app-estado-libro>  
-    <br>
+    <div class="libro-wrapper mt-4">
+        <div class="libro-header">
+            <img src="{{libro.imagen}}" alt="Portada del libro" class="image">
+            <div class="libro-info">
+                <h2>{{ libro.titulo }}</h2>
+                <p style="font-weight:350;color:#666" class="nombre-autores">{{ libro.autores }}</p>
 
+                <div class="datos-libro-desktop">
+                    <div class="publisher"><strong>Editorial:</strong> {{ libro.editor }}</div>
+                    <div class="date"><strong>Fecha de publicación:</strong> {{ libro.fechaPublicacion }}</div>
+                    <div class="categories"><strong>Categorías:</strong> {{ libro.categorias }}</div>
+                    <div class="pages"><strong>Número de páginas:</strong> {{ libro.pageCount }}</div>
+                </div>
+
+                <div class="mt-3">
+                    <app-estado-libro [libro]="libro"></app-estado-libro>
+                </div>
+            </div>
+        </div>
+        <div class="description mt-4">
+            <div class="datos-libro-movil">
+                <hr>
+                <div class="publisher"><strong>Editorial:</strong> {{ libro.editor }}</div>
+                <div class="date"><strong>Fecha de publicación:</strong> {{ libro.fechaPublicacion }}</div>
+                <div class="categories"><strong>Categorías:</strong> {{ libro.categorias }}</div>
+                <div class="pages"><strong>Número de páginas:</strong> {{ libro.pageCount }}</div>
+            </div>
+            <hr>
+            <strong>Descripción:</strong>
+            <p>{{ libro.descripcion }}</p>
+        </div>
+    </div>
 </div>

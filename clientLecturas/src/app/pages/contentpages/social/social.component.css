@@ -11,7 +11,7 @@
 }
 
 .seccion-seguidores {
-    margin-top: 40px; 
+    margin-top: 40px;
 }
 
 .infoSeguidores {
@@ -34,7 +34,7 @@
 }
 
 .lineas-texto {
-     display: -webkit-box;
+    display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
@@ -44,12 +44,16 @@
     display: -webkit-box;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
-    overflow: hidden; 
+    overflow: hidden;
 }
 
 .img-post-libro {
-        width: 50% !important;
-        height: 170px !important;
+    width: 50% !important;
+    height: 152px !important;
+}
+
+.post-descripcion {
+    font-size: small;
 }
 
 
@@ -58,7 +62,7 @@
 
     .img-post-libro {
         width: 50% !important;
-        height: 140px !important;
+        height: 133px !important;
     }
 
     .seccion-actividad {
@@ -73,16 +77,21 @@
         -webkit-line-clamp: 2;
     }
 
+    .post-descripcion {
+        font-size: small;
+    }
+
 }
 
 /* Desktop */
 @media only screen and (min-width: 992px) {
 
-     .seccion-actividad {
+    .seccion-actividad {
         margin-top: 0;
     }
 
-    .col-md-3, .seccion-actividad {
+    .col-md-3,
+    .seccion-actividad {
         padding-top: 24px;
     }
 

@@ -43,25 +43,6 @@
     text-decoration: underline;
 }
 
-.tooltip {
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-
-    background-color: #333;
-    color: white;
-    padding: 6px 10px;
-    border-radius: 4px;
-    font-size: 12px;
-
-    white-space: nowrap;
-
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.2s ease;
-}
-
 
 
 @media (max-width: 768px) {
@@ -85,6 +66,17 @@
 
     .search-col-titulo {
         margin-top: 4%;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .caja-resena {
+        max-width: 150px;
+        white-space: normal;
     }
 
 }

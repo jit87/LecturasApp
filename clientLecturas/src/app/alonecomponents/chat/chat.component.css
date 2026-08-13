@@ -64,3 +64,11 @@
     width: max-content;
     display: flex;
 }
+
+.infoSeguidores {
+    background-color: rgb(242, 234, 230);
+    border-radius: 5px;
+    border: 1px solid rebeccapurple;
+    text-align: center;
+    font-weight: 600;
+}

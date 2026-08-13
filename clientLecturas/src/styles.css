@@ -72,6 +72,30 @@ form {
     min-width: fit-content;
 }
 
+
+input:focus,
+.form-control:focus,
+.buscador-input:focus,
+textarea:focus,
+select:focus,
+#resena:focus,
+#coleccion:focus,
+.ng-pristine:focus {
+    outline: 2px solid var(--color-azul-claro) !important;
+    box-shadow: none !important;
+    border-color: var(--color-azul-claro) !important;
+}
+
+input:focus,
+.form-control:focus,
+.buscador-input:focus,
+textarea:focus,
+select:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    border: 2px solid var(--color-azul-claro) !important;
+}
+
 .card-header {
     color: black !important;
     background-color: white !important;
