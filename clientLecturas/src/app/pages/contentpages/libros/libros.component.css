@@ -59,6 +59,9 @@
     box-sizing: border-box;
 }
 
+.badge-colecciones {
+    background-color: var(--color-azul-claro) !important;
+}
 
 
 @media (max-width: 768px) {

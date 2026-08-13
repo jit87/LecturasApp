@@ -225,6 +225,7 @@ export class SocialComponent {
         };
         post.comentarios.push(comentarioAmpliado);
         post.comentarios = [...post.comentarios];
+        formulario.resetForm();
       },
       (err) => {
         console.log(err);

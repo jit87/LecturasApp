@@ -33,7 +33,7 @@
                         </div>
                         <div class="mt-2 text-muted" style="font-size: 0.9em;cursor: pointer;float:right;">
                         </div>
-                        <div class="mt-5 p-3 rounded caja-comentarios"
+                        <div class="mt-2 p-3 rounded caja-comentarios"
                             style="background-color: #f0f0f5;border:1px lightgrey solid;">
                             <div *ngFor="let comentario of post.comentarios" class="mb-2">
                                 <div>
@@ -54,8 +54,8 @@
                             <form (ngSubmit)="guardarComentario(formulario,'libro', post._id,post)"
                                 #formulario="ngForm">
                                 <div class="input-group mt-2">
-                                    <input type="text" class="form-control" [ngModel]="comentarioTexto"
-                                        name="comentarioTexto" placeholder="Escribe un comentario..." />
+                                    <textarea type="text" class="form-control" [ngModel]="comentarioTexto"
+                                        name="comentarioTexto" placeholder="Escribe un comentario..."></textarea>
                                     <button class="btn btn-outline-primary" type="submit">Publicar</button>
                                 </div>
                             </form>
@@ -82,7 +82,7 @@
                         <div class="mt-2 text-muted caja-comentarios"
                             style="font-size: 0.9em;cursor: pointer;float:right;border:1px lightgrey solid;">
                         </div>
-                        <div class="mt-5 p-3 rounded" style="background-color: #f0f0f5;">
+                        <div class="mt-2 p-3 rounded" style="background-color: #f0f0f5;">
                             <div *ngFor="let comentario of post.comentarios" class="mb-2">
                                 <div>
                                     <img [src]="comentario.imagenUsuario" class="rounded-circle me-2" width="35"
@@ -102,8 +102,8 @@
                             <form (ngSubmit)="guardarComentario(formulario,'resena', post._id,post)"
                                 #formulario="ngForm">
                                 <div class="input-group mt-2">
-                                    <input type="text" class="form-control" name="comentarioTexto"
-                                        [ngModel]="comentarioTexto" placeholder="Escribe un comentario..." />
+                                    <textarea type="text" class="form-control" name="comentarioTexto"
+                                        [ngModel]="comentarioTexto" placeholder="Escribe un comentario..."></textarea>
                                     <button class="btn btn-outline-primary" type="submit">Publicar</button>
                                 </div>
                             </form>

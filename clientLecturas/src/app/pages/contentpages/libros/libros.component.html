@@ -6,7 +6,7 @@
                 <h6 class="ms-1" class="search-libros-titulo">Libros</h6>
                 <div id="buscadorMisLibros">
                     <input type="search" class="form-control" placeholder="Buscar libros..." #termino
-                        (keyup)="limpiarBuscador(termino.value)">
+                        (keyup)="limpiarBuscador(termino.value)" (blur)="limpiarBuscador(termino.value)">
                     <button class="btn-buscar-mis-libros btn btn-outline-primary ms-1" type="button"
                         (click)="buscarLibrosGuardados(termino.value)">Buscar</button>
                 </div>
@@ -25,7 +25,7 @@
             </div>
         </div>
         <div id="seccionEtiquetasCol mt-3">
-            <div class="badge text-bg-primary" style="margin-left: 3px;cursor: pointer;"
+            <div class="badge badge-colecciones text-bg-primary" style="margin-left: 3px;cursor: pointer;"
                 *ngFor="let coleccion of colecciones;let i=index" (click)="filtrarPorColeccion(coleccion)">{{ coleccion
                 }}
                 <i class="fa-solid fa-xmark" style="cursor: pointer;" (click)="eliminarColeccion(i, $event)"

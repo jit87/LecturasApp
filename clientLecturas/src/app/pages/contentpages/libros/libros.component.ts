@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { AbstractLecturasBBDDService } from '../../../abstracts/AbstractLecturasBBDDService';
 import { AbstractEstadoLibroService } from '../../../abstracts/AbstractEstadoLibroService';
@@ -32,6 +32,7 @@ export class LibrosComponent {
     private _lecturasBBDDService: AbstractLecturasBBDDService,
     private toastr: ToastrService
   ) { }
+
 
   ngOnInit() {
     this.getUsuarioID();

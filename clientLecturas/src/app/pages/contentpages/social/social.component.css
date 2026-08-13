@@ -57,6 +57,27 @@
 }
 
 
+.card-body form .input-group {
+    display: flex;
+    align-items: flex-start;
+}
+
+.card-body form .input-group textarea.form-control {
+    border-radius: 4px 0 0 4px;
+    border-right: none;
+    height: 38px;
+    resize: none;
+    /* si decidimos cambiar a que sea movible poner resize: vertical*/
+    overflow: auto;
+}
+
+.card-body form .input-group button[type="submit"] {
+    border-radius: 0 4px 4px 0;
+    height: 38px;
+    align-self: flex-start;
+    flex-shrink: 0;
+}
+
 /* Móviles */
 @media only screen and (max-width: 991px) {
 
@@ -81,7 +102,14 @@
         font-size: small;
     }
 
+    .caja-comentarios .btn,
+    .card-body form .btn {
+        padding: 6px 10px;
+        font-size: 0.85rem;
+    }
+
 }
+
 
 /* Desktop */
 @media only screen and (min-width: 992px) {
