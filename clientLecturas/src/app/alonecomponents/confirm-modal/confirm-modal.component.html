@@ -1,0 +1,17 @@
+<section class="modal-overlay">
+    <div class="contenedor">
+        <div class="tarjeta">
+            <div class="cabecera">
+                <h4>{{ titulo }}</h4>
+                <button class="cerrar-btn" (click)="onCancelar()">×</button>
+            </div>
+            <div class="cuerpo">
+                <p>{{ mensaje }}</p>
+                <div class="acciones-confirm">
+                    <button class="btn btn-outline-secondary" (click)="onCancelar()">Cancelar</button>
+                    <button class="btn btn-outline-danger" (click)="onConfirmar()">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

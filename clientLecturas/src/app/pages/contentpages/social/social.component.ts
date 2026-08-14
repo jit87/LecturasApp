@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../../../services/auth.service';
 import { NgForm, NgModel } from '@angular/forms';
 import { ComentarioModel } from '../../../models/comentario.model';
 import { AbstractLecturasBBDDService } from '../../../abstracts/AbstractLecturasBBDDService';

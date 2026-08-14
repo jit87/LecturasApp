@@ -57,21 +57,23 @@
                     </label>
                 </div>
             </div>
-            <!-- Sección opcional: Información adicional -->
             <div class="row mt-4">
                 <div class="col-12 text-center">
-                    <!-- <button class="btn btn-warning btn-sm  me-3" (click)="abrirFormularioEma()">Editar perfil</button> -->
-                    <button class="btn btn-danger btn-sm" (click)="eliminarCuenta(DatosPerfil._id)">Eliminar
-                        cuenta</button>
+                    <button class="btn btn-danger btn-sm" (click)="abrirConfirmEliminar()">Eliminar cuenta</button>
                 </div>
             </div>
+
+            <app-confirm-modal *ngIf="mostrarConfirmEliminar" titulo="Eliminar cuenta"
+                mensaje="¿Estás seguro de que quieres eliminar tu cuenta? Esta acción no se puede deshacer."
+                (confirmar)="confirmarEliminarCuenta()" (cancelar)="mostrarConfirmEliminar = false">
+            </app-confirm-modal>
         </div>
     </div>
 
 
 
     <!--Formularios-->
-    <section class="formularios-perfil animate__animated animate__fadeIn">
+    <section class="formularios-perfil">
         <div class="container">
             <!-- Fondo oscuro cuando el formulario está abierto -->
             <div *ngIf="mostrarFormularioPass || mostrarFormularioNom || mostrarFormularioEma || mostrarFormularioImg || mostrarFormularioBio"
@@ -79,7 +81,7 @@
 
 
             <!-- Subir imagen -->
-            <div class="tarjeta shadow-lg modal-form animate__animated animate__fadeIn" *ngIf="mostrarFormularioImg">
+            <div class="tarjeta shadow-lg modal-form" *ngIf="mostrarFormularioImg">
                 <div class="cabecera">
                     <h4 class="mb-0">Subir Imagen</h4>
                     <button class="cerrar-btn" (click)="cerrarFormularioImg()">x</button>
@@ -113,7 +115,7 @@
             </div>
 
             <!-- Cambiar bio -->
-            <div class="tarjeta shadow-lg modal-form animate__animated animate__fadeIn" *ngIf="mostrarFormularioBio">
+            <div class="tarjeta shadow-lg modal-form" *ngIf="mostrarFormularioBio">
                 <div class="cabecera">
                     <h4 class="mb-0">Cambiar Bio</h4>
                     <button class="cerrar-btn" (click)="cerrarFormularioBio()">x</button>
@@ -134,7 +136,7 @@
 
 
             <!-- Cambiar contraseña -->
-            <div class="tarjeta shadow-lg modal-form animate__animated animate__fadeIn" *ngIf="mostrarFormularioPass">
+            <div class="tarjeta shadow-lg modal-form" *ngIf="mostrarFormularioPass">
                 <div class="cabecera">
                     <h4 class="mb-0">Cambiar Contraseña</h4>
                     <button class="cerrar-btn" (click)="cerrarFormularioPass()">x</button>
@@ -176,7 +178,7 @@
             </div>
 
             <!-- Cambiar nombre -->
-            <div class="tarjeta shadow-lg modal-form animate__animated animate__fadeIn" *ngIf="mostrarFormularioNom">
+            <div class="tarjeta shadow-lg modal-form" *ngIf="mostrarFormularioNom">
                 <div class="cabecera">
                     <h4 class="mb-0">Cambiar Nombre</h4>
                     <button class="cerrar-btn" (click)="cerrarFormularioNom()">x</button>
@@ -195,7 +197,7 @@
             </div>
 
             <!-- Cambiar email -->
-            <div class="tarjeta shadow-lg modal-form animate__animated animate__fadeIn" *ngIf="mostrarFormularioEma">
+            <div class="tarjeta shadow-lg modal-form" *ngIf="mostrarFormularioEma">
                 <div class="cabecera">
                     <h4 class="mb-0">Cambiar Email</h4>
                     <button class="cerrar-btn" (click)="cerrarFormularioEma()">x</button>

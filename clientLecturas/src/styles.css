@@ -263,6 +263,10 @@ select:focus {
     border-color: var(--background-negro);
 }
 
+.btn-outline-secondary:hover {
+    background-color: var(--color-azul-claro);
+}
+
 .fa-power-off i {
     color: var(--background-negro);
 }

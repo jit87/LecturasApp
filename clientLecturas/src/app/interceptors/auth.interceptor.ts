@@ -1,7 +1,7 @@
 // auth.interceptor.ts
 import { Injectable } from '@angular/core';
-import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse } from '@angular/common/http';
+import { catchError, Observable, throwError } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { LecturasBBDDService } from '../services/lecturas-bbdd.service';
 
@@ -29,6 +29,13 @@ export class AuthInterceptor implements HttpInterceptor {
       });
     }
 
-    return next.handle(req);
+    return next.handle(req).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error.status === 401 && (isAuthUrl || isLecturasUrl)) {
+          this._authService.logout();
+        }
+        return throwError(() => error);
+      })
+    );
   }
 }

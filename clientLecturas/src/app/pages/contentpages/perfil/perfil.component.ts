@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { AbstractAuthService } from '../../../abstracts/AbstractAuthService';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-perfil',
@@ -45,10 +46,14 @@ export class PerfilComponent {
   //Propiedad del toggle button
   isChecked: boolean = false;
 
+  //Propiedades de eliminar usuario
+  mostrarConfirmEliminar: boolean = false;
+
 
   constructor(
     private _authService: AbstractAuthService,
     private toastr: ToastrService,
+    private router: Router
   ) {
     this.cargarDatos();
   }
@@ -295,19 +300,31 @@ export class PerfilComponent {
   }
 
 
-
+  /*Eliminación de usuario*/
   eliminarCuenta(id: any) {
-    this.cargarDatos();
-    console.log(id);
     if (this.email)
       this._authService.eliminarUsuario(id).subscribe(
         (resp) => {
           console.log("Usuario eliminado: ", resp);
+          this._authService.logout();
+          localStorage.removeItem("email");
+          localStorage.removeItem("auth-token");
+          this.router.navigate(['/login']);
         },
         (err) => {
           console.log(err);
         }
       );
+  }
+
+
+  abrirConfirmEliminar() {
+    this.mostrarConfirmEliminar = true;
+  }
+
+  confirmarEliminarCuenta() {
+    this.mostrarConfirmEliminar = false;
+    this.eliminarCuenta(this.DatosPerfil._id);
   }
 
 

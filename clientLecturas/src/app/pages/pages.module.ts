@@ -15,6 +15,7 @@ import { SocialComponent } from './contentpages/social/social.component';
 import { PublicoperfilComponent } from './contentpages/publicoperfil/publicoperfil.component';
 import { ReviewComponent } from './contentpages/review/review.component';
 import { ChatComponent } from '../alonecomponents/chat/chat.component';
+import { ConfirmModalComponent } from '../alonecomponents/confirm-modal/confirm-modal.component';
 
 
 
@@ -38,8 +39,9 @@ import { ChatComponent } from '../alonecomponents/chat/chat.component';
     FormsModule,
     ReactiveFormsModule,
     EstadoLibroComponent,
-    ChatComponent
-],
+    ChatComponent,
+    ConfirmModalComponent
+  ],
   exports: [
     LoginComponent,
     RegistroComponent,
