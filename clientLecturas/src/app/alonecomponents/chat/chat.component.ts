@@ -100,7 +100,8 @@ export class ChatComponent {
   seleccionarSeguido(seguido: any) {
     this.seguidoSeleccionado = seguido;
     this.cerrado = false;
-    this.idConMensajesNuevos = this.idConMensajesNuevos.filter((elem) => elem != seguido._id); //Una vez seleccionado quitamos el puntito rojo, controlado por this.idConMensajesNuevos
+    this.cargados = false;
+    this.idConMensajesNuevos = this.idConMensajesNuevos.filter((elem) => elem != seguido._id);
     this.getChats(this.usuarioID, seguido);
   }
 
@@ -184,6 +185,7 @@ export class ChatComponent {
   obtenerDatosPorId(mensajes: any) {
     this.mensajesGuardados = [...mensajes];
     mensajes.forEach((m: any) => this.rellenarDatosUsuario(m));
+    this.cargados = true;
   }
 
 
