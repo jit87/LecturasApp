@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
 import { AbstractAuthService } from '../../abstracts/AbstractAuthService';
 import { createIcons, icons } from 'lucide';
 
@@ -41,6 +40,8 @@ export class NavbarComponent {
     createIcons({ icons });
   }
 
+
+
   cargarImagen() {
     this.email = localStorage.getItem("email");
     this._authService.getUserByEmail(this.email).subscribe(
@@ -73,9 +74,14 @@ export class NavbarComponent {
 
   checkAuthentication() {
     const token = localStorage.getItem('auth-token');
+    const wasAuthenticated = this.isAuthenticated;
     this.isAuthenticated = !!token;
     if (this.isAuthenticated) {
       this.autenticado = true;
+      if (!wasAuthenticated) {
+        //Recién autenticado, esperamos a que el DOM se actualice y reprocesamos iconos
+        setTimeout(() => createIcons({ icons }), 0);
+      }
     }
   }
 

@@ -12,18 +12,30 @@ import { AbstractAuthService } from '../../../abstracts/AbstractAuthService';
 })
 export class LibrosComponent {
 
+  usuarioID: string = "";
+
+  //Propiedades de libros
   librosGuardados: any[] = [];
   librosSeleccionados: any[] = [];
   librosAMostrar: any[] = [];
   libroEncontrado: boolean = false;
-  mostrarForm: boolean = false;
-  usuarioID: string = "";
+
+  //Propiedades de colecciones
   colecciones: string[] = [];
   mostrarBoton: boolean = false;
+
+  //Propiedades de la tabla
   librosPaginados: any[] = [];
   paginaActual: number = 1;
   totalPaginas: number = 1;
   librosPorPagina: number = 5;
+
+  //Propiedades de modales
+  mostrarForm: boolean = false;
+  mostrarConfirmEliminarLibro: boolean = false;
+  libroIdAEliminar: string = "";
+  mostrarConfirmEliminarColeccion: boolean = false;
+  indiceColeccionAEliminar: number = -1;
 
 
   constructor(
@@ -68,7 +80,6 @@ export class LibrosComponent {
     )
   }
 
-
   /*Buscador*/
   //Busca libros dentro de los que hay guardados
   buscarLibrosGuardados(termino: string) {
@@ -104,8 +115,6 @@ export class LibrosComponent {
     this.librosAMostrar = this.librosSeleccionados;
   }
 
-
-
   limpiarBuscador(termino: string) {
     if (termino == "" || termino == null) {
       this.librosSeleccionados = [];
@@ -114,24 +123,26 @@ export class LibrosComponent {
     }
   }
 
-
-
   //Elimina libro de la BBDD
-  eliminarLibro(libroId: string) {
-    if (confirm("¿Está seguro de eliminarlo?")) {
-      this._lecturasBBDDService.deletelibro(libroId).subscribe(
-        (resp: any) => {
-          console.log(resp, "Libro eliminado");
-          this.librosGuardados = this.librosGuardados.filter(libro => libro._id !== libroId);
-          this.librosAMostrar = this.librosGuardados;
-          this.toastr.info('Ha sido eliminado!', 'Eliminado!');
-          this.actualizarPagina();
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
-    }
+  abrirConfirmEliminarLibro(libroId: string) {
+    this.libroIdAEliminar = libroId;
+    this.mostrarConfirmEliminarLibro = true;
+  }
+
+  confirmarEliminarLibro() {
+    this.mostrarConfirmEliminarLibro = false;
+    this._lecturasBBDDService.deletelibro(this.libroIdAEliminar).subscribe(
+      (resp: any) => {
+        console.log(resp, "Libro eliminado");
+        this.librosGuardados = this.librosGuardados.filter(libro => libro._id !== this.libroIdAEliminar);
+        this.librosAMostrar = this.librosGuardados;
+        this.toastr.info('Ha sido eliminado!', 'Eliminado!');
+        this.actualizarPagina();
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
 
@@ -172,36 +183,38 @@ export class LibrosComponent {
     )
   }
 
-
-  eliminarColeccion(index: number, event: Event) {
-    event.stopPropagation();
-    if (confirm("¿Está seguro de eliminarlo?")) {
-      this._lecturasBBDDService.deleteColeccion(index).subscribe(
-        (resp) => {
-          console.log("Eliminada la coleccion", resp);
-          this.toastr.info("Colección eliminada");
-          this.mostrarColecciones();
-        },
-        (error) => {
-          console.log(error);
-        }
-      )
-    }
-  }
-
-
   filtrarPorColeccion(coleccion: string) {
     this.buscarLibrosGuardados(coleccion);
     this.colecciones = [coleccion];
     this.mostrarBoton = true;
   }
 
-
   mostrarTodasColecciones() {
     this.mostrarColecciones();
     this.mostrarLibros();
     this.limpiarBuscador("");
     this.mostrarBoton = false;
+  }
+
+  /* Eliminación de colección */
+  abrirConfirmEliminarColeccion(index: number, event: Event) {
+    event.stopPropagation();
+    this.indiceColeccionAEliminar = index;
+    this.mostrarConfirmEliminarColeccion = true;
+  }
+
+  confirmarEliminarColeccion() {
+    this.mostrarConfirmEliminarColeccion = false;
+    this._lecturasBBDDService.deleteColeccion(this.indiceColeccionAEliminar).subscribe(
+      (resp) => {
+        console.log("Eliminada la coleccion", resp);
+        this.toastr.info("Colección eliminada");
+        this.mostrarColecciones();
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
 

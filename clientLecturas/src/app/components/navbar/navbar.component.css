@@ -105,7 +105,7 @@ a {
 }
 
 .img-perfil {
-    cursor: pointer; 
+    cursor: pointer;
 }
 
 
@@ -150,7 +150,6 @@ a {
         padding: 18px 15px;
     }
 
-
     .buscador-input {
         flex: 1;
         min-width: 0;
@@ -174,7 +173,6 @@ a {
         z-index: 9999;
         border-radius: 20px;
     }
-
 
     .links-desktop {
         display: none;

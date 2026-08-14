@@ -50,6 +50,8 @@
     text-align: justify;
 }
 
+
+
 .description-review p:first-child::first-letter {
     float: left;
     font-size: 3.5em;

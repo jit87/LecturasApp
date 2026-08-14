@@ -28,7 +28,7 @@
             <div class="badge badge-colecciones text-bg-primary" style="margin-left: 3px;cursor: pointer;"
                 *ngFor="let coleccion of colecciones;let i=index" (click)="filtrarPorColeccion(coleccion)">{{ coleccion
                 }}
-                <i class="fa-solid fa-xmark" style="cursor: pointer;" (click)="eliminarColeccion(i, $event)"
+                <i class="fa-solid fa-xmark" style="cursor: pointer;" (click)="abrirConfirmEliminarColeccion(i, $event)"
                     *ngIf="mostrarBoton==false"></i>
             </div>
             <span class="badge-todas badge text-bg-secondary" style="margin-left: 3px;cursor: pointer; padding:5px;"
@@ -88,9 +88,8 @@
                         </td>
                         <td>
                             <i class="fa-solid fa-trash" style="cursor: pointer;"
-                                (click)="eliminarLibro(libro._id)"></i>
+                                (click)="abrirConfirmEliminarLibro(libro._id)"></i>
                         </td>
-                        <!-- <i class="fa-solid fa-plus"></i> -->
                     </tr>
                 </tbody>
             </table>
@@ -126,3 +125,14 @@
     </div>
     <br>
 </section>
+
+<!-- Modales -->
+<app-confirm-modal *ngIf="mostrarConfirmEliminarLibro" titulo="Eliminar libro"
+    mensaje="¿Estás seguro de que quieres eliminar este libro?" (confirmar)="confirmarEliminarLibro()"
+    (cancelar)="mostrarConfirmEliminarLibro = false">
+</app-confirm-modal>
+
+<app-confirm-modal *ngIf="mostrarConfirmEliminarColeccion" titulo="Eliminar colección"
+    mensaje="¿Estás seguro de que quieres eliminar esta colección?" (confirmar)="confirmarEliminarColeccion()"
+    (cancelar)="mostrarConfirmEliminarColeccion = false">
+</app-confirm-modal>
