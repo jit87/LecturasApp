@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostBinding } from '@angular/core';
 import { Router } from '@angular/router';
 import { AbstractAuthService } from '../../abstracts/AbstractAuthService';
 import { createIcons, icons } from 'lucide';
@@ -10,12 +10,11 @@ import { createIcons, icons } from 'lucide';
 })
 export class NavbarComponent {
 
-  autenticado: boolean | any = false;
-  isAuthenticated: boolean = false;
-
+  autenticado: boolean = false;
   ImagenPerfil: string | undefined | any;
   email: string | null = "";
   idLogueado: string = "";
+
 
   constructor(private router: Router, private _authService: AbstractAuthService) {
     if (this._authService.isAuthenticated()) {
@@ -25,7 +24,6 @@ export class NavbarComponent {
     this.cargarImagen();
   }
 
-
   ngOnInit() {
     this.cargarImagen();
     this._authService.perfilImagen$.subscribe(
@@ -33,14 +31,13 @@ export class NavbarComponent {
         this.ImagenPerfil = resp;
       }
     )
+    this.checkAuthentication();
   }
 
-  //Para dar estilo a los iconos
   ngAfterViewInit() {
+    //Para dar estilo a los iconos
     createIcons({ icons });
   }
-
-
 
   cargarImagen() {
     this.email = localStorage.getItem("email");
@@ -57,41 +54,32 @@ export class NavbarComponent {
       })
   }
 
-
-
-
-  //Buscador de libros
   getInfoLibro(termino: string) {
     this.router.navigate(['/buscador', termino]);
   }
-
-
 
   ngDoCheck(): void {
     this.checkAuthentication();
   }
 
-
   checkAuthentication() {
     const token = localStorage.getItem('auth-token');
-    const wasAuthenticated = this.isAuthenticated;
-    this.isAuthenticated = !!token;
-    if (this.isAuthenticated) {
-      this.autenticado = true;
-      if (!wasAuthenticated) {
-        //Recién autenticado, esperamos a que el DOM se actualice y reprocesamos iconos
-        setTimeout(() => createIcons({ icons }), 0);
-      }
+    const eraAutenticado = this.autenticado;
+
+    this.autenticado = token !== null;
+    //Este artificio es para controlar el cambio de estado, puede afectar a los iconos.
+    if (this.autenticado && !eraAutenticado) {
+      setTimeout(() => createIcons({ icons }), 0);
     }
   }
 
-
   logout() {
     this._authService.logout();
-    this.autenticado = false;
     //Eliminamos los datos guardados en el navegador
     localStorage.removeItem("email");
     localStorage.removeItem("auth-token");
+
+    this.autenticado = false;
   }
 
 
