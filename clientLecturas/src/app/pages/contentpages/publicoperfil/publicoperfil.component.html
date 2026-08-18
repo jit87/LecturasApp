@@ -45,8 +45,7 @@
                                     <br>
                                     <hr />
                                     <div class="d-flex" style="padding: 2%;">
-                                        <img [src]="post.imagen || 'default.png'" class="rounded me-3 img-post-libro"
-                                            width="124" height="164">
+                                        <img [src]="post.imagen || 'default.png'" class="rounded me-3 img-post-libro">
                                         <div>
                                             <h5 class="mb-1" [routerLink]="['/info', post.APIid]"
                                                 routerLinkActive="router-link-active" style="cursor: pointer;"
@@ -81,22 +80,30 @@
                     <div class="info-seguidores col-md-3">
                         <h5 class="mt-4">Lista de Seguidores</h5>
                         <ul class="list-group">
-                            <li *ngFor="let seguidor of this.listaSeguidores"
+                            <li *ngFor="let seguidor of seguidoresVisibles"
                                 class="s-social list-group-item d-flex align-items-center"
                                 [routerLink]="['/perfilpublico', seguidor._id]" style="cursor: pointer;">
                                 <img [src]="seguidor.imagen || 'default.png'" class="rounded-circle me-2" width="40"
                                     height="40">
                                 <span><b>{{seguidor.nombre}}</b></span>
                             </li>
+                            <li *ngIf="hayMasSeguidores" class="list-group-item text-center ver-mas-item"
+                                (click)="verMasSeguidores()" style="cursor: pointer; font-weight: bold;">
+                                Ver más
+                            </li>
                         </ul>
                         <h5 class="mt-4">Lista de Seguidos</h5>
                         <ul class="list-group">
-                            <li *ngFor="let seguido of this.listaSeguidos"
+                            <li *ngFor="let seguido of seguidosVisibles"
                                 class="s-social list-group-item d-flex align-items-center"
                                 [routerLink]="['/perfilpublico', seguido._id]" style="cursor: pointer;">
                                 <img [src]="seguido.imagen || 'default.png'" class="rounded-circle me-2" width="40"
                                     height="40">
                                 <span><b>{{seguido.nombre}}</b></span>
+                            </li>
+                            <li *ngIf="hayMasSeguidos" class="list-group-item text-center ver-mas-item"
+                                (click)="verMasSeguidos()" style="cursor: pointer; font-weight: bold;">
+                                Ver más
                             </li>
                         </ul>
                     </div>

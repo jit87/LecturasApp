@@ -48,8 +48,9 @@
 }
 
 .img-post-libro {
-    width: 50% !important;
+    width: 100px !important;
     height: 152px !important;
+    flex-shrink: 0;
 }
 
 .post-descripcion {
@@ -82,7 +83,7 @@
 @media only screen and (max-width: 991px) {
 
     .img-post-libro {
-        width: 50% !important;
+        width: 85px !important;
         height: 133px !important;
     }
 

@@ -29,17 +29,13 @@ export class AuthService extends AbstractAuthService {
   private perfilApariencia = new BehaviorSubject<string>('');
   perfilApariencia$ = this.perfilApariencia.asObservable();
 
-
-
   constructor(
     private http: HttpClient,
     private router: Router) {
     super();
   }
 
-
   //Gestión de login, registro y todos los datos de usuario (nombre, contraseña, apariencia, imagen, email, bio)
-
   login(email: string, password: string): Observable<any> {
     console.log('Iniciando login...');
     return this.http.post<any>(`${this.authUrl}/login`, { email, password }).pipe(
@@ -83,8 +79,6 @@ export class AuthService extends AbstractAuthService {
     );
   }
 
-
-
   logout(): void {
     localStorage.removeItem(this.tokenKey);
     this.userSubject.next(null);
@@ -92,45 +86,33 @@ export class AuthService extends AbstractAuthService {
     this.router.navigate(['/login']);
   }
 
-
-
   getToken(): string | null {
     return localStorage.getItem(this.tokenKey);
   }
-
-
 
   isAuthenticated(): boolean {
     return !!this.getToken();
   }
 
-
-
   getUserById(id: string): Observable<any> {
     return this.http.get<any>(`${this.authUrl}/usuarioPorId/${id}`);
   }
-
 
   getUserByEmail(email: string | null): Observable<any> {
     return this.http.get<any>(`${this.authUrl}/usuario/${email}`);
   }
 
-
-
   getIdByEmail(email: string | null) {
     return this.http.get<any>(`${this.authUrl}/usuarioId/${email}`);
   }
-
 
   isLoggedIn(): boolean {
     return !!localStorage.getItem('auth-token');
   }
 
-
   authStatusListener() {
     return this.authStatus.asObservable();
   }
-
 
   modificarPassword(email: string, actualPassword: string, nuevaPassword: string): Observable<any> {
     if (nuevaPassword == "") {
@@ -151,7 +133,6 @@ export class AuthService extends AbstractAuthService {
       );
     }
   }
-
 
   modificarNombre(email: string, nuevoNombre: string): Observable<any> {
     return this.http.put<any>(`${this.authUrl}/modificar-nombre`, {
@@ -184,7 +165,6 @@ export class AuthService extends AbstractAuthService {
     );
   }
 
-
   modificarImagen(email: string, nuevoEmail: string): Observable<any> {
     return this.http.put<any>(`${this.authUrl}/modificar-email`, {
       email,
@@ -201,7 +181,6 @@ export class AuthService extends AbstractAuthService {
     );
   }
 
-
   saveImage(email: string, file: string): Observable<any> {
     return this.http.put<any>(`${this.authUrl}/modificar-imagen`, {
       email,
@@ -217,12 +196,10 @@ export class AuthService extends AbstractAuthService {
     );
   }
 
-
   //Para que el navbar actualice su imagen
   actualizarImagenPerfil(nuevaImagen: string) {
     this.perfilImagenSource.next(nuevaImagen);
   }
-
 
   modificarBio(email: string, nuevaBio: string): Observable<any> {
     return this.http.put<any>(`${this.authUrl}/modificar-bio`, {
@@ -239,7 +216,6 @@ export class AuthService extends AbstractAuthService {
     );
   }
 
-
   modificarApariencia(email: string | null, value: string): Observable<any> {
     return this.http.put<any>(`${this.authUrl}/modificar-apariencia`, {
       email,
@@ -255,7 +231,6 @@ export class AuthService extends AbstractAuthService {
       })
     );
   }
-
 
   eliminarUsuario(id: string) {
     return this.http.delete<any>(`${this.authUrl}/eliminar-usuario/${id}`).pipe(

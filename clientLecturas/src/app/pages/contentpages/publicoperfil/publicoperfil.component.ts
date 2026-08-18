@@ -45,6 +45,12 @@ export class PublicoperfilComponent {
   posts: any[] = [];
   listaSeguidos: any = [];
 
+  //Para que sea opcional aumentar la visualización de seguidos.
+  seguidosVisibles: any[] = [];
+  seguidoresVisibles: any[] = [];
+  tamanioSeguidos: number = 3;
+  tamanioSeguidores: number = 3;
+
 
   constructor(
     private _authService: AbstractAuthService,
@@ -73,10 +79,6 @@ export class PublicoperfilComponent {
     this.getActividad(this.idUsuario);
   }
 
-
-
-
-
   cargarDatos(idUsuario: string) {
     this._authService.getUserById(idUsuario).subscribe(
       (resp: any) => {
@@ -95,13 +97,9 @@ export class PublicoperfilComponent {
     this.getActividad(this.idUsuario);
   }
 
-
-
   regresar() {
     this.location.back();
   }
-
-
 
   //Si es seguido el id se oculta el botón de seguir en la vista
   compruebaSiEsSeguido(idUsuario: string) {
@@ -118,7 +116,6 @@ export class PublicoperfilComponent {
     )
   }
 
-
   seguir(idSeguido: any) {
     this._lecturasBBDDService.setSeguido(idSeguido).subscribe(
       (resp) => {
@@ -131,7 +128,6 @@ export class PublicoperfilComponent {
     )
     this.mostrarBotonAgregar = -1;
   }
-
 
   noseguir(idSeguido: any) {
     this._lecturasBBDDService.deleteSeguido(idSeguido).subscribe(
@@ -146,10 +142,9 @@ export class PublicoperfilComponent {
     this.mostrarBotonAgregar = 1;
   }
 
-
-
   getSeguidoresById(id: any) {
     this.listaSeguidores = [];
+    this.actualizarSeguidoresVisibles();
     this._lecturasBBDDService.getSeguidoresById(id).subscribe(
       (resp) => {
         resp.forEach((id: any) => {
@@ -157,6 +152,7 @@ export class PublicoperfilComponent {
             (usuario: any) => {
               if (usuario != undefined) {
                 this.listaSeguidores.push(usuario);
+                this.actualizarSeguidoresVisibles();
               }
             }
           )
@@ -168,9 +164,9 @@ export class PublicoperfilComponent {
     )
   }
 
-
   getSeguidosById(id: any) {
     this.listaSeguidos = [];
+    this.actualizarSeguidosVisibles();
     this._lecturasBBDDService.getSeguidosById(id).subscribe(
       (resp) => {
         resp.forEach((id: any) => {
@@ -178,6 +174,7 @@ export class PublicoperfilComponent {
             (usuario: any) => {
               if (usuario != undefined) {
                 this.listaSeguidos.push(usuario);
+                this.actualizarSeguidosVisibles();
               }
             }
           )
@@ -187,6 +184,35 @@ export class PublicoperfilComponent {
         console.log(err);
       }
     )
+  }
+
+  /*Métodos y funciones para mostrar de manera opcional más seguidos/seguidores*/
+  /*Seguidos*/
+  actualizarSeguidosVisibles() {
+    this.seguidosVisibles = this.listaSeguidos.slice(0, this.tamanioSeguidos);
+  }
+
+  verMasSeguidos() {
+    this.tamanioSeguidos += 5;
+    this.actualizarSeguidosVisibles();
+  }
+
+  get hayMasSeguidos(): boolean {
+    return this.seguidosVisibles.length < this.listaSeguidos.length;
+  }
+
+  /*Seguidores*/
+  actualizarSeguidoresVisibles() {
+    this.seguidoresVisibles = this.listaSeguidores.slice(0, this.tamanioSeguidores);
+  }
+
+  verMasSeguidores() {
+    this.tamanioSeguidores += 5;
+    this.actualizarSeguidoresVisibles();
+  }
+
+  get hayMasSeguidores(): boolean {
+    return this.seguidoresVisibles.length < this.listaSeguidores.length;
   }
 
 

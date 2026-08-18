@@ -34,6 +34,10 @@ export class ChatComponent {
   cargados: boolean = false;
   idChatActual: string = "";
 
+  //Propiedades para cargar más seguidos
+  seguidosVisibles: any[] = [];
+  tamanioPagina: number = 3;
+
   //Usuario logueado
   @Input() usuarioID;
 
@@ -70,11 +74,9 @@ export class ChatComponent {
     this.obtenerMensajesDeWebSocket();
   }
 
-
   cerrarChat() {
     this.cerrado = true;
   }
-
 
   getSeguidos() {
     this.seguidos = [];
@@ -85,6 +87,7 @@ export class ChatComponent {
             (usuario: any) => {
               if (usuario != undefined) {
                 this.seguidos.push(usuario);
+                this.actualizarSeguidosVisibles();
               }
             }
           )
@@ -96,7 +99,6 @@ export class ChatComponent {
     )
   }
 
-
   seleccionarSeguido(seguido: any) {
     this.seguidoSeleccionado = seguido;
     this.cerrado = false;
@@ -105,13 +107,24 @@ export class ChatComponent {
     this.getChats(this.usuarioID, seguido);
   }
 
+  actualizarSeguidosVisibles() {
+    this.seguidosVisibles = this.seguidos.slice(0, this.tamanioPagina);
+  }
+
+  verMasSeguidos() {
+    this.tamanioPagina += 5;
+    this.actualizarSeguidosVisibles();
+  }
+
+  get hayMasSeguidos(): boolean {
+    return this.seguidosVisibles.length < this.seguidos.length;
+  }
 
   crearFormulario() {
     this.formulario = this.fb.group({
       mensaje: ['']
     })
   }
-
 
   guardar(usuarioLogueado: string) {
     this.mensaje = {
@@ -128,8 +141,6 @@ export class ChatComponent {
     this.formulario.reset();
     this.scrollAbajo();
   }
-
-
 
   getChats(_idUsuario: string, seguido: any) {
     var chats: any = [];
@@ -168,7 +179,6 @@ export class ChatComponent {
     );
   }
 
-
   getMensajes(_idChat: string) {
     this.idChatActual = _idChat;
     this._websocketService.joinChat(_idChat);
@@ -180,14 +190,11 @@ export class ChatComponent {
     });
   }
 
-
-
   obtenerDatosPorId(mensajes: any) {
     this.mensajesGuardados = [...mensajes];
     mensajes.forEach((m: any) => this.rellenarDatosUsuario(m));
     this.cargados = true;
   }
-
 
   scrollAbajo(): void {
     //Sin el try se rompe
@@ -197,7 +204,6 @@ export class ChatComponent {
       console.log(err);
     }
   }
-
 
   obtenerMensajesDeWebSocket() {
     this._websocketService.getMensajes().subscribe({
@@ -210,7 +216,6 @@ export class ChatComponent {
       error: err => console.log(err)
     });
   }
-
 
   //Función auxiliar para completar datos en tiempo real
   rellenarDatosUsuario(mensaje: any) {

@@ -64,6 +64,12 @@ export class SocialComponent {
   imagenUsuario: string = "";
   cargados: boolean = false;
 
+  //Para que sea opcional aumentar la visualización de seguidos.
+  seguidosVisibles: any[] = [];
+  seguidoresVisibles: any[] = [];
+  tamanioSeguidos: number = 3;
+  tamanioSeguidores: number = 3;
+
 
   constructor(
     private _lecturasBBDDService: AbstractLecturasBBDDService,
@@ -74,7 +80,6 @@ export class SocialComponent {
       this.cargados = true;
     }, 1000);
   }
-
 
 
   ngOnInit() {
@@ -95,7 +100,6 @@ export class SocialComponent {
     )
     this.getSeguidores();
   }
-
 
 
   //MURO
@@ -154,7 +158,6 @@ export class SocialComponent {
   }
 
 
-
   //SEGUIDOS Y SEGUIDORES
   getSeguidos() {
     this.seguidos = [];
@@ -165,6 +168,7 @@ export class SocialComponent {
             (usuario: any) => {
               if (usuario != undefined) {
                 this.seguidos.push(usuario);
+                this.actualizarSeguidosVisibles();
               }
             }
           )
@@ -175,7 +179,6 @@ export class SocialComponent {
       }
     )
   }
-
 
   getSeguidores() {
     this.seguidores = [];
@@ -187,7 +190,7 @@ export class SocialComponent {
               console.log("Usuario:", usuario);
               if (usuario != undefined) {
                 this.seguidores.push(usuario);
-                console.log("Seguidores:", this.seguidores);
+                this.actualizarSeguidoresVisibles();
               }
             }
           )
@@ -199,7 +202,37 @@ export class SocialComponent {
     )
   }
 
+  /*Métodos y funciones para mostrar de manera opcional más seguidos/seguidores*/
+  /*Seguidos*/
+  actualizarSeguidosVisibles() {
+    this.seguidosVisibles = this.seguidos.slice(0, this.tamanioSeguidos);
+  }
 
+  verMasSeguidos() {
+    this.tamanioSeguidos += 5;
+    this.actualizarSeguidosVisibles();
+  }
+
+  get hayMasSeguidos(): boolean {
+    return this.seguidosVisibles.length < this.seguidos.length;
+  }
+
+  /*Seguidores*/
+  actualizarSeguidoresVisibles() {
+    this.seguidoresVisibles = this.seguidores.slice(0, this.tamanioSeguidores);
+  }
+
+  verMasSeguidores() {
+    this.tamanioSeguidores += 5;
+    this.actualizarSeguidoresVisibles();
+  }
+
+  get hayMasSeguidores(): boolean {
+    return this.seguidoresVisibles.length < this.seguidores.length;
+  }
+
+
+  //COMENTARIOS
   guardarComentario(formulario: NgForm, tipo: string, _id: string, post: any) {
     //Datos de comentario que guardamos en la colección comentarios
     var nuevoComentarioBase = new ComentarioModel();
@@ -245,7 +278,6 @@ export class SocialComponent {
     )
   }
 
-
   getNombreUsuario(_idUsuario: string) {
     this._authService.getUserById(_idUsuario).subscribe(
       (resp) => {
@@ -259,7 +291,6 @@ export class SocialComponent {
     )
   }
 
-
   //Obtiene los comentarios asociados a cada post
   getComentarios(postLibros: PostLibro, postResena: PostResena) {
     if (postLibros.resena === "") {
@@ -269,7 +300,6 @@ export class SocialComponent {
       this.cargarComentarios(postResena);
     }
   }
-
 
   //Función auxiliar para cargar los comentarios en función del tipo que se trate
   cargarComentarios(post: any) {

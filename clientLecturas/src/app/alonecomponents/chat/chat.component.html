@@ -1,11 +1,11 @@
 <div style="padding-top: 36px;">
     <h5 class="chat-title">Chat</h5>
     <p class="infoSeguidores" *ngIf="seguidos.length === 0" style="padding: 2%;">No hay seguidos</p>
-    <div class="card-body" style="flex-grow: 1; background-color: #f9f9f9; border-radius: 5%;" id="chat-scroll">
+    <div class="card-body" style="flex-grow: 1; border-radius: 5%;" id="chat-scroll">
         <div class="mb-2">
             <div class="d-flex">
                 <ul class="list-group">
-                    <li *ngFor="let seguido of seguidos" class="s-social d-flex list-group-item"
+                    <li *ngFor="let seguido of seguidosVisibles" class="s-social d-flex list-group-item"
                         (click)="seleccionarSeguido(seguido)" [ngClass]="'inactiva'">
                         <img [src]="seguido.imagen || 'default.png'" class="rounded-circle me-2" width="30" height="30">
                         <span style="font-weight: bold;">{{ seguido.nombre }}</span>
@@ -13,6 +13,10 @@
                         <div *ngFor="let id of idConMensajesNuevos">
                             <span class="punto-notificacion" *ngIf="seguido._id == id && (cerrado==true)"></span>
                         </div>
+                    </li>
+                    <li *ngIf="hayMasSeguidos" class="list-group-item text-center ver-mas-item"
+                        (click)="verMasSeguidos()" style="cursor: pointer; font-weight: bold;">
+                        Ver más
                     </li>
                 </ul>
             </div>

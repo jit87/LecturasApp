@@ -101,6 +101,9 @@ select:focus {
     background-color: white !important;
 }
 
+.ver-mas-item {
+    color: var(--color-azul-claro);
+}
 
 
 /*Boton X de los formularios de perfil y editar-libro*/
