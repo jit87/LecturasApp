@@ -1,4 +1,4 @@
-import { Component, HostBinding } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AbstractAuthService } from '../../abstracts/AbstractAuthService';
 import { createIcons, icons } from 'lucide';
@@ -29,6 +29,13 @@ export class NavbarComponent {
     this._authService.perfilImagen$.subscribe(
       (resp) => {
         this.ImagenPerfil = resp;
+      }
+    )
+    this._authService.idLogueado$.subscribe(
+      (id) => {
+        if (id) {
+          this.idLogueado = id;
+        }
       }
     )
     this.checkAuthentication();

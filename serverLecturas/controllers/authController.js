@@ -275,6 +275,12 @@ export async function eliminarUsuario(req, res) {
             return res.status(404).json({ message: 'Usuario no encontrado' });
         }
 
+        //Quitamos su referencia de los arrays seguidores/seguidos de cualquier otro usuario
+        await Usuario.updateMany(
+            { $or: [{ seguidores: req._idUsuario }, { seguidos: req._idUsuario }] },
+            { $pull: { seguidores: req._idUsuario, seguidos: req._idUsuario } }
+        );
+
         await Usuario.findByIdAndDelete(req._idUsuario);
         res.json({ resultado: "Eliminado usuario" });
 

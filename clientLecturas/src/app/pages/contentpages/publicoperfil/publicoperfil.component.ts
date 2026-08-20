@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
-import { AuthService } from '../../../services/auth.service';
+import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { AbstractLecturasBBDDService } from '../../../abstracts/AbstractLecturasBBDDService';
 import { AbstractAuthService } from '../../../abstracts/AbstractAuthService';
+import { Subscription } from 'rxjs';
 
 interface DatosPerfil {
   nombre: string;
@@ -50,6 +50,11 @@ export class PublicoperfilComponent {
   seguidoresVisibles: any[] = [];
   tamanioSeguidos: number = 3;
   tamanioSeguidores: number = 3;
+
+  // NUEVO: solo esto se añade a las propiedades
+  private actividadSub: Subscription | undefined;
+  private seguidoresSub: Subscription | undefined;
+  private seguidosSub: Subscription | undefined;
 
 
   constructor(
@@ -145,7 +150,11 @@ export class PublicoperfilComponent {
   getSeguidoresById(id: any) {
     this.listaSeguidores = [];
     this.actualizarSeguidoresVisibles();
-    this._lecturasBBDDService.getSeguidoresById(id).subscribe(
+
+    if (this.seguidoresSub) {
+      this.seguidoresSub.unsubscribe();
+    }
+    this.seguidoresSub = this._lecturasBBDDService.getSeguidoresById(id).subscribe(
       (resp) => {
         resp.forEach((id: any) => {
           this._authService.getUserById(id).subscribe(
@@ -167,7 +176,11 @@ export class PublicoperfilComponent {
   getSeguidosById(id: any) {
     this.listaSeguidos = [];
     this.actualizarSeguidosVisibles();
-    this._lecturasBBDDService.getSeguidosById(id).subscribe(
+
+    if (this.seguidosSub) {
+      this.seguidosSub.unsubscribe();
+    }
+    this.seguidosSub = this._lecturasBBDDService.getSeguidosById(id).subscribe(
       (resp) => {
         resp.forEach((id: any) => {
           this._authService.getUserById(id).subscribe(
@@ -218,6 +231,10 @@ export class PublicoperfilComponent {
 
   getActividad(idUsuario: string) {
     this.posts = [];
+    // NUEVO: cancela la petición anterior si sigue en curso
+    if (this.actividadSub) {
+      this.actividadSub.unsubscribe();
+    }
     this._lecturasBBDDService.getListLibrosUsuarios().subscribe(
       (resp) => {
         resp.forEach((libro: any) => {
@@ -275,8 +292,11 @@ export class PublicoperfilComponent {
     console.log(this.posts);
   }
 
-
-
-
+  // NUEVO: único método añadido, nada más
+  ngOnDestroy() {
+    if (this.actividadSub) this.actividadSub.unsubscribe();
+    if (this.seguidoresSub) this.seguidoresSub.unsubscribe();
+    if (this.seguidosSub) this.seguidosSub.unsubscribe();
+  }
 
 }

@@ -6,6 +6,7 @@ export abstract class AbstractAuthService {
     //OBSERVABLES
     abstract perfilImagen$: Observable<string>;
     abstract perfilApariencia$: Observable<string>;
+    abstract idLogueado$: Observable<string>;
 
     //MÉTODOS BÁSICOS
     abstract login(email: string, password: string): Observable<any>;

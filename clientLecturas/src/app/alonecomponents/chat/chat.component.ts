@@ -159,7 +159,6 @@ export class ChatComponent {
             });
           });
         });
-
         //Si no existe el chat, lo creamos ahora
         if (!chatEncontrado) {
           const nuevoChat = {
@@ -197,7 +196,6 @@ export class ChatComponent {
   }
 
   scrollAbajo(): void {
-    //Sin el try se rompe
     try {
       this.chatScroll.nativeElement.scrollTop = this.chatScroll.nativeElement.scrollHeight;
     } catch (err) {

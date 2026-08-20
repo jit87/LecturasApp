@@ -29,6 +29,9 @@ export class AuthService extends AbstractAuthService {
   private perfilApariencia = new BehaviorSubject<string>('');
   perfilApariencia$ = this.perfilApariencia.asObservable();
 
+  private idLogueadoSource = new BehaviorSubject<string>('');
+  idLogueado$ = this.idLogueadoSource.asObservable();
+
   constructor(
     private http: HttpClient,
     private router: Router) {
@@ -46,6 +49,15 @@ export class AuthService extends AbstractAuthService {
         localStorage.setItem(this.tokenKey, response.token);
         localStorage.setItem('email', email);
         this.userSubject.next(response.user);
+
+        //Para que el navbar cargue la imagen y el id
+        this.getUserByEmail(email).subscribe(
+          (usuario: any) => {
+            this.actualizarImagenPerfil(usuario.imagen || '');
+            this.actualizarIdLogueado(usuario._id);
+          },
+          (err) => console.log('Error obteniendo datos tras login', err)
+        );
 
         //Accedemos al contenido principal
         this.router.navigate(['/contenido']).then(() => {
@@ -82,6 +94,7 @@ export class AuthService extends AbstractAuthService {
   logout(): void {
     localStorage.removeItem(this.tokenKey);
     this.userSubject.next(null);
+    this.actualizarIdLogueado('');
     //Volvemos a login si salimos
     this.router.navigate(['/login']);
   }
@@ -199,6 +212,11 @@ export class AuthService extends AbstractAuthService {
   //Para que el navbar actualice su imagen
   actualizarImagenPerfil(nuevaImagen: string) {
     this.perfilImagenSource.next(nuevaImagen);
+  }
+
+  //Método para notificar el ID actual
+  actualizarIdLogueado(id: string) {
+    this.idLogueadoSource.next(id);
   }
 
   modificarBio(email: string, nuevaBio: string): Observable<any> {
