@@ -12,7 +12,8 @@
                                     height="110" width="110">
                             </div>
                             <div class="btn-seguir mt-3 mb-3">
-                                <button class="btn btn-primary btn-sm mt-3" *ngIf="mostrarBotonAgregar === 1"
+                                <button class="btn btn-primary btn-sm mt-3"
+                                    *ngIf="mostrarBotonAgregar === 1 && DatosPerfil._id!=idLogueado"
                                     (click)="seguir(DatosPerfil._id)">Seguir usuario</button>
                                 <button class="btn btn-danger btn-sm mt-3"
                                     *ngIf="mostrarBotonAgregar === -1 && DatosPerfil._id!=idLogueado"

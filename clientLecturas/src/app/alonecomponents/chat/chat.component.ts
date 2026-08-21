@@ -52,7 +52,6 @@ export class ChatComponent {
     private _chatService: AbstractChatService,
     private _websocketService: WebsocketService
   ) {
-    this.getSeguidos();
     this.usuarioID = "";
     this.formulario = "";
     this.crearFormulario();
@@ -72,6 +71,7 @@ export class ChatComponent {
 
   ngOnInit() {
     this.obtenerMensajesDeWebSocket();
+    this.getSeguidos();
   }
 
   cerrarChat() {
@@ -80,6 +80,7 @@ export class ChatComponent {
 
   getSeguidos() {
     this.seguidos = [];
+    this.seguidosVisibles = []
     this._lecturasBBDDService.getSeguidos().subscribe(
       (resp) => {
         resp.forEach((id: any) => {
@@ -88,6 +89,10 @@ export class ChatComponent {
               if (usuario != undefined) {
                 this.seguidos.push(usuario);
                 this.actualizarSeguidosVisibles();
+                //Ordenación de contactos
+                this._chatService.getChats(this.usuarioID).subscribe((chats: any) => {
+                  this.ordenarSeguidosPorFecha(chats);
+                });
               }
             }
           )
@@ -135,7 +140,11 @@ export class ChatComponent {
       fecha: new Date
     }
     this._chatService.crearMensaje(this.mensaje).subscribe(
-      (resp) => { console.log(resp); },
+      (resp) => {
+        console.log(resp); if (this.seguidoSeleccionado) {
+          this.subirSeguidoArriba(this.seguidoSeleccionado._id);
+        }
+      },
       (err) => { console.log(err); }
     );
     this.formulario.reset();
@@ -210,6 +219,7 @@ export class ChatComponent {
         this.rellenarDatosUsuario(resp);
         //Para notificar con punto rojo el mensaje entrante
         this.idConMensajesNuevos.push(resp._idUsuario);
+        this.subirSeguidoArriba(resp._idUsuario);
       },
       error: err => console.log(err)
     });
@@ -221,6 +231,30 @@ export class ChatComponent {
       mensaje.nombre = user.nombre;
       mensaje.imagen = user.imagen;
     });
+  }
+
+  //Ordenación de contactos del chat
+  ordenarSeguidosPorFecha(chats: any[]) {
+    this.seguidos.sort((a, b) => {
+      //Buscamos el chat de cada uno para comparar su fecha
+      const chatA = chats.find((c: any) => c.participantes.includes(a._id));
+      const chatB = chats.find((c: any) => c.participantes.includes(b._id));
+
+      const fechaA = chatA?.fecha ? new Date(chatA.fecha).getTime() : 0;
+      const fechaB = chatB?.fecha ? new Date(chatB.fecha).getTime() : 0;
+
+      return fechaB - fechaA;
+    });
+    this.actualizarSeguidosVisibles();
+  }
+
+  subirSeguidoArriba(userId: string) {
+    const index = this.seguidos.findIndex(s => s._id === userId);
+    if (index > -1) {
+      const usuario = this.seguidos.splice(index, 1)[0];
+      this.seguidos.unshift(usuario);
+      this.actualizarSeguidosVisibles();
+    }
   }
 
 

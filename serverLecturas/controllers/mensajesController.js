@@ -1,5 +1,6 @@
 import Mensaje from "../models/Mensaje.js";
 import { getIO } from "../websockets/webSocketServer.js";
+import Chat from "../models/Chat.js";
 
 export async function crearMensaje(req, res) {
 
@@ -17,8 +18,15 @@ export async function crearMensaje(req, res) {
         //Guardamos el mensaje
         await nuevoMensaje.save();
 
+        //Asignamos una fecha al chat para después ordenarlos
+        await Chat.findByIdAndUpdate(_idChat, {
+            fecha: fecha,
+            ultimoMensaje: texto
+        });
+
         //Emitimos la notificación al websocket
         const io = getIO();
+
         //Sólo a los usuarios de la misma room del chat
         io.to(_idChat).emit("nuevoMensaje", {
             _idChat,
