@@ -89,9 +89,18 @@ export class ChatComponent {
               if (usuario != undefined) {
                 this.seguidos.push(usuario);
                 this.actualizarSeguidosVisibles();
-                //Ordenación de contactos
+                //Buscamos el chat con este contacto: para ordenar por fecha Y para unirnos a su room de WebSocket
                 this._chatService.getChats(this.usuarioID).subscribe((chats: any) => {
-                  this.ordenarSeguidosPorFecha(chats);
+                  this.ordenarSeguidosPorFecha(chats);   // ya lo tenías: ordena por fecha del chat
+
+                  // NUEVO: nos unimos a la room de este contacto en cuanto sabemos su chat,
+                  // así recibimos sus mensajes por WebSocket aunque no lo hayamos abierto todavía
+                  const chatConEsteContacto = chats.find((c: any) =>
+                    c.participantes.includes(id)
+                  );
+                  if (chatConEsteContacto) {
+                    this._websocketService.joinChat(chatConEsteContacto._id);
+                  }
                 });
               }
             }

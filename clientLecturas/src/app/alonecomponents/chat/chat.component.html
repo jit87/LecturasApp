@@ -11,7 +11,8 @@
                         <span style="font-weight: bold;">{{ seguido.nombre }}</span>
                         &nbsp;<i class="fa-solid fa-message contact-icon" style="margin-left:auto;margin-top: 2%;"></i>
                         <div *ngFor="let id of idConMensajesNuevos">
-                            <span class="punto-notificacion" *ngIf="seguido._id == id && (cerrado==true)"></span>
+                            <span class="punto-notificacion"
+                                *ngIf="seguido._id == id && (cerrado==true || seguidoSeleccionado?._id !== seguido._id)"></span>
                         </div>
                     </li>
                     <li *ngIf="hayMasSeguidos" class="list-group-item text-center ver-mas-item"
