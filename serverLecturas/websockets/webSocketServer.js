@@ -34,8 +34,6 @@ export function configurarWebSocket(server) {
 
         socket.on('disconnect', () => console.log('user disconnected'));
     });
-
-
 }
 
 export function getIO() {

@@ -231,11 +231,11 @@ export class PublicoperfilComponent {
 
   getActividad(idUsuario: string) {
     this.posts = [];
-    // NUEVO: cancela la petición anterior si sigue en curso
+    //Cancela la petición anterior si sigue en curso
     if (this.actividadSub) {
       this.actividadSub.unsubscribe();
     }
-    this._lecturasBBDDService.getListLibrosUsuarios().subscribe(
+    this.actividadSub = this._lecturasBBDDService.getListLibrosUsuarios().subscribe(
       (resp) => {
         resp.forEach((libro: any) => {
           if (libro._idUsuario == idUsuario) {

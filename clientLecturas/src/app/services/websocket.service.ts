@@ -19,7 +19,7 @@ export class WebsocketService {
     const token = localStorage.getItem('auth-token');
 
 
-    //Conecta con el WebSocket e incluir el token y el ID del usuario
+    //Conecta con el WebSocket e incluye el token y el ID del usuario
     this.socket = io(this.url, {
       transports: ['websocket'],
       auth: { token: token }
