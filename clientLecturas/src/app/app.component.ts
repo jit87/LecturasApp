@@ -28,7 +28,6 @@ export class AppComponent {
     })
   }
 
-
   cargarDatos() {
     this.email = localStorage.getItem("email");
     this._authService.getUserByEmail(this.email).subscribe(
@@ -40,7 +39,6 @@ export class AppComponent {
       })
   }
 
-
   cargarApariencia() {
     if (this.datos.apariencia == "clara") {
       document.body.classList.remove("modo-oscuro");
@@ -49,7 +47,6 @@ export class AppComponent {
       document.body.classList.add("modo-oscuro");
     }
   }
-
 
 
 }

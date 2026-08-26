@@ -292,7 +292,6 @@ export class PublicoperfilComponent {
     console.log(this.posts);
   }
 
-  // NUEVO: único método añadido, nada más
   ngOnDestroy() {
     if (this.actividadSub) this.actividadSub.unsubscribe();
     if (this.seguidoresSub) this.seguidoresSub.unsubscribe();

@@ -241,7 +241,7 @@ export class AuthService extends AbstractAuthService {
     }).pipe(
       tap(response => {
         console.log('Apariencia cambiada', response);
-        this.perfilApariencia.next(response);
+        this.perfilApariencia.next(value);
       }),
       catchError(error => {
         console.error('Error', error);

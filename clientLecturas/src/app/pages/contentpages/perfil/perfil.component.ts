@@ -67,7 +67,6 @@ export class PerfilComponent {
     }
   }
 
-
   cargarDatos() {
     this.email = localStorage.getItem("email");
     this._authService.getUserByEmail(this.email).subscribe(
@@ -79,10 +78,8 @@ export class PerfilComponent {
   }
 
 
-
   //FORMULARIOS
   /*Imagen*/
-
   onFileSelected(event: Event) {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files[0]) {
@@ -96,7 +93,6 @@ export class PerfilComponent {
       reader.readAsDataURL(this.file);
     }
   }
-
 
   async onUpload(): Promise<void> {
     //Hay que convertirlo a string antes de subir la imagen
@@ -120,18 +116,13 @@ export class PerfilComponent {
     }
   }
 
-
   abrirFormularioImg() {
     this.mostrarFormularioImg = true;
   }
 
-
   cerrarFormularioImg() {
     this.mostrarFormularioImg = false;
   }
-
-
-
 
   /*Bio*/
   cambiarBio() {
@@ -161,9 +152,6 @@ export class PerfilComponent {
     this.mostrarFormularioBio = false;
   }
 
-
-
-
   /*Password*/
   cambiarPassword() {
     this.loading = false;
@@ -183,16 +171,13 @@ export class PerfilComponent {
       )
   }
 
-
   cerrarFormularioPass() {
     this.mostrarFormularioPass = false;
   }
 
-
   abrirFormularioPass() {
     this.mostrarFormularioPass = true;
   }
-
 
   visualizarPasswordActual() {
     let input = document.getElementById('actualPassword') as HTMLInputElement;
@@ -201,16 +186,12 @@ export class PerfilComponent {
     }
   }
 
-
   visualizarPasswordNueva() {
     let input = document.getElementById('nuevaPassword') as HTMLInputElement;
     if (input) {
       input.type = input.type === 'text' ? 'password' : 'text';
     }
   }
-
-
-
 
   /*Nombre*/
   cambiarNombre() {
@@ -241,8 +222,6 @@ export class PerfilComponent {
     this.mostrarFormularioNom = false;
   }
 
-
-
   /*Email*/
   cambiarEmail() {
     this.loading = false;
@@ -269,8 +248,6 @@ export class PerfilComponent {
   cerrarFormularioEma() {
     this.mostrarFormularioEma = false;
   }
-
-
 
   /*Apariencia*/
   cambiarApariencia() {
@@ -299,7 +276,6 @@ export class PerfilComponent {
     }
   }
 
-
   /*Eliminación de usuario*/
   eliminarCuenta(id: any) {
     if (this.email)
@@ -316,7 +292,6 @@ export class PerfilComponent {
         }
       );
   }
-
 
   abrirConfirmEliminar() {
     this.mostrarConfirmEliminar = true;

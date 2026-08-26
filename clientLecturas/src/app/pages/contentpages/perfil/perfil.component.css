@@ -10,7 +10,6 @@
     background-color: white;
 }
 
-
 .fa-regular.fa-pen-to-square {
     cursor: pointer;
 }
@@ -36,7 +35,6 @@
     z-index: 1040;
 }
 
-
 .modal-form {
     position: fixed;
     top: 40%;
@@ -48,12 +46,10 @@
     animation: fadeIn 0.8s ease forwards;
 }
 
-
 .cajaPass {
     display: flex;
     flex-wrap: nowrap;
 }
-
 
 .cabecera {
     padding: 1rem 1.5rem;
