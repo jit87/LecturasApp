@@ -156,7 +156,6 @@ export class ChatComponent {
       (err) => { console.log(err); }
     );
     this.formulario.reset();
-    this.scrollAbajo();
   }
 
   getChats(_idUsuario: string, seguido: any) {
@@ -228,6 +227,7 @@ export class ChatComponent {
         //Para notificar con punto rojo el mensaje entrante
         this.idConMensajesNuevos.push(resp._idUsuario);
         this.subirSeguidoArriba(resp._idUsuario);
+        setTimeout(() => this.scrollAbajo(), 0);
       },
       error: err => console.log(err)
     });

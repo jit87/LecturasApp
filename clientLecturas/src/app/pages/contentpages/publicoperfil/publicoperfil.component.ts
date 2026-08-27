@@ -100,6 +100,7 @@ export class PublicoperfilComponent {
     this.getSeguidoresById(this.idUsuario);
     this.getSeguidosById(this.idUsuario);
     this.getActividad(this.idUsuario);
+    this.compruebaSiEsSeguido(this.idUsuario);
   }
 
   regresar() {
@@ -111,9 +112,7 @@ export class PublicoperfilComponent {
     this._lecturasBBDDService.getSeguidos().subscribe(
       (resp) => {
         let result = resp.includes(idUsuario);
-        if (!result && idUsuario !== this.idLogueado) {
-          this.mostrarBotonAgregar = 1;
-        }
+        this.mostrarBotonAgregar = result ? -1 : 1;
       },
       (err) => {
         console.log(err);
