@@ -16,6 +16,7 @@ import { PublicoperfilComponent } from './contentpages/publicoperfil/publicoperf
 import { ReviewComponent } from './contentpages/review/review.component';
 import { ChatComponent } from '../alonecomponents/chat/chat.component';
 import { ConfirmModalComponent } from '../alonecomponents/confirm-modal/confirm-modal.component';
+import { VisorCitasComponent } from '../alonecomponents/visorcitas/visorcitas.component';
 
 
 
@@ -40,7 +41,8 @@ import { ConfirmModalComponent } from '../alonecomponents/confirm-modal/confirm-
     ReactiveFormsModule,
     EstadoLibroComponent,
     ChatComponent,
-    ConfirmModalComponent
+    ConfirmModalComponent,
+    VisorCitasComponent
   ],
   exports: [
     LoginComponent,

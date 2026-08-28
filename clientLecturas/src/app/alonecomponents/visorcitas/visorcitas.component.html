@@ -1,0 +1,20 @@
+<div class="quote-card">
+
+    @if (loading) {
+
+    <span class="quote-loading">
+        Cargando cita...
+    </span>
+
+    } @else if (currentQuote) {
+
+    <p class="quote-text">
+        “{{ currentQuote.quoteText }}”
+    </p>
+
+    <p class="quote-author">
+        — {{ currentQuote.quoteAuthor }}
+    </p>
+
+    }
+</div>

@@ -220,9 +220,15 @@ select:focus {
     color: white;
 }
 
-.modo-oscuro .spinner-muro-social {
+.modo-oscuro .spinner-muro-social,
+.spinner {
     color: white;
     text-align: center;
+}
+
+.modo-oscuro .spinner-border {
+    color: white !important;
+    text-align: center !important;
 }
 
 .modo-oscuro .description-review p {
@@ -235,6 +241,19 @@ select:focus {
 
 .modo-oscuro .review-usuario {
     color: white !important;
+}
+
+.modo-oscuro .quote-text {
+    color: var(--text-blanco) !important;
+}
+
+.modo-oscuro .quote-author {
+    color: var(--text-blanco) !important;
+}
+
+.modo-oscuro .quote-loading {
+    font-size: 0.8rem;
+    color: var(--text-blanco) !important;
 }
 
 /*  Fin modo oscuro */

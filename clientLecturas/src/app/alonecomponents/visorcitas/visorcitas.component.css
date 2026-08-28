@@ -1,0 +1,32 @@
+.quote-card {
+    width: calc(100% - 40px);
+    max-width: 1100px;
+    margin: 22px auto 12px;
+    margin-bottom: 50px;
+    padding: 8px 20px 10px;
+
+    text-align: center;
+    /* border-bottom: 1px solid rgba(255, 255, 255, 0.25);*/
+}
+
+.quote-text {
+    margin: 0;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1rem;
+    line-height: 1.4;
+    font-style: italic;
+    color: var(--text-negro);
+}
+
+.quote-author {
+    margin: 3px 0 0;
+    font-family: Arial, sans-serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--text-negro);
+}
+
+.quote-loading {
+    font-size: 0.8rem;
+    color: var(--text-negro);
+}

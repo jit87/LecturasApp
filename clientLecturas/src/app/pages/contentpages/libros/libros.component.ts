@@ -19,6 +19,7 @@ export class LibrosComponent {
   librosSeleccionados: any[] = [];
   librosAMostrar: any[] = [];
   libroEncontrado: boolean = false;
+  cargados: boolean = false;
 
   //Propiedades de colecciones
   colecciones: string[] = [];
@@ -73,6 +74,7 @@ export class LibrosComponent {
         this.librosAMostrar = this.librosGuardados;
         this.totalPaginas = Math.ceil(this.librosAMostrar.length / this.librosPorPagina);
         this.actualizarPagina();
+        this.cargados = true;
       },
       (error) => {
         console.log(error);

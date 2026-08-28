@@ -13,6 +13,10 @@
             </div>
             <br>
             <div class="mb-4">
+                <div class="caja-spinner" role="status" *ngIf="cargados==false">
+                    <div class="spinner-border m-5 spinner" role="status">
+                    </div>
+                </div>
                 <h6 class="ms-1" class="search-col-titulo">Colecciones</h6>
                 <div id="agregadorMisColecciones">
                     <input type="search" id="coleccionInput" class="form-control" placeholder="Añadir colección..."

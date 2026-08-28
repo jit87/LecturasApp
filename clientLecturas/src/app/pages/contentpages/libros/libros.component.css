@@ -63,6 +63,10 @@
     background-color: var(--color-azul-claro) !important;
 }
 
+.caja-spinner {
+    text-align: center;
+}
+
 
 @media (max-width: 768px) {
 
