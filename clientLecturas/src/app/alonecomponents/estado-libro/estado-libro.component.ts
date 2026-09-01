@@ -35,25 +35,30 @@ export class EstadoLibroComponent {
   @Input() libro!: any;
   @Output() libroGuardado = new EventEmitter<string>();
 
-
-
-
   constructor(
     private _lecturasBBDDService: AbstractLecturasBBDDService,
     private _authService: AbstractAuthService,
     private toastr: ToastrService,
   ) { }
 
-
+  //Método auxiliar para limpiar el ID de Open Library (quita barras y /works/)
+  private getCleanAPIid(rawId: string): string {
+    if (!rawId) return '';
+    if (rawId.includes('OL') || rawId.startsWith('/')) {
+      const parts = rawId.split('/').filter(p => p.length > 0);
+      return parts[parts.length - 1] || rawId;
+    }
+    return rawId;
+  }
 
   //Conviene usar OnInit para obtener el valor de @Input
   ngOnInit() {
-    const apiId = this.libro?.APIid || this.libro?.id;
+    const rawId = this.libro?.APIid || this.libro?.id;
+    const apiId = this.getCleanAPIid(rawId);
     if (apiId) {
       this.esGuardado(apiId);
     }
   }
-
 
   //Usamos promesa porque la obtención del usuarioID es asíncrona 
   //y si lo queremos recuperar en guardarEstadoLibros dará undefined si no usamos promesas
@@ -75,48 +80,50 @@ export class EstadoLibroComponent {
     });
   }
 
-
-
   async guardarEstadoLibro(estado: string) {
     console.log("Datos del libro recibidos:", this.libro);
 
     //Await espera a que se ejecute la promesa anterior
     const usuarioID = await this.getUsuarioID();
 
+    // Unificamos la fuente de los datos (volumeInfo o info)
+    const info = this.libro.volumeInfo || this.libro.info || {};
+    const rawId = this.libro?.APIid || this.libro?.id;
+    const cleanAPIid = this.getCleanAPIid(rawId);
+
     var nuevoLibro = new LibroModel();
     nuevoLibro = {
-      _id: this.libro.id,
+      _id: cleanAPIid,
       _idUsuario: usuarioID,
-      titulo: this.libro.titulo || this.libro.info?.title || "Sin título",
-      autores: this.libro.autores || this.libro.info?.authors[0],
-      editor: this.libro.editor || this.libro.info?.publisher,
-      fechaPublicacion: this.libro?.fechaPublicacion || this.libro.info?.publisherDate,
-      descripcion: this.libro?.descripcion || this.libro.info?.description,
-      pageCount: this.libro?.pageCount || this.libro.info?.pageCount.toString(),
+      titulo: this.libro.titulo || info.title || "Sin título",
+      autores: this.libro.autores || info.authors || ['Autor desconocido'],
+      editor: this.libro.editor || info.publisher || "",
+      fechaPublicacion: this.libro?.fechaPublicacion || info.publishedDate || "",
+      descripcion: this.libro?.descripcion || info.description || "",
+      pageCount: Number(this.libro?.pageCount || info.pageCount || 0),
       averageRating: 0,
       ratingsCount: 0,
       contentVersion: "",
-      imagen: this.libro?.imagen || this.libro.info?.imageLinks?.thumbnail,
+      imagen: this.libro?.imagen || info.imageLinks?.thumbnail || "",
       lengua: "",
-      previewLink: "",
+      previewLink: this.libro?.previewLink || info.previewLink || "",
       estado: estado === 'Leído' ? 'Leído' : 'Pendiente',
-      categorias: this.libro?.categorias || this.libro.info?.categories?.join(', ') || "Sin categoría",
-      APIid: this.libro?.APIid || this.libro?.id
+      categorias: this.libro?.categorias || (Array.isArray(info.categories) ? info.categories.join(', ') : info.categories) || "Sin categoría",
+      APIid: cleanAPIid
     };
 
-    this.toastr.success('Ha sido añadido!', 'Añadido!');
     this._lecturasBBDDService.addlibro(nuevoLibro).subscribe((resp: any) => {
       console.log("Libro añadido", resp);
+      this.toastr.success('Ha sido añadido!', 'Añadido!');
       this.guardado = true;
       this.libroGuardado.emit(nuevoLibro.APIid);
     });
   }
 
-
-
   //Comprobación de si está guardado para bloquear que se pueda guardar duplicado
   esGuardado(libroId: string) {
-    this._lecturasBBDDService.getlibroByAPIid(libroId).subscribe(
+    const cleanId = this.getCleanAPIid(libroId);
+    this._lecturasBBDDService.getlibroByAPIid(cleanId).subscribe(
       (resp) => {
         console.log("Está guardado en la BBDD", resp);
         this.guardado = true;
@@ -126,9 +133,5 @@ export class EstadoLibroComponent {
       }
     )
   }
-
-
-
-
 
 }

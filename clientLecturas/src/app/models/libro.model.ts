@@ -1,32 +1,29 @@
-
-
-
 export class LibroModel {
-  _id?:                 string; 
-  _idUsuario?:          string | any; 
-  titulo:               string;
-  autores:              string[];
-  editor?:              string;
-  fechaPublicacion?:    string;
-  descripcion?:         string;
-  pageCount?:           number;
-  averageRating?:       number;
-  ratingsCount?:        number;
-  contentVersion?:      string;
-  imagen?:              string;
-  lengua?:              string;
-  previewLink?:         string;
-  estado?:              string;
-  coleccion?:           string; 
-  categorias?:          string;
-  APIid?:               string;
-  resena?:              string;
+  _id?: string;
+  _idUsuario?: string | any;
+  titulo: string;
+  autores: string[];
+  editor?: string;
+  fechaPublicacion?: string;
+  descripcion?: string;
+  pageCount?: number;
+  averageRating?: number;
+  ratingsCount?: number;
+  contentVersion?: string;
+  imagen?: string;
+  lengua?: string;
+  previewLink?: string;
+  estado?: string;
+  coleccion?: string;
+  categorias?: string;
+  APIid?: string;
+  resena?: string;
 
   constructor() {
     this._id = "";
-    this._idUsuario = ""; 
-    this.titulo = ""; 
-    this.autores = []; 
+    this._idUsuario = "";
+    this.titulo = "";
+    this.autores = [];
     this.editor = "";
     this.fechaPublicacion = "";
     this.descripcion = "";
@@ -34,13 +31,13 @@ export class LibroModel {
     this.averageRating = 0;
     this.ratingsCount = 0;
     this.contentVersion = "";
-    this.imagen = ""; 
+    this.imagen = "";
     this.lengua = "";
     this.previewLink = "";
     this.estado = "Pendiente";
     this.coleccion = "No clasificado";
-    this.categorias = "Sin categoría"; 
-    this.APIid = ""; 
-    this.resena = ""; 
-   }
+    this.categorias = "Sin categoría";
+    this.APIid = "";
+    this.resena = "";
+  }
 }

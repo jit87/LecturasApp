@@ -22,42 +22,48 @@ a:hover {
         flex-direction: row !important;
         margin-left: 0 !important;
         margin-right: 0 !important;
-        width: 50% !important;
+        width: 100% !important;
     }
 
     .caja-imagen-libro {
-        width: 100% !important;
+        width: 40% !important;
         padding-left: 0 !important;
         padding-right: 0 !important;
     }
 
-    .caja-imagen-libro-recomendaciones {
-        width: 65% !important;
+    .caja-descripcion-libro {
+        width: 60% !important;
         text-align: left;
+        box-sizing: border-box !important;
+    }
+
+    .caja-imagen-libro-recomendaciones {
+        width: 50% !important;
+        text-align: center;
         padding-right: 8px !important;
         box-sizing: border-box !important;
     }
 
-    .caja-descripcion-libro {
-        width: 100% !important;
-        text-align: left;
-        box-sizing: border-box !important;
-    }
-
     .caja-descripcion-libro-recomendaciones {
-        width: 100% !important;
+        width: 50% !important;
         text-align: left;
         box-sizing: border-box !important;
     }
 
     .caja-libro-home {
         max-width: 100% !important;
-        overflow-x: hidden;
+        overflow: hidden;
     }
 
     .caja-imagen-libro,
     .caja-imagen-libro-recomendaciones {
         text-align: center;
+    }
+
+    .img-libro-home {
+        margin-left: 0;
+        max-width: 100%;
+        object-fit: cover;
     }
 
 }

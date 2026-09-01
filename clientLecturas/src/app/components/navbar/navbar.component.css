@@ -188,3 +188,21 @@ a {
     }
 
 }
+
+/* Tablets */
+@media only screen and (min-width: 769px) and (max-width: 1099px) {
+
+    .navbar-fija {
+        padding: 0 20px;
+        box-sizing: border-box;
+    }
+
+    .navbar-izquierda {
+        gap: 24px;
+    }
+
+    .links-desktop {
+        gap: 14px;
+    }
+
+}

@@ -11,13 +11,11 @@ import { AbstractAuthService } from '../../../abstracts/AbstractAuthService';
 })
 export class BuscadorComponent {
 
-
   libros: { id: any; info: any; }[] = [];
   librosGuardados: any[] = [];
   cargando: boolean = false;
   disponibles: boolean = true;
   usuarioID: String = "";
-
 
   constructor(
     private _librosService: AbstractLibrosService,
@@ -26,7 +24,6 @@ export class BuscadorComponent {
     private _authService: AbstractAuthService) {
 
   }
-
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(
@@ -37,8 +34,6 @@ export class BuscadorComponent {
     )
   }
 
-
-  //Usamos promesa porque la obtención del ID es asíncrona y si la queremos recuperar en guardarEstadoLibros dará undefined si no usamos promesas
   async getUsuarioID() {
     const email = localStorage.getItem("email");
     return new Promise((resolve, reject) => {
@@ -56,38 +51,44 @@ export class BuscadorComponent {
     });
   }
 
-
   getLibros(termino: string) {
     if (termino == '') {
       this.regresar();
     }
     this.cargando = true;
-    //Limpiamos la búsqueda anterior antes de realizar nueva búsqueda
     this.libros = [];
     this._librosService.getLibros(termino).subscribe(
       (resp: any) => {
-        for (let i = 0; i < resp.items.length; i++) {
+        const items = resp.items || [];
+        for (let i = 0; i < items.length; i++) {
+          const volumen = items[i].volumeInfo || {};
           const libroInfo = {
-            id: resp.items[i].id,
-            info: resp.items[i].volumeInfo
+            id: items[i].id,
+            //Aseguramos que tenga un objeto info consistente con thumbnail y smallThumbnail
+            info: {
+              title: volumen.title || 'Sin título',
+              authors: volumen.authors || ['Autor desconocido'],
+              description: volumen.description || '',
+              imageLinks: {
+                smallThumbnail: volumen.imageLinks?.thumbnail || volumen.imageLinks?.smallThumbnail || 'assets/imagen-no-disponible.png',
+                thumbnail: volumen.imageLinks?.thumbnail || 'assets/imagen-no-disponible.png'
+              }
+            }
           };
           this.libros.push(libroInfo);
-          this.cargando = false;
         }
+        this.cargando = false;
       },
       (error) => {
         console.log("Ha fallado", error);
+        this.cargando = false;
         this.disponibles = false;
       }
     );
-    console.log(this.libros);
   }
 
   regresar() {
     this.location.back();
   }
-
-
-
 
 }

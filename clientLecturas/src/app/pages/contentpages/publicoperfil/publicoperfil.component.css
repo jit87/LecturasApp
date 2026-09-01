@@ -91,3 +91,22 @@
     }
 
 }
+
+/* Tablets */
+@media only screen and (min-width: 768px) and (max-width: 1099px) {
+
+    .info-usuario.col-md-8,
+    .info-seguidores.col-md-3 {
+        width: 100% !important;
+        max-width: 100% !important;
+        flex: 0 0 100% !important;
+    }
+
+    .s-social span b {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        display: block;
+        max-width: 100%;
+    }
+}
