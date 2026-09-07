@@ -3,14 +3,17 @@
 /*Variables*/
 :root {
     --background-verde-suave: rgb(185, 208, 198);
-    --background-aguamarina: aquamarine;
+    --background-aguamarina: #72E6BE
+        /*aquamarine*/
+    ;
     --background-negro: black;
     --background-verde-oscuro: #102A2D;
     --text-blanco: #ffffff;
     --text-gris-oscuro: rgb(26, 27, 27);
-    --text-negro: black;
+    --text-negro: #000000;
     --color-azul-claro: #2734f181;
     --color-azul-solido: #2734f1;
+    --color-azul-oscuro: #0b2545;
 }
 
 

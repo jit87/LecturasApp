@@ -7,7 +7,7 @@
     top: 0;
     width: 100%;
     z-index: 100;
-    background-color: aquamarine;
+    background-color: var(--background-aguamarina);
     height: 56px;
 }
 
@@ -18,7 +18,6 @@
     max-width: 1265px;
     width: 100%;
 }
-
 
 .navbar-izquierda {
     display: flex;
@@ -41,6 +40,11 @@
 .links-desktop {
     display: flex;
     gap: 20px;
+    font-weight: 500;
+}
+
+.nav-link {
+    color: var(--color-azul-oscuro);
 }
 
 .buscador-input {
@@ -51,12 +55,12 @@
 }
 
 .buscador-btn {
-    border: 1px solid black;
+    border: 1px solid var(--color-azul-oscuro);
     border-radius: 0px 5px 5px 0px;
     padding: 5px;
     display: flex;
     background-color: transparent;
-    color: black;
+    color: var(--color-azul-oscuro);
 }
 
 .movil-nav {
@@ -67,13 +71,14 @@
     cursor: pointer;
     display: flex;
     align-items: center;
+    color: var(--color-azul-oscuro) !important;
 }
 
 .logo-text {
     font-weight: 700;
     font-size: 18px;
     letter-spacing: -0.5px;
-    color: #111;
+    color: var(--color-azul-oscuro);
 }
 
 .logo-text span {
@@ -173,7 +178,7 @@ a {
         height: 60px;
         justify-content: space-around;
         align-items: center;
-        background: rgba(129, 241, 204, 0.829);
+        background: rgba(114, 230, 190, 0.90);
         border-top: 1px solid #ddd;
         z-index: 9999;
         border-radius: 20px;

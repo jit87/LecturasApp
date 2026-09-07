@@ -8,7 +8,7 @@ a:hover {
 }
 
 /* Tablets */
-@media only screen and (min-width: 768px) and (max-width: 1099px) {
+@media only screen and (min-width: 768px) and (max-width: 1366px) {
 
     .col-md-4 {
         width: 50% !important;
