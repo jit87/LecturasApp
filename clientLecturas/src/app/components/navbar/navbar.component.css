@@ -86,9 +86,11 @@ a {
 }
 
 .buscador-btn:hover {
-    background-color: var(--color-azul-claro);
-    border-color: white;
+    background-color: #7b8de6 !important;
+    opacity: 1 !important;
+    backdrop-filter: none !important;
     color: white;
+    border-color: white;
     transition: 200ms;
 }
 
@@ -98,6 +100,8 @@ a {
 
 .activo {
     border-bottom: 2px solid var(--color-azul-claro);
+    opacity: 1 !important;
+    backdrop-filter: none !important;
 }
 
 .icono-logout:hover {

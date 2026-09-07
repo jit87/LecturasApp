@@ -10,6 +10,7 @@
     --text-gris-oscuro: rgb(26, 27, 27);
     --text-negro: black;
     --color-azul-claro: #2734f181;
+    --color-azul-solido: #2734f1;
 }
 
 
@@ -260,9 +261,12 @@ select:focus {
 
 
 .s-social:hover {
-    background-color: var(--background-aguamarina) !important;
+    background-color:
+        var(--color-azul-claro) !important;
     cursor: pointer !important;
-    transition: 0.8s;
+    color: var(--text-blanco);
+    transition: 200ms;
+    isolation: isolate;
 }
 
 .btn-buscar-mis-libros {
@@ -359,8 +363,10 @@ select:focus {
 
 .dropdown-item:hover {
     z-index: 3 !important;
-    background-color: var(--background-aguamarina) !important;
-    transition: 0.8s;
+    background-color:
+        var(--color-azul-claro) !important;
+    transition: 200ms;
+    color: var(--text-blanco);
 }
 
 /*Animación de la caja de libro*/
@@ -370,7 +376,6 @@ select:focus {
     transition: 0.5s;
     box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
 }
-
 
 input {
     box-sizing: border-box;
