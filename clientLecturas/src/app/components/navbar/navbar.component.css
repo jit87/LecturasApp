@@ -96,6 +96,7 @@ a {
 
 .nav-link:hover {
     border-bottom: 2px solid var(--color-azul-claro);
+    opacity: 1 !important;
 }
 
 .activo {

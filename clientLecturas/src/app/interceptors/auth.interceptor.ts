@@ -17,7 +17,7 @@ export class AuthInterceptor implements HttpInterceptor {
     const isAuthUrl = req.url.startsWith(this._authService.authUrl);
     const isLecturasUrl = req.url.startsWith(this._lecturasBBDDService.url);
 
-    if (req.url.includes('googleapis.com') || req.url.includes('google.com')) {
+    if (req.url.includes('googleapis.com') || req.url.includes('google.com') || req.url.includes('openlibrary.org')) {
       return next.handle(req);
     }
 
