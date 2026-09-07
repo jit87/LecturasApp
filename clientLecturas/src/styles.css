@@ -35,17 +35,6 @@ h2 {
     color: var(--text-gris-oscuro);
 }
 
-
-.footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 2.5rem;
-    z-index: -2 !important;
-    flex-wrap: wrap;
-    margin-top: 60px;
-}
-
 .recomendaciones {
     border-radius: 5px;
     padding: 5%;
@@ -127,7 +116,6 @@ select:focus {
     background-color: var(--background-verde-oscuro) !important;
 }
 
-
 .modo-oscuro .card-header-config {
     background-color: var(--background-verde-suave) !important;
 }
@@ -135,7 +123,6 @@ select:focus {
 .modo-oscuro h5 {
     color: var(--text-blanco) !important;
 }
-
 
 .modo-oscuro h2 {
     color: var(--text-blanco) !important;
@@ -148,7 +135,6 @@ select:focus {
 .modo-oscuro .card h5 {
     color: var(--text-gris-oscuro) !important;
 }
-
 
 .modo-oscuro .s-social {
     background-color: #e4f7f0 !important;
@@ -196,7 +182,6 @@ select:focus {
 .modo-oscuro .cuenta-txt {
     color: white;
 }
-
 
 .modo-oscuro .btn-volver {
     color: white;
@@ -257,6 +242,10 @@ select:focus {
 
 .modo-oscuro .quote-loading {
     font-size: 0.8rem;
+    color: var(--text-blanco) !important;
+}
+
+.modo-oscuro .footer {
     color: var(--text-blanco) !important;
 }
 
