@@ -140,6 +140,11 @@ select:focus {
     background-color: #e4f7f0 !important;
 }
 
+.modo-oscuro .lista-seg,
+.lista-chat {
+    background-color: var(--background-verde-suave);
+}
+
 .modo-oscuro .list-group-item:hover {
     background-color: var(--background-aguamarina);
     cursor: pointer;
@@ -247,6 +252,10 @@ select:focus {
 
 .modo-oscuro .footer {
     color: var(--text-blanco) !important;
+}
+
+.modo-oscuro .nombre-autores {
+    color: lightblue !important;
 }
 
 /*  Fin modo oscuro */

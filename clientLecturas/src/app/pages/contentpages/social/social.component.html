@@ -116,7 +116,7 @@
 
         <div class="col-md-3 seccion-seguidores">
             <h5>Seguidos</h5>
-            <ul class="list-group">
+            <ul class="list-group lista-seg">
                 <li *ngFor="let seguido of seguidosVisibles" class="s-social list-group-item d-flex align-items-center"
                     [routerLink]="['/perfilpublico', seguido._id]">
                     <img [src]="seguido.imagen || 'default.png'" class="rounded-circle me-2" width="40" height="40">
@@ -132,7 +132,7 @@
             <br>
             <br>
             <h5>Seguidores</h5>
-            <ul class="list-group">
+            <ul class="list-group lista-seg">
                 <li *ngFor="let seguidor of seguidoresVisibles"
                     class="s-social list-group-item d-flex align-items-center"
                     [routerLink]="['/perfilpublico', seguidor._id]">

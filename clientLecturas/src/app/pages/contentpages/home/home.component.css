@@ -20,6 +20,7 @@ a:hover {
 
     .caja-libro-home .row.g-0 {
         flex-direction: row !important;
+        flex-wrap: nowrap !important;
         margin-left: 0 !important;
         margin-right: 0 !important;
         width: 100% !important;
@@ -27,18 +28,21 @@ a:hover {
 
     .caja-imagen-libro {
         width: 40% !important;
+        min-width: 0 !important;
         padding-left: 0 !important;
         padding-right: 0 !important;
     }
 
     .caja-descripcion-libro {
         width: 60% !important;
+        min-width: 0 !important;
         text-align: left;
         box-sizing: border-box !important;
     }
 
     .caja-imagen-libro-recomendaciones {
         width: 50% !important;
+        min-width: 0 !important;
         text-align: center;
         padding-right: 8px !important;
         box-sizing: border-box !important;
@@ -46,6 +50,7 @@ a:hover {
 
     .caja-descripcion-libro-recomendaciones {
         width: 50% !important;
+        min-width: 0 !important;
         text-align: left;
         box-sizing: border-box !important;
     }

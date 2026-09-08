@@ -9,6 +9,7 @@
     z-index: 100;
     background-color: var(--background-aguamarina);
     height: 56px;
+    border-bottom: darkgray solid 1px;
 }
 
 .navbar-fija {
@@ -117,6 +118,7 @@ a {
 .img-perfil {
     cursor: pointer;
 }
+
 
 
 /* Responsive */

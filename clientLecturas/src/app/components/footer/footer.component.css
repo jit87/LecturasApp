@@ -3,3 +3,15 @@
     color: var(--text-gris-oscuro) !important;
     border-top: 1px solid #E2E8E6;
 }
+
+.logo-text {
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: -0.5px;
+    color: var(--color-azul-oscuro);
+}
+
+.logo-text span {
+    font-weight: 400;
+    opacity: 0.7;
+}

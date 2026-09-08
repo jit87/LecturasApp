@@ -4,7 +4,7 @@
     <div class="card-body" style="flex-grow: 1; border-radius: 5%;" id="chat-scroll">
         <div class="mb-2">
             <div class="d-flex">
-                <ul class="list-group">
+                <ul class="list-group lista-chat">
                     <li *ngFor="let seguido of seguidosVisibles" class="s-social d-flex list-group-item"
                         (click)="seleccionarSeguido(seguido)" [ngClass]="'inactiva'">
                         <img [src]="seguido.imagen || 'default.png'" class="rounded-circle me-2" width="30" height="30">
