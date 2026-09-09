@@ -322,7 +322,10 @@ select:focus {
 
 .btn-publicar,
 .btn-buscar,
-.btn-auth {
+.btn-auth,
+.btn-confirm,
+.btn-editar-libro,
+.btn-config {
     border-color: var(--text-negro);
     color: var(--text-negro);
 }
@@ -331,6 +334,9 @@ select:focus {
 .btn-buscar:hover,
 .btn-volver:hover,
 .btn-auth:hover,
+.btn-confirm:hover,
+.btn-editar-libro:hover,
+.btn-config:hover,
 #btnAgregarColeccion:hover {
     border-color: var(--text-blanco) !important;
     background-color: var(--color-azul-claro);

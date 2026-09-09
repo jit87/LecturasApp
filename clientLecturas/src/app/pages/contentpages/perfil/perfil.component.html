@@ -79,7 +79,6 @@
             <div *ngIf="mostrarFormularioPass || mostrarFormularioNom || mostrarFormularioEma || mostrarFormularioImg || mostrarFormularioBio"
                 class="backdrop" (click)="$event.stopPropagation()"></div>
 
-
             <!-- Subir imagen -->
             <div class="tarjeta shadow-lg modal-form" *ngIf="mostrarFormularioImg">
                 <div class="cabecera">
@@ -128,7 +127,7 @@
                                 required></textarea>
                         </div>
                         <div class="text-center">
-                            <button class="btn btn-outline-primary" type="submit">Cambiar bio</button>
+                            <button class="btn btn-config" type="submit">Cambiar bio</button>
                         </div>
                     </form>
                 </div>
@@ -152,8 +151,7 @@
                             <input type="password" id="actualPassword" [(ngModel)]="actualPassword" class="form-control"
                                 required>
                             &nbsp;
-                            <button type="button" (click)="visualizarPasswordActual()"
-                                class="btn btn-outline-secondary">
+                            <button type="button" (click)="visualizarPasswordActual()" class="btn btn-config">
                                 <i class="fa fa-eye" aria-hidden="true" *ngIf="!show"></i>
                                 <i class="fa fa-eye-slash" aria-hidden="true" *ngIf="show"></i>
                             </button>
@@ -164,14 +162,14 @@
                             <input type="password" id="nuevaPassword" [(ngModel)]="nuevaPassword" class="form-control"
                                 required>
                             &nbsp;
-                            <button type="button" (click)="visualizarPasswordNueva()" class="btn btn-outline-secondary">
+                            <button type="button" (click)="visualizarPasswordNueva()" class="btn btn-config">
                                 <i class="fa fa-eye" aria-hidden="true" *ngIf="!show"></i>
                                 <i class="fa fa-eye-slash" aria-hidden="true" *ngIf="show"></i>
                             </button>
                         </div>
                         <br>
                         <div class="text-center">
-                            <button class="btn btn-outline-primary" type="submit">Cambiar contraseña</button>
+                            <button class="btn btn-config" type="submit">Cambiar contraseña</button>
                         </div>
                     </form>
                 </div>
@@ -190,7 +188,7 @@
                             <input type="text" id="nuevoNombre" [(ngModel)]="nuevoNombre" class="form-control" required>
                         </div>
                         <div class="text-center">
-                            <button class="btn btn-outline-primary" type="submit">Cambiar nombre</button>
+                            <button class="btn btn-config" type="submit">Cambiar nombre</button>
                         </div>
                     </form>
                 </div>
@@ -209,7 +207,7 @@
                             <input type="email" id="nuevoEmail" [(ngModel)]="nuevoEmail" class="form-control" required>
                         </div>
                         <div class="text-center">
-                            <button class="btn btn-outline-primary" type="submit">Cambiar email</button>
+                            <button class="btn btn-config" type="submit">Cambiar email</button>
                         </div>
                     </form>
                 </div>
