@@ -14,7 +14,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="email">Correo Electrónico</label>
+                <label for="email">Correo electrónico</label>
                 <input id="email" type="email" formControlName="email" class="form-control" />
                 <div *ngIf="registroForm.get('email')?.invalid && registroForm.get('email')?.touched"
                     class="text-danger">
@@ -30,7 +30,7 @@
                 </div>
             </div>
             <br>
-            <button type="submit" class="btn btn-outline-primary btn-registrar"
+            <button type="submit" class="btn btn-auth btn-registrar"
                 [disabled]="registroForm.invalid">Registrar</button>
         </form>
         <p class="mt-2 cuenta-txt">¿Ya tienes una cuenta? <br><a [routerLink]="['/login']">Inicia sesión aquí</a></p>

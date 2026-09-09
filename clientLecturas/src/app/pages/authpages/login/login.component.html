@@ -6,7 +6,7 @@
                 <p>El correo o la contraseña no es correcto</p>
             </div>
             <div class="form-group">
-                <label for="email">Correo Electrónico</label>
+                <label for="email">Correo electrónico</label>
                 <input id="email" type="email" formControlName="email" class="form-control" />
                 <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="text-danger">
                     El correo electrónico es obligatorio y debe ser válido.
@@ -21,7 +21,7 @@
                 </div>
             </div>
             <br>
-            <button type="submit" class="btn btn-outline-primary btn-registrar" [disabled]="loginForm.invalid">Iniciar
+            <button type="submit" class="btn btn-auth btn-registrar" [disabled]="loginForm.invalid">Iniciar
                 Sesión</button>
         </form>
         <p class="mt-2 cuenta-txt">¿No tienes una cuenta? <a routerLink="/registro">Regístrate aquí</a></p>

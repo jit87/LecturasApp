@@ -6,6 +6,7 @@
 
 #buscadorMisLibros input {
     width: max-content;
+    border-radius: 5px 0px 0px 5px;
 }
 
 
@@ -65,6 +66,14 @@
 
 .caja-spinner {
     text-align: center;
+}
+
+.btn-buscar {
+    border: 1px solid var(--color-azul-oscuro);
+    border-radius: 0px 5px 5px 0px;
+    padding: 5px;
+    display: flex;
+    margin-left: -1px;
 }
 
 

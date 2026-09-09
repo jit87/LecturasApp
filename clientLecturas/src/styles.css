@@ -280,7 +280,14 @@ select:focus {
     background-color: #8990F0 !important;
 }
 
-/*
+.modo-oscuro #btnAgregarColeccion:hover {
+    background-color: #8990F0 !important;
+}
+
+.modo-oscuro .btn-buscar {
+    border-color: var(--text-blanco) !important;
+}
+
 
 /*  Fin modo oscuro */
 
@@ -314,15 +321,18 @@ select:focus {
 }
 
 .btn-publicar,
-.btn-buscar {
+.btn-buscar,
+.btn-auth {
     border-color: var(--text-negro);
     color: var(--text-negro);
 }
 
 .btn-publicar:hover,
 .btn-buscar:hover,
-.btn-volver:hover {
-    border-color: var(--text-blanco);
+.btn-volver:hover,
+.btn-auth:hover,
+#btnAgregarColeccion:hover {
+    border-color: var(--text-blanco) !important;
     background-color: var(--color-azul-claro);
     color: var(--text-blanco);
 }
