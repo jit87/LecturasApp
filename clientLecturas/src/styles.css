@@ -258,6 +258,30 @@ select:focus {
     color: lightblue !important;
 }
 
+.modo-oscuro .review-autor-libro {
+    color: lightblue !important;
+}
+
+.modo-oscuro .logo-text-footer {
+    color: var(--text-blanco) !important;
+}
+
+.modo-oscuro .btn-buscar {
+    border-color: var(--text-blanco);
+    color: var(--text-blanco);
+    margin-left: 5px;
+}
+
+.modo-oscuro .btn-volver:hover {
+    background-color: #8990F0;
+}
+
+.modo-oscuro .btn-buscar:hover {
+    background-color: #8990F0 !important;
+}
+
+/*
+
 /*  Fin modo oscuro */
 
 
@@ -270,26 +294,6 @@ select:focus {
     isolation: isolate;
 }
 
-.btn-buscar-mis-libros {
-    border-color: grey;
-    color: grey;
-}
-
-.btn-outline-primary {
-    border-color: var(--background-negro);
-    color: var(--text-negro);
-}
-
-.btn-outline-primary:hover {
-    background-color: var(--background-negro);
-    border-color: white;
-}
-
-.btn-outline-secondary {
-    color: var(--text-negro);
-    border-color: var(--background-negro);
-}
-
 .btn-outline-secondary:hover {
     background-color: var(--color-azul-claro);
 }
@@ -298,14 +302,31 @@ select:focus {
     color: var(--background-negro);
 }
 
-.badge {
-    background-color: #209268 !important;
-}
-
-
 [type="search"]::placeholder {
     color: grey;
 }
+
+/* Para botones */
+
+.btn-volver {
+    color: black;
+    border-color: var(--text-negro);
+}
+
+.btn-publicar,
+.btn-buscar {
+    border-color: var(--text-negro);
+    color: var(--text-negro);
+}
+
+.btn-publicar:hover,
+.btn-buscar:hover,
+.btn-volver:hover {
+    border-color: var(--text-blanco);
+    background-color: var(--color-azul-claro);
+    color: var(--text-blanco);
+}
+
 
 
 /*Usado en los textos de las tarjetas de los libros*/
@@ -370,6 +391,7 @@ select:focus {
     color: var(--text-blanco);
 }
 
+
 /*Animación de la caja de libro*/
 .caja-libro-home:hover {
     -webkit-box-shadow: 3px 3px 29px -12px rgba(0, 0, 0, 0.35);
@@ -428,9 +450,15 @@ input {
 /*Hover de botones e iconos*/
 
 .btn-volver:hover,
-.btn-outline-primary:hover,
 .boton-recargar:hover {
     background-color: var(--color-azul-claro);
+}
+
+.btn-outline-secondary:hover,
+.btn-outline-primary:hover {
+    background-image: linear-gradient(var(--color-azul-claro), var(--color-azul-claro));
+    background-color: rgb(236, 238, 239);
+    color: var(--text-blanco) !important;
 }
 
 .fa-pen-to-square:hover,

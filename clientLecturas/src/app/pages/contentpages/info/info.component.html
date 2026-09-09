@@ -1,5 +1,5 @@
 <div class="container home py-5 animate__animated animate__fadeIn">
-    <button class="btn-volver btn btn-outline-secondary mt-3" (click)="regresar()">Volver</button>
+    <button class="btn btn-volver mt-3" (click)="regresar()">Volver</button>
     <p *ngIf="disponibles1==false && disponibles2 == false" class="error">No hay información disponible</p>
 
     <div class="mt-4" *ngIf="cargado==false" style="text-align: center;">

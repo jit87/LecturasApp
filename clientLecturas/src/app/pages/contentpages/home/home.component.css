@@ -46,6 +46,7 @@ a:hover {
         text-align: center;
         padding-right: 8px !important;
         box-sizing: border-box !important;
+        margin-left: -25px;
     }
 
     .caja-descripcion-libro-recomendaciones {

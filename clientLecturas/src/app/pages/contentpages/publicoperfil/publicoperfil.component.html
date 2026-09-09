@@ -1,7 +1,6 @@
 <div class="container mt-5 animate__animated animate__fadeIn" *ngIf="DatosPerfil">
     <div class="caja-info" style="position: relative;">
-        <button class="btn-volver  btn btn-outline-secondary mt-3" style="margin-bottom: 2%;"
-            (click)="regresar()">Volver</button>
+        <button class="btn btn-volver mt-3" style="margin-bottom: 2%;" (click)="regresar()">Volver</button>
         <div class="card mx-auto">
             <div class="card-body mt-4">
                 <div class="row">
@@ -23,7 +22,7 @@
                         <div style="display: flex; flex-wrap: nowrap;">
                             <h3 class="card-title" class="nombre">{{ DatosPerfil.nombre }}</h3>
                             <div style="margin-left: 2%;">
-                                <div class="badge" *ngIf="DatosPerfil._id==idLogueado"
+                                <div class="badge badge-perfil" *ngIf="DatosPerfil._id==idLogueado"
                                     style="margin-left: 2%;vertical-align: -webkit-baseline-middle;"><b>Propietario</b>
                                 </div>
                             </div>
