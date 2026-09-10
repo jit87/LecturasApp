@@ -11,7 +11,7 @@ import { AbstractLibrosService } from '../abstracts/AbstractLibrosService';
 export class LibrosService extends AbstractLibrosService {
 
   url: string = "https://www.googleapis.com/books/v1/volumes?q="
-  Google_API_KEY: string = /*environment.Google_API_KEY;*/ "";
+  Google_API_KEY: string = environment.Google_API_KEY;
   max: number = 9;
   maxRecomendaciones: number = 2;
 
