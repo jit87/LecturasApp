@@ -268,4 +268,5 @@ Este proyecto está bajo la Licencia ISC.
 
 ## Agradecimientos
 
-- Google Books API (por la integración de búsqueda de libros)
+- Google Books API (por proporcionar datos de libros).
+- Open Library API (por proporcionar datos de libros).
