@@ -90,7 +90,7 @@ export class HomeComponent {
       (resp) => {
         this.librosGuardados = resp;
         console.log("Libros guardados por el usuario: ", this.librosGuardados);
-        this.getRecomendaciones(resp[0].categorias);
+        /* this.getRecomendaciones(resp[0].categorias);*/
       },
       (err) => {
         console.log(err);

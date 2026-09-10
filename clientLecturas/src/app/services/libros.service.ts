@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable, of, shareReplay, tap } from 'rxjs';
+import { catchError, forkJoin, map, Observable, of, shareReplay, switchMap, tap } from 'rxjs';
 import { environment } from '../environments/environment'
 import { AbstractLibrosService } from '../abstracts/AbstractLibrosService';
 
@@ -11,7 +11,7 @@ import { AbstractLibrosService } from '../abstracts/AbstractLibrosService';
 export class LibrosService extends AbstractLibrosService {
 
   url: string = "https://www.googleapis.com/books/v1/volumes?q="
-  Google_API_KEY: string = environment.Google_API_KEY;
+  Google_API_KEY: string = /*environment.Google_API_KEY;*/ "";
   max: number = 9;
   maxRecomendaciones: number = 2;
 
@@ -97,51 +97,109 @@ export class LibrosService extends AbstractLibrosService {
         }),
         shareReplay(1),
         catchError(error => {
-          console.error("Error en la API", error);
-          this.librosNuevos$ = undefined;
-          return of({ items: [] });
-        }
-        )
+          console.warn("Google Books falló al obtener novedades. Cambiando a Open Library...", error);
+
+          const openLibraryUrl = `https://openlibrary.org/subjects/fiction.json?sort=new&limit=${this.max}`;
+
+          return this.http.get(openLibraryUrl).pipe(
+            switchMap((res: any) => this.mapearWorksOpenLibrary(res.works || [])),
+            tap((data) => {
+              localStorage.setItem(this.CACHE_KEY, JSON.stringify({
+                timestamp: Date.now(),
+                data
+              }));
+            }),
+            catchError(fallbackError => {
+              console.error("Open Library también falló en novedades", fallbackError);
+              this.librosNuevos$ = undefined;
+              return of({ items: [] });
+            })
+          );
+        })
       );
     }
     return this.librosNuevos$;
   }
 
   getInfoLibroById(id: string): Observable<any> {
-    // Si el ID es de Open Library (contiene 'OL' o empieza por '/')
+    //Si el ID es de Open Library
     if (id && (id.includes('OL') || id.startsWith('/'))) {
       const cleanId = id.startsWith('/') ? id : `/works/${id}`;
       const openLibraryUrl = `https://openlibrary.org${cleanId}.json`;
 
       return this.http.get(openLibraryUrl).pipe(
-        map((doc: any) => ({
-          id: doc.key,
-          volumeInfo: {
-            title: doc.title,
-            authors: [],
-            description: typeof doc.description === 'string' ? doc.description : doc.description?.value || 'Sin descripción disponible',
-            publishedDate: doc.first_publish_date || '',
-            publisher: '',
-            pageCount: 0,
-            categories: doc.subjects ? doc.subjects.slice(0, 5).join(', ') : 'Sin categoría',
-            imageLinks: doc.covers && doc.covers.length > 0
-              ? { thumbnail: `https://covers.openlibrary.org/b/id/${doc.covers[0]}-M.jpg` }
-              : { thumbnail: 'assets/imagen-no-disponible.png' },
-            previewLink: `https://openlibrary.org${doc.key}`
+        switchMap((doc: any) => {
+          //Si el work tiene portada, seguimos normalmente
+          if (doc.covers?.[0]) {
+            return of(doc);
           }
-        })),
+          //Si no tiene portada, buscamos en sus ediciones
+          return this.http.get(
+            `https://openlibrary.org${cleanId}/editions.json?limit=5`
+          ).pipe(
+            map((res: any) => {
+              const edicion = res.entries?.find(
+                (e: any) => e.covers?.[0]
+              );
+              if (edicion?.covers?.[0]) {
+                doc.covers = edicion.covers;
+              }
+              return doc;
+            }),
+            catchError(() => of(doc))
+          );
+        }),
+        map((doc: any) => {
+          const urlPortada = doc.covers?.[0]
+            ? `https://covers.openlibrary.org/b/id/${doc.covers[0]}-M.jpg`
+            : 'assets/imagen-no-disponible.png';
+
+          return {
+            id: doc.key,
+            volumeInfo: {
+              title: doc.title,
+              authors: [],
+              description: typeof doc.description === 'string'
+                ? doc.description
+                : doc.description?.value || 'Sin descripción disponible',
+              publishedDate: doc.first_publish_date || '',
+              publisher: '',
+              pageCount: 0,
+              categories: doc.subjects
+                ? doc.subjects.slice(0, 5).join(', ')
+                : 'Sin categoría',
+              imageLinks: {
+                thumbnail: urlPortada,
+                smallThumbnail: urlPortada
+              },
+              previewLink: `https://openlibrary.org${doc.key}`
+            }
+          };
+        }),
         catchError(err => {
           console.error("Error al cargar detalle de Open Library", err);
-          return of({ volumeInfo: { title: 'Libro no disponible', description: 'No se pudo cargar la información.' } });
+          return of({
+            volumeInfo: {
+              title: 'Libro no disponible',
+              description: 'No se pudo cargar la información.'
+            }
+          });
         })
       );
     }
-    // Si es un ID normal de Google Books
-    const googleDetailUrl = `${this.url.slice(0, this.url.length - 3)}/${id}?&key=${this.Google_API_KEY}`;
+    //Si es un ID normal de Google Books
+    const googleDetailUrl =
+      `${this.url.slice(0, this.url.length - 3)}/${id}?&key=${this.Google_API_KEY}`;
+
     return this.http.get(googleDetailUrl).pipe(
       catchError(error => {
         console.error("Error al cargar detalle de Google Books", error);
-        return of({ volumeInfo: { title: 'Error', description: 'No se pudo conectar con el servidor.' } });
+        return of({
+          volumeInfo: {
+            title: 'Error',
+            description: 'No se pudo conectar con el servidor.'
+          }
+        });
       })
     );
   }
@@ -175,4 +233,38 @@ export class LibrosService extends AbstractLibrosService {
     localStorage.removeItem(this.CACHE_KEY);
   }
 
+  //AUX
+  private mapearWorksOpenLibrary(works: any[]): Observable<any> {
+    if (works.length === 0) return of({ items: [] });
+
+    const peticiones = works.map((work: any) => {
+      const urlPortada = work.cover_id
+        ? `https://covers.openlibrary.org/b/id/${work.cover_id}-M.jpg`
+        : 'https://placehold.co/128x192?text=Sin+portada';
+      const genérica = `Obra de ${work.authors?.[0]?.name || 'un autor desconocido'}${work.first_publish_year ? ` (${work.first_publish_year})` : ''}, disponible en el catálogo de Open Library.`;
+
+      const base = {
+        id: work.key,
+        volumeInfo: {
+          title: work.title,
+          authors: work.authors?.map((a: any) => a.name) || ['Autor desconocido'],
+          publisher: '',
+          publishedDate: work.first_publish_year?.toString() || '',
+          pageCount: 0,
+          imageLinks: { thumbnail: urlPortada, smallThumbnail: urlPortada },
+          previewLink: `https://openlibrary.org${work.key}`
+        }
+      };
+
+      return this.http.get(`https://openlibrary.org${work.key}.json`).pipe(
+        map((detalle: any) => {
+          const desc = typeof detalle.description === 'string' ? detalle.description : detalle.description?.value;
+          return { ...base, volumeInfo: { ...base.volumeInfo, description: desc || genérica } };
+        }),
+        catchError(() => of({ ...base, volumeInfo: { ...base.volumeInfo, description: genérica } }))
+      );
+    });
+
+    return forkJoin(peticiones).pipe(map((items: any[]) => ({ items })));
+  }
 }
