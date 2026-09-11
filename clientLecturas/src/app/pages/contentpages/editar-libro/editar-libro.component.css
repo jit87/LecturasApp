@@ -2,12 +2,10 @@
     width: 800px;
 }
 
-
 option:hover {
     background-color: aquamarine !important;
     color: #000;
 }
-
 
 .editar-libro {
     animation: fadeIn 0.8s ease;
@@ -43,7 +41,6 @@ option:hover {
     font-size: 1.25rem;
     color: black;
 }
-
 
 .cuerpo {
     padding: 1.5rem;
@@ -113,9 +110,51 @@ textarea {
 }
 
 /* Móviles */
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 768px) and (max-height: 700px) {
+
     .editar-libro .contenedor {
-        width: 80%;
-        max-width: 400px;
+        margin-top: 15px;
+        margin-bottom: 15px;
     }
+
+    .cabecera {
+        padding: 0.6rem 1rem;
+    }
+
+    .cabecera h4 {
+        font-size: 1rem;
+    }
+
+    .cuerpo {
+        padding: 0.8rem 1rem;
+    }
+
+    .grupo-formulario {
+        margin-bottom: 0.6rem;
+    }
+
+    .grupo-formulario label {
+        font-size: 0.85rem;
+        margin-bottom: 0.2rem;
+    }
+
+    select,
+    textarea {
+        padding: 0.35rem;
+        font-size: 0.9rem;
+    }
+
+    textarea {
+        height: 60px;
+    }
+
+    .acciones {
+        margin-top: 0.5rem;
+    }
+
+    .acciones button {
+        padding: 0.4rem 1rem;
+        font-size: 0.9rem;
+    }
+
 }
